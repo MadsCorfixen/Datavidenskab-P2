@@ -77,7 +77,7 @@ Package babel Info: \l@newzealand = using hyphenrules for ukenglish
 ))
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\mat
 hpazo.sty"
-Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
+Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS)
 \symupright=\mathgroup4
 )
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\fonte
@@ -1018,7 +1018,7 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
 
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/biblatex\b
 iblatex.cfg"
-File: biblatex.cfg 
+File: biblatex.cfg
 ))
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tocbibind\
 tocbibind.sty"
@@ -1185,9 +1185,15 @@ Package hyperref Info: Option `colorlinks' set `false' on input line 158.
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count347
-\@quotereset=\count348
-(master.aux)
+\@quotelevel=\count434
+\@quotereset=\count435
+
+("C:\Users\madsc\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backen
+d-pdfmode.def"
+File: l3backend-pdfmode.def 2019-04-06 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count436
+\l__pdf_internal_box=\box63
+) (master.aux)
 \openout1 = `master.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -1243,7 +1249,7 @@ Package caption Info: End \AtBeginDocument code.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: twoside 
+* modes: twoside
 * h-part:(L,W,R)=(79.66771pt, 401.18387pt, 116.6563pt)
 * v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
 * \paperwidth=597.50787pt
@@ -1332,7 +1338,7 @@ LaTeX Info: Redefining \nameref on input line 5.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: twoside 
+* modes: twoside
 * h-part:(L,W,R)=(0.0pt, 597.50787pt, 0.0pt)
 * v-part:(T,H,B)=(0.0pt, 810.90363pt, 34.14322pt)
 * \paperwidth=597.50787pt
@@ -1359,41 +1365,41 @@ LaTeX Info: Redefining \nameref on input line 5.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<AAUgraphics/frontpageImage.jpg, id=81, 963.6pt x 636.3775pt>
+<AAUgraphics/frontpageImage.jpg, id=74, 963.6pt x 636.3775pt>
 File: AAUgraphics/frontpageImage.jpg Graphic file (type jpg)
 <use AAUgraphics/frontpageImage.jpg>
 Package pdftex.def Info: AAUgraphics/frontpageImage.jpg  used on input line 14.
 
 (pdftex.def)             Requested size: 597.52876pt x 298.7479pt.
-LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 
+LaTeX Font Info:    Trying to load font information for OT1+pplx on input line
 73.
 
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1
 pplx.fd"
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
-LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line
 73.
 
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\oml
 zplm.fd"
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line
 73.
 
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\oms
 zplm.fd"
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line
 73.
 
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\omx
 zplm.fd"
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line
 73.
 
 ("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\ot1
@@ -1412,15 +1418,13 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 8.33606pt on input line 73.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 6.25204pt on input line 73.
-LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 73.
-<AAUgraphics/aau_logo_circle_en.pdf, id=82, 77.28876pt x 77.28876pt>
+<AAUgraphics/aau_logo_circle_en.pdf, id=75, 77.28876pt x 77.28876pt>
 File: AAUgraphics/aau_logo_circle_en.pdf Graphic file (type pdf)
 <use AAUgraphics/aau_logo_circle_en.pdf>
 Package pdftex.def Info: AAUgraphics/aau_logo_circle_en.pdf  used on input line
  78.
 (pdftex.def)             Requested size: 119.49974pt x 119.51091pt.
-<AAUgraphics/aau_waves.pdf, id=83, 598.235pt x 845.1575pt>
+<AAUgraphics/aau_waves.pdf, id=76, 598.235pt x 845.1575pt>
 File: AAUgraphics/aau_waves.pdf Graphic file (type pdf)
 <use AAUgraphics/aau_waves.pdf>
 Package pdftex.def Info: AAUgraphics/aau_waves.pdf  used on input line 81.
@@ -1428,77 +1432,16 @@ Package pdftex.def Info: AAUgraphics/aau_waves.pdf  used on input line 81.
  [1
 
 
-{C:/Users/Ronni Carlsen/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./A
-AUgraphics/aau_waves.pdf> <./AAUgraphics/frontpageImage.jpg> <./AAUgraphics/aau
-_logo_circle_en.pdf>]) (sections/frontpage.texpdfTeX warning (ext4): destinatio
-n with the same identifier (name{label:frontpage.0}) has been already used, dup
-licate ignored
-<to be read again> 
-                   \relax 
-l.1 \pdfbookmark[0]{Front page}{label:frontpage}
-                                                %
-File: AAUgraphics/aau_logo_circle_en.pdf Graphic file (type pdf)
-<use AAUgraphics/aau_logo_circle_en.pdf>
-Package pdftex.def Info: AAUgraphics/aau_logo_circle_en.pdf  used on input line
- 44.
-(pdftex.def)             Requested size: 119.49974pt x 119.51091pt.
-File: AAUgraphics/aau_waves.pdf Graphic file (type pdf)
-<use AAUgraphics/aau_waves.pdf>
-Package pdftex.def Info: AAUgraphics/aau_waves.pdf  used on input line 47.
-(pdftex.def)             Requested size: 597.5489pt x 845.06516pt.
-pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.47 \end{titlepage}
-                     [1
-
-]) (sections/colophon.tex
-LaTeX Font Info:    Trying to load font information for OMS+pplx on input line 
-4.
-LaTeX Font Info:    No file OMSpplx.fd. on input line 4.
-
-
-LaTeX Font Warning: Font shape `OMS/pplx/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead on input line 4.
-
-[2
-
-]) (sections/titlepages.tex
-\titlepageleftcolumnwidth=\skip95
-\titlepagerightcolumnwidth=\skip96
-<AAUgraphics/aau_logo_en.pdf, id=110, 115.43124pt x 77.28876pt>
-File: AAUgraphics/aau_logo_en.pdf Graphic file (type pdf)
-<use AAUgraphics/aau_logo_en.pdf>
-Package pdftex.def Info: AAUgraphics/aau_logo_en.pdf  used on input line 31.
-(pdftex.def)             Requested size: 194.59193pt x 130.30179pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--31
-
- []
-
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 3
-1.
-
-("C:\Users\Ronni Carlsen\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\t1cms
-s.fd"
-File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 31.
-
-Overfull \hbox (3.18648pt too wide) in paragraph at lines 31--31
-[] 
- []
-
-[3
-
- <./AAUgraphics/aau_logo_en.pdf>] [4
+{C:/Users/madsc/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./AAUgraphi
+cs/aau_waves.pdf> <./AAUgraphics/frontpageImage.jpg> <./AAUgraphics/aau_logo_ci
+rcle_en.pdf>]) (sections/titlepages.tex [2
 
 
 
 ]
-<AAUgraphics/aau_logo_da.pdf, id=127, 121.45375pt x 77.28876pt>
+\titlepageleftcolumnwidth=\skip101
+\titlepagerightcolumnwidth=\skip102
+<AAUgraphics/aau_logo_da.pdf, id=99, 121.45375pt x 77.28876pt>
 File: AAUgraphics/aau_logo_da.pdf Graphic file (type pdf)
 <use AAUgraphics/aau_logo_da.pdf>
 Package pdftex.def Info: AAUgraphics/aau_logo_da.pdf  used on input line 65.
@@ -1508,26 +1451,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--65
 
  []
 
-
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 6
+5.
+("C:\Users\madsc\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\t1cmss.fd"
+File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
 Overfull \hbox (3.18648pt too wide) in paragraph at lines 65--65
-[] 
+[]
  []
 
-[5 <./AAUgraphics/aau_logo_da.pdf>]) [6
+[3 <./AAUgraphics/aau_logo_da.pdf>]) [4
 
 
 
-]
-LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 16.
- (master.toc)
+] (master.toc)
 \tf@toc=\write6
 \openout6 = `master.toc'.
 
- [7
+ [5
 
 
-] [8
+] [6
 
 
 ] (master.tdo)
@@ -1535,16 +1479,14 @@ LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <20.74> not available
 \openout7 = `master.tdo'.
 
 
-(sections/preface.tex [9] [10
+(sections/preface.tex [7] [8
 
 
-]) [11] [12
+]) [9] [10
 
 
 ] (sections/introduction.tex
 Chapter 1.
-LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 8.
 Package hyperref Info: bookmark level for unknown exa defaults to 0 on input li
 ne 10.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
@@ -1556,7 +1498,7 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 Overfull \hbox (1.555pt too wide) in paragraph at lines 19--19
 |[]\T1/pplx/b/n/14.4 How Does Sec-tions, Sub-sec-tions, and Sub-sec-tions Look?
-| 
+|
  []
 
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <12> not available
@@ -1568,7 +1510,7 @@ ine 29.
 
 ]) (sections/ch2name.tex
 
-Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+Package Fancyhdr Warning: \headheight is too small (12.0pt):
 Make it at least 13.59999pt.
 We now make it that large for the rest of the document.
 This may cause the page layout to be inconsistent, however.
@@ -1605,24 +1547,15 @@ Appendix A.
 \tf@thm=\write8
 \openout8 = `master.thm'.
 
- 
+
 AED: lastpage setting LastPage
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 30.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 30.
 (master.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 30.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 30.
-
-
-Package rerunfilecheck Warning: File `master.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `master.out':
-(rerunfilecheck)             Before: 6892F155DA728A3EE0E38C1B0BD0D2A4;783
-(rerunfilecheck)             After:  373EC4E79DC6658BA557E355297503C7;770.
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+Package rerunfilecheck Info: File `master.out' has not changed.
+(rerunfilecheck)             Checksum: 0DDFE26C6A444E4ECC99F202DB80BC84;651.
 
 
 LaTeX Warning: There were undefined references.
@@ -1636,31 +1569,27 @@ Package biblatex Warning: Please (re)run BibTeX on the file(s):
 Package logreq Info: Writing requests to 'master.run.xml'.
 \openout1 = `master.run.xml'.
 
- ) 
+ )
 Here is how much of TeX's memory you used:
- 28037 strings out of 492482
- 532159 string characters out of 3117950
- 964724 words of memory out of 3000000
- 31739 multiletter control sequences out of 15000+200000
- 48959 words of font info for 83 fonts, out of 3000000 for 9000
+ 28085 strings out of 481570
+ 531197 string characters out of 2914292
+ 1141039 words of memory out of 3000000
+ 42688 multiletter control sequences out of 15000+200000
+ 576888 words of font info for 92 fonts, out of 3000000 for 9000
  1146 hyphenation exceptions out of 8191
- 71i,14n,85p,844b,2331s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Ronni Carlsen\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec
-/dpi600\ectt1095.pk>{C:/Users/Ronni Carlsen/AppData/Local/Programs/MiKTeX 2.9/f
-onts/enc/dvips/base/8r.enc} <C:\Users\Ronni Carlsen\AppData\Local\MiKTeX\2.9\fo
-nts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\Ronni Carlsen\AppData\L
-ocal\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk><C:/Users/Ronni 
-Carlsen/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.
-pfb><C:/Users/Ronni Carlsen/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb><C:/Users/Ronni Carlsen/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/Ronni Carlsen/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/Ronni Carls
-en/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Us
-ers/Ronni Carlsen/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/up
-lri8a.pfb>
-Output written on master.pdf (20 pages, 572391 bytes).
+ 71i,14n,85p,844b,2336s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
+ectt1095.pk>{C:/Users/madsc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/b
+ase/8r.enc} <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/e
+c/dpi600\ecss1000.pk> <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/
+jknappen/ec/dpi600\ecsx1000.pk><C:/Users/madsc/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/madsc/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/madsc/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/madsc/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/ma
+dsc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on master.pdf (17 pages, 549290 bytes).
 PDF statistics:
- 316 PDF objects out of 1000 (max. 8388607)
- 43 named destinations out of 1000 (max. 500000)
- 238 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 282 PDF objects out of 1000 (max. 8388607)
+ 40 named destinations out of 1000 (max. 500000)
+ 217 words of extra memory for PDF output out of 10000 (max. 10000000)
