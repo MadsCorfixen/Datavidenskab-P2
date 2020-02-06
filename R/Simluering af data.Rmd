@@ -2,9 +2,12 @@
 title: "Simulering af Data"
 author: "Mads"
 date: "06/02/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
+Her er noget tekst
 ```{r}
 sim_data_normal = rnorm(n = 2000, mean = 0, sd = 1)
 hist(sim_data_normal)
