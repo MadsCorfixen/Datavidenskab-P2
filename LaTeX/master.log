@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.2.4)  6 FEB 2020 09:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.2.4)  6 FEB 2020 09:34
 entering extended mode
 **./master.tex
 (master.tex
@@ -1169,8 +1169,7 @@ d-pdfmode.def"
 File: l3backend-pdfmode.def 2019-04-06 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count436
 \l__pdf_internal_box=\box63
-)
-No file master.aux.
+) (master.aux)
 \openout1 = `master.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -1300,6 +1299,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 5.
 LaTeX Info: Redefining \pageref on input line 5.
 LaTeX Info: Redefining \nameref on input line 5.
+ (master.out) (master.out)
 \@outlinefile=\write5
 \openout5 = `master.out'.
 
@@ -1336,7 +1336,7 @@ LaTeX Info: Redefining \nameref on input line 5.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<AAUgraphics/frontpageImage.jpg, id=30, 963.6pt x 636.3775pt>
+<AAUgraphics/frontpageImage.jpg, id=78, 963.6pt x 636.3775pt>
 File: AAUgraphics/frontpageImage.jpg Graphic file (type jpg)
 <use AAUgraphics/frontpageImage.jpg>
 Package pdftex.def Info: AAUgraphics/frontpageImage.jpg  used on input line 14.
@@ -1384,13 +1384,13 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 8.33606pt on input line 73.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 6.25204pt on input line 73.
-<AAUgraphics/aau_logo_circle_en.pdf, id=31, 77.28876pt x 77.28876pt>
+<AAUgraphics/aau_logo_circle_en.pdf, id=79, 77.28876pt x 77.28876pt>
 File: AAUgraphics/aau_logo_circle_en.pdf Graphic file (type pdf)
 <use AAUgraphics/aau_logo_circle_en.pdf>
 Package pdftex.def Info: AAUgraphics/aau_logo_circle_en.pdf  used on input line
  78.
 (pdftex.def)             Requested size: 119.49974pt x 119.51091pt.
-<AAUgraphics/aau_waves.pdf, id=32, 598.235pt x 845.1575pt>
+<AAUgraphics/aau_waves.pdf, id=80, 598.235pt x 845.1575pt>
 File: AAUgraphics/aau_waves.pdf Graphic file (type pdf)
 <use AAUgraphics/aau_waves.pdf>
 Package pdftex.def Info: AAUgraphics/aau_waves.pdf  used on input line 81.
@@ -1400,30 +1400,7 @@ Package pdftex.def Info: AAUgraphics/aau_waves.pdf  used on input line 81.
 
 {C:/Users/madsc/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./AAUgraphi
 cs/aau_waves.pdf> <./AAUgraphics/frontpageImage.jpg> <./AAUgraphics/aau_logo_ci
-rcle_en.pdf>]) (sections/frontpage.texpdfTeX warning (ext4): destination with t
-he same identifier (name{label:frontpage.0}) has been already used, duplicate i
-gnored
-<to be read again> 
-                   \relax 
-l.1 \pdfbookmark[0]{Front page}{label:frontpage}
-                                                %
-File: AAUgraphics/aau_logo_circle_en.pdf Graphic file (type pdf)
-<use AAUgraphics/aau_logo_circle_en.pdf>
-Package pdftex.def Info: AAUgraphics/aau_logo_circle_en.pdf  used on input line
- 44.
-(pdftex.def)             Requested size: 119.49974pt x 119.51091pt.
-File: AAUgraphics/aau_waves.pdf Graphic file (type pdf)
-<use AAUgraphics/aau_waves.pdf>
-Package pdftex.def Info: AAUgraphics/aau_waves.pdf  used on input line 47.
-(pdftex.def)             Requested size: 597.5489pt x 845.06516pt.
-pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.47 \end{titlepage}
-                     [1
-
-]) (sections/colophon.tex
+rcle_en.pdf>]) (sections/colophon.tex
 LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 
 4.
 
@@ -1434,37 +1411,7 @@ File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
 ]) (sections/titlepages.tex
 \titlepageleftcolumnwidth=\skip101
 \titlepagerightcolumnwidth=\skip102
-<AAUgraphics/aau_logo_en.pdf, id=59, 115.43124pt x 77.28876pt>
-File: AAUgraphics/aau_logo_en.pdf Graphic file (type pdf)
-<use AAUgraphics/aau_logo_en.pdf>
-Package pdftex.def Info: AAUgraphics/aau_logo_en.pdf  used on input line 31.
-(pdftex.def)             Requested size: 194.59193pt x 130.30179pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--31
-
- []
-
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 3
-1.
-("C:\Users\madsc\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\t1cmss.fd"
-File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-
-LaTeX Warning: Reference `LastPage' on page iii undefined on input line 31.
-
-
-Overfull \hbox (3.18648pt too wide) in paragraph at lines 31--31
-[] 
- []
-
-[3
-
- <./AAUgraphics/aau_logo_en.pdf>] [4
-
-
-
-]
-<AAUgraphics/aau_logo_da.pdf, id=75, 121.45375pt x 77.28876pt>
+<AAUgraphics/aau_logo_da.pdf, id=103, 121.45375pt x 77.28876pt>
 File: AAUgraphics/aau_logo_da.pdf Graphic file (type pdf)
 <use AAUgraphics/aau_logo_da.pdf>
 Package pdftex.def Info: AAUgraphics/aau_logo_da.pdf  used on input line 65.
@@ -1474,48 +1421,44 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--65
 
  []
 
-
-LaTeX Warning: Reference `LastPage' on page v undefined on input line 65.
-
-
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 6
+5.
+("C:\Users\madsc\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\t1cmss.fd"
+File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
 Overfull \hbox (3.18648pt too wide) in paragraph at lines 65--65
 [] 
  []
 
-[5 <./AAUgraphics/aau_logo_da.pdf>]) [6
+[3
+
+ <./AAUgraphics/aau_logo_da.pdf>]) [4
 
 
 
-]
+] (master.toc)
 \tf@toc=\write6
 \openout6 = `master.toc'.
 
- [7
+ [5
 
 
-] [8
+] [6
 
 
-]
+] (master.tdo)
 \tf@tdo=\write7
 \openout7 = `master.tdo'.
 
- (sections/preface.tex [9]
-[10
+
+(sections/preface.tex [7] [8
 
 
-]) [11] [12
+]) [9] [10
 
 
 ] (sections/introduction.tex
 Chapter 1.
-
-LaTeX Warning: Reference `ch:ch2label' on page 1 undefined on input line 2.
-
-
-LaTeX Warning: Reference `ex:simple_example' on page 1 undefined on input line 
-9.
-
 Package hyperref Info: bookmark level for unknown exa defaults to 0 on input li
 ne 10.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
@@ -1572,11 +1515,7 @@ Appendix A.
 \tf@thm=\write8
 \openout8 = `master.thm'.
 
-
-
-Package lastpage Warning: Rerun to get the references right on input line 30.
-
-
+ 
 AED: lastpage setting LastPage
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 30.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 30.
@@ -1590,8 +1529,8 @@ Package rerunfilecheck Warning: File `master.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `master.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  373EC4E79DC6658BA557E355297503C7;770.
+(rerunfilecheck)             Before: AE0A05AC57E091BA4C75D744243F1CD5;716
+(rerunfilecheck)             After:  0DDFE26C6A444E4ECC99F202DB80BC84;651.
 
 LaTeX Warning: There were undefined references.
 
@@ -1609,26 +1548,29 @@ Package logreq Info: Writing requests to 'master.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28110 strings out of 481570
- 531659 string characters out of 2914292
- 1139404 words of memory out of 3000000
- 42708 multiletter control sequences out of 15000+200000
+ 28124 strings out of 481570
+ 531953 string characters out of 2914292
+ 1141133 words of memory out of 3000000
+ 42718 multiletter control sequences out of 15000+200000
  578059 words of font info for 94 fonts, out of 3000000 for 9000
  1146 hyphenation exceptions out of 8191
- 71i,14n,85p,844b,2328s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
-ectt1095.pk>{C:/Users/madsc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/b
-ase/8r.enc} <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/e
-c/dpi600\ecss1000.pk> <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/
-jknappen/ec/dpi600\ecsx1000.pk><C:/Users/madsc/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/madsc/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/madsc/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/madsc/App
-Data/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/ma
-dsc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on master.pdf (20 pages, 557926 bytes).
+ 71i,14n,85p,844b,2336s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{label:titlepage_en.0} has been referenced but doe
+s not exist, replaced by a fixed one
+
+ <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ec
+tt1095.pk>{C:/Users/madsc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/bas
+e/8r.enc} <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/
+dpi600\ecss1000.pk> <C:\Users\madsc\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jk
+nappen/ec/dpi600\ecsx1000.pk><C:/Users/madsc/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/madsc/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/madsc/AppData/Loca
+l/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/madsc/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/mads
+c/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on master.pdf (17 pages, 550221 bytes).
 PDF statistics:
- 256 PDF objects out of 1000 (max. 8388607)
- 43 named destinations out of 1000 (max. 500000)
- 134 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 286 PDF objects out of 1000 (max. 8388607)
+ 41 named destinations out of 1000 (max. 500000)
+ 225 words of extra memory for PDF output out of 10000 (max. 10000000)
 
