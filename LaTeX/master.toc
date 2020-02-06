@@ -3,7 +3,7 @@
 \babel@toc {danish}{}
 \babel@toc {english}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Preface}{xi}{chapter*.4}%
+\contentsline {chapter}{Preface}{ix}{chapter*.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \defcounter {refsection}{0}\relax 
