@@ -16,7 +16,7 @@ hist(sim_data_unif)
 ```
 
 ```{r}
-sim_data_binom = rbinom = (n = 1000, size = 20, prob = 0.5)
+sim_data_binom = rbinom(n = 1000, size = 20, prob = 0.5)
 hist(sim_data_binom)
 ```
 
