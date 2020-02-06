@@ -18,8 +18,15 @@ sim_data_unif = runif(n = 1000, min = 0, max = 10)
 hist(sim_data_unif)
 ```
 
+-----
+rbinom: fx. 20 coinflips 1000 gange. 50% sandsynlighed for hvert udfald. Plottet viser hver hvor mange tilfælde True er optrådt. Der kan kun være to udfald i en binominalfordeling.
+n = Antal gentagelser af test
+size = Antal tests
+prob = Sandsynlighed for True
 ```{r}
 sim_data_binom = rbinom(n = 1000, size = 20, prob = 0.5)
 hist(sim_data_binom)
 ```
+
+
 
