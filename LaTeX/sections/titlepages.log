@@ -1,9 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.2.4)  6 FEB 2020 09:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.2.4)  6 FEB 2020 10:09
 entering extended mode
 **./titlepages.tex
 (titlepages.tex
-LaTeX2e <2020-02-02>
-L3 programming layer <2020-01-31>
+LaTeX2e <2019-10-01> patch level 3
 
 ! Package babel Error: Unknown language `danish'. Either you have
 (babel)                misspelled its name, it has not been installed,
@@ -139,7 +138,7 @@ LaTeX Font Warning: Font shape `/cmr/m/n' undefined
 (Font)              using `OT1/cmr/m/n' instead on input line 42.
 
 ! Please use \mathaccent for accents in math mode.
-\add@accent ... \let \ignorespaces \relax \accent 
+\add@accent ...@spacefactor \spacefactor }\accent 
                                                   #1 #2\egroup \spacefactor ...
 l.42     Efterå
                 rssemestret 2010 %project period
@@ -157,7 +156,7 @@ so that I will find a matching right brace soon.
 (If you're confused by all this, try typing `I}' now.)
 
 ! You can't use `\spacefactor' in math mode.
-\add@accent ... \accent #1 #2\egroup \spacefactor 
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
                                                   \accent@spacefactor 
 l.42     Efterå
                 rssemestret 2010 %project period
@@ -193,7 +192,7 @@ LaTeX Warning: Command \' invalid in math mode on input line 64.
 LaTeX Warning: Command \' invalid in math mode on input line 64.
 
 ! Please use \mathaccent for accents in math mode.
-\add@accent ... \let \ignorespaces \relax \accent 
+\add@accent ...@spacefactor \spacefactor }\accent 
                                                   #1 #2\egroup \spacefactor ...
 l.64   Her er resumé
                      et
@@ -211,7 +210,7 @@ so that I will find a matching right brace soon.
 (If you're confused by all this, try typing `I}' now.)
 
 ! You can't use `\spacefactor' in math mode.
-\add@accent ... \accent #1 #2\egroup \spacefactor 
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
                                                   \accent@spacefactor 
 l.64   Her er resumé
                      et
@@ -228,11 +227,11 @@ return to the right one by typing `I}' or `I$' or `I\par'.
 
  
 Here is how much of TeX's memory you used:
- 36 strings out of 481570
- 662 string characters out of 2914292
- 236665 words of memory out of 3000000
- 15370 multiletter control sequences out of 15000+200000
- 532646 words of font info for 25 fonts, out of 3000000 for 9000
+ 25 strings out of 492482
+ 407 string characters out of 3117950
+ 61534 words of memory out of 3000000
+ 4470 multiletter control sequences out of 15000+200000
+ 3948 words of font info for 15 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 18i,6n,16p,104b,115s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 18i,6n,16p,89b,115s stack positions out of 5000i,500n,10000p,200000b,50000s
 !  ==> Fatal error occurred, no output PDF file produced!
