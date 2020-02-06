@@ -8,18 +8,27 @@ output:
 ---
 
 Her er noget tekst
-```{r}
+
+```r
 sim_data_normal = rnorm(n = 1000, mean = 0, sd = 1)
 hist(sim_data_normal)
 ```
 
-```{r}
+![](Simluering_af_data_files/figure-latex/unnamed-chunk-1-1.pdf)<!-- --> 
+
+
+```r
 sim_data_unif = runif(n = 1000, min = 0, max = 10)
 hist(sim_data_unif)
 ```
 
-```{r}
+![](Simluering_af_data_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
+
+
+```r
 sim_data_binom = rbinom(n = 1000, size = 20, prob = 0.5)
 hist(sim_data_binom)
 ```
+
+![](Simluering_af_data_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
