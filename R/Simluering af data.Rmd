@@ -1,0 +1,22 @@
+---
+title: "Simulering af Data"
+author: "Mads"
+date: "06/02/2020"
+output: html_document
+---
+
+```{r}
+sim_data_normal = rnorm(n = 1000, mean = 0, sd = 1)
+hist(sim_data_normal)
+```
+
+```{r}
+sim_data_unif = runif(n = 1000, min = 0, max = 10)
+hist(sim_data_unif)
+```
+
+```{r}
+sim_data_binom = rbinom = (n = 1000, size = 20, prob = 0.5)
+hist(sim_data_binom)
+```
+
