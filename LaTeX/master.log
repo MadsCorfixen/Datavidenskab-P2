@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.2.4)  10 FEB 2020 10:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2020.2.4)  10 FEB 2020 10:40
 entering extended mode
 **./master.tex
 (master.tex
@@ -1319,12 +1319,12 @@ LaTeX Info: Redefining \nameref on input line 5.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<AAUgraphics/frontpageImage.jpg, id=74, 963.6pt x 636.3775pt>
+<AAUgraphics/frontpageImage.jpg, id=74, 979.66pt x 401.5pt>
 File: AAUgraphics/frontpageImage.jpg Graphic file (type jpg)
 <use AAUgraphics/frontpageImage.jpg>
 Package pdftex.def Info: AAUgraphics/frontpageImage.jpg  used on input line 14.
 
-(pdftex.def)             Requested size: 597.52876pt x 298.7479pt.
+(pdftex.def)             Requested size: 597.517pt x 298.77171pt.
 LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 
 73.
 
@@ -1393,19 +1393,19 @@ rcle_en.pdf>]) (sections/titlepages.tex [2
 <AAUgraphics/aau_logo_da.pdf, id=99, 121.45375pt x 77.28876pt>
 File: AAUgraphics/aau_logo_da.pdf Graphic file (type pdf)
 <use AAUgraphics/aau_logo_da.pdf>
-Package pdftex.def Info: AAUgraphics/aau_logo_da.pdf  used on input line 66.
+Package pdftex.def Info: AAUgraphics/aau_logo_da.pdf  used on input line 67.
 (pdftex.def)             Requested size: 194.59193pt x 123.8308pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--66
+Underfull \hbox (badness 10000) in paragraph at lines 67--67
 
  []
 
 LaTeX Font Info:    Trying to load font information for T1+cmss on input line 6
-6.
+7.
 ("C:\Users\madsc\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\t1cmss.fd"
 File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-Overfull \hbox (3.18648pt too wide) in paragraph at lines 66--66
+Overfull \hbox (3.18648pt too wide) in paragraph at lines 67--67
 [] 
  []
 
@@ -1539,7 +1539,7 @@ ms/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmri.pfb><C:/Users/madsc/AppData/Lo
 cal/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/madsc/App
 Data/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/ma
 dsc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on master.pdf (17 pages, 550463 bytes).
+Output written on master.pdf (17 pages, 635401 bytes).
 PDF statistics:
  282 PDF objects out of 1000 (max. 8388607)
  40 named destinations out of 1000 (max. 500000)
