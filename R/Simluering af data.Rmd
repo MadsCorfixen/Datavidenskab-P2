@@ -9,7 +9,7 @@ output:
 
 Her er noget tekst
 ```{r}
-sim_data_normal = rnorm(n = 1☺000, mean = 0, sd = 1)
+sim_data_normal = rnorm(n = 1000, mean = 0, sd = 1)
 
 mean(sim_data_normal)
 sd(sim_data_normal)
