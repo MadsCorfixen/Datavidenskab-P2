@@ -1,0 +1,30 @@
+---
+title: "P2 Rapport"
+author: "Gruppe B2-19"
+date: "18/02/2020"
+output: pdf_document
+---
+# Problemanalyse
+## Variabler
+
+
+## Outliers
+Forelæsning 1 (27 - 32)
+
+* Klokkeformet histogram
+  + 68 %
+  + 95 %
+  + 98 %
+* Percentiler
+  + Median
+  + Minimum
+  + Nedre og øvre kvartil
+    -l IQR
+  + Maksimum
+* Boksplot
+  + Outliers
+
+
+
+
+## Problemformulering
