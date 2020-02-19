@@ -1,29 +1,5 @@
-book_filename: "P2-Rapport"
-
+book_filename: "bookdown-demo"
 language:
-  label:
-    fig: 'Figur '
-    tab: 'Tabel '
-    eq: 'Ligning '
-    thm: 'Sætning '
-    lem: 'Lemma '
-    cor: 'Korollar '
-    prp: 'Proposition '
-    cnj: 'Konjektur '
-    def: 'Definition '
-    exm: 'Eksempel '
-    exr: 'Øvelse '
-    proof: 'Bevis. '
-    remark: 'Bemærkning. '
-    solution: 'Løsning. '
   ui:
-    edit: Edit
-    chapter_name: 'Kapitel '
-    appendix_name: 'Bilag '
-
+    chapter_name: "Chapter "
 delete_merged_file: true
-
-rmd_files: ["index.Rmd", "01-intro.Rmd", "06-references.Rmd"]
-
-
-
