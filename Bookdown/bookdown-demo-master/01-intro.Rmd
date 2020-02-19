@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Problemanalyse
 
 =======
@@ -17,6 +18,8 @@ De ordinale variable er de kvalitative variable, som derimod godt kan rangordnes
 
 [ASTA bogen s. 12-13]
 
+=======
+>>>>>>> parent of 6883212... Update 01-intro.Rmd
 =======
 >>>>>>> parent of 6883212... Update 01-intro.Rmd
 =======
