@@ -22,5 +22,5 @@ language:
 delete_merged_file: true
 
 
-rmd_files: ["index.Rmd", "01-intro.Rmd", "06-references.Rmd"]
+rmd_files: ["index.Rmd", "01-problemanalyse.Rmd", "100-bibliografi.Rmd"]
 
