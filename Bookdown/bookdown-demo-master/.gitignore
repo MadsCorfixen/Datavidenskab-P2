@@ -5,3 +5,8 @@ _publish.R
 _book
 _bookdown_files
 rsconnect
+README.md
+now.json
+preamble.tex
+style.css
+toc.css

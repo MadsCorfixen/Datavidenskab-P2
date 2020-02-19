@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+# Problemanalyse
+
 ## Kvalitative variabler
 
 De stokastiske variabler, som kategorisk kan opdeles kaldes for kategoriske eller kvalitative variabler. Ved en kvalitativ variabel fremgår der en faktor, som er den enhed der kategoriseres efter. Udfaldsmængen, er de mulige værdier, som kan forekomme ved en undersøgelse af faktoren. (Dette kunne som et eksempel være nationalitet, hvor man kategoriseres efter land, hvor udfaldsmængen er landene i verden.)  
@@ -10,9 +11,6 @@ Den norminale beskriver variable, som ikke har en naturlig rangorden, og derved 
 De ordinale variable er de kvalitative variable, som derimod godt kan rangordnes. Eftersom udfaldsmængen er naturligt rangeret, og samtidig er kategoriske variable, vil det altså være en ordinal variabel. Heriblandt er ordinale variable; økonomisk status, uddannelsesgrad, karakterer m.m. Disse variables udfaldsmængde er altså rangeret i forhold til hinanden, da det er bedre at være i en høj indkomst fremfor en lav indkomst og ligeledes er det bedre at få karakteren 10 end karakteren 4. Ud fra observationerne kan man efterfølgende som eksempel finde medianen, kvartiler m.m. Ønsker man at finde middelværdien skal man være lidt påpasselig, eftersom det reelt set ikke giver nogen mening. Dog er det muligt at udregne middelværdien hvis der er en fælles forståelse af, hvad middelværdien betyder for faktoren og hvilken skala, det er udregnet på baggrund af. Når ordinale variable illustreres skal det gøres som et søjlediagram efter rangordenen.
 
 [ASTA bogen s. 12-13]
-=======
-# Problemanalyse
->>>>>>> 3f4da08c0b70d0ffdc235dbb7426389b627e84c6
 
 ## Outliers
 
