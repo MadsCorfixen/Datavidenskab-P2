@@ -42,7 +42,7 @@ Det gælder altså, at $\approx 68 \%$ af observationerne findes inden for en st
 
 På baggrund af dette, kan en outlier defineres som en værdi, der ligger et vist antal standardafvigelser væk fra middelværdien. Som udgangspunkt siges det, at hvis en værdi er mere end $3$ standardafvigelser væk fra middelværdien, kan den ses som en outlier.
 
-En anden måde at beskrive fordelingen af en observation er ved hjælp af percentiler - et punkt for hvilket en hvis mængde af data antager værdier over eller under. Her en medianen et specialtilfælde af en percentil, 50-percentilen, hvor halvdelen af data antager værdier under punktet, og den anden halvdel over punktet. Generelt defineres en percentil som...
+En anden måde at beskrive fordelingen af en observation er ved hjælp af percentiler - et punkt for hvilket en hvis mængde af data antager værdier over eller under. Her en medianen et specialtilfælde af en percentil, 50-percentilen, hvor halvdelen af data antager værdier under punktet, og den anden halvdel over punktet. Generelt defineres en percentil som,
 
 >```{definition}
 >__p-percentilen__ er et punkt, således at $p  \%$ af observationerne antager værdier under punktet, og $(100 - p) \%$ af observationerne antager værdier over punktet.
@@ -50,7 +50,7 @@ En anden måde at beskrive fordelingen af en observation er ved hjælp af percen
 
 To andre særlige tilfælde af percentiler er 25-percentilen, den nedre kvartil ($Q_L$), og 75-percentilen, den øvre kvartil $Q_U$. Ved hjælp af $Q_L$ og $Q_U$ kan variabiliteten af observationerne beskrives som afstanden mellem de to kvartiler. Denne afstand benævnes _Inner Quartile Range_, IQR, og beregnes som $IQR = Q_U - Q_L$.
 
-Når både minimum, $Q_L$, median, $Q_U$ og maksimum er fundet, kan disse benyttes til at tegne et boksplot af observationerne. Et boksplot giver et grafisk overblik af midten og variabiliteten af observationerne. Et boksplot ser ud, som på nedenstående figur...
+Når både minimum, $Q_L$, median, $Q_U$ og maksimum er fundet, kan disse benyttes til at tegne et boksplot af observationerne. Et boksplot giver et grafisk overblik af midten og variabiliteten af observationerne. Et boksplot ser ud, som på nedenstående figur.
 
 ```{r, out.width='75%', fig.align='center', echo = FALSE}
 knitr::include_graphics('images/Boksplot.PNG')
@@ -59,7 +59,5 @@ knitr::include_graphics('images/Boksplot.PNG')
 På baggrund af IQR og boksplottet kan outliers nu defineres som data, der antager værdier mere end $1,5(IQR)$ gange over $Q_U$ eller under $Q_L$.
 
 Outliers er altså værdier, der er ekstreme nok til at påvirke en dataanalyse i forkert retning. Derfor benyttes forskellige metoder til at identificere sådanne outliers, som derefter kan fjernes i en rengøring af datasættet.
-
-(Medmindre andet er angivet, er kilden vores ASTA-bog)
 
 
