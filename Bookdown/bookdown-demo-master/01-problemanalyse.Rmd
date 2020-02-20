@@ -43,6 +43,7 @@ $P(a < X < b) = \int_a^b f(x) dx$
 
 Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den ses i mange målinger i virkeligheden, og dels fordi, den centrale grænseværdi sætning siger, at ved et højere antal observationen, vil alle stokastiske variabler gennemsnitsfordeling antage en normalfordeling.
 
+## Stokastiske variabler
 
 ## Outliers
 
