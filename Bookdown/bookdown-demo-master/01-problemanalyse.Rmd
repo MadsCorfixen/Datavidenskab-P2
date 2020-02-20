@@ -22,9 +22,9 @@ Et andet essentielt værktøj i dataanalyse er visualisering. På baggrund af mi
 
 Kvantitative variabler kan opdeles i to underkategorier, interval og ratio. Derudover kan disse underkategorier inddeles yderligere i diskrete og kontinuerte variabler. __indsæt figur__ Disse beskrives i et efterfølgende afsnit.
 
-Variabler, der tilhører intervalkategorien, er defineret som variabler, hvor det er muligt at bestemme forskellen mellem to mængder eller to tal. Det kunne eksempelvis være forskellen på temeraturen indenfor, $20 ~^\circ C$, og udenfor, $10 ~^\circ C$.
+Variabler, der tilhører intervalkategorien, er defineret som variabler, hvor det er muligt at bestemme forskellen mellem to mængder eller to tal. Det kunne eksempelvis være forskellen på temperaturen indenfor, $20 ~^\circ C$, og udenfor, $10 ~^\circ C$.
 
-Variabler, der tilhører ratiokategorien, er defineret som variabler, hvor det er muligt at bestemme forholdet mellem to mængder eller to tal. Det betyder, at der mellem to tal skal være et særligt forhold. Som eksempel på værdier som tilhører ratiokategorien kan være antal hår på hovedet, fart, temperatur målt i kelvin eller tidsforskel. Årsagen til, at temperaturer målt i kelvin, men ikke temperaturer målt i $^\circ$C, tilhører ratiokategorien er, at værdier i denne kategori skal have et naturligt nulpunkt.
+Variabler, der tilhører ratiokategorien, er defineret som variabler, hvor det er muligt at bestemme forholdet mellem to mængder eller to tal. Det betyder, at der mellem to tal skal være et særligt forhold. Som eksempel på værdier, der tilhører ratiokategorien, kan være antal hår på hovedet, fart, temperatur målt i kelvin eller tidsforskel. Årsagen til, at temperaturer målt i kelvin, men ikke temperaturer målt i grader celsius, tilhører ratiokategorien er, at værdier i denne kategori skal have et naturligt nulpunkt.
 
 ### Diskrete variabler
 
@@ -32,6 +32,8 @@ En underkategori til kvantitative variabler er diskrete variabler. En variabel e
 
 Nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirrende at kende forskel på diskrete og kontinuerte variabler, da man runder kontinuerte variabler op til heltal når man måler dem, så de bliver diskrete. Som eksempelvis med alder, siger man typisk 21 år, når faktisk man er mellem 21 og 22 år. Grunden til at det er vigtigt, at genkende om variablen er kontinuert eller diskret er fordi, at man bruger den viden til at bestemme, hvilken statistisk metode der skal benyttes til at analyserer den givne data. (Kilde: ASTA-bog)
 
+
+## Stokastiske variabler
 
 ## Outliers
 
