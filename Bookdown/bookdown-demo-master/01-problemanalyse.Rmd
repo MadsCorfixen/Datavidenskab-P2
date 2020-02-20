@@ -16,19 +16,15 @@ De ordinale variabler er de kvalitative variabler, som derimod godt kan rangordn
 
 ## Kvantitative variable
 
-En kvantitativ variabler er defineret ved en numerisk ?objektiv? værdi, hvilket gør variablen målbar. Da en kvantitativ variabel antager en numerisk værdi kan aritmetriske operationer udføres på variablen. ??Middelværdi, varians og standardafvigelse, anvendes ofte på kvantitative variable.?? På baggrund af disse simple operationer er det muligt at få informationer ud af et datasæt, der kan skabe indsigt, og giver inputs til fokusområder, som skal undersøges yderligere. Dette er en væsentlig del af dataanalyse, således at ressourcer kan anvendes optimalt.
+En kvantitativ variabler er defineret ved en numerisk  værdi, hvilket gør variablen målbar. Da en kvantitativ variabel antager en numerisk værdi kan aritmetriske operationer udføres på variablen. På baggrund af disse simple operationer er det muligt at få informationer ud af et datasæt, der kan skabe indsigt, og giver inputs til fokusområder, som skal undersøges yderligere. Dette er en væsentlig del af dataanalyse, således at ressourcer kan anvendes optimalt.
 
 Et andet essentielt værktøj i dataanalyse er visualisering. På bagrund af middelværdi, varians og standardafvigelsen er det muligt at visualisere data med eksempelvis et histogram eller ey boksplot.
 
 Kvantitative variable kan opdeles i to underkategorier, interval og ratio. Derudover kan variablen også indeles i to stokastiske variable, diskret og kontinuert. Disse beskrives i et efterfølgende afsnit.
 
-(FORSLAG TIL ÆNDRING) Intervalkategorien er defineret som forskellen mellem to mængder eller to tal, hvorfor de kaldes interval. Det kunne være forskellen på temeraturen indenfor, $20 ~^\circ C$, og udenfor, $10 ~^\circ C$,  målt i $^\circ C$ . Grunden til at eksemplet her hører under inteval er, at det er muligt at beregne en forskel mellem to tal $20 ~^\circ C - 10 ~^\circ C = 10 ~^\circ$.
+Variabler, der tilhører intervalkategorien, er defineret som variabler, hvor det er muligt at bestemme forskellen mellem to mængder eller to tal. Det kunne eksempelvis være forskellen på temeraturen indenfor, $20 ~^\circ C$, og udenfor, $10 ~^\circ C$.
 
-Ratiokategorien er defineret ved forholdet mellem to mængder eller to tal. Det betyder at, mellem to tal skal der være et særligt forhold, det kunne være temepraturen fra tidligere 20 og 10 $^\circ$C. Her er indetemperaturen dobbelt so stor som udetemperaturen. Men havde tallene i stedet været 20 og -10, så er det ikke længere tilfældet, da det dobbelte af -10 ikke er 20, men -20. Dette er ligeledes forklaringen på hvorfor temperaturer målt i $^\circ$C, er placeret i interval kategorien. Værdier som tilhører ratio kan være antal hår på hovedet, fart, temperatur målt i $^\circ$K eller tidsforskel. Årsagen til at temepraturer mål i kelvin tilhører ratio, er at værdier denne kategori skal have et naturligt nulpunkt. (FORSLAG TIL ÆNDRING)
-
-__Variabler, der tilhører intervalkategorien, er defineret som variabler, hvor det er muligt at bestemme forskellen mellem to mængder eller to tal. Det kunne eksempelvis være forskellen på temeraturen indenfor, $20 ~^\circ C$, og udenfor, $10 ~^\circ C$.__
-
-__Variabler, der tilhører ratiokategorien, er defineret som variabler, hvor det er muligt at bestemme forholdet mellem to mængder eller to tal. Det betyder, at der mellem to tal skal være et særligt forhold. Som eksempel på værdier som tilhører ratiokategorien kan være antal hår på hovedet, fart, temperatur målt i kelvis eller tidsforskel. Årsagen til, at temepraturer målt i kelvin, men ikke temperaturer målt i $^\circ$, tilhører ratiokategorien er, at værdier i denne kategori skal have et naturligt nulpunkt.__
+Variabler, der tilhører ratiokategorien, er defineret som variabler, hvor det er muligt at bestemme forholdet mellem to mængder eller to tal. Det betyder, at der mellem to tal skal være et særligt forhold. Som eksempel på værdier som tilhører ratiokategorien kan være antal hår på hovedet, fart, temperatur målt i kelvin eller tidsforskel. Årsagen til, at temperaturer målt i kelvin, men ikke temperaturer målt i $^\circ$C, tilhører ratiokategorien er, at værdier i denne kategori skal have et naturligt nulpunkt.
 
 ### Diskrete variabler
 
