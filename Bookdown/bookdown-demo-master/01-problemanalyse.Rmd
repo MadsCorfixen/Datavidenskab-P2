@@ -2,17 +2,17 @@
 
 ## Kvalitative variabler
 
-De stokastiske variabler, som kategorisk kan opdeles kaldes for kategoriske eller kvalitative variabler. Ved en kvalitativ variabel fremgår der en faktor, som er den enhed der kategoriseres efter. Udfaldsmængen, er de mulige værdier, som kan forekomme ved en undersøgelse af faktoren. Dette kunne eksempelvis være nationalitet, hvor man kategoriseres efter land, hvor udfaldsmængen er landene i verden. 
+De stokastiske variabler kan opdeles i kategoriske eller kvalitative variabler. Ved en kvalitativ variabel fremgår der en enhed, som er den enhed der kategoriseres efter. Udfaldsmængden er de mulige værdier, som kan forekomme ved en undersøgelse af enheden. Dette kunne eksempelvis være nationalitet, hvor der kategoriseres efter land, hvor udfaldsmængen er landene i verden. 
 
-De kvalitative variabler er opdelt efter en nominal og ordinal skala.
+De kvalitative variabler er opdelt efter en nominel og ordinel skala.
 
-Den nominale beskriver variabler, som ikke har en naturlig rangorden, og derved ikke kan rangeres. Ofte er de nominale variabler tekststrenge, men de kan også være numeriske i form af postnumre, dog vil det være meningsløst at foretage udregninger såsom gennemsnittet eller standardafvigelsen. Eksempler på nominale variabler er; køn, hudfarve, nationalitet, hårfarve m.m., da udfaldsmængen i faktorene ikke kan rangordnes. Derved skal nominale variabler illustreres ved et cirkeldiagram da der ikke er givet nogen skala. De udregninger, som man kan foretage sig på nominale variabler er andele og frekvenser, da disse kun kan skelne udfald.
+Den nominale beskriver variabler, som ikke har en naturlig rangorden, og derved ikke kan rangeres. Ofte er de nominale variabler tekststrenge, men de kan også være numeriske i form af postnumre, dog vil det være meningsløst at foretage beregninger såsom middelværdi eller standardafvigelsen. Eksempler på nominale variabler er køn, hudfarve, nationalitet og hårfarve, da udfaldsmængden i enheden ikke kan rangordnes. Derved skal nominale variabler illustreres ved et cirkeldiagram, da der ikke er givet nogen skala. De udregninger, som der kan foretages på nominale variabler er andele og frekvenser, da disse kun kan skelne udfald.
 
-De ordinale variabler er de kvalitative variabler, som derimod godt kan rangordnes. Eftersom udfaldsmængen er naturligt rangeret, og samtidig er kategoriske variabler, vil det altså være en ordinal variabel. Heriblandt er ordinale variabler; økonomisk status, uddannelsesgrad, karakterer m.m. Disse variablers udfaldsmængde er altså rangeret i forhold til hinanden, da det er bedre at være i en høj indkomst fremfor en lav indkomst og ligeledes er det bedre at få karakteren 10 end karakteren 4. Ud fra observationerne kan man efterfølgende blandt andet finde medianen, kvartiler m.m.
+De ordinale variabler er de kvalitative variabler, som kan rangeres. Eftersom udfaldsmængden er naturligt rangeret, og samtidig er kategorisk, vil det altså være en ordinal variabel. Eksempler på ordinale variabler er økonomisk status, uddannelsesgrad og karakterer. Disse variablers udfaldsmængde er altså rangeret i forhold til hinanden, da det er bedre at være i en høj indkomst fremfor en lav indkomst og ligeledes er det bedre at få karakteren 10 end karakteren 4. Ud fra observationerne kan man efterfølgende blandt andet finde medianen, kvartiler m.m.
 
-Ønsker man at finde middelværdien skal man være lidt påpasselig, eftersom det reelt set ikke giver nogen mening at på ordinale variabler. Dog er det muligt at udregne en middelværdi hvis der er en fælles forståelse af, hvad middelværdien betyder for faktoren og hvilken skala, det er udregnet på baggrund af. Når ordinale variabler illustreres skal det gøres som et søjlediagram efter rangordenen.
+Ønsker man at finde middelværdien skal man være lidt påpasselig, eftersom det reelt set ikke giver nogen mening på ordinale variabler. Dog er det muligt at udregne en middelværdi, hvis der er en fælles forståelse af, hvad middelværdien betyder for enheden og hvilken skala, det er udregnet på baggrund af. Når ordinale variabler illustreres, skal det gøres som et søjlediagram efter rangordenen.
 
-[ASTA bogen s. 12-13]
+[ASTA-bogen s. 12-13]
 
 ## Kvantitative variable
 
