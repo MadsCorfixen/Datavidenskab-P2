@@ -25,7 +25,9 @@ Ratio kategorien er defineret ved forholdet mellem to mængder eller to tal. Det
 
 ### Diskrete variabler
 
-En underkategori til kvantitative variabler er diskrete variabler. En variabel er diskret hvis man kan tælle værdierne i den, som eksempelvis øjne på en terning (1, 2, 3…). En hver variabel der kan beskrives som “antallet af…” er en diskret variabel. Værdierne i en diskret variabel kan ikke blive opdelt i tal imellem selve værdierne, som eksempelvis kan man ikke sige en person har 2,5 søskende. Kategoriske, nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirrende at kende forskel på diskrete og kontinuerte variabler, da man runder kontinuerte variabler op til hele tal når man måler dem, så de bliver diskrete. Som eksempelvis med alder, siger man typisk 21 når faktisk man er mellem 21 og 22 år. Grunden til at det er vigtigt at genkende om variablen er kontinuert eller diskret er vigtig, fordi man bruger den viden til at bestemme hvilken statistisk metode man skal bruge til at analyserer sit data. (Kilde: ASTA-bog)
+En underkategori til kvantitative variabler er diskrete variabler. En variabel er diskret, hvis man kan tælle værdierne i den, som eksempelvis øjne på en terning (1, 2, ..., 6). En hver variabel der kan beskrives, som “antallet af…” er en diskret variabel. Værdierne i en diskret variabel kan ikke blive opdelt i tal imellem selve værdierne, som eksempelvis kan man ikke sige en person har 2,5 søskende. 
+
+Nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirrende at kende forskel på diskrete og kontinuerte variabler, da man runder kontinuerte variabler op til heltal når man måler dem, så de bliver diskrete. Som eksempelvis med alder, siger man typisk 21 år, når faktisk man er mellem 21 og 22 år. Grunden til at det er vigtigt, at genkende om variablen er kontinuert eller diskret er fordi, at man bruger den viden til at bestemme, hvilken statistisk metode der skal benyttes til at analyserer den givne data. (Kilde: ASTA-bog)
 
 
 ## Outliers
