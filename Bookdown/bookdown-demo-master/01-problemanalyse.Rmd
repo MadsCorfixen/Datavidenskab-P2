@@ -23,6 +23,10 @@ Interval kategorien er defineret som forskellen mellem to mængder eller to tal,
 
 Ratio kategorien er defineret ved forholdet mellem to mængder eller to tal. Det betyder at, mellem to tal skal der være et særligt forhold, det kunne være temepraturen fra tidligere 20 og 10 $^\circ$C. Her er indetemperaturen dobbelt so stor som udetemperaturen. Men havde tallene i stedet været 20 og -10, så er det ikke længere tilfældet, da det dobbelte af -10 ikke er 20, men -20. Dette er ligeledes forklaringen på hvorfor temperaturer målt i $^\circ$C, er placeret i interval kategorien. Værdier som tilhører ratio kan være antal hår på hovedet, fart, temperatur målt i $^\circ$K eller tidsforskel. Årsagen til at temepraturer mål i $^\circ$K tilhører ratio, er at værdier denne kategori skal have et naturligt nulpunkt. 
 
+### Diskrete variabler
+
+En underkategori til kvantitative variabler er diskrete variabler. En variabel er diskret hvis man kan tælle værdierne i den, som eksempelvis øjne på en terning (1, 2, 3…). En hver variabel der kan beskrives som “antallet af…” er en diskret variabel. Værdierne i en diskret variabel kan ikke blive opdelt i tal imellem selve værdierne, som eksempelvis kan man ikke sige en person har 2,5 søskende. Kategoriske, nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirrende at kende forskel på diskrete og kontinuerte variabler, da man runder kontinuerte variabler op til hele tal når man måler dem, så de bliver diskrete. Som eksempelvis med alder, siger man typisk 21 når faktisk man er mellem 21 og 22 år. Grunden til at det er vigtigt at genkende om variablen er kontinuert eller diskret er vigtig, fordi man bruger den viden til at bestemme hvilken statistisk metode man skal bruge til at analyserer sit data. (Kilde: ASTA-bog)
+
 
 ## Outliers
 
