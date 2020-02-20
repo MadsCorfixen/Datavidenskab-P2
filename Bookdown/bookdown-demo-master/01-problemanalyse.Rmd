@@ -2,7 +2,7 @@
 
 ## Kvalitative variabler
 
-De stokastiske variabler kan opdeles i kategoriske eller kvalitative variabler. Ved en kvalitativ variabel fremgår der en enhed, som er den enhed der kategoriseres efter. Udfaldsmængden er de mulige værdier, som kan forekomme ved en undersøgelse af enheden. Dette kunne eksempelvis være nationalitet, hvor der kategoriseres efter land, hvor udfaldsmængen er landene i verden. 
+De stokastiske variabler kan opdeles i kategoriske eller kvalitative variabler. Ved en kvalitativ variabel fremgår der en enhed, som er den enhed der kategoriseres efter. Udfaldsmængden er de mulige værdier, som kan forekomme ved en undersøgelse af enheden. Dette kunne eksempelvis være nationalitet, hvor der kategoriseres efter land, hvor udfaldsmængen er landene i verden.
 
 De kvalitative variabler er opdelt efter en nominel og ordinel skala.
 
@@ -28,12 +28,21 @@ Variabler, der tilhører ratiokategorien, er defineret som variabler, hvor det e
 
 ### Diskrete variabler
 
-En underkategori til kvantitative variabler er diskrete variabler. En variabel er diskret, hvis man kan tælle værdierne i den, som eksempelvis øjne på en terning (1, 2, ..., 6). En hver variabel der kan beskrives, som “antallet af…” er en diskret variabel. Værdierne i en diskret variabel kan ikke blive opdelt i tal imellem selve værdierne, som eksempelvis kan man ikke sige en person har 2,5 søskende. 
+En underkategori til kvantitative variabler er diskrete variabler. En variabel er diskret, hvis man kan tælle værdierne i den, som eksempelvis øjne på en terning (1, 2, ..., 6). En hver variabel der kan beskrives, som “antallet af…” er en diskret variabel. Værdierne i en diskret variabel kan ikke blive opdelt i tal imellem selve værdierne, som eksempelvis kan man ikke sige en person har 2,5 søskende.
 
 Nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirrende at kende forskel på diskrete og kontinuerte variabler, da man runder kontinuerte variabler op til heltal når man måler dem, så de bliver diskrete. Som eksempelvis med alder, siger man typisk 21 år, når faktisk man er mellem 21 og 22 år. Grunden til at det er vigtigt, at genkende om variablen er kontinuert eller diskret er fordi, at man bruger den viden til at bestemme, hvilken statistisk metode der skal benyttes til at analyserer den givne data. (Kilde: ASTA-bog)
 
 
-## Stokastiske variabler
+## Kontinuerte Variabler
+
+Hvis den stokastiske varibel antager et overtælleligt antal, siges den at være kontinuert. Et eksempel på en overtællelig variabel, kan være hvis har en undersøgelse, hvor man tager højden på et tilfældigt menneske i populationen. Her kan højden have et antal decimaler, der går mod uendeligt, for eksempel $195,00000003 cm$.
+
+For kontinuerte variabler bruger man tæthedsfunktionen, f(x). Her er arealet under tæthedsfunktionen sandsynligheden for, at en stokastisk variabel, X, befinder sig i intervallet (a, b), givet ved,
+
+$P(a < X < b) = \int_a^b f(x) dx$
+
+Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den ses i mange målinger i virkeligheden, og dels fordi, den centrale grænseværdi sætning siger, at ved et højere antal observationen, vil alle stokastiske variabler gennemsnitsfordeling antage en normalfordeling.
+
 
 ## Outliers
 
