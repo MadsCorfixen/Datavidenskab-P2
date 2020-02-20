@@ -1,3 +1,23 @@
+--- 
+title: "P2 - Simulering af Data"
+author: "Gruppe B2-19"
+date: "2020-02-20"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+#description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+# Overskrift
+
+
+
+<!--chapter:end:index.Rmd-->
+
 # Problemanalyse
 
 ## Kvalitative variabler
@@ -50,9 +70,19 @@ En outlier kan beskrives som en observation, der afviger betydeligt fra resten a
 
 Den første metode til at identificere outliers tager udgangpunkt i fordelingen af observationerne. Hvis fordelingen er tilnærmelsesvis klokkeformet, gælder figur, hvor $\mu$ er middelværdien og $\sigma$ er standardafvigelse.
 
-```{r, out.width='75%', fig.align='center', fig.cap = "Figurtekst"}
+
+```r
 knitr::include_graphics('images/Normalfordeling.PNG')
 ```
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.75\linewidth]{images/Normalfordeling} 
+
+}
+
+\caption{Figurtekst}(\#fig:unnamed-chunk-2)
+\end{figure}
 
 Det gælder altså, at $\approx 68 \%$ af observationerne findes inden for en standardafvigelse fra middelværdien, $\approx 95 \%$ inden for to standardafvigelser og $\approx 99,7 \%$ inden for tre standardafvigelser.
 
@@ -60,18 +90,22 @@ På baggrund af dette, kan en outlier defineres som en værdi, der ligger et vis
 
 En anden måde at beskrive fordelingen af en observation er ved hjælp af percentiler - et punkt for hvilket en hvis mængde af data antager værdier over eller under. Her en medianen et specialtilfælde af en percentil, 50-percentilen, hvor halvdelen af data antager værdier under punktet, og den anden halvdel over punktet. Generelt defineres en percentil som,
 
->```{definition}
->__p-percentilen__ er et punkt, således at $p  \%$ af observationerne antager værdier under punktet, og $(100 - p) \%$ af observationerne antager værdier over punktet.
->```
+>\BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:unnamed-chunk-3"><strong>(\#def:unnamed-chunk-3) </strong></span>__p-percentilen__ er et punkt, således at $p  \%$ af observationerne antager værdier under punktet, og $(100 - p) \%$ af observationerne antager værdier over punktet.</div>\EndKnitrBlock{definition}
 
 To andre særlige tilfælde af percentiler er 25-percentilen, den nedre kvartil ($Q_L$), og 75-percentilen, den øvre kvartil $Q_U$. Ved hjælp af $Q_L$ og $Q_U$ kan variabiliteten af observationerne beskrives som afstanden mellem de to kvartiler. Denne afstand benævnes _Inner Quartile Range_, IQR, og beregnes som $IQR = Q_U - Q_L$.
 
 Når både minimum, $Q_L$, median, $Q_U$ og maksimum er fundet, kan disse benyttes til at tegne et boksplot af observationerne. Et boksplot giver et grafisk overblik af midten og variabiliteten af observationerne. Et boksplot ser ud, som på nedenstående figur.
 
-```{r, out.width='75%', fig.align='center', echo = FALSE}
-knitr::include_graphics('images/Boksplot.PNG')
-```
+
+\begin{center}\includegraphics[width=0.75\linewidth]{images/Boksplot} \end{center}
 
 På baggrund af IQR og boksplottet kan outliers nu defineres som data, der antager værdier mere end $1,5(IQR)$ gange over $Q_U$ eller under $Q_L$.
 
 Outliers er altså værdier, der er ekstreme nok til at påvirke en dataanalyse i forkert retning. Derfor benyttes forskellige metoder til at identificere sådanne outliers, som derefter kan fjernes i en rengøring af datasættet.
+
+<!--chapter:end:01-problemanalyse.Rmd-->
+
+
+
+<!--chapter:end:100-bibliografi.Rmd-->
+
