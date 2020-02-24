@@ -64,9 +64,7 @@ Hvis en varibels værdier tilhører en overtællelig mængde, siges den at være
 
 For kontinuerte variabler bruger man tæthedsfunktionen, f(x). Her er arealet under tæthedsfunktionen sandsynligheden for, at en stokastisk variabel, X, befinder sig i intervallet (a, b), givet ved,
 
-$P(a < X < b) = \int_a^b f(x) dx.$
-
-Derudover er det også et krav at arealet under grafen er lig 1, da dette vil svare til 100 procent.
+$P(a < X < b) = \int_a^b f(x) dx$
 
 Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den fremgår i mange målinger i virkeligheden, og dels fordi, den centrale grænseværdisætning siger, at ved et højere antal observationer, vil alle stokastiske variablers gennemsnitsfordeling antage en normalfordeling.
 
