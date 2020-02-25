@@ -67,9 +67,9 @@ En anden måde at beskrive fordelingen af en observation er ved hjælp af percen
 
 To andre særlige tilfælde af percentiler er 25-percentilen, den nedre kvartil ($Q_L$), og 75-percentilen, den øvre kvartil ($Q_U$). Ved hjælp af $Q_L$ og $Q_U$ kan variabiliteten af observationerne beskrives som afstanden mellem de to kvartiler. Denne afstand benævnes _Inner Quartile Range_ (_IQR_), og beregnes som $IQR = Q_U - Q_L$.
 
-Når både minimum, nedre kvartil, median, øvre kvartil og maksimum er fundet, kan disse benyttes til at tegne et boksplot af observationerne. Et boksplot giver et grafisk overblik af midten og variabiliteten af observationerne. Et boksplot ser ud, som på figur.
+Når både minimum, nedre kvartil, median, øvre kvartil og maksimum er fundet, kan disse benyttes til at tegne et boksplot af observationerne. Et boksplot giver et grafisk overblik af midten og variabiliteten af observationerne. Et boksplot ser ud, som på figuren nedenfor.
 
-```{r, out.width='75%', fig.align='center', echo = FALSE}
+```{r, out.width='75%', fig.align='center', fig.cap="Figurtekst", echo = FALSE}
 knitr::include_graphics('images/Boksplot.PNG')
 ```
 
