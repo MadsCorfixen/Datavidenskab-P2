@@ -47,7 +47,7 @@ Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den fremgår
 
 ## Outliers
 
-En outlier kan beskrives som en observation, der afviger betydeligt fra resten af den stikprøve, observationen stammer fra (WIKI). Denne beskrivelse uddybes nedenfor, hvor to forskellige metoder til at identificere outliers gennemgås. Afsnittet er skrevet med udgangspunkt i [@ASTA, s. 48-55].
+En outlier kan beskrives som en observation, der afviger betydeligt fra resten af den stikprøve, observationen stammer fra (WIKI). Denne beskrivelse uddybes nedenfor, hvor to forskellige metoder til at identificere outliers gennemgås. Afsnittet er skrevet med udgangspunkt i [@ASTAbog, s. 48-55].
 
 Den første metode til at identificere outliers tager udgangpunkt i fordelingen af observationerne. Hvis fordelingen er tilnærmelsesvis klokkeformet, gælder figur, hvor $\mu$ er middelværdien og $\sigma$ er standardafvigelse.
 
