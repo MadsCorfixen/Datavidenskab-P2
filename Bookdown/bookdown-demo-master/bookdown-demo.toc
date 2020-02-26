@@ -1,13 +1,8 @@
-\contentsline {chapter}{\numberline {1}Overskrift}{5}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Overskrift}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Kvalitative variabler}{7}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Kvantitative variabler}{8}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Diskrete variabler}{8}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Kontinuerte variabler}{9}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Stokastiske variabler}{9}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Outliers}{9}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Problemformulering}{11}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Faldgruber i en dataanalyse}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Matematiske operationer}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Estimatorens egenskaber}{13}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Populationens fordeling}{13}{section.3.3}%
+\contentsline {chapter}{\numberline {1}Overskrift}{5}{chapter.1}% 
+\contentsline {chapter}{\numberline {2}Overskrift}{7}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Kvalitative variabler}{7}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Kvantitative variabler}{8}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Diskrete variabler}{8}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}Kontinuerte variabler}{9}{subsection.2.2.2}% 
+\contentsline {section}{\numberline {2.3}Stokastiske variabler}{9}{section.2.3}% 
+\contentsline {section}{\numberline {2.4}Outliers}{9}{section.2.4}% 
