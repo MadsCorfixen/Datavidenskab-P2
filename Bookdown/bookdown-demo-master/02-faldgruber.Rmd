@@ -4,26 +4,21 @@ Der er flere forskellige forhold at tage hensyn til, inden en dataanalyse påbeg
 
 ## Matematiske operationer
 
+Som nævnt i __AFSNITTET__, findes der forskellige typer af variable. Dette er en vigtig faktor at tage hensyn til, da det har indflydelse på, hvilke matematiske operationer, der kan udføres på variablen. Desuden har variabeltypen indflydelse på, hvilken type diagram de kan illustreres i. En kort opsummering af, hvilke operationer, der kan udføres på hvilke variable, ses på tabellen nedenfor.
 
+Table: En oversigt over de forskellige variable, og hvilke typer af matematiske operationer, der kan udføres på dem.
 
+|  Kvalitative variable   |      Kvantitative variable           ||
+|-------------|-----------|-------------------|-------------------|
+| __Nominal__ |__Ordinal__| __Interval__      | __Ratio__         |
+|    Andel    |   Median  | Middelværdi       | Middelværdi       |
+|   Frekvens  | Kvartiler | Standardafvigelse | Standardafvigelse |
 
+Generelt gælder det, at hvis en variabel tillader en bestemt operation, tillades samme operation på variabler, der står til højre i tabellen.
 
-- Typen af variabel
-- Parameter kontra estimat
-- Estimat kontra estimator
+En anden væsentlig, omend ikke lige så matematisk faldgrube, er symboler. Der defineres nøjagtigt, hvad en parameter, et estimat og en estimator er, og de hver et specifikt symbol. Generelt gælder, at græske bogstaver definerer en parameter, det tilsvarende latinske bogstav et estimat, og et stort latinsk bogstav en estimator. I tabellen nedenfor er det opsummeret, hvad fire forskellige parametre er givet som, og hvad det tilsvarende er i stikprøven og estimatoren.
 
-
-NOMINAL: Ingen rangordning. Forskel. Andel og frekvens. Cirkeldiagram.
-
-ORDINAL: Rangordning. Median og kvartiler. Søjlediagram. Middelværdien kun mening nogle gange.
-
-INTERVAL: Forskel. Middelværdi og standardafvigelse. 
-
-RATIO: Forhold. Middelværdi og standardafvigelse.
-
-
-
-Table: Her er en tabel, som jeg gerne vil referere til.
+Table: En oversigt over de forskellige symboler, som angiver henholdsvis en parameter, et estimat og en estimator.
 
 | Population (Parametre) | Stikprøve (Estimater) | Estimatorer |
 |:-----------:|:---------:|:---------:|
@@ -32,8 +27,13 @@ Table: Her er en tabel, som jeg gerne vil referere til.
 |  sigma^2    |    s^2    |    S^2    |
 |      pi     |   pi_hat  |   Pi_hat  |
 
+Det er derfor klart, at der skal være enighed om, hvad en parameter og et estimat er, og hvad forskellen er på et estimat og en estimator, før en dataanalyse kan udføres korrekt.
+
+
 ## Estimatorens egenskaber
-- Estimator forventningsret, efficient, konsistent og sufficient
+
+
+
 
 >```{definition}
 >__Forventningsret__ [@ASTAkursus3]
