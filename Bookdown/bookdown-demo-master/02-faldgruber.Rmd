@@ -1,0 +1,75 @@
+# Faldgruber i en dataanalyse
+
+Der er flere forskellige forhold at tage hensyn til, inden en dataanalyse påbegyndes. Nogle eksempler på disse forhold gennemgåes i dette afsnit, herunder variabeltyper, estimatorens egenskaber, fordelinger og antallet af kovariater. Afsnittet er primært skrevet med inspiration fra [@ASTAbog] og [@ASTAkursus3].
+
+## Matematiske operationer
+
+Som nævnt i __AFSNITTET__, findes der forskellige typer af variable. Dette er en vigtig faktor at tage hensyn til, da det har indflydelse på, hvilke matematiske operationer, der kan udføres på variablen. Desuden har variabeltypen indflydelse på, hvilken type diagram de kan illustreres i. En kort opsummering af, hvilke operationer, der kan udføres på hvilke variable, ses på tabellen nedenfor.
+
+Table: En oversigt over de forskellige variable, og hvilke typer af matematiske operationer, der kan udføres på dem.
+
+|  Kvalitative variable   |      Kvantitative variable           ||
+|-------------|-----------|-------------------|-------------------|
+| __Nominal__ |__Ordinal__| __Interval__      | __Ratio__         |
+|    Andel    |   Median  | Middelværdi       | Middelværdi       |
+|   Frekvens  | Kvartiler | Standardafvigelse | Standardafvigelse |
+
+Generelt gælder det, at hvis en variabel tillader en bestemt operation, tillades samme operation på variabler, der står til højre i tabellen.
+
+En anden væsentlig, omend ikke lige så matematisk faldgrube, er symboler. Der defineres nøjagtigt, hvad en parameter, et estimat og en estimator er, og de hver et specifikt symbol. Generelt gælder, at græske bogstaver definerer en parameter, det tilsvarende latinske bogstav et estimat, og et stort latinsk bogstav en estimator. I tabellen nedenfor er det opsummeret, hvad fire forskellige parametre er givet som, og hvad det tilsvarende er i stikprøven og estimatoren.
+
+Table: En oversigt over de forskellige symboler, som angiver henholdsvis en parameter, et estimat og en estimator.
+
+| Population (Parametre) | Stikprøve (Estimater) | Estimatorer |
+|:-----------:|:---------:|:---------:|
+|      my     |   my_hat  |   My_hat  |
+|   sigma     |     s     |     S     |
+|  sigma^2    |    s^2    |    S^2    |
+|      pi     |   pi_hat  |   Pi_hat  |
+
+Det er derfor klart, at der skal være enighed om, hvad en parameter og et estimat er, og hvad forskellen er på et estimat og en estimator, før en dataanalyse kan udføres korrekt.
+
+
+## Estimatorens egenskaber
+
+
+
+
+>```{definition}
+>__Forventningsret__ [@ASTAkursus3]
+> Den forventede værdi for en forventningsret estimator er lig parameteren $E(\hat{Y}) = \mu$.
+> ```
+
+
+>```{definition}
+>__Efficient__ [@ASTAkursus3]
+> En efficient estimator er den estimator med lavest varians.
+> ```
+
+
+>```{definition}
+>__Konsistent__ [@ASTAkursus3]
+> Variansen af en konsistent estimator falder, når størrelsen af stikprøver stiger.
+> ```
+
+
+>```{definition}
+>__Sufficient__ [@ASTAkursus3]
+> Når estimatet er beregnet, skal stikprøven ikke indeholde yderligere information om parameteret.
+> ```
+
+
+## Populationens fordeling
+- Population højreskævp -> estimat højreskæv og estimator højreskæv
+- Generel foldningsregel
+- Den centrale grænseværdisætning
+
+>```{theorem}
+>__Den Centrale Grænseværdisætning__ [@ASTAbog, s. 93].
+>
+> Ved tilfældig stikprøveudtagning af tilpas stor størrelse, vil fordelingen af stikprøvegennemsnittet blive tilnærmelsesvist normalfordelt.
+>```
+
+
+
+
