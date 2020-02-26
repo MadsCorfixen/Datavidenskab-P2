@@ -20,6 +20,7 @@ language:
     chapter_name: 'Kapitel '
     appendix_name: 'Bilag '
     figure_name: 'Figur '
+    table_name: 'Tabel '
 delete_merged_file: true
 
 
