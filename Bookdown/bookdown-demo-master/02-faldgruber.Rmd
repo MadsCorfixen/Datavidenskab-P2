@@ -1,24 +1,36 @@
 # Faldgruber i en dataanalyse
 
+Der er flere forskellige forhold at tage hensyn til, inden en dataanalyse påbegyndes. Nogle eksempler på disse forhold gennemgåes i dette afsnit, herunder variabeltyper, estimatorens egenskaber, fordelinger og antallet af kovariater. Afsnittet er primært skrevet med inspiration fra [@ASTAbog] og [@ASTAkursus3].
+
 ## Matematiske operationer
 
 
 
 
 
-NOMINAL: Ingen rangordning. Forskel. Andel og frekvens. Cirkeldiagram.
-
-ORDINAL: Rangordning. Median og kvartiler. Søjlediagram. Middelværdien kun mening nogle gange.
-
-INTERVAL: Forskel. Middelværdi 
-
-RATIO: Forhold. 
-
-
 - Typen af variabel
 - Parameter kontra estimat
 - Estimat kontra estimator
 
+
+NOMINAL: Ingen rangordning. Forskel. Andel og frekvens. Cirkeldiagram.
+
+ORDINAL: Rangordning. Median og kvartiler. Søjlediagram. Middelværdien kun mening nogle gange.
+
+INTERVAL: Forskel. Middelværdi og standardafvigelse. 
+
+RATIO: Forhold. Middelværdi og standardafvigelse.
+
+
+
+Table: Her er en tabel, som jeg gerne vil referere til.
+
+| Population (Parametre) | Stikprøve (Estimater) | Estimatorer |
+|:-----------:|:---------:|:---------:|
+|      my     |   my_hat  |   My_hat  |
+|   sigma     |     s     |     S     |
+|  sigma^2    |    s^2    |    S^2    |
+|      pi     |   pi_hat  |   Pi_hat  |
 
 ## Estimatorens egenskaber
 - Estimator forventningsret, efficient, konsistent og sufficient
@@ -59,12 +71,5 @@ RATIO: Forhold.
 >```
 
 
-Table: Her er en tabel, som jeg gerne vil referere til.
 
-| Population (Parametre) | Stikprøve (Estimater) | Estimatorer |
-|:----------:|:---------:|:---------:|
-|      &#956;     |   &#956;_hat  |   &#924;_hat  |
-|      &#963;     |     s     |     S     |
-|      &#963;^2    |    s^2    |    S^2    |
-|      &#960;     |   &#960;_hat   |   &#928;_hat   |
 
