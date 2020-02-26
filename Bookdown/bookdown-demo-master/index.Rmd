@@ -12,7 +12,7 @@ github-repo: rstudio/bookdown-demo
 #description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
 
-# Overskrift
+# Introduktion
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
