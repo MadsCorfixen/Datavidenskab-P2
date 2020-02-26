@@ -37,7 +37,7 @@ Nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirre
 
 Hvis en varibels værdier tilhører en overtællelig mængde, siges den at være kontinuert. Et eksempel på en kontinuert variabel, kan være højden på et tilfældigt menneske i en population. Her kan højden have et antal decimaler, der går mod uendeligt, for eksempel $195,00000003 cm$.
 
-For kontinuerte variabler bruger man tæthedsfunktionen, f(x). Her er arealet under tæthedsfunktionen sandsynligheden for, at en stokastisk variabel, X, befinder sig i intervallet (a, b), givet ved,
+For kontinuerte variabler bruger man tæthedsfunktionen, f(x). Her er arealet, hvilket svarer til 1 altså 100 procent, under tæthedsfunktionen sandsynligheden for, at en stokastisk variabel, X, befinder sig i intervallet (a, b), givet ved,
 
 $P(a < X < b) = \int_a^b f(x) dx$
 
