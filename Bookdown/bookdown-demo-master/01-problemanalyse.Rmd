@@ -47,7 +47,7 @@ Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den fremgår
 
 ## Outliers
 
-En outlier kan beskrives som en observation, der afviger betydeligt fra resten af den stikprøve, observationen stammer fra (WIKI). Denne beskrivelse uddybes nedenfor, hvor to forskellige metoder til at identificere outliers gennemgås. Afsnittet er skrevet med udgangspunkt i [@ASTA, s. 48-55].
+En outlier kan beskrives som en observation, der afviger betydeligt fra resten af den stikprøve, observationen stammer fra (WIKI). Denne beskrivelse uddybes nedenfor, hvor to forskellige metoder til at identificere outliers gennemgås. Afsnittet er skrevet med udgangspunkt i [@ASTAbog, s. 48-55].
 
 Den første metode til at identificere outliers tager udgangpunkt i fordelingen af observationerne. Hvis fordelingen er tilnærmelsesvis klokkeformet, gælder figur, hvor $\mu$ er middelværdien og $\sigma$ er standardafvigelse.
 
@@ -76,3 +76,17 @@ knitr::include_graphics('images/Boksplot.PNG')
 På baggrund af _IQR_ og boksplottet kan outliers nu defineres som data, der antager værdier mere end $1,5(IQR)$ gange over $Q_U$ eller under $Q_L$.
 
 Outliers er altså værdier, der er ekstreme nok til at påvirke en dataanalyse i forkert retning. Derfor benyttes forskellige metoder til at identificere sådanne outliers, som derefter kan fjernes i en rengøring af datasættet.
+
+## Problemformulering
+
+_Hvorvidt kan simulationsstudier bidrage til at højne kvaliteten af dataanalyser?_
+
+1. Hvilke faldgruber skal man være opmærksom på?
+
+2. Hvordan simulerer man data?
+
+a. Hvordan sikrer man en høj kvalitet af simuleret data?
+
+3. Hvad kan man inferere ud fra simuleret data?
+
+4. Hvilke alternativer finder der til statistisk inferens? (Bootstrapping)

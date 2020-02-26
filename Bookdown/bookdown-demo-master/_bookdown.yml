@@ -19,8 +19,9 @@ language:
     edit: Edit
     chapter_name: 'Kapitel '
     appendix_name: 'Bilag '
+    figure_name: 'Figur '
 delete_merged_file: true
 
 
-rmd_files: ["index.Rmd", "01-problemanalyse.Rmd", "100-bibliografi.Rmd"]
+rmd_files: ["index.Rmd", "01-problemanalyse.Rmd", "02-faldgruber.Rmd", "100-bibliografi.Rmd"]
 
