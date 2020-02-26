@@ -1,6 +1,20 @@
 # Faldgruber i en dataanalyse
 
 ## Matematiske operationer
+
+
+
+
+
+NOMINAL: Ingen rangordning. Forskel. Andel og frekvens. Cirkeldiagram.
+
+ORDINAL: Rangordning. Median og kvartiler. Søjlediagram. Middelværdien kun mening nogle gange.
+
+INTERVAL: Forskel. Middelværdi 
+
+RATIO: Forhold. 
+
+
 - Typen af variabel
 - Parameter kontra estimat
 - Estimat kontra estimator
@@ -10,38 +24,38 @@
 - Estimator forventningsret, efficient, konsistent og sufficient
 
 >```{definition}
->__Forventningsret__
+>__Forventningsret__ [@ASTAkursus3]
 > Den forventede værdi for en forventningsret estimator er lig parameteren $E(\hat{Y}) = \mu$.
 > ```
 
 
 >```{definition}
->__Efficient__
+>__Efficient__ [@ASTAkursus3]
 > En efficient estimator er den estimator med lavest varians.
 > ```
 
 
 >```{definition}
->__Konsistent__
+>__Konsistent__ [@ASTAkursus3]
 > Variansen af en konsistent estimator falder, når størrelsen af stikprøver stiger.
 > ```
 
 
 >```{definition}
->__Sufficient__
+>__Sufficient__ [@ASTAkursus3]
 > Når estimatet er beregnet, skal stikprøven ikke indeholde yderligere information om parameteret.
 > ```
 
 
 ## Populationens fordeling
-- Population højreskæv -> estimat højreskæv og estimator højreskæv
+- Population højreskævp -> estimat højreskæv og estimator højreskæv
 - Generel foldningsregel
 - Den centrale grænseværdisætning
 
 >```{theorem}
 >__Den Centrale Grænseværdisætning__ [@ASTAbog, s. 93].
 >
-> Ved tilfældig stikprøveudtagning af tilpas stor størrelse, $n$, vil fordelingen af stikprøvegennemsnittet blive tilnærmelsesvist normalfordelt.
+> Ved tilfældig stikprøveudtagning af tilpas stor størrelse, vil fordelingen af stikprøvegennemsnittet blive tilnærmelsesvist normalfordelt.
 >```
 
 
@@ -53,12 +67,4 @@ Table: Her er en tabel, som jeg gerne vil referere til.
 |      &#963;     |     s     |     S     |
 |      &#963;^2    |    s^2    |    S^2    |
 |      &#960;     |   &#960;_hat   |   &#928;_hat   |
-
-
-
-
-
-
-
-
 
