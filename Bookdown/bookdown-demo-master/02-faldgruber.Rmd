@@ -4,7 +4,7 @@ Der er flere forskellige forhold at tage hensyn til, inden en dataanalyse påbeg
 
 ## Variabeltyper
 
-I dette afsnit gennemgåes...  fordi...
+I dette afsnit gennemgåes, hvilken indflydelse variabeltyper har på en dataanalyse, samt andre faktorer, der skal tages hensyn til, før en korrekt dataanalyse kan udføres. Dette gøres for at give et overblik over, hvilke umiddelbare risici der er for både almindelige tastefejl, og fejlagtige matematiske operationer.
 
 Som nævnt i __AFSNITTET__, findes der forskellige typer af variable. Dette er en vigtig faktor at tage hensyn til, da det har indflydelse på, hvilke matematiske operationer, der kan udføres på variablen. Desuden har variabeltypen indflydelse på, hvilken type diagram de kan illustreres i. En kort opsummering af, hvilke operationer, der kan udføres på hvilke variable, ses på tabellen nedenfor.
 
@@ -56,19 +56,25 @@ Hver af disse egenskaber har indvirkning på, hvor brugbare resultater, en dataa
 
 ## Populationens fordeling
 
-I dette afsnit gennemgåes, hvilken indflydelse en populations fordeling har på fordelingen af estimaterne og de tilhørende estimatorer. Dette er nødvendigt, da forskellige regneregler og metoder, der gælder for eksempelvis en normalfordeling ikke nødvendigvis gælder for eksempelvis en uniform fordeling.
+I dette afsnit gennemgåes, hvilken indflydelse en populations fordeling har på fordelingen af estimaterne og de tilhørende estimatorer. Dette er nødvendigt, da forskellige regneregler og metoder, der gælder for, eksempelvis, en normalfordeling ikke nødvendigvis gælder for, eksempelvis, en uniform fordeling. Desuden har fordelingen af populationen indflydelse på, hvordan fordelingen af stikprøven og estimatorerne er.
 
-
-
-- Population højreskæv -> estimat højreskæv og estimator højreskæv
-- Generel foldningsregel
-- Den centrale grænseværdisætning
+Givet en population med en ukendt fordeling $Y \sim ?(\mu, \sigma)$, virker det umiddelbart ikke klart, hvordan en stikprøve kan benyttes til at infere. Dog siger den centrale grænseværdi sætning, at stikprøvemiddelværdien vil være normalfordelt, $\hat{y} \sim n(\mu, \frac{\sigma}{\sqrt{n}})$.
 
 >```{theorem}
 >__Den Centrale Grænseværdisætning__ [@ASTAbog, s. 93].
 >
-> Ved tilfældig stikprøveudtagning af tilpas stor størrelse, vil fordelingen af stikprøvegennemsnittet blive tilnærmelsesvist normalfordelt.
+> Ved tilfældig stikprøveudtagning af tilpas stor størrelse, vil fordelingen af stikprøvegennemsnittet blive tilnærmelsesvist normalfordelt med middelværdi $$\mu$$ og varians $\frac{\sigma}{\sqrt{n}}$.
 >```
+
+```{r, out.width='75%', fig.align='center', fig.cap="Figurtekst, [@ASTAkursus2]", echo = FALSE}
+knitr::include_graphics('images/Illustration_af_CLT.PNG')
+```
+
+- Population højreskæv -> estimat højreskæv og estimator højreskæv
+- Generel foldningsregel
+- Den centrale grænseværdisætning
+    - Cochrans regel
+
 
 
 
