@@ -12,3 +12,10 @@ style.css
 toc.css
 packages.bib
 bookdown-demo.toc
+bookdown-demo.aux
+bookdown-demo.pdf
+bookdown-demo.Rmd
+bookdown-demo.tex
+bookdown-demo.toc
+bookdown-demo.log
+packages.bib
