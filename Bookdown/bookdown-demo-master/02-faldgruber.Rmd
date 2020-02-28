@@ -4,13 +4,13 @@ Der er flere forskellige forhold at tage hensyn til, inden en dataanalyse påbeg
 
 ## Variabeltyper
 
-I dette afsnit gennemgåes, hvilken indflydelse variabeltyper har på en dataanalyse, samt andre faktorer, der skal tages hensyn til, før en korrekt dataanalyse kan udføres. Dette gøres for at give et overblik over, hvilke umiddelbare risici der er for både almindelige tastefejl, og fejlagtige matematiske operationer.
+I dette afsnit gennemgåes...  fordi...
 
-Som nævnt i __AFSNITTET__, findes der forskellige typer af variabler. Dette er en vigtig faktor at tage hensyn til, da det har indflydelse på, hvilke matematiske operationer, der kan udføres på variablen og hvilken type diagram den kan illustreres i. En kort opsummering af, hvilke operationer, der kan udføres på hvilke variable, ses på tabellen nedenfor.
+Som nævnt i __AFSNITTET__, findes der forskellige typer af variable. Dette er en vigtig faktor at tage hensyn til, da det har indflydelse på, hvilke matematiske operationer, der kan udføres på variablen. Desuden har variabeltypen indflydelse på, hvilken type diagram de kan illustreres i. En kort opsummering af, hvilke operationer, der kan udføres på hvilke variable, ses på tabellen nedenfor.
 
 Table: En oversigt over de forskellige variable, og hvilke typer af matematiske operationer, der kan udføres på dem.
 
-|  Kvalitative variable   |      Kvantitative variable            |
+|  Kvalitative variable   |      Kvantitative variable           ||
 |-------------|-----------|-------------------|-------------------|
 | __Nominal__ |__Ordinal__| __Interval__      | __Ratio__         |
 |    Andel    |   Median  | Middelværdi       | Middelværdi       |
@@ -18,25 +18,25 @@ Table: En oversigt over de forskellige variable, og hvilke typer af matematiske 
 
 Generelt gælder det, at hvis en variabel tillader en bestemt operation, tillades samme operation på variabler, der står til højre i tabellen.
 
-En anden væsentlig, omend ikke lige så matematisk faldgrube, er symboler. Der defineres nøjagtigt, hvad en parameter, et estimat og en estimator er, og de har hver et specifikt symbol. Generelt gælder, at græske bogstaver definerer en parameter, det tilsvarende latinske bogstav et estimat, og et stort latinsk bogstav en estimator. I tabellen nedenfor er det opsummeret, hvad fire forskellige parametre er givet som, og hvad det tilsvarende er i stikprøven og estimatoren.
+En anden væsentlig, omend ikke lige så matematisk faldgrube, er symboler. Der defineres nøjagtigt, hvad en parameter, et estimat og en estimator er, og de hver et specifikt symbol. Generelt gælder, at græske bogstaver definerer en parameter, det tilsvarende latinske bogstav et estimat, og et stort latinsk bogstav en estimator. I tabellen nedenfor er det opsummeret, hvad fire forskellige parametre er givet som, og hvad det tilsvarende er i stikprøven og estimatoren.
 
 Table: En oversigt over de forskellige symboler, som angiver henholdsvis en parameter, et estimat og en estimator.
 
 | Population (Parametre) | Stikprøve (Estimater) | Estimatorer |
 |:-----------:|:---------:|:---------:|
-|        $\mu$   |   $\hat{y}$   |   $\hat{Y}$  |
-|   $\sigma$     |     $s$     |     $S$     |
-|  $\sigma^2$    |    $s^2$    |    $S^2$    |
-|      $\pi$     |   $\hat{\pi}$  |   $\hat{\Pi}$  |
+|      my     |   my_hat  |   My_hat  |
+|   sigma     |     s     |     S     |
+|  sigma^2    |    s^2    |    S^2    |
+|      pi     |   pi_hat  |   Pi_hat  |
 
-Det er derfor klart, at der skal være enighed om, hvad en parameter og et estimat er, og hvad forskellen er på et estimat og en estimator er, før en dataanalyse kan udføres korrekt.
+Det er derfor klart, at der skal være enighed om, hvad en parameter og et estimat er, og hvad forskellen er på et estimat og en estimator, før en dataanalyse kan udføres korrekt.
 
 
 ## Estimatorens egenskaber
 
-I dette afsnit gennemgåes de forskellige egenskaber, forventningsret, efficient, konsistent og sufficient, en estimator kan have. Disse begreber giver et indblik i, hvor god en estimator er, og derved også, hvor valide resultater en dataanalyse på baggrund af den estimator, vil bibringe.
+I dette afsnit gennemgåes de forskellige egenskaber, unbiased, efficient, konsistent og sufficient, en estimator kan have. Disse begreber giver et indblik i, hvor god en estimator er, og derved også, hvor valide resultater, en dataanalyse på baggrund af den estimator, vil bibringe.
 
-En estimator er en stikprøvefunktion, der udfører en beregning på baggrund af værdier i en stikprøve, for at estimere parametrene i en population. Eksempelvis er middelværdi, $\mathrm{middel} = \frac{\mathrm{\#sucesser}}{\mathrm{\#observationer}}$, en estimator, der beregner et estimat for en populations middelværdi.
+En estimator er en stikprøvefunktion, der udfører en beregning på baggrund af værdier i en stikprøve, for at estimere parametrene i en population. Eksempelvis er middelværdi, $mean = \frac{\sum observationer}{\# observationer}$, en estimator, der beregner et estimat for en populations middelværdi.
 
 Der findes overordnet set fire forskellige måder at måle, hvorvidt en estimator er passende for ens data. Disse er, om estimatoren er forventningsret, efficient, konsistent og sufficient, som defineret nedenfor. 
 
@@ -56,48 +56,20 @@ Hver af disse egenskaber har indvirkning på, hvor brugbare resultater, en dataa
 
 ## Populationens fordeling
 
-I dette afsnit gennemgåes, hvilken indflydelse en populations fordeling har på fordelingen af estimaterne og de tilhørende estimatorer. Dette er nødvendigt, da forskellige regneregler og metoder, der gælder for, eksempelvis, en normalfordeling ikke nødvendigvis gælder for en uniform fordeling. Desuden har fordelingen af populationen indflydelse på, hvordan fordelingen af stikprøven og estimatorerne er.
+I dette afsnit gennemgåes, hvilken indflydelse en populations fordeling har på fordelingen af estimaterne og de tilhørende estimatorer. Dette er nødvendigt, da forskellige regneregler og metoder, der gælder for eksempelvis en normalfordeling ikke nødvendigvis gælder for eksempelvis en uniform fordeling.
 
-For eksempel, hvis en population er højre/venstreskæv, vil både stikprøven og estimatorerne også være det. Dette giver nogle problemer i forhold til at udføre hypotesetests, da densitetsfunktionen ikke vil tage en klokkeform. Dog kan dette afhjælpes ved brug af den centrale grænseværdisætning, der siger, at stikprøvemiddelværdien vil være normalfordelt, $\hat{y} \sim n(\mu, \frac{\sigma}{\sqrt{n}})$, hvis stikprøven er af 'tilpas' stor størrelse.
+
+
+- Population højreskæv -> estimat højreskæv og estimator højreskæv
+- Generel foldningsregel
+- Den centrale grænseværdisætning
 
 >```{theorem}
 >__Den Centrale Grænseværdisætning__ [@ASTAbog, s. 93].
 >
-> Ved tilfældig stikprøveudtagning af tilpas stor størrelse, vil fordelingen af stikprøvegennemsnittet blive tilnærmelsesvist normalfordelt med middelværdi $\mu$ og varians $\frac{\sigma}{\sqrt{n}}$.
+> Ved tilfældig stikprøveudtagning af tilpas stor størrelse, vil fordelingen af stikprøvegennemsnittet blive tilnærmelsesvist normalfordelt.
 >```
 
-Den centrale grænseværdisætning er illustreret på figuren nedenfor.
 
-```{r, out.width='75%', fig.align='center', fig.cap="Illustration af den centrale grænseværdisætning, [@ASTAkursus2]", echo = FALSE}
-knitr::include_graphics('images/Illustration_af_CLT.PNG')
-```
-
-For at bestemme, hvor stor en stikprøve der skal benyttes, for at stikprøvegennemsnittet bliver normalfordelt, benyttes 'Cochrans regel'. Reglen siger, at stikprøvestørrelsen, $n$, skal ligge i intervallet $[25 \cdot (\mathrm{skævhed})^2, 100 \cdot (\mathrm{skævhed})^2]$, hvor skævhed er en numerisk værdi der symboliserer hvor "lang" halen er, i en venstre- eller højreskæv fordeling. 
-
-
-## Passende antal kovariater 
-
-Hvis man vil lave en analyse af mænd og kvinders indkomst på arbejdsmarkedet, vil det give mening at tilføje en variabel, der måler på arbejdserfaring, da den vil kunne antages at have en indflydelse på indkomsten. Den variabel, som tilføjes, der måler arbejdserfaring, kaldes for en kovariat, og bruges til at beskrive indkomsten, som kaldes for responsvariablen.
-
-For eksempel med indkomsten mellem mænd og kvinder, kan det siges at mere arbejdserfaring har positiv indflydelse på indkomsten. Hvis mænd tenderer til at have mere arbejdserfaring end kvinder, vil resultatet ændre sig, afhængig af om man kontroller for variablen arbejdserfaring.
-
-For at illustrere indflydelse af kovariater på responsvariablen, kan der bruges lineær regression.
-
-<!-- #Denne type sammenligning er kaldet "analysis of covariance", som blev opfundet af R. A. Fischer. (Denne sætning er ikke rigtig. ANCOVA betyder analyse af KOVARIANS, som er et mål for, hvorvidt middelværdien er ens blandt flere kovariater) -->
-
-<!-- Fordi indflydelse kan ændre sig efter der kontrolleres for kovariater, kan resultaterne for "analysis of covariance" og "analysis of variance" være forskellige. (ANOVA og ANCOVA har ikke lige noget med passende antal kovariater at gøre) -->
-
-<!-- - Hvorfor og hvordan bruges det -->
-<!-- - Hvordan afgøre man om der er tilpas antal kovariater -->
-<!-- - Kovariater skas beskrive responsvariablen -->
-
-<!-- Kovariater skal beskrive responsvariablen -->
-
-# Hvad er kovariater
-Kovariater er variabler som beskriver responsvariablen. Responsvariablen er den variabel der ændre sig i forhold til de forklarende variabler (kovariater). Hvis man for eksempel vil lave en analyse af mænd og kvinders indkomst på arbejdsmarkedet, vil det give mening at tilføje en variabel der måler på arbejdserfaring, da den vil kunne antages at have en indflydelse på indkomsten. Kontrolvariablen der tilføjes som måler arbejdserfaring kaldes for en kovariat. Denne type sammenligning er kaldet "analysis of covariance". Hvis der ikke blev taget højde for, den ekstra variabel, arbejdserfaring og dermed kun ses på forholdet mellem indkomst og køn, ville den type sammenligning være "analysis of variance".
-
-## Hvorfor og hvordan bruges det
-Fordi at indflydelse kan ændre sig efter at der kontrolleres for variabler (kovariater), kan resultaterne for "analysis of covariance" og "analysis of variance" være forskellige. For eksempel med indkomsten mellem mænd og kvinder, kan det siges at mere arbejdserfaring har positiv indflydelse på indkomsten. Hvis mænd tenderer til at have mere arbejdserfaring end kvinder, vil resultatet ændre sig, afhængig af om man kontroller for variablen arbejdserfaring. [ASTA-bogen]
-Det kan dermed siges at kovariater er vigtige at tage højde for, da konklusionen af data afhænger af at der er blevet taget højde for alle kovariater der forklarer responsvariablen. Hvis man ikke har alle kovariater med, kan man komme til at konkluderer en forkert hypotese.
 
 

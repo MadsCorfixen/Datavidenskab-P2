@@ -1,24 +1,22 @@
 # Simulering af variabler
 
-Simuleringer er generering af estimater på mulige udfald, og på den måde en efterligne virkeligheden. Formålet er derved at generere tilfældigt estimerede værdier ud fra en model, der simulerer virkeligheden, hvilket muliggør yderligere analyser.
+Simuleringer er generering af estimater på mulige udfald, og på den måde efterligne virkeligheden ved simulering. Formålet er derved, at generere tilfældigt estimerede værdier ud fra en model, der simulerer virkeligheden, hvilket muliggører yderligerer analyser. 
 
-En definition på simulering er;
+En defination på simulation er;
 
 >A situation or event that seems real but is not real, used especially in order to help people deal with such situations or events. - Cambridge Dictonary [https://dictionary.cambridge.org/dictionary/english/simulation]
 
-Ud fra definitionen, er formålet altså ved simuleringer at efterligne virkeligheden, så de analyser der gøres på baggrund af simuleringerne, kan bruges i virkeligheden når lignende situationer opstår.
-Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producere dem i virkeligheden for at spare penge. Derved kan de analysere, hvilke forskellige dele der producerer mest _down-force_, uden at skulle teste dem i virkelig. [https://careers.mercedesamgf1.com/facilities/simulator/]
+Ud fra definationen, er formålet altså ved simuleringer at efterligne virkeligheden, så de analyser der gøres på baggrund af simuleringerne, kan bruges i virkeligheden når lignende situationer opstår.
+Brancher hvor simulationer er et yderst vigtigt redskab, er i motorsporten. I Formula 1, benytter holdene sig af simulatore, hvor de genskaber bilerne og derved kan teste nye dele af inden de behøver at producere dem i virkeligheden for at spare penge, så de derved kan analysere, hvad der for eksempel producere mere _down-force_ af forskellige dele, og så etablere den i stedet for, at skulle teste dem i virkeligheden. [https://careers.mercedesamgf1.com/facilities/simulator/] 
 
 ## Simulering i R
-Meta-forklaring til afsnittet. Henvises der ikke til noget er kilden: [https://bookdown.org/rdpeng/rprogdatascience/simulation.html]
 
+Simuleringer i R gøres ved at estimere udfald fra en fordeling, hvor der bliver genereret "tilfældige" tal. Eftersom tilfældige tal står i citationstegn, er det fordi, at der refereres til pseudo-tilfældige tal. 
+Disse generede tal forekommer at være tilfældige, men er det reelt set ikke helt tilfældige. [https://en.wikipedia.org/wiki/Pseudorandom_number_generator]
 
-Simuleringer i R udføres ved at estimere udfald fra en fordeling, hvor der bliver generet pseudo-tilfældige tal.
-Disse generede tal forekommer at være tilfældige, men er det reelt set ikke. [https://en.wikipedia.org/wiki/Pseudorandom_number_generator]
+Tallene er genereret ud fra et _seed_, som i R bestemmes ved set.seed("værdi"). Generere man tal ud fra samme _seed_, så vil værdierne altså være identiske.
 
-Tallene er genereret ud fra et _seed_, som i R bestemmes ved ```set.seed("værdi")```. Genererer man tal ud fra samme _seed_ vil værdierne være identiske.
-
-Fordelinger, som der blandt andet kan simuleres i R, er normalfordelinger, binomialfordelinger og uniforme fordelinger.
+Fordelinger som der blandt andet kan simuleres i R er normalfordelinger, binomialfordelinger og uniformefordelinger. 
 
 En normalfordeling kan simuleres på følgende måde:
 ```{r}
@@ -26,35 +24,35 @@ set.seed(1)
 rnorm(10, mean = 0, sd = 1)
 ```
 
-Først sættes et _seed_ så man kan rekonstruere samme simulering igen. Næste linje startes med at skrive ```rnorm``` hvor "r" står for tilfældigt genererede tal, og "norm" for en normalfordeling. Inde i paranteserne angives antallet af værdier, der skal genereres, som bliver genereret ud fra en middelværdi på 0 og en standardafvigelse på 1. Eftersom middelværdien er 0 og standardafvigelsen er 1, kaldes denne normalfordeling for en standard normalfordeling eller Z-fordeling.
+Først sættes et _seed_, så man kan rekonstruere samme simulation igen. Næste linje startes med at skrive "rnorm" hvor "r" står for tilfældigt genererede tal, og "norm" for en normalfordeling. Inde i parantesene angives antallet af værdier der skal genereres, som bliver genereret ud fra en middelværdi på 0 og en standardafvigelse på 1. Eftersom middelværdien er 0 og standardafvigelsen er 1, kaldes denne normalfordeling for en standard normalfordeling eller Z-fordeling.
 
-Ligeledes kan man simulere binomialfordelinger og uniforme fordelinger:
+Ligeledes kan man simulere binomialfordelinger og uniformefordelinger:
 ```{r}
 set.seed(1)
 rbinom(10, size = 2, prob = 0.5)
 ```
 
-Som før sættes et _seed_, og der skrives "r" før fordelingen der simuleres. Ligeledes er første værdi antallet af værdier der skal genereres. __I binomialfordelingen er der angivet _size_, som er antallet af succes/fejl _(1/0)_ repetationer(forklaring)__, hvorimod _prob_ er sandsynligheden for succes.
+Som før sættes et _seed_, og der skrives "r" før fordelingen der simuleres. Ligeledes er første værdi antallet af værdier der skal genereres. I binomialfordelingen er der angivet _size_, som er antallet success/faliure _(1/0)_ repetationer, hvor hvor _prob_ er sandsynligheden for success. 
 
 ```{r}
 set.seed(1)
 runif(10, min = 1, max = 2)
 ```
 
-Den uniforme fordelingen er derimod angivet med en minimum- og maksimumværdi, hvor der genereres værdier imellem.
+Uniformfordelingen er derimod angivet med en minimum og maximum-værdi, hvor der genereres værdier imellem. 
 
 ### Sample og replicate (Bootstrapping)
 
-Derudover kan der simuleres på baggrund af observeret data. Ved at benytte funktionerne ```sample``` og ```replicate``` kan der dannes nye simuleringer. ```sample``` tager en stikprøve af den observerede data, hvor ```replicate``` kan gentage forskellige stikprøver.
+Derudover kan der simuleres på baggrund af observeret data. Ved at benytte _sample_ og _replicate_ fuktionerne kan der dannes nye simulationer. _Sample_ tager en stikprøve af den observerede data, hvor _replicate_ kan gentage forskellige stikprøver.
 ```{r}
 set.seed(1)
 Z_fordeling <- rnorm(1000, mean = 0, sd = 1)
 
 mean(Z_fordeling)
 ```
-Her eksekveres en Z-fordeling af 1.000 observationer hvor middelværdien, -0,012, printes. Denne middelværdi vil variere afhængigt af det _seed_¨, der benyttes.
+Her eksekveres en Z-fordling af 1000 observationer hvor middelværdien, -0.01164814, printes. Denne middelværdi vil varriere afhængigt af det _seed_ der benyttes.
 
-Dernæst kan der foretages en ```sample``` af variablen ```Z_fordeling```.
+Dernæst kan der foretages en sample af Z_fordeling.
 
 ```{r}
 set.seed(1)
@@ -63,9 +61,9 @@ Z_sample <- sample(Z_fordeling, size = 10, replace = TRUE)
 Z_sample
 mean(Z_sample)
 ```
-Her fremgår der 10 værdier, som er taget fra ```Z_fordeling```, som gemmes i ```Z_sample```. ```Replace``` gør så de værdier der tages og gemmes i ```Z_sample``` bliver lagt tilbage, og kan derved blive taget igen, så man kan få den samme værdi flere gange.
+Her fremgår der 10 værdier, som er taget fra Z_fordeling, som gemmes i Z_sample. _Replace_ gør så de værdier der tages og gemmes i Z_sample bliver lagt tilbage, og kan derved blive taget igen, så man kan få den samme værdi flere gange. 
 
-Derefter er det muligt at gentage disse stikprøver ved brug af ```replicate```
+Derefter er det muligt at gentage disse stikprøver ved brug af _replicate_
 ```{r}
 set.seed(1)
 Z_replicate <- replicate(100, {
@@ -74,24 +72,60 @@ Z_replicate <- replicate(100, {
 Z_replicate
 mean(Z_replicate)
 ```
-Her bliver en stikprøve af ```Z_fordeling``` foretaget 10x100 gange, hvorefter middelværdien på de 100 gentagelser bliver fundet.
+Her bliver en stikprøve af Z_fordeling foretage 10x100 gange, hvorefter middelværdien på de 100 gentagelser bliver fundet. 
 
 Det med at tage en et stort antal stikprøver af nogle observationer er også kaldet bootstrapping, hvilket forklares i [AFSNIT XXXX]
 
-
+Henvises der ikke til noget er kilden: [https://bookdown.org/rdpeng/rprogdatascience/simulation.html]
 __AFSNIT SLUT__
+
+
+### Simulering af nominele variabler
+En nominel variabel kan for eksempel være køn, en måde at simulere dette på kan være ved en binomialfordeling.
+```{r}
+set.seed(1)
+gender <- rbinom(100, size = 1, prob = 0.5)
+mean(gender)
+```
+Hvis kvinde er en success og mand er en failiure, så er der derved en forekomst på 48% kvinder og 52% mænd. Derved har binomialfordelingen taget 100 værdier, en gang,  hvor der har været 50% sandsynlighed for success, som har været kvinde. Da middelværdien er 0.48, betyder det så at der ud fra 100 observationer er 48 kvinder.
+
+### Simulering af ordinale variabler
+En ordinal variabel, som der kan simuleres kan være minutter det tager at løse en opgave, hvilket kan simuleres ved en uniformfordeling.
+
+```{r, ECHO=FALSE}
+library(mosaic)
+```
+
+
+```{r}
+set.seed(1)
+opgave <- as.integer(runif(100, min = 1, max = 10+1))
+gf_histogram(~opgave, bins = 10)
+```
+
+### Simulering af interval variabler
+En interval variabel kan for eksempel simuleres ved 
+```{r}
+
+```
+
+### Simulering af ratio variabler
+"..."
+```{r}
+
+```
+
+Test
 
 
 *Magnus*
 **Kan man sige ting om en population ud fra stikprøver (inferens, hvordan og hvorfor?)**
 
-Det følgende afsnit er primært baseret på [@ASTAbog, s. 3-6]
+Processen med at bruge data analyse til at sige noget om en underliggende population ud fra en stikprøve, kaldes også statistisk inferens. Ud fra denne stikprøve vil man lave statistike analyser, som man kan bruge til at fortælle om populationen. Dette er meget nyttig, da det kan være nemmere at indsamle og analysere data fra en mindre mængde og så sige noget om en større mængde, end hvis man skulle indsamle mange millioner datapunkter. 
 
-*Processen med at bruge data analyse til at sige noget om en underliggende population ud fra en stikprøve, kaldes også statistisk inferens.* Ud fra denne**(hvis?)* stikprøve vil der kunne udarbejdes statistisk analyse, som kan bruge til at drage konklusioner om populationen. Dette er meget nyttig, da det kan være nemmere at indsamle og analysere data fra en mindre mængde og så sige noget om en større mængde, end hvis man skulle indsamle mange millioner datapunkter.
-
-I statistisk inferens differentier man normalt(?) imellem to metoder, estimering og hypotesetest.
-Når der estimeres på baggrund af fra en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan f.ek.s være gennemsnitsindkomst af danskere, hvorved der findes et estimat $\hat{\mu}$ som bruges til at beskrive $\mu$. Dette betegnes som et punkt estimat, og vil oftest suppleres med at intervalestimat. Årsagen til detter er, at punkt estimater i sin essesns er tilfældig (det ændre sig fra stikprøve til stikprøve), derfor tilstræbes det at anvende et interval, fremfor punkt estimat, da intervallet giver en større præcision i konklusionen. Her vil man finde det interval, hvor man er enten ca. 95% sikker på at $\mu$ ligger inden for.
-Den anden form for statistisk inferenes, hypotesetest, bruges til at bestemme om en teori om befolkningen viser sig at være sand. En hypotesen kunne være, at danskere tjener mere i gennemsnit end folk fra Sverige. Der vil også typisk opstilles en modsat hypotese, i tilfældet af at den første hypotese, $H_0$ viser sig at være falsk. Denne modsatte hypotese vil bolt sige det modsatte og kaldes for $H_1$.
-
+I statistisk inferens differentier man normalt imellem to metoder, estimering og hypotesetest. 
+Når man estimerer noget ud fra en population, vil man bruge stikprøven til at beskrive en ukendt del af populationen. Det kan f.ek.s være gennemsnitsindkomst af danskere, hvorved man finder et estimat $\mu^$ som bruges til at beskrive $\mu$. Dette vil være et punkt estimat, og vil oftest suppleres med at intervalestimat. Da punkt estimater i sin essesns er tilfældig (den vil ændre sig fra stikprøve til stikprøve), vil man helst undgå at støtte sig 100 procent op af dette når man skal konkludere noget om populationen, og derfor vil man helst have et interval at kunne henvise til. Her vil man finde det interval, hvor man er enten ca. 95% sikker på at $\mu$ ligger inden for.
+Den anden form for statistisk inferenes, nemlig hypotesetest, bruges til at bestemme om en teori om befolkningen viser sig at være sand. Det kunne være at hypotesen er, at danskere tjener mere i gennemsnit end folk fra Sverige. Der vil også typisk opstilles en modsat hypotese, i tilfældet af at vores første hypotese, $H_0$ viser sig at være falsk. Denne modsat hypotese vil oftest blot sige det modsatte og kaldes for $H_A$.
 
 Et alternativ til statistisk inferens er bootstrapping -> Overgang?
+
