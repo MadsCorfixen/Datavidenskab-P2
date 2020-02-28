@@ -43,14 +43,14 @@ Den uniforme fordelingen er derimod angivet med en minimum- og maksimumværdi, h
 
 ### Sample og replicate (Bootstrapping)
 
-Derudover kan der simuleres på baggrund af observeret data. Ved at benytte ```sample``` og ```replicate``` fuktionerne kan der dannes nye simulationer. ``Sample``` tager en stikprøve af den observerede data, hvor ```replicate``` kan gentage forskellige stikprøver.
+Derudover kan der simuleres på baggrund af observeret data. Ved at benytte funktionerne ```sample``` og ```replicate``` kan der dannes nye simuleringer. ```sample``` tager en stikprøve af den observerede data, hvor ```replicate``` kan gentage forskellige stikprøver.
 ```{r}
 set.seed(1)
 Z_fordeling <- rnorm(1000, mean = 0, sd = 1)
 
 mean(Z_fordeling)
 ```
-Her eksekveres en Z-fordling af 1000 observationer hvor middelværdien, -0.01164814, printes. Denne middelværdi vil varriere afhængigt af det _seed_ der benyttes.
+Her eksekveres en Z-fordeling af 1.000 observationer hvor middelværdien, -0,012, printes. Denne middelværdi vil variere afhængigt af det _seed_¨, der benyttes.
 
 Dernæst kan der foretages en sample af Z_fordeling.
 
