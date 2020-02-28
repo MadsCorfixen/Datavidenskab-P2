@@ -24,6 +24,11 @@ language:
 delete_merged_file: true
 
 
+<<<<<<< HEAD
 rmd_files: ["index.Rmd", "01-problemanalyse.Rmd", "02-faldgruber.Rmd", "03-Faldgruber.Rmd",
             "0x-simuleringer.Rmd", "100-bibliografi.Rmd"]
+=======
+rmd_files: ["index.Rmd", "01-problemanalyse.Rmd", "02-faldgruber.Rmd",
+            "0x-simuleringer.Rmd", "0x-simuleringer.Rmd", "100-bibliografi.Rmd"]
+>>>>>>> parent of b056381... Ændret i rækkefølgen
 

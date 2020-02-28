@@ -1,8 +1,32 @@
+<<<<<<< HEAD
+=======
+
+## Passende antal kovariater 
+
+Hvis man vil lave en analyse af mænd og kvinders indkomst på arbejdsmarkedet, vil det give mening at tilføje en variabel, der måler på arbejdserfaring, da den vil kunne antages at have en indflydelse på indkomsten. Den variabel, som tilføjes, der måler arbejdserfaring, kaldes for en kovariat.
+
+<!-- #Denne type sammenligning er kaldet "analysis of covariance", som blev opfundet af R. A. Fischer. (Denne sætning er ikke rigtig. ANCOVA betyder analyse af KOVARIANS, som er et mål for, hvorvidt middelværdien er ens blandt flere kovariater) -->
+
+Fordi indflydelse kan ændre sig efter der kontrolleres for kovariater, kan resultaterne for "analysis of covariance" og "analysis of variance" være forskellige. For eksempel med indkomsten mellem mænd og kvinder, kan det siges at mere arbejdserfaring har positiv indflydelse på indkomsten. Hvis mænd tenderer til at have mere arbejdserfaring end kvinder, vil resultatet ændre sig, afhængig af om man kontroller for variablen arbejdserfaring.
+
+For at illustrere indflydelse af kovariater på responsvariablen, kan der bruges lineær regression 
+
+
+- Hvorfor og hvordan bruges det
+- Hvordan afgøre man om der er tilpas antal kovariater
+- Kovariater skas beskrive responsvariablen
+
+Kovariater skal beskrive responsvariablen
+
+>>>>>>> parent of b056381... Ændret i rækkefølgen
 # Hvad er kovariater
 Kovariater er variabler som beskriver responsvariablen. Responsvariablen er den variabel der ændre sig i forhold til de forklarende variabler (kovariater). Hvis man for eksempel vil lave en analyse af mænd og kvinders indkomst på arbejdsmarkedet, vil det give mening at tilføje en variabel der måler på arbejdserfaring, da den vil kunne antages at have en indflydelse på indkomsten. Kontrolvariablen der tilføjes som måler arbejdserfaring kaldes for en kovariat. Denne type sammenligning er kaldet "analysis of covariance". Hvis der ikke blev taget højde for, den ekstra variabel, arbejdserfaring og dermed kun ses på forholdet mellem indkomst og køn, ville den type sammenligning være "analysis of variance".
 
 ## Hvorfor og hvordan bruges det
 Fordi at indflydelse kan ændre sig efter at der kontrolleres for variabler (kovariater), kan resultaterne for "analysis of covariance" og "analysis of variance" være forskellige. For eksempel med indkomsten mellem mænd og kvinder, kan det siges at mere arbejdserfaring har positiv indflydelse på indkomsten. Hvis mænd tenderer til at have mere arbejdserfaring end kvinder, vil resultatet ændre sig, afhængig af om man kontroller for variablen arbejdserfaring. [ASTA-bogen]
 Det kan dermed siges at kovariater er vigtige at tage højde for, da konklusionen af data afhænger af at der er blevet taget højde for alle kovariater der forklarer responsvariablen. Hvis man ikke har alle kovariater med, kan man komme til at konkluderer en forkert hypotese.
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> parent of b056381... Ændret i rækkefølgen
