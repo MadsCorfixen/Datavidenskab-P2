@@ -10,6 +10,8 @@ Ud fra definitionen, er formålet altså ved simuleringer at efterligne virkelig
 Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producere dem i virkeligheden for at spare penge. Derved kan de analysere, hvilke forskellige dele der producerer mest _down-force_, uden at skulle teste dem i virkelig. [https://careers.mercedesamgf1.com/facilities/simulator/]
 
 ## Simulering i R
+Meta-forklaring til afsnittet. Henvises der ikke til noget er kilden: [https://bookdown.org/rdpeng/rprogdatascience/simulation.html]
+
 
 Simuleringer i R udføres ved at estimere udfald fra en fordeling, hvor der bliver generet pseudo-tilfældige tal.
 Disse generede tal forekommer at være tilfældige, men er det reelt set ikke. [https://en.wikipedia.org/wiki/Pseudorandom_number_generator]
@@ -61,7 +63,7 @@ Z_sample <- sample(Z_fordeling, size = 10, replace = TRUE)
 Z_sample
 mean(Z_sample)
 ```
-Her fremgår der 10 værdier, som er taget fra ```Z_fordeling```, som gemmes i Z_sample. ```Replace``` gør så de værdier der tages og gemmes i Z_sample bliver lagt tilbage, og kan derved blive taget igen, så man kan få den samme værdi flere gange.
+Her fremgår der 10 værdier, som er taget fra ```Z_fordeling```, som gemmes i ```Z_sample```. ```Replace``` gør så de værdier der tages og gemmes i ```Z_sample``` bliver lagt tilbage, og kan derved blive taget igen, så man kan få den samme værdi flere gange.
 
 Derefter er det muligt at gentage disse stikprøver ved brug af ```replicate```
 ```{r}
@@ -72,11 +74,11 @@ Z_replicate <- replicate(100, {
 Z_replicate
 mean(Z_replicate)
 ```
-Her bliver en stikprøve af Z_fordeling foretage 10x100 gange, hvorefter middelværdien på de 100 gentagelser bliver fundet.
+Her bliver en stikprøve af ```Z_fordeling``` foretaget 10x100 gange, hvorefter middelværdien på de 100 gentagelser bliver fundet.
 
 Det med at tage en et stort antal stikprøver af nogle observationer er også kaldet bootstrapping, hvilket forklares i [AFSNIT XXXX]
 
-Henvises der ikke til noget er kilden: [https://bookdown.org/rdpeng/rprogdatascience/simulation.html]
+
 __AFSNIT SLUT__
 
 
