@@ -80,51 +80,13 @@ Henvises der ikke til noget er kilden: [https://bookdown.org/rdpeng/rprogdatasci
 __AFSNIT SLUT__
 
 
-### Simulering af nominele variabler
-En nominel variabel kan for eksempel være køn, en måde at simulere dette på kan være ved en binomialfordeling.
-```{r}
-set.seed(1)
-gender <- rbinom(100, size = 1, prob = 0.5)
-mean(gender)
-```
-Hvis kvinde er en success og mand er en failiure, så er der derved en forekomst på 48% kvinder og 52% mænd. Derved har binomialfordelingen taget 100 værdier, en gang,  hvor der har været 50% sandsynlighed for success, som har været kvinde. Da middelværdien er 0.48, betyder det så at der ud fra 100 observationer er 48 kvinder.
-
-### Simulering af ordinale variabler
-En ordinal variabel, som der kan simuleres kan være minutter det tager at løse en opgave, hvilket kan simuleres ved en uniformfordeling.
-
-```{r, ECHO=FALSE}
-library(mosaic)
-```
-
-
-```{r}
-set.seed(1)
-opgave <- as.integer(runif(100, min = 1, max = 10+1))
-gf_histogram(~opgave, bins = 10)
-```
-
-### Simulering af interval variabler
-En interval variabel kan for eksempel simuleres ved 
-```{r}
-
-```
-
-### Simulering af ratio variabler
-"..."
-```{r}
-
-```
-
-Test
-
-
 *Magnus*
 **Kan man sige ting om en population ud fra stikprøver (inferens, hvordan og hvorfor?)**
 
 Processen med at bruge data analyse til at sige noget om en underliggende population ud fra en stikprøve, kaldes også statistisk inferens. Ud fra denne stikprøve vil man lave statistike analyser, som man kan bruge til at fortælle om populationen. Dette er meget nyttig, da det kan være nemmere at indsamle og analysere data fra en mindre mængde og så sige noget om en større mængde, end hvis man skulle indsamle mange millioner datapunkter. 
 
 I statistisk inferens differentier man normalt imellem to metoder, estimering og hypotesetest. 
-Når man estimerer noget ud fra en population, vil man bruge stikprøven til at beskrive en ukendt del af populationen. Det kan f.ek.s være gennemsnitsindkomst af danskere, hvorved man finder et estimat $\mu^$ som bruges til at beskrive $\mu$. Dette vil være et punkt estimat, og vil oftest suppleres med at intervalestimat. Da punkt estimater i sin essesns er tilfældig (den vil ændre sig fra stikprøve til stikprøve), vil man helst undgå at støtte sig 100 procent op af dette når man skal konkludere noget om populationen, og derfor vil man helst have et interval at kunne henvise til. Her vil man finde det interval, hvor man er enten ca. 95% sikker på at $\mu$ ligger inden for.
+Når man estimerer noget ud fra en population, vil man bruge stikprøven til at beskrive en ukendt del af populationen. Det kan f.ek.s være gennemsnitsindkomst af danskere, hvorved man finder et estimat $\hat{\mu}$ som bruges til at beskrive $\mu$. Dette vil være et punkt estimat, og vil oftest suppleres med at intervalestimat. Da punkt estimater i sin essesns er tilfældig (den vil ændre sig fra stikprøve til stikprøve), vil man helst undgå at støtte sig 100 procent op af dette når man skal konkludere noget om populationen, og derfor vil man helst have et interval at kunne henvise til. Her vil man finde det interval, hvor man er enten ca. 95% sikker på at $\mu$ ligger inden for.
 Den anden form for statistisk inferenes, nemlig hypotesetest, bruges til at bestemme om en teori om befolkningen viser sig at være sand. Det kunne være at hypotesen er, at danskere tjener mere i gennemsnit end folk fra Sverige. Der vil også typisk opstilles en modsat hypotese, i tilfældet af at vores første hypotese, $H_0$ viser sig at være falsk. Denne modsat hypotese vil oftest blot sige det modsatte og kaldes for $H_A$.
 
 Et alternativ til statistisk inferens er bootstrapping -> Overgang?
