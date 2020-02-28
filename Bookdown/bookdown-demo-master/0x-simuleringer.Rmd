@@ -80,44 +80,6 @@ Henvises der ikke til noget er kilden: [https://bookdown.org/rdpeng/rprogdatasci
 __AFSNIT SLUT__
 
 
-### Simulering af nominele variabler
-En nominel variabel kan for eksempel være køn, en måde at simulere dette på kan være ved en binomialfordeling.
-```{r}
-set.seed(1)
-gender <- rbinom(100, size = 1, prob = 0.5)
-mean(gender)
-```
-Hvis kvinde er en success og mand er en failiure, så er der derved en forekomst på 48% kvinder og 52% mænd. Derved har binomialfordelingen taget 100 værdier, en gang,  hvor der har været 50% sandsynlighed for success, som har været kvinde. Da middelværdien er 0.48, betyder det så at der ud fra 100 observationer er 48 kvinder.
-
-### Simulering af ordinale variabler
-En ordinal variabel, som der kan simuleres kan være minutter det tager at løse en opgave, hvilket kan simuleres ved en uniformfordeling.
-
-```{r, ECHO=FALSE}
-library(mosaic)
-```
-
-
-```{r}
-set.seed(1)
-opgave <- as.integer(runif(100, min = 1, max = 10+1))
-gf_histogram(~opgave, bins = 10)
-```
-
-### Simulering af interval variabler
-En interval variabel kan for eksempel simuleres ved 
-```{r}
-
-```
-
-### Simulering af ratio variabler
-"..."
-```{r}
-
-```
-
-Test
-
-
 *Magnus*
 **Kan man sige ting om en population ud fra stikprøver (inferens, hvordan og hvorfor?)**
 
