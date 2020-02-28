@@ -52,7 +52,7 @@ mean(Z_fordeling)
 ```
 Her eksekveres en Z-fordeling af 1.000 observationer hvor middelværdien, -0,012, printes. Denne middelværdi vil variere afhængigt af det _seed_¨, der benyttes.
 
-Dernæst kan der foretages en sample af Z_fordeling.
+Dernæst kan der foretages en ```sample``` af variablen ```Z_fordeling```.
 
 ```{r}
 set.seed(1)
@@ -61,7 +61,7 @@ Z_sample <- sample(Z_fordeling, size = 10, replace = TRUE)
 Z_sample
 mean(Z_sample)
 ```
-Her fremgår der 10 værdier, som er taget fra Z_fordeling, som gemmes i Z_sample. ```Replace``` gør så de værdier der tages og gemmes i Z_sample bliver lagt tilbage, og kan derved blive taget igen, så man kan få den samme værdi flere gange.
+Her fremgår der 10 værdier, som er taget fra ```Z_fordeling```, som gemmes i Z_sample. ```Replace``` gør så de værdier der tages og gemmes i Z_sample bliver lagt tilbage, og kan derved blive taget igen, så man kan få den samme værdi flere gange.
 
 Derefter er det muligt at gentage disse stikprøver ved brug af ```replicate```
 ```{r}
