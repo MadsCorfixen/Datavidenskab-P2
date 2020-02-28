@@ -24,7 +24,7 @@ Table: En oversigt over de forskellige symboler, som angiver henholdsvis en para
 
 | Population (Parametre) | Stikprøve (Estimater) | Estimatorer |
 |:-----------:|:---------:|:---------:|
-|      my     |   my_hat  |   My_hat  |
+|        mu   |   my_hat  |   My_hat  |
 |   sigma     |     s     |     S     |
 |  sigma^2    |    s^2    |    S^2    |
 |      pi     |   pi_hat  |   Pi_hat  |
@@ -72,7 +72,7 @@ Den centrale grænseværdisætning er illustreret på figuren nedenfor.
 knitr::include_graphics('images/Illustration_af_CLT.PNG')
 ```
 
-For at bestemme, hvor stor en stikprøve der skal benyttes, for at stikprøvegennemsnittet bliver normalfordelt, benyttes 'Cochrans regel', som siger, at stikprøvestørrelsen, $n$, skal ligge i intervallet $[25 \cdot (\mathrm{skævhed})^2, 100 \cdot (\mathrm{skævhed})^2]$.
+For at bestemme, hvor stor en stikprøve der skal benyttes, for at stikprøvegennemsnittet bliver normalfordelt, benyttes 'Cochrans regel', som siger, at stikprøvestørrelsen, $n$, skal ligge i intervallet $[25 \cdot (\mathrm{skævhed})^2, 100 \cdot (\mathrm{skævhed})^2]$. Hvor skævhed er en numerisk værdi der symboliserer hvor "lang" halen er, i en venstre- eller højreskæv fordeling. 
 
 
 ## Passende antal kovariater 
