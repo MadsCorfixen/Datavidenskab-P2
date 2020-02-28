@@ -14,14 +14,12 @@ Statistisk videnskab giver tre overordnede begreber til anvendelsen. _Design_, s
 
 *Magnus*
 **Kan man sige ting om en population ud fra stikprøver (inferens, hvordan og hvorfor?)**
+## Statistisk inferens
 
-*Processen med at bruge data analyse til at sige noget om en underliggende population ud fra en stikprøve, kaldes også statistisk inferens.* Ud fra denne**(hvis?)* stikprøve vil der kunne udarbejdes statistisk analyse, som kan bruge til at drage konklusioner om populationen. Dette er meget nyttig, da det kan være nemmere at indsamle og analysere data fra en mindre mængde og så sige noget om en større mængde, end hvis man skulle indsamle mange millioner datapunkter.
+Processen med at bruge dataanalyse til at drage konklusioner om en underliggende population ud fra en stikprøve af populationen, kaldes statistisk inferens. Dette er nyttigt, da det er nemmere at indsamle og analysere data fra en delmængde af en population, end hvis der skulle indsamles de potentielt mange milioner datapunkter i populationen. 
 
-I statistisk inferens differentier man normalt(?) imellem to metoder, estimering og hypotesetest.
-Når der estimeres på baggrund af fra en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan f.ek.s være gennemsnitsindkomst af danskere, hvorved der findes et estimat $\hat{\mu}$ som bruges til at beskrive $\mu$. Dette betegnes som et punkt estimat, og vil oftest suppleres med at intervalestimat. Årsagen til detter er, at punkt estimater i sin essesns er tilfældig (det ændre sig fra stikprøve til stikprøve), derfor tilstræbes det at anvende et interval, fremfor punkt estimat, da intervallet giver en større præcision i konklusionen. Her vil man finde det interval, hvor man er enten ca. 95% sikker på at $\mu$ ligger inden for.
-Den anden form for statistisk inferenes, hypotesetest, bruges til at bestemme om en teori om befolkningen viser sig at være sand. En hypotesen kunne være, at danskere tjener mere i gennemsnit end folk fra Sverige. Der vil også typisk opstilles en modsat hypotese, i tilfældet af at den første hypotese, $H_0$ viser sig at være falsk. Denne modsatte hypotese vil bolt sige det modsatte og kaldes for $H_1$.
+I statistisk inferens differentieres der mellem to metoder, _estimering_ og _hypotesetest_. Når der estimeres på baggrund af fra en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan f.eks være gennemsnitsindkomst af danskere, hvorved der findes et estimat $\hat{\mu}$ som bruges til at beskrive $\mu$. Dette betegnes som et punktestimat, og vil oftest suppleres med at intervalestimat. Årsagen til dette er, at punktestimater i sin essens er tilfældig (det ændrer sig fra stikprøve til stikprøve). Derfor tilstræbes det at anvende et intervalestimat, fremfor et punktestimat, da intervallet giver en større præcision i konklusionen. Her vil man finde det interval, hvor det kan sige at $\mu$ med 95% sikkerhed ligger. Den anden form for statistisk infernes, hypotesetest, bruges til at bestemme om en teori om populationen viser sig at være sand. En hypotesen kunne være, at danskere tjener mere i gennemsnit end folk fra Sverige. Der opstilles også en modhypotese, i tilfældet af, at den første hypotese, $H_0$, viser sig at være falsk. Denne modhypotese vil blot sige det modsatte og kaldes for $H_1$.
 
-Et alternativ til statistisk inferens er bootstrapping -> Overgang?
 
 # Variabeltyper
 
