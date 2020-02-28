@@ -1,16 +1,18 @@
 \contentsline {chapter}{\numberline {1}Introduktion}{5}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Variabeltyper}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Kvalitative variabler}{7}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Kvantitative variabler}{8}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Diskrete variabler}{8}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Kontinuerte variabler}{9}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Stokastiske variabler}{9}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Outliers}{9}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Problemformulering}{11}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Faldgruber i en dataanalyse}{13}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Variabeltyper}{13}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Estimatorens egenskaber}{14}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Populationens fordeling}{15}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Simulering af variabler}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Simulering i R}{17}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Sample og replicate (Bootstrapping)}{18}{subsection.4.1.1}%
+\contentsline {chapter}{\numberline {2}Statistik og historien bag}{7}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Variabeltyper}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Kvalitative variabler}{9}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Kvantitative variabler}{10}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Diskrete variabler}{10}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Kontinuerte variabler}{11}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Stokastiske variabler}{11}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Outliers}{11}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Problemformulering}{13}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Faldgruber i en dataanalyse}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Variabeltyper}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Estimatorens egenskaber}{16}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Populationens fordeling}{17}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Passende antal kovariater}{19}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Simulering af variabler}{21}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Simulering i R}{21}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Sample og replicate (Bootstrapping)}{22}{subsection.6.1.1}%

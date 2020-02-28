@@ -1,7 +1,7 @@
 # Statistik og historien bag
 
 Ordet _statistik_ stammer tilbage fra det lantinske _statisticum collegium_ ("statsrådgiver") og italienske _statista_ ("statsmand" eller "politiker"). At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statestik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrerer befolkningen og dennes tilhøresforhold. Derfor anvendte statsrådgiver og statsmænd, statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik. 
-Selve ordet statistik fandt sin vej til Danmark i 1749, via den tyske statistiker Gottfried Achenwall, som var den første som anvendte ordet _statistik_, til at beskrive sine studier indenfor netop statistik. [@History_statisikwiki][@Statistikwiki]
+Selve ordet statistik fandt sin vej til Danmark i 1749, via den tyske statistiker Gottfried Achenwall, som var den første som anvendte ordet _statistik_, til at beskrive sine studier indenfor netop statistik. [@History] [@Statistikwiki]
 
 Udgangspunktet for statistik kommer fra sandsynlighedsregning og læreren derfra. I statistikken arbejdes der ligeledes med udfald og tilfældigheder, men overordnet beskæftiger statistikken sig med analyse af indsamlet data. Der er igennem tiderne i stor udstrækning refereret til mange af de samme matematikere. 
 [@Sandsyndlighedsregning]
@@ -22,9 +22,7 @@ Den nominale beskriver variabler, som ikke har en naturlig rangorden, og derved 
 
 De ordinale variabler er de kvalitative variabler, som kan rangeres. Eftersom udfaldsmængden er naturligt rangeret, og samtidig er kategorisk, vil det altså være en ordinal variabel. Eksempler på ordinale variabler er økonomisk status, uddannelsesgrad og karakterer. Disse variablers udfaldsmængde er altså rangeret i forhold til hinanden, da det er bedre at være i en høj indkomst fremfor en lav indkomst og ligeledes er det bedre at få karakteren 10 end karakteren 4. Ud fra observationerne kan man efterfølgende blandt andet finde medianen, kvartiler m.m.
 
-Ønsker man at finde middelværdien skal man være lidt påpasselig, eftersom det reelt set ikke giver nogen mening på ordinale variabler. Dog er det muligt at udregne en middelværdi, hvis der er en fælles forståelse af, hvad middelværdien betyder for enheden og hvilken skala, det er udregnet på baggrund af. Når ordinale variabler illustreres, skal det gøres som et søjlediagram efter rangordenen.
-
-[@ASTAbog s. 12-13]
+Ønsker man at finde middelværdien skal man være lidt påpasselig, eftersom det reelt set ikke giver nogen mening på ordinale variabler. Dog er det muligt at udregne en middelværdi, hvis der er en fælles forståelse af, hvad middelværdien betyder for enheden og hvilken skala, det er udregnet på baggrund af. Når ordinale variabler illustreres, skal det gøres som et søjlediagram efter rangordenen. [@ASTAbog s. 12-13]
 
 ## Kvantitative variabler
 
@@ -42,7 +40,7 @@ Variabler, der tilhører ratiokategorien, er defineret som variabler, hvor det e
 
 En underkategori til kvantitative variabler er diskrete variabler. En variabel er diskret, hvis man kan tælle værdierne i den, som eksempelvis øjne på en terning. Enhver variabel der kan beskrives, som “antallet af…” er en diskret variabel. Værdierne i en diskret variabel er heltal, eksempelvis kan det ikke siges, at en person har 2,5 søskende.
 
-Nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirrende at kende forskel på diskrete og kontinuerte variabler, da man ofte afrunder kontinuerte variabler til heltal når man måler dem, så de bliver diskrete. Alder er ét eksempel på en afrunding af et kontinuert tal. Eksempelvis siger man typisk 21 år, når man faktisk er mellem 21 og 22 år. Grunden til, at det er vigtigt at genkende om variablen er kontinuert eller diskret, er at den viden bruges til at bestemme, hvilken statistisk metode, der skal benyttes til dataanalysen. (Kilde: [@ASTAbog])
+Nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirrende at kende forskel på diskrete og kontinuerte variabler, da man ofte afrunder kontinuerte variabler til heltal når man måler dem, så de bliver diskrete. Alder er ét eksempel på en afrunding af et kontinuert tal. Eksempelvis siger man typisk 21 år, når man faktisk er mellem 21 og 22 år. Grunden til, at det er vigtigt at genkende om variablen er kontinuert eller diskret, er at den viden bruges til at bestemme, hvilken statistisk metode, der skal benyttes til dataanalysen. [@ASTAbog]
 
 
 ### Kontinuerte variabler
@@ -59,7 +57,7 @@ Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den fremgår
 
 ## Outliers
 
-En outlier kan beskrives som en observation, der afviger betydeligt fra resten af den stikprøve, observationen stammer fra (WIKI). Denne beskrivelse uddybes nedenfor, hvor to forskellige metoder til at identificere outliers gennemgås. Afsnittet er skrevet med udgangspunkt i [@ASTAbog, s. 48-55].
+En outlier kan beskrives som en observation, der afviger betydeligt fra resten af den stikprøve, observationen stammer fra (WIKI). Denne beskrivelse uddybes nedenfor, hvor to forskellige metoder til at identificere outliers gennemgås. Afsnittet er skrevet med udgangspunkt i. [@ASTAbog, s. 48-55]
 
 Den første metode til at identificere outliers tager udgangpunkt i fordelingen af observationerne. Hvis fordelingen er tilnærmelsesvis klokkeformet, gælder figur, hvor $\mu$ er middelværdien og $\sigma$ er standardafvigelse.
 
