@@ -1,5 +1,5 @@
 
-Passende antal kovariater 
+# Passende antal kovariater 
 - Hvad er kovariater
 Hvis man vil lave en analyse af mænd og kvinders indkomst på arbejdsmarkedet, vil det give mening at tilføje en variabel der måler på arbejdserfaring, da den vil kunne antages at have en indflydelse på indkomsten. Den variabel vi tilføjer der måler arbejdserfaring kaldes for en kovariat. Denne type sammenligning er kaldet "analysis of covariance", som blev opfundet af R. A. Fischer.
 
