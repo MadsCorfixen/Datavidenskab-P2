@@ -75,6 +75,24 @@ knitr::include_graphics('images/Illustration_af_CLT.PNG')
 For at bestemme, hvor stor en stikprøve der skal benyttes, for at stikprøvegennemsnittet bliver normalfordelt, benyttes 'Cochrans regel', som siger, at stikprøvestørrelsen, $n$, skal ligge i intervallet $[25 \cdot (\mathrm{skævhed})^2, 100 \cdot (\mathrm{skævhed})^2]$.
 
 
+## Passende antal kovariater 
+
+Hvis man vil lave en analyse af mænd og kvinders indkomst på arbejdsmarkedet, vil det give mening at tilføje en variabel, der måler på arbejdserfaring, da den vil kunne antages at have en indflydelse på indkomsten. Den variabel, som tilføjes, der måler arbejdserfaring, kaldes for en kovariat, og bruges til at beskrive indkomsten, som kaldes for responsvariablen.
+
+For eksempel med indkomsten mellem mænd og kvinder, kan det siges at mere arbejdserfaring har positiv indflydelse på indkomsten. Hvis mænd tenderer til at have mere arbejdserfaring end kvinder, vil resultatet ændre sig, afhængig af om man kontroller for variablen arbejdserfaring.
+
+For at illustrere indflydelse af kovariater på responsvariablen, kan der bruges lineær regression.
+
+<!-- #Denne type sammenligning er kaldet "analysis of covariance", som blev opfundet af R. A. Fischer. (Denne sætning er ikke rigtig. ANCOVA betyder analyse af KOVARIANS, som er et mål for, hvorvidt middelværdien er ens blandt flere kovariater) -->
+
+<!-- Fordi indflydelse kan ændre sig efter der kontrolleres for kovariater, kan resultaterne for "analysis of covariance" og "analysis of variance" være forskellige. (ANOVA og ANCOVA har ikke lige noget med passende antal kovariater at gøre) -->
+
+<!-- - Hvorfor og hvordan bruges det -->
+<!-- - Hvordan afgøre man om der er tilpas antal kovariater -->
+<!-- - Kovariater skas beskrive responsvariablen -->
+
+<!-- Kovariater skal beskrive responsvariablen -->
+
 
 
 

@@ -1,9 +1,11 @@
 
-# Passende antal kovariater 
-- Hvad er kovariater
-Hvis man vil lave en analyse af mænd og kvinders indkomst på arbejdsmarkedet, vil det give mening at tilføje en variabel der måler på arbejdserfaring, da den vil kunne antages at have en indflydelse på indkomsten. Den variabel vi tilføjer der måler arbejdserfaring kaldes for en kovariat. Denne type sammenligning er kaldet "analysis of covariance", som blev opfundet af R. A. Fischer.
+## Passende antal kovariater 
 
-Fordi at indflydelse kan ændre sig efter at der kontroleres for variabler (kovariater), kan resultaterne for "analysis of covariance" og "analysis of variance" være forskellige. For eksempel med indkomsten mellem mænd og kvinder, kan det siges at mere arbejdserfaring har positiv indflydelse på indkomsten. Hvis mænd tenderer til at have mere arbejdserfaring end kvinder, vil resultatet ændre sig, afhængig af om man kontroller for variablen arbejdserfaring.
+Hvis man vil lave en analyse af mænd og kvinders indkomst på arbejdsmarkedet, vil det give mening at tilføje en variabel, der måler på arbejdserfaring, da den vil kunne antages at have en indflydelse på indkomsten. Den variabel, som tilføjes, der måler arbejdserfaring, kaldes for en kovariat.
+
+<!-- #Denne type sammenligning er kaldet "analysis of covariance", som blev opfundet af R. A. Fischer. (Denne sætning er ikke rigtig. ANCOVA betyder analyse af KOVARIANS, som er et mål for, hvorvidt middelværdien er ens blandt flere kovariater) -->
+
+Fordi indflydelse kan ændre sig efter der kontrolleres for kovariater, kan resultaterne for "analysis of covariance" og "analysis of variance" være forskellige. For eksempel med indkomsten mellem mænd og kvinder, kan det siges at mere arbejdserfaring har positiv indflydelse på indkomsten. Hvis mænd tenderer til at have mere arbejdserfaring end kvinder, vil resultatet ændre sig, afhængig af om man kontroller for variablen arbejdserfaring.
 
 For at illustrere indflydelse af kovariater på responsvariablen, kan der bruges lineær regression 
 
