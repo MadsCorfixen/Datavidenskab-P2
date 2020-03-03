@@ -10,4 +10,16 @@ Agresti, A. and Finlay, B. (2014).
 \newblock Pearson, Edinburgh Gate, England, 4th edition.
 \newblock ISBN 978-1-292-02166-9.
 
+\bibitem[Wikipedia, 2020a]{History}
+Wikipedia (2020a).
+\newblock History of statistics.
+
+\bibitem[Wikipedia, 2020b]{Sandsyndlighedsregning}
+Wikipedia (2020b).
+\newblock Sandsyndlighedsregning.
+
+\bibitem[Wikipedia, 2020c]{Statistikwiki}
+Wikipedia (2020c).
+\newblock Statistik.
+
 \end{thebibliography}
