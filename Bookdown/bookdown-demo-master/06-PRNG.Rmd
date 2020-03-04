@@ -1,10 +1,35 @@
 ## Pseduo Random Number Generator
 
-FIXME
+a method of generating a sequence of numbers that are not actually random, but share many properties with completely random numbers. These types of numbers are called pseudorandom numbers.
 
 # Lineær Kongruens Generator
 
-FIXME
+Lineær Kongruens Generator (LCG) er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG finder en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen den angivet ved
+
+>```{definition}
+> $X_(n+1) = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og X_0 er 'seed'
+>```
+
+Helt præcist fungerer algoritmen på denne måde: 
+Der startes med en værdi angivet med 'seed'. Denne værdi bliver så multipliceret med værdien a og der bliver lagt en tilvækst c til. Til sidst tages modulus, m, af værdien. Modulus er en operator der dividerer et tal med et andet tal og returnerer restværdien.
+
+I figuren nedenfor kan ses tre eksempler på dette. De to første eksempler har samme parametre, men forskellige 'seeds'. 
+
+```{r, out.width='75%', fig.align='center', fig.cap="Kilde: Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
+knitr::include_graphics('images/LCG_eksempel.PNG')
+```
+
+I teorien kan parameterne antage et uendeligt antal værdier, men i praksis er der nogle der bruges oftere end andre. FIXME Kilde på disse parametre
+
+Nedenfor ses et eksempel på et stykke kode der vil danne en sekvens af LCG tal. Hvis man for eksempel kørte koden med parametrene: lcg(9, 2, 0, 3) vil man få en sekvens der uendeligt returnerer værdierne 3, 6, 3, 6, 3, 6...
+
+```{python}
+def lcg(modulus, a, c, seed):
+    """Linear congruential generator."""
+    while True:
+        seed = (a * seed + c) % modulus
+        print(seed)
+```
 
 # Box-Muller transformation
 
