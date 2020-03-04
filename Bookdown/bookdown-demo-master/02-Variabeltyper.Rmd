@@ -1,5 +1,9 @@
 # Variabeltyper
 
+## Stokastike variabler
+
+FIXME 
+
 ## Kvalitative variabler
 
 De stokastiske variabler kan opdeles i kategoriske eller kvalitative variabler. Ved en kvalitativ variabel fremgår der en enhed, som er den enhed der kategoriseres efter. Udfaldsmængden er de mulige værdier, som kan forekomme ved en undersøgelse af enheden. Dette kunne eksempelvis være nationalitet, hvor der kategoriseres efter land, hvor udfaldsmængen er landene i verden.
@@ -18,7 +22,7 @@ Kvantitative variabler er defineret ved en numerisk  værdi, hvilket gør variab
 
 Et andet essentielt værktøj i dataanalyse er visualisering. På baggrund af middelværdi, varians og standardafvigelse, er det muligt at visualisere data med eksempelvis et histogram eller et boksplot.
 
-Kvantitative variabler kan opdeles i to underkategorier, interval og ratio. Derudover kan disse underkategorier inddeles yderligere i diskrete og kontinuerte variabler. __indsæt figur__ Disse beskrives i et efterfølgende afsnit.
+Kvantitative variabler kan opdeles i to underkategorier, interval og ratio. Derudover kan disse underkategorier inddeles yderligere i diskrete og kontinuerte variabler. __FIXME indsæt figur__ Disse beskrives i et efterfølgende afsnit.
 
 Variabler, der tilhører intervalkategorien, er defineret som variabler, hvor det er muligt at bestemme forskellen mellem to mængder eller to tal. Det kunne eksempelvis være forskellen på temperaturen indenfor, $20 ~^\circ C$, og udenfor, $10 ~^\circ C$.
 
@@ -33,10 +37,10 @@ Nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirre
 
 ### Kontinuerte variabler
 
-Hvis en varibels værdier tilhører en overtællelig mængde, siges den at være kontinuert. Et eksempel på en kontinuert variabel, kan være højden på et tilfældigt menneske i en population. Her kan højden have et antal decimaler, der går mod uendeligt, for eksempel $195,00000003 cm$.
+Hvis en variabels værdier tilhører en overtællelig mængde, siges den at være kontinuert. Et eksempel på en kontinuert variabel, kan være højden på et tilfældigt menneske i en population. Her kan højden have et antal decimaler, der går mod uendeligt, for eksempel $195,00000003$ cm.
 
-For kontinuerte variabler bruger man tæthedsfunktionen, f(x). Her er arealet, hvilket svarer til 1 altså 100 procent, under tæthedsfunktionen sandsynligheden for, at en stokastisk variabel, X, befinder sig i intervallet (a, b), givet ved,
+For kontinuerte variabler bruger man tæthedsfunktionen, f(x). Her er arealet, hvilket svarer til 1, altså 100 procent, under tæthedsfunktionen sandsynligheden for, at en stokastisk variabel, X, befinder sig i intervallet [a, b], givet ved
 
-$P(a < X < b) = \int_a^b f(x) dx$
+$P(a \leq X \leq b) = \int_a^b f(x) dx$
 
 Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den fremgår i mange målinger i virkeligheden, og dels fordi, den centrale grænseværdisætning siger, at ved et højere antal observationer, vil alle stokastiske variablers gennemsnitsfordeling antage en normalfordeling.

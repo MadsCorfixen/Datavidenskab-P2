@@ -1,5 +1,7 @@
 # Simulering af variabler
 
+FIXME Fiks kilder i dette afsnit
+ 
 Simuleringer er generering af estimater på mulige udfald, og på den måde en efterligne virkeligheden. Formålet er derved at generere tilfældigt estimerede værdier ud fra en model, der simulerer virkeligheden, hvilket muliggør yderligere analyser.
 
 En definition på simulering er;
@@ -8,6 +10,18 @@ En definition på simulering er;
 
 Ud fra definitionen, er formålet altså ved simuleringer at efterligne virkeligheden, så de analyser der gøres på baggrund af simuleringerne, kan bruges i virkeligheden når lignende situationer opstår.
 Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producere dem i virkeligheden for at spare penge. Derved kan de analysere, hvilke forskellige dele der producerer mest _down-force_, uden at skulle teste dem i virkelig. [https://careers.mercedesamgf1.com/facilities/simulator/]
+
+## Pseduo Random Number Generator
+
+FIXME
+
+# Lineær Kongruens Generator
+
+FIXME
+
+# Box-Muller transformation
+
+FIXME
 
 ## Simulering i R
 Meta-forklaring til afsnittet. Henvises der ikke til noget er kilden: [https://bookdown.org/rdpeng/rprogdatascience/simulation.html]
@@ -76,4 +90,4 @@ mean(Z_replicate)
 ```
 Her bliver en stikprøve af ```Z_fordeling``` foretaget 10x100 gange, hvorefter middelværdien på de 100 gentagelser bliver fundet.
 
-Det med at tage en et stort antal stikprøver af nogle observationer er også kaldet bootstrapping, hvilket forklares i [AFSNIT XXXX]
+Det med at tage en et stort antal stikprøver af nogle observationer er også kaldet bootstrapping, hvilket forklares i FIXME [AFSNIT XXXX]
