@@ -2,26 +2,33 @@
 
 a method of generating a sequence of numbers that are not actually random, but share many properties with completely random numbers. These types of numbers are called pseudorandom numbers.
 
+
+
 ## Lineær Kongruens Generator
 
-Lineær Kongruens Generator (LCG) er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG finder en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen den angivet ved
+Lineær Kongruens Generator, på engelsk Linear Congruens Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG finder en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
 > $X_(n+1) = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og X_0 er 'seed'
 >```
 
-Helt præcist fungerer algoritmen på denne måde: 
+Algoritmen fungerer således: 
 Der startes med en værdi angivet med 'seed'. Denne værdi bliver så multipliceret med værdien a og der bliver lagt en tilvækst c til. Til sidst tages modulus, m, af værdien. Modulus er en operator der dividerer et tal med et andet tal og returnerer restværdien.
 
-I figuren nedenfor kan ses tre eksempler på dette. De to første eksempler har samme parametre, men forskellige 'seeds'. 
+I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempler har samme parametre, men forskellige 'seeds', altså startpunkter. 
 
-```{r, out.width='75%', fig.align='center', fig.cap="Kilde: Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
+```{r, out.width='75%', fig.align='center', fig.cap="Kilde: By Cmglee - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
 knitr::include_graphics('images/LCG_eksempel.PNG')
 ```
 
-I teorien kan parameterne antage et uendeligt antal værdier, men i praksis er der nogle der bruges oftere end andre. FIXME Kilde på disse parametre
+I teorien kan parameterne antage et uendeligt antal værdier, men i praksis er der nogle der bruges oftere end andre. Derudover findes der også "dårlige" værdier til parameterne, der vil returner en tilsyneladende ikke tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 2048, a = 1229$ og $c = 1$. Efter nok rekursioner vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden nok ikke er ren tilfældig. 
 
-Nedenfor ses et eksempel på et stykke kode der vil danne en sekvens af LCG tal. Hvis man for eksempel kørte koden med parametrene: lcg(9, 2, 0, 3) vil man få en sekvens der uendeligt returnerer værdierne 3, 6, 3, 6, 3, 6...
+
+FIXME Billeder af poor parameters, https://rpubs.com/aaronsc32/linear-congruential-generator-r 
+FIXME Kilde på disse parametre, tabel i wiki??, https://en.wikipedia.org/wiki/Linear_congruential_generator#cite_note-Steele20-3
+
+
+Nedenfor ses et eksempel på et stykke kode der vil danne en sekvens af LCG tal. Hvis man for eksempel kørte koden med parametrene: lcg(9, 2, 0, 3) vil man få en sekvens der uendeligt returnerer værdierne 3, 6, 3, 6, 3, 6... Dette er også jf. i FIXME figuren ovenover.
 
 ```{python}
 def lcg(modulus, a, c, seed):
@@ -30,6 +37,8 @@ def lcg(modulus, a, c, seed):
         seed = (a * seed + c) % modulus
         print(seed)
 ```
+
+
 
 ## Box-Muller transformation
 
