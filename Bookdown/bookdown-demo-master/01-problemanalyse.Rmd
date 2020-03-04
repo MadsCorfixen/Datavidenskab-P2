@@ -4,9 +4,7 @@
 
 Ordet _statistik_ stammer tilbage fra det latinske _statisticum collegium_ ("statsrådgiver") og det italienske _statista_ ("statsmand" eller "politiker"). [@Orddef] At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statistik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrere befolkningen og dennes tilhørselsforhold. Derfor anvendte statsrådgivere og statsmænd statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik.
 
-
-
-Selve ordet statistik fandt sin vej til Danmark i 1749, via den tyske statistiker Gottfried Achenwall, som var den første, der anvendte ordet _statistik_ til at beskrive sine studier indenfor netop dette emne. [@O]
+Selve ordet statistik fandt sin vej til Danmark i 1749, via den tyske statistiker Gottfried Achenwall, som var den første, der anvendte ordet _statistik_ til at beskrive sine studier indenfor netop dette emne. [@Orddef]
 
 Udgangspunktet for statistik kommer fra sandsynlighedsregning og læren derfra. Ligesom i sandsynlighedsregning arbejdes der i statistikken med udfald og tilfældigheder, men overordnet beskæftiger statistikken sig med analyse af indsamlet data.
 
@@ -27,10 +25,11 @@ Hvis dette er tilfældet, vil nulhypotesen forkastes og den alternative hypotese
 
 ## Intro til simulering?
 
+FIXME
 
 ## Problemformulering
 
-_Hvorvidt kan simulationsstudier bidrage til at højne kvaliteten af dataanalyser?_
+_Hvorvidt kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyser?_
 
 1. Hvilke faldgruber skal man være opmærksom på?
 
@@ -40,4 +39,4 @@ a. Hvordan sikrer man en høj kvalitet af simuleret data?
 
 3. Hvad kan man inferere ud fra simuleret data?
 
-4. Hvilke alternativer finder der til statistisk inferens? (Bootstrapping)
+4. Hvilke alternativer finder der til statistisk inferens? (Bootstrapping og Jackknifing)

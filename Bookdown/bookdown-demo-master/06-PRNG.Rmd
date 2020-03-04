@@ -1,0 +1,11 @@
+## Pseduo Random Number Generator
+
+FIXME
+
+# Lineær Kongruens Generator
+
+FIXME
+
+# Box-Muller transformation
+
+FIXME
