@@ -33,10 +33,20 @@ def lcg(modulus, a, c, seed):
 
 ## Box-Muller transformation
 
+I dette afsnit beskrives Box-Muller transformation, hvilket er en metode til at generere normalfordelte tal ud fra uniformt fordelte tal. Dette gøres for at belyse, hvordan en computer kan generere tilsyneladende tilfældige tal.
 
-Nedenfor illustreres Box-Muller transformationen i R. Først simuleres to populationer, ```U1``` og ```U2```, hvor $\mathrm{U1 \sim unif(0,1)}$ og $\mathrm{U2 \sim unif(0,1)}$.
+### Generelt om algoritmen
+
+FIXME: Skriv generelt om BMT.
+
+### Eksempel i R
+
+I dette følgende efterprøves Box-Muller transformationens regler ved hjælp af R.
+
+Først simuleres to populationer, ```U1``` og ```U2```, hvor $\mathrm{U1 \sim unif(0,1)}$ og $\mathrm{U2 \sim unif(0,1)}$, som er de to uniformt fordelte populationer, der genereres normalfordelinger ud fra.
 
 ```{r}
+set.seed(2000)
 U1 <- runif(100000, 0, 1)
 U2 <- runif(100000, 0, 1)
 ```
@@ -52,18 +62,49 @@ Det kan nu tjekkes deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har. Før
 
 ```{r}
 boxplot(Z1, Z2, main = "Boksplot af Z1 og Z2")
+```
 
+Det ses på boksplottet, at der er en indikation på normalfordeling med henvisning til de fire krav et boksplot af en normalfordeling opfylder. 
+De fire krav er:
+
+1) Median og middelværdi er lig hinanden.
+
+2) Øvre og nedre kvartil er lige langt fra midten.
+
+3) Der er lige mange outliers over øvre kvartil og under nedre kvartil.
+
+4) 0,7 % af observationerne ligger som outliers.
+
+Punkterne 2 og 3 tjekkes ved at betragte boksplottet, hvor der ikke umiddelbart synes at være noget, der modbeviser en normalfordeling af ```Z1``` og ```Z2```.
+
+For at tjekke punkt 1, beregnes median (```median```) og middelværdi (```mean```) i kodestykket nedenfor.
+
+```{r}
+mean_Z1 <- mean(Z1)
+median_Z1 <- median(Z1)
+
+mean_Z2 <- mean(Z2)
+median_Z2 <- median(Z2)
+```
+
+Dette giver henholdsvis en middelværdi og median for ```Z1``` på ```r mean_Z1``` og ```r median_Z1```, samt for ```Z2```  på ```r mean_Z2``` og ```r median_Z2```. Disse resultater ligger meget tæt på hinanden, og den meget lave værdi stemmer overens med forventningen om, at ```Z1``` og ```Z2``` er standard normalfordelt.
+
+For at tjekke punkt 4, beregnes andelen af outliers i hvert boksplot i kodestykket nedenfor.
+
+```{r}
 OutVals1 = boxplot(Z1, plot = FALSE)$out
 outliers_Z1 <- length(which(Z1 %in% OutVals1))
 
 OutVals2 = boxplot(Z2, plot = FALSE)$out
 outliers_Z2 <- length(which(Z2 %in% OutVals2))
 
-outliers_Z1/length(Z1)
-outliers_Z2/length(Z2)
+outliers_andel_Z1 <- outliers_Z1/length(Z1)
+outliers_andel_Z2 <- outliers_Z2/length(Z2)
 ```
 
-Det ses på boksplottet, at...
+Dette giver en andel af outliers i ```Z1``` på ```r outliers_andel_Z1``` og i ```Z2``` på ```outliers_andel_Z2```. Dette svarer til cirka $0,7 \%$ outliers i både ```Z1``` og ```Z2```, hvilket stemmer overens med punkt 4.
+
+Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være normalfordelt. Tværtimod underbygger beregningen af deres middelværdi, at de er _standard_ normalfordelte.
 
 Hernest kan der kigges på histogrammerne af ```Z1``` og ```Z2```.
 
@@ -73,16 +114,12 @@ hist(Z1, main = "Histogram for Z1", ylab = "Frekvens")
 hist(Z2, main = "Histogram for Z2", ylab = "Frekvens")
 ```
 
-Det ses på histogrammerne, at...
+Det ses tydeligt på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at de har en middelværdi på 0 og en standardafvigelse på 1, og altså, at ```Z1``` og ```Z2``` er standard normalfordelte.
 
 Desuden er det også en konsekvens af Box-Muller transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette tjekkes ved hjælp af nedenstående graf.
 
 ```{r}
 plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2")
-
-# independent_variables <- as.numeric(c(z1, z2))
-# independence_test <- chisq.test(variables)
-# independence_test
 ```
 
 Det ses tydeligt, at der ikke er nogen relation mellem ```Z1``` og ```Z2```, hvilket giver en god indikation for, at de er uafhængige.
