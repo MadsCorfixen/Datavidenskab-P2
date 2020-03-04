@@ -11,17 +11,6 @@ En definition på simulering er;
 Ud fra definitionen, er formålet altså ved simuleringer at efterligne virkeligheden, så de analyser der gøres på baggrund af simuleringerne, kan bruges i virkeligheden når lignende situationer opstår.
 Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producere dem i virkeligheden for at spare penge. Derved kan de analysere, hvilke forskellige dele der producerer mest _down-force_, uden at skulle teste dem i virkelig. [https://careers.mercedesamgf1.com/facilities/simulator/]
 
-## Pseduo Random Number Generator
-
-FIXME
-
-# Lineær Kongruens Generator
-
-FIXME
-
-# Box-Muller transformation
-
-FIXME
 
 ## Simulering i R
 Meta-forklaring til afsnittet. Henvises der ikke til noget er kilden: [https://bookdown.org/rdpeng/rprogdatascience/simulation.html]
