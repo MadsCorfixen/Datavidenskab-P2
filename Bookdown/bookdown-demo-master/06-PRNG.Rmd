@@ -10,25 +10,25 @@ Det følgende afsnit er primært baseret på informationen skaffet fra kilden [@
 Lineær Kongruens Generator, på engelsk Linear Congruens Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG finder en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
-> $X_(n+1) = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og X_0 er 'seed'
+> $X_(n+1) = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og $X_0$ er 'seed'
 >```
 
 Algoritmen fungerer således: 
-Der startes med en værdi angivet med 'seed'. Denne værdi bliver så multipliceret med værdien a og der bliver lagt en tilvækst c til. Til sidst tages modulus, m, af værdien. Modulus er en operator der dividerer et tal med et andet tal og returnerer restværdien.
+Der startes ved en værdi angivet med 'seed'. Denne værdi bliver så multipliceret med værdien a og der bliver lagt en tilvækst c til. Til sidst tages modulus, m, af værdien. Modulus er en operator der dividerer et tal med et andet tal og returnerer restværdien.
 
 I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempler har samme parametre, men forskellige 'seeds', altså startpunkter. 
 
 ```{r, out.width='75%', fig.align='center', fig.cap="Kilde: By Cmglee - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
-knitr::include_graphics('images/LCG_eksempel.PNG')
+knitr::include_graphics("images/LCG_eksempel.svg")
 ```
 
 I teorien kan parameterne antage et uendeligt antal værdier, men i praksis er der nogle der bruges oftere end andre. Derudover findes der også "dårlige" værdier til parameterne, der vil returner en tilsyneladende ikke tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal rekursioner vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden nok ikke er helt tilfældig. Dette vil nu vises:
  
 FIXME Kilde på disse parametre, tabel i wiki??, https://en.wikipedia.org/wiki/Linear_congruential_generator#cite_note-Steele20-3
 
-De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden med hvordan man kan undersøge om en LCG, generer tilfældige værdier, og hvilke parametre der skal vælges for at opfylde dette.
+De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, man kan undersøge om ens parametre, generer tilsyneladende tilfældige værdier.
 
-Her ses et eksempel på en LCG generator. Her angives værdierne for parametrerne, og rekursionen køres igennem m antal gange, i dette tilfælde 100 gange. Dette er også et eksempel på en LCG sekvens med en periode på 16. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
+Her ses et eksempel på en LCG generator. Der angives værdier for parametrerne, og rekursionen køres igennem m antal gange, i dette tilfælde 100 gange. Dette er også et eksempel på en LCG sekvens med en periode på 16. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
 
 ```{r}
 modulus <- 64
@@ -52,10 +52,10 @@ Hvis man plotter denne sekvens i et 2d punktplot, vil man også hurtigt se at v�
 ```{r}
 #hist(r)
 #hist((r)/modulus)
-plot(r, main = "Eksempel på ikke tilfældig LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier" )
+plot(r, main = "Eksempel på en ikke tilfældig LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier" )
 ```
 
-Nedenfor vises et eksempel på hvordan man kan bruge LCG algortimen til at lave en uniformfordeling i intervallet [0, 1]. Her kan det også nævnes at hvis man plotter de værdier algoritmen returnerer i et 2d punktplot, vil man se en tydeligere "tilfældig" fordeling, dog vil de fleste stadig kunne se et mønster.
+Nedenfor vises et eksempel på hvordan man kan bruge LCG algortimen til at lave en uniformfordeling i intervallet [0, 1]. Her kan det også nævnes at hvis man plotter de værdier algoritmen returnerer i et 2d punktplot, vil man se en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
 
 ```{r}
 modulus <- 86436
@@ -80,7 +80,7 @@ hist((r1 + 0.05)/modulus, main = "LCG Uniformfordeling", xlab = "Sekvens værdie
 plot(r1, main = "2d plot af LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
 ```
 
-Til sidst vil der vises et eksempel, hvor der returneres en sekvens, der plottet i et 2d punktplot, ser tilfældig ud. 
+Afslutningsvist vil der vises et eksempel, hvor der returneres en sekvens, der plottet i et 2d punktplot, ser tilfældig ud. 
 
 ```{r, echo=FALSE}
 modulus <- 86436
