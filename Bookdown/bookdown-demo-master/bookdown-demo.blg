@@ -1,0 +1,13 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: bookdown-demo.aux
+The style file: apalike.bst
+Database file #1: book.bib
+Warning--entry type for "ASTAkursus3" isn't style-file defined
+--line 27 of file book.bib
+Warning--entry type for "Statistikwiki" isn't style-file defined
+--line 35 of file book.bib
+Warning--entry type for "History" isn't style-file defined
+--line 43 of file book.bib
+Warning--entry type for "Sandsyndlighedsregning" isn't style-file defined
+--line 51 of file book.bib
+Database file #2: packages.bib
+(There were 4 warnings)
