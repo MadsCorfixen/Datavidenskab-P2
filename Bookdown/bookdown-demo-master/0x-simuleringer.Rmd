@@ -81,14 +81,3 @@ Det med at tage en et stort antal stikprøver af nogle observationer er også ka
 
 __AFSNIT SLUT__
 
-
-*Magnus*
-**Kan man sige ting om en population ud fra stikprøver (inferens, hvordan og hvorfor?)**
-
-*Processen med at bruge data analyse til at sige noget om en underliggende population ud fra en stikprøve, kaldes også statistisk inferens.* Ud fra denne**(hvis?)* stikprøve vil der kunne udarbejdes statistisk analyse, som kan bruge til at drage konklusioner om populationen. Dette er meget nyttig, da det kan være nemmere at indsamle og analysere data fra en mindre mængde og så sige noget om en større mængde, end hvis man skulle indsamle mange millioner datapunkter.
-
-I statistisk inferens differentier man normalt(?) imellem to metoder, estimering og hypotesetest.
-Når der estimeres på baggrund af fra en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan f.ek.s være gennemsnitsindkomst af danskere, hvorved der findes et estimat $\hat{\mu}$ som bruges til at beskrive $\mu$. Dette betegnes som et punkt estimat, og vil oftest suppleres med at intervalestimat. Årsagen til detter er, at punkt estimater i sin essesns er tilfældig (det ændre sig fra stikprøve til stikprøve), derfor tilstræbes det at anvende et interval, fremfor punkt estimat, da intervallet giver en større præcision i konklusionen. Her vil man finde det interval, hvor man er enten ca. 95% sikker på at $\mu$ ligger inden for.
-Den anden form for statistisk inferenes, hypotesetest, bruges til at bestemme om en teori om befolkningen viser sig at være sand. En hypotesen kunne være, at danskere tjener mere i gennemsnit end folk fra Sverige. Der vil også typisk opstilles en modsat hypotese, i tilfældet af at den første hypotese, $H_0$ viser sig at være falsk. Denne modsatte hypotese vil bolt sige det modsatte og kaldes for $H_1$.
-
-Et alternativ til statistisk inferens er bootstrapping -> Overgang?
