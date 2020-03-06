@@ -18,9 +18,9 @@ Der startes ved en værdi angivet med 'seed'. Denne værdi bliver så multiplice
 
 I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempler har samme parametre, men forskellige 'seeds', altså startpunkter. 
 
-# ```{r, out.width='75%', fig.align='center', fig.cap="Kilde: By Cmglee - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
-# knitr::include_graphics("images/LCG_eksempel.PNG")
-# ```
+```{r, out.width='75%', fig.align='center', fig.cap="Kilde: By Cmglee - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
+ #knitr::include_graphics("images/LCG_eksempel.PNG")
+```
 
 I teorien kan parameterne antage et uendeligt antal værdier, men i praksis er der nogle der bruges oftere end andre. Derudover findes der også "dårlige" værdier til parameterne, der vil returner en tilsyneladende ikke tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal rekursioner vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden nok ikke er helt tilfældig. Dette vil nu vises:
  
