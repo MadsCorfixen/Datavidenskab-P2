@@ -1,1 +1,64 @@
+```{r, echo=FALSE, message=FALSE}
+library(mosaic)
+```
 ## Bootstrap
+
+Bootstrap er hvor man ud fra ét datasæt genererer yderligere datasæt ud fra det oprendelige datasæt, hvor målet er altså at finde inferens for populations parametre.
+
+Hvert datapunkt har lige stor sandsynlighed for at blive taget, $\frac{1}{n}$, hvor $n$ er antal observationer. Når man genererer de nye datasæt, som har samme størrelse om stikprøven, bliver der tilfældigt taget et datapunkt, som bliver indsat i det nye datasæt og sat tilbage i det oprendelige så det kan tages igen.
+
+Dette gøres $b$ gange, hvor man tager en _resample_ af stikprøven, som man beregner inferens på. 
+
+Man starter med at have et stikprøve fra en population. 
+Hvilket man trækker yderligere stikprøver fra, kaldet en bootstrap stikprøve. 
+Ud fra hver bootstrap stikprøve udregner man inferens.
+Efter $b$ gentagelser, kan man udregner standard fejlen og et konfidensinterval for stikprøven.
+
+Har man et datasæt over gennemsnitslig månedtlig udgift i kr til fastfood per hustand:
+
+```{r}
+fastfood <- c(200, 0, 100, 50, 500, 100, 0, 250, 100, 150)
+hist(fastfood, breaks = 18)
+```
+
+Så kan man udregne stikprøves gennemsnitslige udgift og standard afvigelsen:
+
+```{r}
+mean(fastfood)
+sd(fastfood)
+```
+
+Derefter kan man tage en _resample_ (bootstrap stikprøve) af stikprøven og middelværdien samd standard afvigelsen heraf:
+
+```{r}
+set.seed(1)
+resample <- sample(fastfood, size = length(fastfood), replace = TRUE)
+resample
+mean(resample)
+sd(resample)
+```
+
+Dette gør man herefter en stort antal gange, $b$, f.eks. 1.000 gange, hvilket gør at man for 1.000 nye estimater fra stikprøven:
+
+```{r}
+set.seed(1)
+fastfood_boot <- replicate(1000, {
+  mean(sample(fastfood, size = length(fastfood), replace = TRUE))
+})
+hist(fastfood_boot)
+mean(fastfood_boot)
+sd(fastfood_boot)
+```
+
+Et 95% konfidensinterval kan udregnes ved:
+```{r}
+ese <- sd(fastfood_boot/(sqrt(length(fastfood))))
+fastfood_coef <- mean(fastfood_boot) + c(-1, 1) * 1.96 * ese
+fastfood_coef
+```
+
+Ud fra bootstrappet kan det altså siges at det med 95% sikkerhed er, at det gennemsnitslige fastfood budget ligger inden mellem 115,90kr og 171,64 kr.
+
+
+
+Afsnittet er baseret på [https://towardsdatascience.com/an-introduction-to-the-bootstrap-method-58bcb51b4d60]
