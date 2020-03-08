@@ -10,7 +10,7 @@ Det følgende afsnit er primært baseret på informationen skaffet fra kilden [@
 Lineær Kongruens Generator, på engelsk Linear Congruens Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG finder en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
-> $X_(n+1) = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og $X_0$ er 'seed'
+> FIXME(Er det korekt at (n+1) skal sænkes?) $X_{(n+1)} = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og $X_0$ er 'seed'
 >```
 
 Algoritmen fungerer således: 
