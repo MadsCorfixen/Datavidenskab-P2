@@ -1,1 +1,28 @@
 ## Jackknife
+
+Jackknifing er en alternativ resample metode til bootstraping. En af de ting der gør jackknifing anderledes er at den ikke bruger erstatning. Derudover har metoden jackknifing typisk en større standardafvigelse end bootstrap.
+https://www.sciencedirect.com/topics/mathematics/jackknife
+
+
+Jackknife metoden baserer sig på at slette en observation af gangen fra stikprøven, derefter beregne estimatoren. Estimatoren er beregnet så der er _n_ estimater for en stikprøve på _n_. Som eksempel kan der være 5 datapunkter $(X_1,X_2,X_3,X_4,X_5)$, som vi vil udføre jackknife på. 
+
+første beregning: $(X_1,X_2,X_3,X_4,X_5)$\
+anden beregning: $(X_2,X_3,X_4,X_5)$\
+tredje beregning: $(X_3,X_4,X_5)$\
+fjerde beregning: $(X_4,X_5)$\
+femte beregning: $(X_5)$
+https://www.biostat.washington.edu/sites/default/files/modules/2017_sisg_1_9_v3.pdf
+
+Så har man sine _n_ estimater som kaldes for $\hat{\theta}$. De vil se sådan ud:\
+$\hat\theta_1,\hat\theta_2,...,\hat\theta_n$
+
+Med de estimater kan der så beregnes standardafvigelsen på stikprøven:
+$\hat{se_{jack}}=\sqrt{\frac{n-1}{n}\cdot\sum_{i=1}^n{(\hat{\theta_i}-\bar{\hat{\theta}})^2}}$
+
+http://people.bu.edu/aimcinto/jackknife.pdf
+
+For jackknife metoden er standardafvigelsen den samme ved en given stikprøve, som ikke er tilfældet for bootstrap. Dog er standardafvigelsen typisk større end end ved bootstrap metoden, derfor er jackknife metoden mere konservativ. 
+
+Jackknife metoden er god at bruge, da man den kan kompenserer for bias i en estimator. Derudover gør metoden det nemmere at lave statistisk inferens uden at have teoretisk viden omkring estimatorens standardafvigelse
+
+https://www.biostat.washington.edu/sites/default/files/modules/2017_sisg_1_9_v3.pdf
