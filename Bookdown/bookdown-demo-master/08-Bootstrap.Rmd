@@ -52,13 +52,24 @@ sd(fastfood_boot)
 
 Et 95% konfidensinterval kan udregnes ved:
 ```{r}
-ese <- sd(fastfood_boot/(sqrt(length(fastfood))))
-fastfood_coef <- mean(fastfood_boot) + c(-1, 1) * 1.96 * ese
-fastfood_coef
+confidence_interval <- function(fastfood_boot, interval) {
+  # Standardafvigelsen af bootstrappet
+  fastfood_boot_sd <- sd(fastfood_boot)
+  # Bootstrap størrelsen
+  n <- length(fastfood_boot)
+  # Middelværdien af bootstrappet
+  fastfood_boot_mean <- mean(fastfood_boot)
+  # Estimeret standard fejl fra t-fordeling
+  standard_error <- qt((interval+1)/2, df = n - 1) * fastfood_boot_sd / sqrt(n)
+  # Konfidensintervallet som vektor
+  result <- c("lower" = fastfood_boot_mean - standard_error, "upper" = fastfood_boot_mean + standard_error)
+  return(result)
+}
+confidence_interval(fastfood_boot, 0.95)
 ```
 
-Ud fra bootstrappet kan det altså siges at det med 95% sikkerhed er, at det gennemsnitslige fastfood budget ligger inden mellem 115,90kr og 171,64 kr.
+Ud fra bootstrappet kan det altså siges at det med 95% sikkerhed er, at det gennemsnitslige fastfood budget ligger mellem 140,98kr 146,56kr kr.
 
-
+Man kan altså ud fra bootstrap estimere inferens, såsom middelværdien for en population, hvor man eventuelt kun har givet en enkelt stikprøve.
 
 Afsnittet er baseret på [https://towardsdatascience.com/an-introduction-to-the-bootstrap-method-58bcb51b4d60]
