@@ -6,40 +6,40 @@ a method of generating a sequence of numbers that are not actually random, but s
 
 ## Lineær Kongruens Generator
 
-Det følgende afsnit er primært baseret på informationen skaffet fra kilden [@LCGinfo]
-Lineær Kongruens Generator, på engelsk Linear Congruens Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG finder en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
+Det følgende afsnit er primært baseret på kilden. [@LCGinfo]
+Lineær Kongruens Generator, på engelsk Linear Congruens Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
-> $X_(n+1) = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og $X_0$ er 'seed'
+> $X_{n+1} = (a \cdot X_n + c) \mod m$. Hvor $X_n$ er en liste af tal fra $X_0$ til $X_n$, $m$ er modulus, $a$ er en faktor, $c$ er tilvæksten, og $X_0$ er startpunktet.
 >```
 
 Algoritmen fungerer således: 
-Der startes ved en værdi angivet med 'seed'. Denne værdi bliver så multipliceret med værdien a og der bliver lagt en tilvækst c til. Til sidst tages modulus, m, af værdien. Modulus er en operator der dividerer et tal med et andet tal og returnerer restværdien.
+Der startes ved en værdi der bliver multipliceret med $a$ og der bliver lagt en tilvækst $c$ til. Derefter tages modulus, $m$, af værdien. Modulus er en operator der dividerer et tal med et andet tal og returnerer restværdien.
 
-I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempler har samme parametre, men forskellige 'seeds', altså startpunkter. 
+I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempler har samme parametre, men forskellige startpunkter. 
 
-```{r, out.width='75%', fig.align='center', fig.cap="Kilde: By Cmglee - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
+```{r, out.width='75%', fig.align='center', fig.cap=" 3 eksempler på LCG. Kilde: By Cmglee - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
  knitr::include_graphics("images/LCG_eksempel.PNG")
 ```
 
-I teorien kan parameterne antage et uendeligt antal værdier, men i praksis er der nogle der bruges oftere end andre. Derudover findes der også "dårlige" værdier til parameterne, der vil returner en tilsyneladende ikke tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal rekursioner vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden nok ikke er helt tilfældig. Dette vil nu vises:
+I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal rekursioner vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette vil vises om lidt:
  
 FIXME Kilde på disse parametre, tabel i wiki??, https://en.wikipedia.org/wiki/Linear_congruential_generator#cite_note-Steele20-3
 
-De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, man kan undersøge om ens parametre, generer tilsyneladende tilfældige værdier.
+De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, man kan undersøge om ens parametre, genererer tilsyneladende tilfældige værdier.
 
-Her ses et eksempel på en LCG generator. Der angives værdier for parametrerne, og algoritmen gentages m antal gange, i dette tilfælde 100 gange. Dette er også et eksempel på en LCG sekvens med en periode på 16. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
+Her ses et eksempel på en LCG generator. Der angives værdier for parametrerne, og algoritmen gentages $n$ antal gange, i dette tilfælde 100 gange. Dette er også et eksempel på en LCG sekvens med en periode på 16. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
 
 ```{r}
 modulus <- 64
 a <- 33
 c <- 12 
 seed <- 57 
-m <- 100
-r <- numeric(m)
+n <- 100
+r <- numeric(n)
 r[1] <- seed
 
-for (i in 1: (m-1))
+for (i in 1: (n-1))
 {
   r[i +1] <- (a * r[i] + c) %% modulus
 }
@@ -47,66 +47,63 @@ for (i in 1: (m-1))
 r
 ```
 
-Hvis man plotter denne sekvens i et 2d punktplot, vil man også hurtigt se at værdierne i virkeligheden nok ikke er helt tilfældige. Selv hvis man ændrer antallet af gange LCG køres igennem, vil det tydelige mønster ikke ændre sig. 
+Plottes denne sekvens i et 2d punktplot, vil man se at værdierne ikke er tilfældige. Selv hvis man ændrer antallet af gange LCG køres igennem, vil det tydelige mønster ikke ændre sig. 
 
 ```{r}
-#hist(r)
-#hist((r)/modulus)
 plot(r, main = "Eksempel på en ikke tilfældig LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier" )
 ```
 
-Nedenfor vises et eksempel på hvordan man kan bruge LCG algortimen til at lave en uniformfordeling i intervallet [0, 1], $\mathrm{unif(0,1)}$. Her kan det også nævnes at hvis man plotter de værdier algoritmen returnerer i et 2d punktplot, vil man se en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
+Nedenfor vises et eksempel på hvordan man kan bruge LCG algortimen til at lave en uniform fordeling i intervallet [0, 1]. 
 
 ```{r}
 modulus <- 86436
 a <- 1093
 c <- 0
 seed <- 12 
-m <- 1000
-r1 <- numeric(m)
+n <- 1000
+r1 <- numeric(n)
 r1[1] <- seed
 
-for (i in 1: (m-1))
+for (i in 1: (n-1))
 {
   r1[i +1] <- (a * r1[i] + c) %% modulus
 }
 
-#r1
 ```
 
 ```{r}
-#hist(r1)
 hist((r1 + 0.05)/modulus, main = "LCG Uniformfordeling", xlab = "Sekvens værdier", ylab = "Frekvens")
+```
+
+Her kan det også nævnes, at hvis man plotter de værdier algoritmen returnerer i et 2d punktplot, vil man se en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
+
+```{r}
 plot(r1, main = "2d plot af LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
 ```
 
+
 Afslutningsvist vil der vises et eksempel, hvor der returneres en sekvens, der plottet i et 2d punktplot, ser tilfældig ud. 
 
-```{r, echo=FALSE}
+```{r}
 modulus <- 86436
 a <- 1093
 c <- 18257
 seed <- 12 
-m <- 1000
-r2 <- numeric(m)
+n <- 1000
+r2 <- numeric(n)
 r2[1] <- seed
 
-for (i in 1: (m-1))
+for (i in 1: (n-1))
 {
   r2[i +1] <- (a * r2[i] + c) %% modulus
 }
 
-#r2
+
 ```
 
 ```{r}
-#hist(r2)
-#hist((r2 + 0.05)/modulus)
 plot(r2, main = "'Tilfældig' LCG Sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
 ```
-
-
-
 
 ## Box-Muller-transformation
 
@@ -114,16 +111,17 @@ I dette afsnit beskrives Box-Muller-transformation, hvilket er en metode til at 
 
 >```{theorem}
 > Box-Muller-transformation
+>
 > Antag, at $U_1$ og $U_2$ er uafhængige stokastiske variabler, der begge er uniformt fordelt på intervallet $[0, 1]$. Lad $$Z_1 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{cos}(2\pi U_2)~ \wedge~ Z_2 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{sin}(2\pi U_2)$$. Så er $Z_1$ og $Z_2$ uafhængige stokastiske variabler, der er standard normalfordelt.
 >```
 
 ### Efterprøvning i R
 
-I det følgende efterprøves Box-Muller-transformationen i R.
+I det følgende afsnit efterprøves Box-Muller-transformationen i R.
 
 Først simuleres to populationer, ```U1``` og ```U2```, hvor $\mathrm{U1 \sim unif(0,1)}$ og $\mathrm{U2 \sim unif(0,1)}$, som er de to uniformt fordelte populationer, der genereres normalfordelinger ud fra.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, message=FALSE}
 set.seed(2000)
 library(mosaic)
 library(e1071)
@@ -169,18 +167,20 @@ median_Z1 <- median(Z1)
 
 mean_Z2 <- mean(Z2)
 median_Z2 <- median(Z2)
+
+
 ```
 
-Dette giver henholdsvis en middelværdi og median for ```Z1``` på ```r mean_Z1``` og ```r median_Z1```, samt for ```Z2```  på ```r mean_Z2``` og ```r median_Z2```. Disse resultater ligger meget tæt på hinanden, og den meget lave værdi stemmer overens med forventningen om, at ```Z1``` og ```Z2``` er standard normalfordelt.
+Dette giver henholdsvis en middelværdi og median for ```Z1``` på $`r mean_Z1`$ og $`r median_Z1`$, samt for ```Z2```  på $`r mean_Z2`$ og $`r median_Z2`$. Disse resultater ligger meget tæt på hinanden, og den meget lave værdi stemmer overens med forventningen om, at ```Z1``` og ```Z2``` er standard normalfordelt.
 
 For at tjekke punkt 4, beregnes andelen af outliers i hvert boksplot i kodestykket nedenfor.
 
 ```{r}
-OutVals1 = boxplot(Z1, plot = FALSE)$out
-outliers_Z1 <- length(which(Z1 %in% OutVals1))
+OutVals1 <- boxplot(Z1, plot = FALSE)$out
+outliers_Z1 <- length(OutVals1)
 
-OutVals2 = boxplot(Z2, plot = FALSE)$out
-outliers_Z2 <- length(which(Z2 %in% OutVals2))
+OutVals2 <- boxplot(Z2, plot = FALSE)$out
+outliers_Z2 <- length(OutVals2)
 
 outliers_andel_Z1 <- outliers_Z1/length(Z1)
 outliers_andel_Z2 <- outliers_Z2/length(Z2)
@@ -190,7 +190,7 @@ Dette giver en andel af outliers i ```Z1``` på ```r outliers_andel_Z1``` og i `
 
 Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være normalfordelt. Tværtimod underbygger beregningen af deres middelværdi, at de er _standard_ normalfordelte.
 
-Hernest kan der kigges på histogrammerne af ```Z1``` og ```Z2```.
+Hernest kigges der på histogrammerne for ```Z1``` og ```Z2```.
 
 ```{r}
 par(mfrow = c(1,2))
@@ -198,12 +198,13 @@ hist(Z1, main = "Histogram for Z1", ylab = "Frekvens")
 hist(Z2, main = "Histogram for Z2", ylab = "Frekvens")
 ```
 
-Det ses tydeligt på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at de har en middelværdi på $\approx 0$ og en standardafvigelse på $\approx 1$, og altså, at ```Z1``` og ```Z2``` er standard normalfordelte.
+Det ses tydeligt på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at de har en middelværdi på $\approx 0$ og en standardafvigelse på $\approx 1$, og derved er  ```Z1``` og ```Z2``` standard normalfordelte.
 
-Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette tjekkes ved hjælp af nedenstående graf.
+Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges ved hjælp af nedenstående graf.
 
 ```{r}
-plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2")
+plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25), pch = 1, cex = 0.5)
+
 ```
 
 Det ses tydeligt, at der ikke er nogen relation mellem ```Z1``` og ```Z2```, hvilket giver en god indikation for, at de er uafhængige.
