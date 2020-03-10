@@ -1,6 +1,6 @@
 # Pseduo Random Number Generator
 
-En computer fungere i hovedtræk ved at den modtager et input, som det bearbejdes af en algoritme, som derefter giver et output. Der findes ingen algoritmer, som er i stand til at generer FIXME(på engelsk kaldes det truly random numbers, dækker ægte? eller rigtig? eller bare tilfældig?)ægte tilfældige tal, fordi gives det samme input, til den samme algoritme, vil det resultatet være det samme output som tidligere. Årsagen til dette er, at computer fungerer på baggrund af matematik og er derfor deterministisk. Det er dog muligt ved hjælp af en beregningsmodel, at skabe en abstraktion af ægte tilfældighed. Denne model kaldes _Pseudo Random Number Generator_ (PRNG)
+En computer fungerer i hovedtræk ved at den modtager et input, som det bearbejdes af en algoritme, som derefter giver et output. Der findes ingen algoritmer, som er i stand til at generer FIXME(på engelsk kaldes det truly random numbers, dækker ægte? eller rigtig? eller bare tilfældig?)ægte tilfældige tal, fordi gives det samme input, til den samme algoritme, vil det resultatet være det samme output som tidligere. Årsagen til dette er, at computer fungerer på baggrund af matematik og er derfor deterministisk. Det er dog muligt ved hjælp af en beregningsmodel, at skabe en abstraktion af ægte tilfældighed. Denne model kaldes _Pseudo Random Number Generator_ (PRNG)
 En PRNGs funktionalitet beskrives ved forskellige karakteristika. Et karateristika er input, dette input kaldes for et FIXME _seed/frø_. På baggrund af det FIXME _seed/frø_ der gives, beregner algoritmen i PRNG, et output, som er et pseudo tilfældigt tal. Dette pseudo tilfældige tal anvendes herefter som et nyt FIXME _seed/frø_ i PRNGen, derved kører den rekursivt og genererer den en sekvens af pseudo tilfældige tal. Et andet karakteristika er FIXME _period/periode_, som beskriver hvor mange repetitioner PRNGen kan kører før den begynder at gentage sig selv. Et tredje karakteristika er FIXME _distribution/fordeling_, som beskriver fordelingen af de talværdier der genereres. FIXME (indsæt billede). Som det ses på figuren kan fordeligen være jævn, hvilket betyder at der er en god fordeling af de generet pseudo tilfældige tal. Er der derimod en partiskhed, som enten kan være høje værdier, lave værdier eller hvis der forekommer andre former for mønstre, vil anvendeligheden af PRNG mindske eller være helt uanvendelig. Jo tidligere et mønster opstår, samt tydeligheden af det, vil betyde at det for udefrakommende er let gennemskueligt, og derfor vil der være risiko for at algoritmen brydes.
 FIXME[https://www.youtube.com/watch?v=4sYawx70iP4, 0-4:05]
 
@@ -10,10 +10,10 @@ Der findes et utal af forskellige PRNG, men John von Neumann udviklede en af de 
 ## Lineær Kongruens Generator
 
 Det følgende afsnit er primært baseret på kilden. [@LCGinfo]
-Lineær Kongruens Generator, på engelsk Linear Congruens Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
+Lineær Kongruens Generator, på engelsk Linear __FIXME staves det Congruens eller Congruence__ Congruens Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
-> FIXME(Er det korekt at (n+1) skal sænkes?) $X_{(n+1)} = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og $X_0$ er 'seed
+> __FIXME(skal parentesen være der om (n+1)? Det er den ikke længere nede)__ $X_{(n+1)} = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og $X_0$ er 'seed
 > $X_{n+1} = (a \cdot X_n + c) \mod m$. Hvor $X_n$ er en liste af tal fra $X_0$ til $X_n$, $m$ er modulus, $a$ er en faktor, $c$ er tilvæksten, og $X_0$ er startpunktet
 >```
 

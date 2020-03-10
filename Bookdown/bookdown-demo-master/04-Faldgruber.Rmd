@@ -60,7 +60,7 @@ Hver af disse egenskaber har indvirkning på, hvor brugbare resultater, en dataa
 
 I dette afsnit gennemgåes, hvilken indflydelse en populations fordeling har på fordelingen af estimaterne og de tilhørende estimatorer. Dette er nødvendigt, da forskellige regneregler og metoder, der gælder for, eksempelvis, en normalfordeling ikke nødvendigvis gælder for en uniform fordeling. Desuden har fordelingen af populationen indflydelse på, hvordan fordelingen af stikprøven og estimatorerne er.
 
-For eksempel, hvis en population er højre/venstreskæv, vil både stikprøven og estimatorerne også være det. Dette giver nogle problemer i forhold til at udføre hypotesetests, da densitetsfunktionen ikke vil tage en klokkeform. Dog kan dette afhjælpes ved brug af den centrale grænseværdisætning, der siger, at stikprøvemiddelværdien vil være normalfordelt, $\hat{y} \sim n(\mu, \frac{\sigma}{\sqrt{n}})$, hvis stikprøven er af 'tilpas' stor størrelse.
+For eksempel, hvis en population er højre- eller venstreskæv, vil både stikprøven og estimatorerne også være det. Dette giver nogle problemer i forhold til at udføre hypotesetests, da densitetsfunktionen ikke vil tage en klokkeform. Dog kan dette afhjælpes ved brug af den centrale grænseværdisætning, der siger, at stikprøvemiddelværdien vil være normalfordelt, $\hat{y} \sim n(\mu, \frac{\sigma}{\sqrt{n}})$, hvis stikprøven er af 'tilpas' stor størrelse.
 
 >```{theorem}
 >__Den Centrale Grænseværdisætning__ [@ASTAbog, s. 93].

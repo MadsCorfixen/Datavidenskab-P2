@@ -55,7 +55,7 @@ Z_fordeling <- rnorm(1000, mean = 0, sd = 1)
 
 mean(Z_fordeling)
 ```
-Her eksekveres en Z-fordeling af 1.000 observationer hvor middelværdien, -0,012, printes. Denne middelværdi vil variere afhængigt af det _seed_¨, der benyttes.
+Her eksekveres en Z-fordeling af 1.000 observationer hvor middelværdien, -0,012, printes. Denne middelværdi vil variere afhængigt af det _seed_, der benyttes.
 
 Dernæst kan der foretages en ```sample``` af variablen ```Z_fordeling```.
 
