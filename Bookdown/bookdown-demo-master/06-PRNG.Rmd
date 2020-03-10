@@ -1,6 +1,6 @@
 # Pseduo Random Number Generator
 
-En computer fungere i hovedtræk ved at den modtager et input, som det bearbejdes af en algoritme, som derefter giver et output. Der findes ingen algoritmer, som er i stand til at generer FIXME(på engelsk kaldes det truly random numbers, dækker ægte? eller rigtig? eller bare tilfældig?)ægte tilfældige tal, fordi gives det samme input, til den samme algoritme, vil det resultatet være det samme output som tidligere. Årsagen til dette er, at computer fungerer på baggrund af matematik og er derfor deterministisk. Det er dog muligt ved hjælp af en beregningsmodel, at skabe en abstraktion af ægte tilfældighed. Denne model kaldes _Pseudo Random Number Generator_ (PRNG)
+En computer fungerer i hovedtræk ved at den modtager et input, der så bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at genererer FIXME(på engelsk kaldes det truly random numbers, dækker ægte? eller rigtig? eller bare tilfældig?)ægte tilfældige tal, fordi gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere. Årsagen til dette er, at en computer fungerer på baggrund af matematik og er derfor deterministisk. Det er dog muligt ved hjælp af en beregningsmodel, at skabe en abstraktion af ægte tilfældighed. Denne model kaldes _Pseudo Random Number Generator_ (PRNG).
 En PRNGs funktionalitet beskrives ved forskellige karakteristika. Et karateristika er input, dette input kaldes for et FIXME _seed/frø_. På baggrund af det FIXME _seed/frø_ der gives, beregner algoritmen i PRNG, et output, som er et pseudo tilfældigt tal. Dette pseudo tilfældige tal anvendes herefter som et nyt FIXME _seed/frø_ i PRNGen, derved kører den rekursivt og genererer den en sekvens af pseudo tilfældige tal. Et andet karakteristika er FIXME _period/periode_, som beskriver hvor mange repetitioner PRNGen kan kører før den begynder at gentage sig selv. Et tredje karakteristika er FIXME _distribution/fordeling_, som beskriver fordelingen af de talværdier der genereres. FIXME (indsæt billede). Som det ses på figuren kan fordeligen være jævn, hvilket betyder at der er en god fordeling af de generet pseudo tilfældige tal. Er der derimod en partiskhed, som enten kan være høje værdier, lave værdier eller hvis der forekommer andre former for mønstre, vil anvendeligheden af PRNG mindske eller være helt uanvendelig. Jo tidligere et mønster opstår, samt tydeligheden af det, vil betyde at det for udefrakommende er let gennemskueligt, og derfor vil der være risiko for at algoritmen brydes.
 FIXME[https://www.youtube.com/watch?v=4sYawx70iP4, 0-4:05]
 
@@ -10,15 +10,15 @@ Der findes et utal af forskellige PRNG, men John von Neumann udviklede en af de 
 ## Lineær Kongruens Generator
 
 Det følgende afsnit er primært baseret på kilden. [@LCGinfo]
-Lineær Kongruens Generator, på engelsk Linear Congruens Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
+Lineær Kongruens Generator, på engelsk Linear Congruential Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
-> FIXME(Er det korekt at (n+1) skal sænkes?) $X_{(n+1)} = (a \cdot X_n + c) \mod m$. Her er m modulus, a er en faktor, m er tilvæksten, og $X_0$ er 'seed
-> $X_{n+1} = (a \cdot X_n + c) \mod m$. Hvor $X_n$ er en liste af tal fra $X_0$ til $X_n$, $m$ er modulus, $a$ er en faktor, $c$ er tilvæksten, og $X_0$ er startpunktet
+> $X_{n+1} = (a \cdot X_n + c) \mod m$. 
+> Hvor $X_n$ er en liste af tal fra $X_0$ til $X_n$, $m$ er modulus, $a$ er en faktor, $c$ er tilvæksten, og $X_0$ er startpunktet.
 >```
 
 Algoritmen fungerer således:
-Der startes ved en værdi der bliver multipliceret med $a$ og der bliver lagt en tilvækst $c$ til. Derefter tages modulus, $m$, af værdien. Modulus er en operator der dividerer et tal med et andet tal og returnerer restværdien.
+Der startes ved en værdi angivet med $X_0$, som bliver multipliceret med $a$ og tilvæksten $c$ lægges til. Derefter tages modulus, $m$, af værdien. Modulus er en operator der dividerer et tal med et andet tal og returnerer restværdien.
 
 I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempler har samme parametre, men forskellige startpunkter.
 
@@ -26,87 +26,61 @@ I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempl
  knitr::include_graphics("images/LCG_eksempel.PNG")
 ```
 
-I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal rekursioner vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette vil vises om lidt:
-
-FIXME Kilde på disse parametre, tabel i wiki??, https://en.wikipedia.org/wiki/Linear_congruential_generator#cite_note-Steele20-3
+I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal rekursioner vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette vil vises om lidt.
 
 De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, man kan undersøge om ens parametre, genererer tilsyneladende tilfældige værdier.
 
-Her ses et eksempel på en LCG generator. Der angives værdier for parametrerne, og algoritmen gentages $n$ antal gange, i dette tilfælde 100 gange. Dette er også et eksempel på en LCG sekvens med en periode på 16. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
+Først defineres en funktion for LCG algoritmen, som tager de nødvendige argumenter for algoritmen. Disse blev der redegjort for tidligere i afsnittet. Derudover angives også et argument, $n$, der fortæller hvor mange rekursioner algoritmen skal foretage. 
 
 ```{r}
-modulus <- 64
-a <- 33
-c <- 12
-seed <- 57
-n <- 100
-r <- numeric(n)
-r[1] <- seed
-
-for (i in 1: (n-1))
+lcg <- function(m, a, c, seed, n) {
+  
+  r <- numeric(n) #Sørger for at n er numerisk
+  r[1] <- seed #Angiver startpunktet
+  
+  for (i in 1: (n-1))
 {
-  r[i +1] <- (a * r[i] + c) %% modulus
+  r[i + 1] <- (a * r[i] + c) %% m
+  
 }
+ return(r)
+}
+```
 
-r
+Det følgende er et eksempel på en LCG sekvens med en periode på 16. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
+
+```{r}
+lcg1 <- lcg(64, 33, 12, 57, 100)
+lcg1
 ```
 
 Plottes denne sekvens i et 2d punktplot, vil man se at værdierne ikke er tilfældige. Selv hvis man ændrer antallet af gange LCG køres igennem, vil det tydelige mønster ikke ændre sig.
 
 ```{r}
-plot(r, main = "Eksempel på en ikke tilfældig LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier" )
+plot(lcg1, main = "Eksempel på en ikke tilfældig LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier" )
 ```
 
 Nedenfor vises et eksempel på hvordan man kan bruge LCG algortimen til at lave en uniform fordeling i intervallet [0, 1].
 
 ```{r}
-modulus <- 86436
-a <- 1093
-c <- 0
-seed <- 12
-n <- 1000
-r1 <- numeric(n)
-r1[1] <- seed
+lcg2 <- lcg(86436, 1093, 0, 12, 1000)
 
-for (i in 1: (n-1))
-{
-  r1[i +1] <- (a * r1[i] + c) %% modulus
-}
-
-```
-
-```{r}
-hist((r1 + 0.05)/modulus, main = "LCG Uniformfordeling", xlab = "Sekvens værdier", ylab = "Frekvens")
+hist((lcg2 + 0.05)/ 86436, main = "LCG Uniformfordeling", xlab = "Sekvens værdier", ylab = "Frekvens")
 ```
 
 Her kan det også nævnes, at hvis man plotter de værdier algoritmen returnerer i et 2d punktplot, vil man se en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
 
 ```{r}
-plot(r1, main = "2d plot af LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
+plot(lcg2, main = "2d plot af LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
 ```
 
 
 Afslutningsvist vil der vises et eksempel, hvor der returneres en sekvens, der plottet i et 2d punktplot, ser tilfældig ud.
 
 ```{r}
-modulus <- 86436
-a <- 1093
-c <- 18257
-seed <- 12
-n <- 1000
-r2 <- numeric(n)
-r2[1] <- seed
+lcg3 <- lcg(86436, 1093, 18257, 12, 1000)
 
-for (i in 1: (n-1))
-{
-  r2[i +1] <- (a * r2[i] + c) %% modulus
-}
-
-
-```
-
-```{r}
-plot(r2, main = "'Tilfældig' LCG Sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
+plot(lcg3, main = "'Tilfældig' LCG Sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
 ```
 
 ## Box-Muller-transformation
