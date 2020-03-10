@@ -1,12 +1,12 @@
 ## Jackknife
 
-FIXME Få sat kilder ordentligt ind i book.bib og lav referencer
+<!-- FIXME Få sat kilder ordentligt ind i book.bib og lav referencer -->
 
-Jackknifing er den første metode for resampling.
-FIXME Forklar hvad resampling er, samt skal afsnittet rettes med ny viden.
+<!-- Jackknifing er den første metode for resampling. -->
+<!-- FIXME Forklar hvad resampling er, samt skal afsnittet rettes med ny viden. -->
 
-ressampling er i denne sammenhæng, når der estimereres en ny stikprøve udfra en anden stikprøve, og derefter estimerer precisionen af data.
 Nogle gane opstår der situationer hvor det er svært at beregne gode estimatorer eller finde de estimatoreres standardafvigelse. I disse situationer kan jackknifing benyttes, da den kan udlede estimater og en standardafvigelse. 
+Ressampling er i denne sammenhæng, når der lave nye datasæt udfra en stikprøve, og derefter estimerer på disse datasæt for at finde nogle værdi, såsom variansen.
 [@Jackknife2, side 2]
 
 FIXME Ret følgende afsnit
@@ -27,18 +27,23 @@ Med disse estimater kan standardfejlen på stikprøven beregnes, hvor $\bar{\hat
 $\hat{se_{jack}}=\sqrt{\frac{n-1}{n}\cdot\sum_{i=1}^n{(\hat{\theta_i}-\bar{\hat{\theta}})^2}}$
 [@Jackknife2, side 3]
 
+<!-- Afsnittet under skal måske forklares lidt mere klart. Se evt. https://www.youtube.com/watch?v=p9XPclE7NtA&fbclid=IwAR06QNE4E7qWUIvtUcJbxYJz6Kbd3lZIptWX-E0CCZCe6goARC0KMgNhUBE. -->
 
-
-#Afsnittet under skal måske forklares lidt mere klart. Se evt. https://www.youtube.com/watch?v=p9XPclE7NtA&fbclid=IwAR06QNE4E7qWUIvtUcJbxYJz6Kbd3lZIptWX-E0CCZCe6goARC0KMgNhUBE.
-
+Jackknife metoden er god at bruge, da den kan kompensere for at en estimator ikke er forventningsret. (hvorfor?)
 For jackknife metoden er standardfejlen den samme ved en given stikprøve, som ikke er tilfældet for bootstrap. Dog er standardfejlen typisk større end ved bootstrap metoden, og derfor er jackknife metoden mindre præcis. 
-Jackknife metoden er god at bruge, da den kan kompensere for at en estimator ikke er forventningsret. 
 
-Derudover gør metoden det nemmere at lave statistisk inferens uden at have teoretisk viden omkring estimatorens standardafvigelse. FIXME: Forklaring(?): Din estimator, standardfejlen, for den er for nogle nem at beregne, men for andre er der ikke nødvendigvis ikke en formel.
-https://www.biostat.washington.edu/sites/default/files/modules/2017_sisg_1_9_v3.pdf
+Derudover gør metoden det nemmere at lave statistisk inferens uden at have teoretisk viden omkring estimatorens standardafvigelse. Nogle gange er der ikke en formel til at beregne standardfejlen på til et givent datasæt, derfor er jackknifing en brugbar metode, da den kan frembringe standardfejlen for datasættet alligevel.
+[@Jackknife2, side 2]
+<!-- FIXME: Forklaring(?): Din estimator, standardfejlen, for den er for nogle nem at beregne, men for andre er der ikke nødvendigvis ikke en formel. -->
 
-En af de ting der gør jackknifing anderledes er at den ikke bruger erstatning. Derudover har metoden jackknifing typisk en større standardafvigelse end bootstrap.
+```{r}
+library(bootstrap)
+```
 
-
-
+```{r}
+set.seed(1)
+x <- rnorm(100)
+jack<-jackknife(x, mean(x))
+jack
+```
 
