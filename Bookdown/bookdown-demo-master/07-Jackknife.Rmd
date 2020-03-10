@@ -4,33 +4,41 @@ FIXME Få sat kilder ordentligt ind i book.bib og lav referencer
 
 Jackknifing er den første metode for resampling.
 FIXME Forklar hvad resampling er, samt skal afsnittet rettes med ny viden.
-En af de ting der gør jackknifing anderledes er at den ikke bruger erstatning. Derudover har metoden jackknifing typisk en større standardafvigelse end bootstrap.
-[@Jackknife1]
+
+ressampling er i denne sammenhæng, når der estimereres en ny stikprøve udfra en anden stikprøve, og derefter estimerer precisionen af data.
+Nogle gane opstår der situationer hvor det er svært at beregne gode estimatorer eller finde de estimatoreres standardafvigelse. I disse situationer kan jackknifing benyttes, da den kan udlede estimater og en standardafvigelse. 
+[@Jackknife2, side 2]
 
 FIXME Ret følgende afsnit
-Jackknife metoden baserer sig på at slette en observation af gangen fra stikprøven, derefter beregne estimatoren. Estimatoren er beregnet så der er _n_ estimater for en stikprøve på _n_. Som eksempel kan der være 5 datapunkter $(X_1,X_2,X_3,X_4,X_5)$, som vi vil udføre jackknife på. 
+Jackknife metoden baserer sig på at fjerne en observation af gangen fra stikprøven, derefter beregne estimatoren, og sætter observation tilbage igen. Estimatoren er beregnet så der er _n_ estimater for en stikprøve på _n_. Algoritmen jackknifing følger er denne: $X_{[i]}={X1, X2, . . . , X_{i−1}, X_{i+1}, . . . , X_{n−1}, X_{n}}$
+Som eksempel kan der være 5 datapunkter $(X_1,X_2,X_3,X_4,X_5)$, som vi vil udføre jackknife på. 
 
-første beregning: $(X_1,X_2,X_3,X_4,X_5)$\
-anden beregning: $(X_2,X_3,X_4,X_5)$\
-tredje beregning: $(X_3,X_4,X_5)$\
-fjerde beregning: $(X_4,X_5)$\
-femte beregning: $(X_5)$
-https://www.biostat.washington.edu/sites/default/files/modules/2017_sisg_1_9_v3.pdf
+første beregning: $(X_2,X_3,X_4,X_5)$\
+anden beregning: $(X_1,X_3,X_4,X_5)$\
+tredje beregning: $(X_1,X_2,X_4,X_5)$\
+fjerde beregning: $(X_1,X_2,X_3,X_5)$\
+femte beregning: $(X_1,X_2,X_3,X_4)$
+[@Jackknife2, side 3]
 
 
 Så har man _n_ estimater, $\hat{\theta} = [\hat\theta_1,\hat\theta_2,...,\hat\theta_n]$.
 
-Med disse estimater kan standardfejlen på stikprøven beregnes:
+Med disse estimater kan standardfejlen på stikprøven beregnes, hvor $\bar{\hat{\theta}}$ er middelværdien af estimaterne:
 $\hat{se_{jack}}=\sqrt{\frac{n-1}{n}\cdot\sum_{i=1}^n{(\hat{\theta_i}-\bar{\hat{\theta}})^2}}$
-FIXME Theta^hat^streg skal forklares inden
+[@Jackknife2, side 3]
 
-http://people.bu.edu/aimcinto/jackknife.pdf
 
-#Afsnittet under skal måske forklares lidt mere klart. Se evt. https://www.youtube.com/watch?v=p9XPclE7NtA&fbclid=IwAR06QNE4E7qWUIvtUcJbxYJz6Kbd3lZIptWX-E0CCZCe6goARC0KMgNhUBE. Konservativ? Anden forklaring.
 
-For jackknife metoden er standardfejlen den samme ved en given stikprøve, som ikke er tilfældet for bootstrap. Dog er standardfejlen typisk større end ved bootstrap metoden, og derfor er jackknife metoden mere konservativ. 
+#Afsnittet under skal måske forklares lidt mere klart. Se evt. https://www.youtube.com/watch?v=p9XPclE7NtA&fbclid=IwAR06QNE4E7qWUIvtUcJbxYJz6Kbd3lZIptWX-E0CCZCe6goARC0KMgNhUBE.
+
+For jackknife metoden er standardfejlen den samme ved en given stikprøve, som ikke er tilfældet for bootstrap. Dog er standardfejlen typisk større end ved bootstrap metoden, og derfor er jackknife metoden mindre præcis. 
 Jackknife metoden er god at bruge, da den kan kompensere for at en estimator ikke er forventningsret. 
 
 Derudover gør metoden det nemmere at lave statistisk inferens uden at have teoretisk viden omkring estimatorens standardafvigelse. FIXME: Forklaring(?): Din estimator, standardfejlen, for den er for nogle nem at beregne, men for andre er der ikke nødvendigvis ikke en formel.
-
 https://www.biostat.washington.edu/sites/default/files/modules/2017_sisg_1_9_v3.pdf
+
+En af de ting der gør jackknifing anderledes er at den ikke bruger erstatning. Derudover har metoden jackknifing typisk en større standardafvigelse end bootstrap.
+
+
+
+
