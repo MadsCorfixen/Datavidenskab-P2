@@ -5,7 +5,7 @@ library(mosaic)
 
 FIXME Sæt kilde ordentligt ind
 
-Det følgende afsnit er baseret på [https://towardsdatascience.com/an-introduction-to-the-bootstrap-method-58bcb51b4d60].
+Det følgende afsnit er baseret på [@TDSBootstrap].
 
 Bootstrap er en resampling metode, til at genererer yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistik inferens for populationens parametre. 
 
