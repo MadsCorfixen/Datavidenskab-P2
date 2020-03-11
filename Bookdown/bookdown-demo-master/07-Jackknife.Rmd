@@ -36,14 +36,5 @@ Derudover gør metoden det nemmere at lave statistisk inferens uden at have teor
 [@Jackknife2, side 2]
 <!-- FIXME: Forklaring(?): Din estimator, standardfejlen, for den er for nogle nem at beregne, men for andre er der ikke nødvendigvis ikke en formel. -->
 
-```{r}
-library(bootstrap)
-```
 
-```{r}
-set.seed(1)
-x <- rnorm(100)
-jack<-jackknife(x, mean(x))
-jack
-```
 
