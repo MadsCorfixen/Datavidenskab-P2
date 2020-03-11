@@ -1,20 +1,31 @@
-# Pseduo Random Number Generator
+# Pseudorandom Number Generator
 
-En computer fungerer i hovedtræk ved at den modtager et input, der så bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at genererer FIXME(på engelsk kaldes det truly random numbers, dækker ægte? eller rigtig? eller bare tilfældig?)ægte tilfældige tal, fordi gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere. Årsagen til dette er, at en computer fungerer på baggrund af matematik og er derfor deterministisk. Det er dog muligt ved hjælp af en beregningsmodel, at skabe en abstraktion af ægte tilfældighed. Denne model kaldes _Pseudo Random Number Generator_ (PRNG).
-En PRNGs funktionalitet beskrives ved forskellige karakteristika. Et karateristika er input, dette input kaldes for et FIXME _seed/frø_. På baggrund af det FIXME _seed/frø_ der gives, beregner algoritmen i PRNG, et output, som er et pseudo tilfældigt tal. Dette pseudo tilfældige tal anvendes herefter som et nyt FIXME _seed/frø_ i PRNGen, derved kører den rekursivt og genererer den en sekvens af pseudo tilfældige tal. Et andet karakteristika er FIXME _period/periode_, som beskriver hvor mange repetitioner PRNGen kan kører før den begynder at gentage sig selv. Et tredje karakteristika er FIXME _distribution/fordeling_, som beskriver fordelingen af de talværdier der genereres. FIXME (indsæt billede). Som det ses på figuren kan fordeligen være jævn, hvilket betyder at der er en god fordeling af de generet pseudo tilfældige tal. Er der derimod en partiskhed, som enten kan være høje værdier, lave værdier eller hvis der forekommer andre former for mønstre, vil anvendeligheden af PRNG mindske eller være helt uanvendelig. Jo tidligere et mønster opstår, samt tydeligheden af det, vil betyde at det for udefrakommende er let gennemskueligt, og derfor vil der være risiko for at algoritmen brydes.
+En computer fungerer ved, at den modtager et input, der bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at generere faktisk tilfældige tal. Grunden til dette er, hvis der gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere, fordi en computer fungerer på baggrund af matematik og derfor er deterministisk. Det er dog muligt ved hjælp af en beregningsmodel at skabe en illusion af ægte tilfældighed. Denne model kaldes _Pseudorandom Number Generator_ (PRNG).
+
+En PRNGs funktionalitet beskrives ved nedenstående karakteristika. 
+
+1. Et input, kaldet seed, på baggrund af hvilket algoritmen beregner et pseudo-tilfældigt output. Herefter fortsætter algortimen rekursivt, hvor det forrige output anvendes som nyt input. 
+
+2. Perioden, som beskriver hvor mange repetitioner algortimen gennemløber, før outputtet begynder at gentage sig selv. Jo kortere perioden er, des mere gennemskuelig vil algoritmen fremstå.
+
+FIXME Indsæt billede nedenunder
+3. Fordeling af de tal værdier der generes. Som det ses på figuren, kan fordelingen af de genererede tal være jævn, hvilket viser en ligelig fordeling af tallene. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og alvendeligheden formindskes.  
+
 FIXME[https://www.youtube.com/watch?v=4sYawx70iP4, 0-4:05]
 
-Der findes et utal af forskellige PRNG, men John von Neumann udviklede en af de tidligste til computer. Algoritmen, _middle square method_, er i dag aldeles kendt, men primært som et historisk symbol begyndelsen af moderne PRNG. Svaghederne ved metoden er, at dens _periode_ oftest er ret kort og ved nok gentagelser begynder den at gentage den samme sekvens eller ryge ind i et uendeligt loop. I takt med udviklingen af de teknologiske hjælpe midler kom der ligeledes flere og stærkere PRNG til. En af de mere kendte og hyppigt anvendte er _linear congruential generator_, som gennemgåes i det følgnede afsnit. FIXME[https://books.google.co.th/books?id=ibpfxsxuCUAC&pg=PA12&dq=middel+square+method&hl=da&sa=X&ved=0ahUKEwjZ9Mn3i4voAhX-zDgGHd9RBlcQ6AEINjAB#v=onepage&q&f=false, s. 12-13]  
+En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af John von Neumann. Svagheden ved denne metode er, at dens periode oftest er ret kort og derfor hurtigt begynder at gentage den samme talsekvens. I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algortimer til PRNG. En af de mere kendte og hyppigt anvendte er Lineær Kongruens Generator, som gennemgåes i det følgnede afsnit.
+
+FIXME[https://books.google.co.th/books?id=ibpfxsxuCUAC&pg=PA12&dq=middel+square+method&hl=da&sa=X&ved=0ahUKEwjZ9Mn3i4voAhX-zDgGHd9RBlcQ6AEINjAB#v=onepage&q&f=false, s. 12-13]  
 
 
 ## Lineær Kongruens Generator
 
 Det følgende afsnit er primært baseret på kilden. [@LCGinfo]
-Lineær Kongruens Generator, på engelsk Linear Congruential Generator eller LCG, er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
+Lineær Kongruens Generator, på engelsk _Linear Congruential Generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
-> $X_{n+1} = (a \cdot X_n + c) \mod m$. 
-> Hvor $X_n$ er en liste af tal fra $X_0$ til $X_n$, $m$ er modulus, $a$ er en faktor, $c$ er tilvæksten, og $X_0$ er startpunktet.
+> Lineær Kongruens Generator danner en talsekvens, $X = [X_0, X_1, \ldots, X_n]$, hvor $X_{i} = (a \cdot X_{i-1} + c) \mod m$.\
+> Her er $a, c, m  \in \mathbb{Z}$, og $0 < m$, $0 < a < m$ og $0 \leq c < m$.
 >```
 
 Algoritmen fungerer således:

@@ -5,7 +5,7 @@
 <!-- Jackknifing er den første metode for resampling. -->
 <!-- FIXME Forklar hvad resampling er, samt skal afsnittet rettes med ny viden. -->
 
-Nogle gane opstår der situationer hvor det er svært at beregne gode estimatorer eller finde de estimatoreres standardafvigelse. I disse situationer kan jackknifing benyttes, da den kan udlede estimater og en standardafvigelse. 
+Nogle gange opstår der situationer hvor det er svært at beregne gode estimatorer eller finde de estimatoreres standardafvigelse. I disse situationer kan jackknifing benyttes, da den kan udlede estimater og en standardafvigelse. 
 Ressampling er i denne sammenhæng, når der lave nye datasæt udfra en stikprøve, og derefter estimerer på disse datasæt for at finde nogle værdi, såsom variansen.
 [@Jackknife2, side 2]
 

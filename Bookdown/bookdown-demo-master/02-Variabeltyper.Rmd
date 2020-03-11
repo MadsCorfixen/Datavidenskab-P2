@@ -2,19 +2,18 @@
 
 ## Stokastike variabler
 
-FIXME (kan muligvis bare slettes __Definition af en stokastiske variabler__ )
-En stokatisk variabel er en funktion, som repræsenterer talværdier for et udfaldsrum, ved udførsel af et eksperiment.  Ved at definere en stokastisk variabel, gøres det nemmere at arbejde med hændelser og deres sandsynligheder. Derudover er stokastiske variable særligt anvendelige i de tilfælde hvor et FIXME udfald(srum) ikke er defineret ved en talværdi, eksempelvis plat eller krone. Dette giver mulighed for at definere en stotastisk variabel 
-En stokastisk variable noteres med store bogstaver som $X, Y \text{og}~ Z$. 
-[@Stokvar]
 
-FIXME En stokastisk variabel kan defineres som en afbildning $X$ fra et $\Omega$-rum til et udfaldsrum $E$. Der er altså et underliggende $\omega$, der er skyld i observationen $X(\omega)$. ( Taget fra wiki, https://da.wikipedia.org/wiki/Stokastisk_variabel)
+En stokatisk variabel, $X$, er en funktion, som afbilleder over i mulige udfald af et eksperiment. Ved at definere en stokastisk variabel, gøres det nemmere at arbejde med hændelser og deres sandsynligheder. Derudover er stokastiske variabler særligt anvendelige i de tilfælde hvor et udfald ikke er defineret ved en talværdi, eksempelvis plat eller krone. [@Stokvar]
 
+FIXME Ide: Dette i en definitionsboks. 
+En stokastisk variabel kan defineres som en afbildning $X$ fra et $\Omega$-rum til et udfaldsrum $E$. Der er altså et underliggende $\omega$, der er skyld i observationen $X(\omega)$.
+( Taget fra wiki, https://da.wikipedia.org/wiki/Stokastisk_variabel)
 
-Eksempel, sten, saks, papir:
-Et eksperiment med sten, saks, papir, er der tre mulige udfald, sten, saks eller papir. Disse udfald er ikke givet på nogen talværdi. Derfor defineres en stokastisk variabel, $X$, hvor sten tilknyttes til 0, saks til 1 og papir til 2. Der med er den stokastiske variabel, $X$, givet ved: 
-\centerline{$X(\text{sten}) = 0$, $X(\text{saks}) = 1$ og  $X(\text{papir}) = 2$}
+Eksempel:\
+Et eksperiment med sten, saks og papir, er der tre mulige udfald. Disse udfald er ikke givet på nogen talværdi. Derfor defineres en stokastisk variabel, $X$, hvor sten tilknyttes til 0, saks til 1 og papir til 2. Dermed er den stokastiske variabel, $X$, givet ved:  
+$X(\text{sten}) = 0$, $X(\text{saks}) = 1$ og  $X(\text{papir}) = 2$
 
-FIXME (Jeg er lidt i tvivl om hvorvidt, der i dette afsnit også skal uddybes omkring diskret og kontinuerte stokastiske variable)Stokastiske variable kan beskrives som _diskret_ eller _kontinuert_, hvilket har indflydelse på hvorledes der tilskrives sandsynligheder til deres værider. Hvorvidt en stokatisk variabel er _diskret_ eller _kontinuert_, afhænger af de mulige udfald som er til variablen. Der skelnes om de mulige udfald er tællelige eller utællelige, dette uddybes i et senere afsnit. [@Stokvar] 
+Stokastiske variabler kan beskrives som _diskrette_ eller _kontinuerte_, hvilket afhænger af de mulige udfald. Der skelnes om disse udfald er tællelige eller utællelige, hvilket uddybes i et senere afsnit. [@Stokvar] 
 
 ## Kvalitative variabler
 
