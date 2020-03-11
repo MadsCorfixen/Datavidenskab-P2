@@ -5,34 +5,29 @@
 <!-- Jackknifing er den første metode for resampling. -->
 <!-- FIXME Forklar hvad resampling er, samt skal afsnittet rettes med ny viden. -->
 
-Nogle gange opstår der situationer hvor det er svært at beregne gode estimatorer eller finde de estimatoreres standardafvigelse. I disse situationer kan jackknifing benyttes, da den kan udlede estimater og en standardafvigelse. 
+Nogle gange opstår der situationer hvor det er svært at udlede estimatorer eller finde de estimatoreres standardafvigelse. I disse situationer kan jackknifing benyttes, da algoritmen kan beregne estimater og standardafvigelser. 
 Ressampling er i denne sammenhæng, når der lave nye datasæt udfra en stikprøve, og derefter estimerer på disse datasæt for at finde nogle værdi, såsom variansen.
 [@Jackknife2, side 2]
 
 FIXME Ret følgende afsnit
-Jackknife metoden baserer sig på at fjerne en observation af gangen fra stikprøven, derefter beregne estimatoren, og sætter observation tilbage igen. Estimatoren er beregnet så der er _n_ estimater for en stikprøve på _n_. Algoritmen jackknifing følger er denne: $X_{[i]}={X1, X2, . . . , X_{i−1}, X_{i+1}, . . . , X_{n−1}, X_{n}}$
-Som eksempel kan der være 5 datapunkter $(X_1,X_2,X_3,X_4,X_5)$, som vi vil udføre jackknife på. 
+Jackknife metoden baserer sig på at fjerne en observation af gangen fra stikprøven, derefter udlede estimatoren, og sætte observationen tilbage igen. For en stikprøve på størrelse _n_, beregner algoritmen _n_ estimater. Jackknifing følger denne algoritme: $X_{[i]}=[{x1, x2, . . . , x_{i−1}, x_{i+1}, . . . , x_{n−1}, x_{n}]}$
+Som eksempel kan der være 5 datapunkter $X=[X_1,X_2,X_3,X_4,X_5]$, hvor $n=5$, som der vil udføres jackknife på.
 
-første beregning: $(X_2,X_3,X_4,X_5)$\
-anden beregning: $(X_1,X_3,X_4,X_5)$\
-tredje beregning: $(X_1,X_2,X_4,X_5)$\
-fjerde beregning: $(X_1,X_2,X_3,X_5)$\
-femte beregning: $(X_1,X_2,X_3,X_4)$
+Første stikprøveudtagning: $X_{[1]}=[X_2,X_3,X_4,X_5]$, hvor $\Theta(X_{[1]})=\hat\theta_1$
+
+Den samme beregning hvor $\Theta(X_{[i]})$ er estimatoren og $\hat\theta_{i}$ er estimatet udføres de resterende fire gange, hvilket giver fem estimater $\hat{\theta} = [\hat\theta_1,\hat\theta_2,\hat\theta_3,\hat\theta_4,\hat\theta_5]$.
 [@Jackknife2, side 3]
 
-
-Så har man _n_ estimater, $\hat{\theta} = [\hat\theta_1,\hat\theta_2,...,\hat\theta_n]$.
-
 Med disse estimater kan standardfejlen på stikprøven beregnes, hvor $\bar{\hat{\theta}}$ er middelværdien af estimaterne:
-$\hat{se_{jack}}=\sqrt{\frac{n-1}{n}\cdot\sum_{i=1}^n{(\hat{\theta_i}-\bar{\hat{\theta}})^2}}$
+$\hat{se}_{jack}=\sqrt{\frac{n-1}{n}\cdot\sum_{i=1}^n{(\hat{\theta_i}-\bar{\hat{\theta}})^2}}$
 [@Jackknife2, side 3]
 
 <!-- Afsnittet under skal måske forklares lidt mere klart. Se evt. https://www.youtube.com/watch?v=p9XPclE7NtA&fbclid=IwAR06QNE4E7qWUIvtUcJbxYJz6Kbd3lZIptWX-E0CCZCe6goARC0KMgNhUBE. -->
 
-Jackknife metoden er god at bruge, da den kan kompensere for at en estimator ikke er forventningsret.
-For jackknife metoden er standardfejlen den samme ved en given stikprøve, som ikke er tilfældet for bootstrap. Dog er standardfejlen typisk større end ved bootstrap metoden, og derfor er jackknife metoden mindre præcis. 
+Jackknife-metoden er god at bruge, da den kan kompensere for at en estimator ikke er forventningsret.
+For jackknife-metoden er standardfejlen den samme for en given stikprøve, hvilket ikke er tilfældet for bootstrapping, da denne algoritme laver tilfældig stikprøveudtagning. Dog er standardfejlen typisk større end ved bootstrap-metoden, og derfor er jackknife-metoden mindre præcis. 
 
-Derudover gør metoden det nemmere at lave statistisk inferens uden at have teoretisk viden omkring estimatorens standardafvigelse. Nogle gange er der ikke en formel til at beregne standardfejlen på til et givent datasæt, derfor er jackknifing en brugbar metode, da den kan frembringe standardfejlen for datasættet alligevel.
+Derudover gør metoden det nemmere at lave statistisk inferens uden at have teoretisk viden omkring estimatorens standardafvigelse. Nogle gange er der ikke en formel til at beregne standardfejlen til en given estimator, derfor er jackknifing en brugbar metode, da den kan frembringe standardfejlen for estimatoren alligevel.
 [@Jackknife2, side 2]
 <!-- FIXME: Forklaring(?): Din estimator, standardfejlen, for den er for nogle nem at beregne, men for andre er der ikke nødvendigvis ikke en formel. -->
 
