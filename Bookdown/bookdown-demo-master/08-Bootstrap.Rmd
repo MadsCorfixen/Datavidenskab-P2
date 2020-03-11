@@ -3,8 +3,6 @@ library(mosaic)
 ```
 ## Bootstrap
 
-FIXME Sæt kilde ordentligt ind
-
 Det følgende afsnit er baseret på [@TDSBootstrap].
 
 Bootstrap er en resampling metode, til at genererer yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistik inferens for populationens parametre. 
