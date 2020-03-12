@@ -6,28 +6,9 @@ Inden en dataanalyse påbegyndes er det vigtigt at undersøge, hvilke typer af v
 knitr::include_graphics('images/variabeltyper.jpg')
 ```
 
-## Stokastike variabler
-
-En stokatisk variabel, $X$, er en funktion, som afbilleder fra mulige udfald af et eksperiment til et tal. Ved at definere en stokastisk variabel, gøres det nemmere at arbejde med hændelser og deres sandsynligheder. Derudover er stokastiske variabler særligt anvendelige i de tilfælde hvor et udfald ikke er defineret ved en talværdi, eksempelvis plat eller krone. [@Stokvar]
-
->```{definition}
-> En stokastisk variabel er en funktion, $X$, som til ethvert udfald af et eksperiment, $\omega \in \Omega$, $X(\omega) \in E$. $E$ kaldes for udfaldsrummet.
->```
-
-<!-- FIXME Find en kilde der ikke er wiki, evt. lærebogen.  -->
-<!-- En stokastisk variabel kan defineres som en afbildning $X$ fra et $\Omega$-rum til et udfaldsrum $E$. Der er altså et underliggende $\omega$, der er skyld i observationen $X(\omega)$.  -->
-<!-- ( Taget fra wiki, https://da.wikipedia.org/wiki/Stokastisk_variabel) -->
-
-Eksempel:
-
-Et eksperiment med sten, saks og papir, er der tre mulige udfald. Disse udfald er ikke givet på nogen talværdi. Derfor defineres en stokastisk variabel, $X$, hvor sten tilknyttes til 0, saks til 1 og papir til 2. Dermed er den stokastiske variabel, $X$, givet ved:  
-$X : \{Sten, saks, papir\} \rightarrow \{0, 1, 2\}$
-
-Stokastiske variabler kan beskrives som _diskrette_ eller _kontinuerte_, hvilket afhænger af de mulige udfald. Der skelnes om disse udfald er tællelige eller utællelige, hvilket uddybes i et senere afsnit. [@Stokvar] 
-
 ## Kvalitative variabler
 
-De stokastiske variabler kan opdeles i kategoriske eller kvalitative variabler. Ved en kvalitativ variabel fremgår der en enhed, som er den enhed der kategoriseres efter. Udfaldsmængden er de mulige værdier, som kan forekomme ved en undersøgelse af enheden. Dette kunne eksempelvis være nationalitet, hvor der kategoriseres efter land, hvor udfaldsmængen er landene i verden.
+Variabler kan opdeles i kategoriske eller kvalitative variabler. Ved en kvalitativ variabel fremgår der en enhed, som er den enhed der kategoriseres efter. Udfaldsmængden er de mulige værdier, som kan forekomme ved en undersøgelse af enheden. Dette kunne eksempelvis være nationalitet, hvor der kategoriseres efter land, hvor udfaldsmængen er landene i verden.
 
 De kvalitative variabler er opdelt efter en nominel og ordinel skala.
 
@@ -60,8 +41,27 @@ Nominale og ordinale variabler er diskrete variabler. Det kan dog være forvirre
 
 Hvis en variabels værdier tilhører en overtællelig mængde, siges den at være kontinuert. Et eksempel på en kontinuert variabel, kan være højden på et tilfældigt menneske i en population. Her kan højden have et antal decimaler, der går mod uendeligt, for eksempel $195,00000003$ cm.
 
-For kontinuerte variabler bruger man tæthedsfunktionen, f(x). Her er arealet, hvilket svarer til 1, altså 100 procent, under tæthedsfunktionen sandsynligheden for, at en stokastisk variabel, X, befinder sig i intervallet [a, b], givet ved
+For kontinuerte variabler bruger man tæthedsfunktionen, f(x). Her er arealet, hvilket svarer til 1, altså 100 procent, under tæthedsfunktionen sandsynligheden for, at en variabel, X, befinder sig i intervallet [a, b], givet ved
 
 $P(a \leq X \leq b) = \int_a^b f(x) dx$
 
-Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den fremgår i mange målinger i virkeligheden, og dels fordi, den centrale grænseværdisætning siger, at ved et højere antal observationer, vil alle stokastiske variablers gennemsnitsfordeling antage en normalfordeling.
+Den typiske kontinuerte fordeling er en normalfordeling. Dels fordi den fremgår i mange målinger i virkeligheden, og dels fordi, den centrale grænseværdisætning siger, at ved et højere antal observationer, vil alle variablers gennemsnitsfordeling antage en normalfordeling.
+
+## Stokastike variabler
+
+En stokatisk variabel, $X$, er en funktion, som afbilleder fra mulige udfald af et eksperiment til et tal. Ved at definere en stokastisk variabel, gøres det nemmere at arbejde med hændelser og deres sandsynligheder. Derudover er stokastiske variabler særligt anvendelige i de tilfælde hvor et udfald ikke er defineret ved en talværdi, eksempelvis plat eller krone. [@Stokvar]
+
+>```{definition}
+> En stokastisk variabel er en funktion, $X$, som til ethvert udfald af et eksperiment, $\omega \in \Omega$, $X(\omega) \in E$. $E$ kaldes for udfaldsrummet.
+>```
+
+<!-- FIXME Find en kilde der ikke er wiki, evt. lærebogen.  -->
+<!-- En stokastisk variabel kan defineres som en afbildning $X$ fra et $\Omega$-rum til et udfaldsrum $E$. Der er altså et underliggende $\omega$, der er skyld i observationen $X(\omega)$.  -->
+<!-- ( Taget fra wiki, https://da.wikipedia.org/wiki/Stokastisk_variabel) -->
+
+Eksempel:
+
+Et eksperiment med sten, saks og papir, er der tre mulige udfald. Disse udfald er ikke givet på nogen talværdi. Derfor defineres en stokastisk variabel, $X$, hvor sten tilknyttes til 0, saks til 1 og papir til 2. Dermed er den stokastiske variabel, $X$, givet ved:  
+$X : \{Sten, saks, papir\} \rightarrow \{0, 1, 2\}$
+
+Stokastiske variabler kan beskrives som _diskrette_ eller _kontinuerte_, hvilket afhænger af de mulige udfald.
