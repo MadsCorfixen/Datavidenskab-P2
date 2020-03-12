@@ -18,13 +18,13 @@ En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af
 FIXME[https://books.google.co.th/books?id=ibpfxsxuCUAC&pg=PA12&dq=middel+square+method&hl=da&sa=X&ved=0ahUKEwjZ9Mn3i4voAhX-zDgGHd9RBlcQ6AEINjAB#v=onepage&q&f=false, s. 12-13]  
 
 
-## Lineær Kongruens Generator
+## Lineær kongruens generator
 
-Det følgende afsnit er primært baseret på kilden. [@LCGinfo]
-Lineær Kongruens Generator, på engelsk _Linear Congruential Generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
+Det følgende afsnit er primært baseret på [@LCGinfo].
+Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
-> Lineær Kongruens Generator danner en talsekvens, $X = [X_0, X_1, \ldots, X_n]$, hvor $X_{i} = (a \cdot X_{i-1} + c) \mod m$.\
+> Lineær kongruens generator danner en talsekvens, $X = [X_0, X_1, \ldots, X_n]$, hvor $X_{i} = (a \cdot X_{i-1} + c) \mod m$.\
 > Her er $a, c, m  \in \mathbb{Z}$, og $0 < m$, $0 < a < m$ og $0 \leq c < m$.
 >```
 
@@ -45,12 +45,12 @@ Først defineres en funktion for LCG algoritmen, som tager de nødvendige argume
 
 ```{r}
 lcg <- function(m, a, c, seed, n) {
+  #M er modulus, a er faktoren, c er tilvæksten, seed er startværdien og n er antal rekursioner.
   
-  r <- numeric(n) #Sørger for at n er numerisk
-  r[1] <- seed #Angiver startpunktet
+  r <- numeric(n) #Definerer en ny variabel r, som er den numeriske værdi af n.
+  r[1] <- seed #Angiver startpunktet. 
   
-  for (i in 1: (n-1))
-{
+  for (i in 1: (n-1)) {
   r[i + 1] <- (a * r[i] + c) %% m
   
 }
@@ -61,14 +61,16 @@ lcg <- function(m, a, c, seed, n) {
 Det følgende er et eksempel på en LCG sekvens med en periode på 16. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
 
 ```{r}
-lcg1 <- lcg(64, 33, 12, 57, 100)
+lcg1 <- lcg(64, 33, 12, 57, 17)
 lcg1
 ```
 
-Plottes denne sekvens i et 2d punktplot, vil man se at værdierne ikke er tilfældige. Selv hvis man ændrer antallet af gange LCG køres igennem, vil det tydelige mønster ikke ændre sig.
+Plottes denne sekvens, vil man se at værdierne ikke er tilfældige, da det er tydeligt se perioderne. Selv hvis man ændrer antallet af gange LCG køres igennem, vil det tydelige mønster ikke ændre sig.
 
 ```{r}
-plot(lcg1, main = "Eksempel på en ikke tilfældig LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier" )
+lcg1_plot <- lcg(64, 33, 12, 57, 100)
+plot(lcg1_plot, main = "Eksempel på en ikke tilfældig LCG sekvens", 
+     xlab = "Indeks", ylab = "Sekvens værdier", type = "l")
 ```
 
 Nedenfor vises et eksempel på hvordan man kan bruge LCG algortimen til at lave en uniform fordeling i intervallet [0, 1].
@@ -76,22 +78,25 @@ Nedenfor vises et eksempel på hvordan man kan bruge LCG algortimen til at lave 
 ```{r}
 lcg2 <- lcg(86436, 1093, 0, 12, 1000)
 
-hist((lcg2 + 0.05)/ 86436, main = "LCG Uniformfordeling", xlab = "Sekvens værdier", ylab = "Frekvens")
+hist((lcg2 + 0.05)/ 86436, main = "LCG Uniform fordeling", 
+     xlab = "Sekvens værdier", ylab = "Frekvens")
 ```
 
 Her kan det også nævnes, at hvis man plotter de værdier algoritmen returnerer i et 2d punktplot, vil man se en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
 
 ```{r}
-plot(lcg2, main = "2d plot af LCG sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
+plot(lcg2, main = "2d plot af LCG sekvens", xlab = "Indeks", 
+     ylab = "Sekvens værdier")
 ```
 
 
-Afslutningsvist vil der vises et eksempel, hvor der returneres en sekvens, der plottet i et 2d punktplot, ser tilfældig ud.
+Afslutningsvist vil der vises et eksempel, hvor der returneres en sekvens der ser tilfældig ud.
 
 ```{r}
-lcg3 <- lcg(86436, 1093, 18257, 12, 1000)
+lcg3 <- lcg(86436, 1093, 18257, 12, 100)
 
-plot(lcg3, main = "'Tilfældig' LCG Sekvens", xlab = "Indeks", ylab = "Sekvens værdier")
+plot(lcg3, main = "'Tilfældig' LCG Sekvens", xlab = "Indeks", 
+     ylab = "Sekvens værdier", type = "l")
 ```
 
 ## Box-Muller-transformation
@@ -130,7 +135,7 @@ Z2 <- sqrt(-2*log(U1))*sin(2*pi*U2)
 
 Det kan nu undersøges deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har.
 
-Først oprettes et boksplot af de to populationer.
+Først oprettes et boksplot af de to populationer, der kan understøtte normalfordeling.
 
 ```{r}
 boxplot(Z1, Z2, main = "Boksplot af Z1 og Z2")
@@ -182,18 +187,35 @@ Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være norm
 Hernest kigges der på histogrammerne for ```Z1``` og ```Z2```.
 
 ```{r}
+
 par(mfrow = c(1,2))
-hist(Z1, main = "Histogram for Z1", ylab = "Frekvens")
-hist(Z2, main = "Histogram for Z2", ylab = "Frekvens")
+hist(Z1, main = "Histogram for Z1", ylab = "Frekvens", prob = TRUE)
+lines(density(Z1), col = "blue")
+
+hist(Z2, main = "Histogram for Z2", ylab = "Frekvens", prob = TRUE)
+lines(density(Z2), col = "blue")
+
 ```
 
-Det ses tydeligt på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at de har en middelværdi på $\approx 0$ og en standardafvigelse på $\approx 1$, og derved er  ```Z1``` og ```Z2``` standard normalfordelte.
+Det ses på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at de har en middelværdi på $\approx 0$ og en standardafvigelse på $\approx 1$, og derved er  ```Z1``` og ```Z2``` standard normalfordelte.
 
 Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges ved hjælp af nedenstående graf.
 
 ```{r}
-plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2", col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25), pch = 1, cex = 0.5)
+plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2", 
+     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25), 
+     pch = 1, cex = 0.5)
 
 ```
 
+FIXME Cor viser at den er tæt på 0: Ingen sammenhæng ELLER ingen lineær sammenhæng? + Forklar hvad korrelation er 
+
+```{r}
+cor(Z1, Z2)
+```
+
+FIXME Se Mikkels note til "relation"
+
 Det ses tydeligt, at der ikke er nogen relation mellem ```Z1``` og ```Z2```, hvilket giver en god indikation for, at de er uafhængige.
+
+

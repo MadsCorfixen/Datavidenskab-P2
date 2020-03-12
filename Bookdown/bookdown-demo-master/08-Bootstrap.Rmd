@@ -18,7 +18,10 @@ Her er et datasæt over gennemsnitlig månedlig udgift i kroner til fastfood per
 
 ```{r}
 fastfood <- c(200, 0, 100, 50, 500, 100, 0, 250, 100, 150)
-hist(fastfood, breaks = 18, main="Hustandes månedlige udgifter til fastfood" ,ylab="Frekvens", xlab="Udgift i kroner")
+hist(fastfood, breaks = 18, 
+     main="Hustandes månedlige udgifter til fastfood" ,
+     ylab="Frekvens", 
+     xlab="Udgift i kroner")
 ```
 
 Nu kan stikprøvens gennemsnitlige udgift og standardafvigelsen findes:
@@ -62,7 +65,8 @@ confidence_interval <- function(fastfood_boot, interval) {
   # Estimeret standard fejl fra t-fordeling
   standard_error <- qt((interval+1)/2, df = n - 1) * fastfood_boot_sd / sqrt(n)
   # Konfidensintervallet som vektor
-  result <- c("lower" = fastfood_boot_mean - standard_error, "upper" = fastfood_boot_mean + standard_error)
+  result <- c("lower" = fastfood_boot_mean - standard_error, 
+              "upper" = fastfood_boot_mean + standard_error)
   return(result)
 }
 confidence_interval(fastfood_boot, 0.95)
