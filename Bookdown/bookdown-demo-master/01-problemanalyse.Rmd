@@ -31,12 +31,19 @@ FIXME
 
 _Hvorvidt kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyser?_
 
-1. Hvilke faldgruber skal man være opmærksom på?
+1. Hvordan simulerer man data?
 
-2. Hvordan simulerer man data?
+2. Hvilke faldgruber skal man være opmærksom på?
 
-a. Hvordan sikrer man en høj kvalitet af simuleret data?
+3. Hvordan kan teoretiske resultater eftervises ved hjælp af simulering?
 
-3. Hvad kan man inferere ud fra simuleret data?
+4. Er parametrisk eller ikke-parametrisk bootstrap bedst egnet til at estimere standardfejl i lineær regression?
 
-4. Hvilke alternativer finder der til statistisk inferens? (Bootstrapping og Jackknifing)
+
+
+
+
+
+
+
+
