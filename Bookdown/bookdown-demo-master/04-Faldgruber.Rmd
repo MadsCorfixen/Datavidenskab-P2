@@ -6,7 +6,7 @@ Der er flere forskellige forhold at tage hensyn til, inden en dataanalyse påbeg
 
 I dette afsnit gennemgåes, hvilken indflydelse variabeltyper har på en dataanalyse, samt andre faktorer, der skal tages hensyn til, før en korrekt dataanalyse kan udføres. Dette gøres for at give et overblik over, hvilke umiddelbare risici der er for både almindelige tastefejl, og fejlagtige matematiske operationer.
 
-Som nævnt i FIXME __AFSNITTET__, findes der forskellige typer af variabler. Dette er en vigtig faktor at tage hensyn til, da det har indflydelse på, hvilke matematiske operationer, der kan udføres på variablen og hvilken type diagram den kan illustreres i. En kort opsummering af, hvilke operationer, der kan udføres på hvilke variable, ses på tabellen nedenfor.
+Som nævnt i afsnit \@ref(variabeltyper), findes der forskellige typer af variabler. Dette er en vigtig faktor at tage hensyn til, da det har indflydelse på, hvilke matematiske operationer, der kan udføres på variablen og hvilken type diagram den kan illustreres i. En kort opsummering af, hvilke operationer, der kan udføres på hvilke variable, ses på tabellen nedenfor.
 
 Table: En oversigt over de forskellige variabler, og hvilke typer af matematiske operationer, der kan udføres på dem.
 
@@ -24,7 +24,7 @@ Table: En oversigt over de forskellige symboler, som angiver henholdsvis en para
 
 | Population (Parametre) | Stikprøve (Estimater) | Estimatorer |
 |:-----------:|:---------:|:---------:|
-|        $\mu$   |   $\hat{y}$   |   $\hat{Y}$  |
+|        $\mu$   |   $\hat{x}$   |   $\hat{X}$  |
 |   $\sigma$     |     $s$     |     $S$     |
 |  $\sigma^2$    |    $s^2$    |    $S^2$    |
 |      $\pi$     |   $\hat{\pi}$  |   $\hat{\Pi}$  |
@@ -43,7 +43,7 @@ Der findes overordnet set fire forskellige måder at måle, hvorvidt en estimato
 >```{definition}
 >__Estimatorers egenskaber__ [@ASTAkursus3]
 >
-> _Forventningsret_: Den forventede værdi for en forventningsret estimator er lig parameteren $E(\hat{Y}) = \mu$.
+> _Forventningsret_: Den forventede værdi for en forventningsret estimator er lig parameteren $E(\hat{X}) = \mu$.
 >
 > _Efficient_: En efficient estimator er den estimator med lavest varians.
 >
@@ -51,8 +51,6 @@ Der findes overordnet set fire forskellige måder at måle, hvorvidt en estimato
 >
 > _Sufficient_: For en sufficient estimator gælder det, at når estimatet er beregnet, skal stikprøven ikke indeholde yderligere informationer om parameteret.
 > ```
-
-FIXME : Nogen gange foretrækkes efficient fremfor forventningsret.
 
 Hver af disse egenskaber har indvirkning på, hvor brugbare resultater, en dataanalyse vil bibringe. En estimator, der ikke er forventningsret, vil ikke give et korrekt bud på populationens middelværdi. Ligeledes vil en estimator, der ikke er efficient, have en større varians end mindst en anden estimator, hvilket leder til mindre brugbare resultater. Det er derfor vigtigt, at en estimator undersøges grundigt, og dens egenskaber bestemmes, inden den tages i brug.
 
