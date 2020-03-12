@@ -8,15 +8,15 @@ En PRNGs funktionalitet beskrives ved nedenstående karakteristika.
 
 2. Perioden, som beskriver hvor mange repetitioner algortimen gennemløber, før outputtet begynder at gentage sig selv. Jo kortere perioden er, des mere gennemskuelig vil algoritmen fremstå.
 
-FIXME Indsæt billede nedenunder
-3. Fordeling af de tal værdier der generes. Som det ses på figuren, kan fordelingen af de genererede tal være jævn, hvilket viser en ligelig fordeling af tallene. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og alvendeligheden formindskes.  
+3. Fordeling af de tal værdier der generes. Som det ses på figuren nedenunder, kan fordelingen af de genererede tal være jævn, hvilket viser en ligelig fordeling af tallene. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og alvendeligheden formindskes.  
 
-FIXME[https://www.youtube.com/watch?v=4sYawx70iP4, 0-4:05]
+```{r, out.width='75%', fig.align='center', fig.cap="PRNG fordelinger", echo = FALSE}
+ knitr::include_graphics("images/prngfordeling.PNG")
+```
 
-En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af John von Neumann. Svagheden ved denne metode er, at dens periode oftest er ret kort og derfor hurtigt begynder at gentage den samme talsekvens. I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algortimer til PRNG. En af de mere kendte og hyppigt anvendte er Lineær Kongruens Generator, som gennemgåes i det følgnede afsnit.
+<!-- FIXME[https://www.youtube.com/watch?v=4sYawx70iP4, 0-4:05], fra videoen er billedet taget 3.09, men kan overvejes selv at lave en eftervisning af disse fordelinger -->
 
-FIXME[https://books.google.co.th/books?id=ibpfxsxuCUAC&pg=PA12&dq=middel+square+method&hl=da&sa=X&ved=0ahUKEwjZ9Mn3i4voAhX-zDgGHd9RBlcQ6AEINjAB#v=onepage&q&f=false, s. 12-13]  
-
+En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af John von Neumann. Svagheden ved denne metode er, at dens periode oftest er ret kort og derfor hurtigt begynder at gentage den samme talsekvens [@PRNGintro, s. 12-13]. I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algortimer til PRNG. En af de mere kendte og hyppigt anvendte er Lineær Kongruens Generator, som gennemgåes i det følgnede afsnit.
 
 ## Lineær kongruens generator
 
@@ -208,14 +208,18 @@ plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2",
 
 ```
 
-FIXME Cor viser at den er tæt på 0: Ingen sammenhæng ELLER ingen lineær sammenhæng? + Forklar hvad korrelation er 
+Udover at eftervise uafhængigheden af ```Z1``` og ```Z2``` grafisk, kan det også undersøges ved hjælp af funktionen ```cor``` i R, som giver en værdi for korrelationen af de to talsekvenser.
+Korrelationen af to variabler udregnes ved formlen 
+
+$$
+Corr(X, Y) = \frac{cov(X, Y)}{std(X) \cdot std(Y)}  
+$$
+Hvor $Cov$ angiver kovariansen og $std$ angiver standardafvigelsen.
+
+Korrelation fortæller hvor stor en lineær sammenhæng der er mellem to variabler. Denne værdi kan ligge i et interval fra [-1, 1], hvor $-1$ påviser en perfekt negativ lineær sammenhæng, $1$ påviser en perfekt positiv lineær sammenhæng, mens $0$ viser enten ingen samemnhæng eller blot ingen lineær sammenhæng. 
 
 ```{r}
 cor(Z1, Z2)
 ```
 
-FIXME Se Mikkels note til "relation"
-
-Det ses tydeligt, at der ikke er nogen relation mellem ```Z1``` og ```Z2```, hvilket giver en god indikation for, at de er uafhængige.
-
-
+Et resultat på afrundet $-0.00048$, hvilket næsten er 0, viser altså også at der ingen korrelation er mellem ```Z1``` og ```Z2```, hvilket giver en god indiktion for, at de er uafhængige.
