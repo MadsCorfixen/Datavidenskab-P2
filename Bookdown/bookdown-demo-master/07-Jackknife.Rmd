@@ -25,7 +25,7 @@ $\hat{se}_{jack}=\sqrt{\frac{n-1}{n}\cdot\sum_{i=1}^n{(\hat{\theta_i}-\bar{\hat{
 <!-- Afsnittet under skal måske forklares lidt mere klart. Se evt. https://www.youtube.com/watch?v=p9XPclE7NtA&fbclid=IwAR06QNE4E7qWUIvtUcJbxYJz6Kbd3lZIptWX-E0CCZCe6goARC0KMgNhUBE. -->
 
 Jackknife-metoden er god at bruge, da den kan kompensere for at en estimator ikke er forventningsret.
-For jackknife-metoden er standardfejlen den samme for en given stikprøve, hvilket ikke er tilfældet for bootstrapping, da denne algoritme laver tilfældig stikprøveudtagning. Dog er standardfejlen typisk større end ved bootstrap-metoden, og derfor er jackknife-metoden mindre præcis. 
+For jackknife-metoden er standardfejlen den samme for en given stikprøve, hvilket ikke er tilfældet for bootstrapping, da denne algoritme laver tilfældig stikprøveudtagning. 
 
 Derudover gør metoden det nemmere at lave statistisk inferens uden at have teoretisk viden omkring estimatorens standardafvigelse. Nogle gange er der ikke en formel til at beregne standardfejlen til en given estimator, derfor er jackknifing en brugbar metode, da den kan frembringe standardfejlen for estimatoren alligevel.
 [@Jackknife2, side 2]
