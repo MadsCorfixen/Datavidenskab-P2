@@ -1,20 +1,25 @@
 # Variabeltyper
 
+Inden en dataanalyse påbegyndes er det vigtigt at undersøge, hvilke typer af variabler, der indgår. Der findes forskellige slags, alt efter, hvilken værdi de har, og det har indflydelse på, hvilke typer af matematiske operationer, man kan udføre på dem. I dette afsnit gennemgåes de forskellige variabeltyper, som er vist på Figur \@ref(fig:figur-variabeltyper).
+
+```{r, figur-variabeltyper, out.width='75%', fig.align='center', fig.cap="Oversigt over forskellige variabeltyper", echo = FALSE}
+knitr::include_graphics('images/variabeltyper.jpg')
+```
+
 ## Stokastike variabler
 
 En stokatisk variabel, $X$, er en funktion, som afbilleder fra mulige udfald af et eksperiment til et tal. Ved at definere en stokastisk variabel, gøres det nemmere at arbejde med hændelser og deres sandsynligheder. Derudover er stokastiske variabler særligt anvendelige i de tilfælde hvor et udfald ikke er defineret ved en talværdi, eksempelvis plat eller krone. [@Stokvar]
 
-
-FIXME Mads tjek lige den her def står rigtigt haha
 >```{definition}
-> En stokastisk variabel er en funktion, $X$, som til et hvert udfald af et eksperiment, $\omega >\in \Omega$, $X(\omega) \in E$. $E$ kaldes for udfaldsrummet. 
+> En stokastisk variabel er en funktion, $X$, som til ethvert udfald af et eksperiment, $\omega \in \Omega$, $X(\omega) \in E$. $E$ kaldes for udfaldsrummet.
 >```
 
-FIXME Find en kilde der ikke er wiki, evt. lærebogen. 
-En stokastisk variabel kan defineres som en afbildning $X$ fra et $\Omega$-rum til et udfaldsrum $E$. Der er altså et underliggende $\omega$, der er skyld i observationen $X(\omega)$. 
-( Taget fra wiki, https://da.wikipedia.org/wiki/Stokastisk_variabel)
+<!-- FIXME Find en kilde der ikke er wiki, evt. lærebogen.  -->
+<!-- En stokastisk variabel kan defineres som en afbildning $X$ fra et $\Omega$-rum til et udfaldsrum $E$. Der er altså et underliggende $\omega$, der er skyld i observationen $X(\omega)$.  -->
+<!-- ( Taget fra wiki, https://da.wikipedia.org/wiki/Stokastisk_variabel) -->
 
-Eksempel:\
+Eksempel:
+
 Et eksperiment med sten, saks og papir, er der tre mulige udfald. Disse udfald er ikke givet på nogen talværdi. Derfor defineres en stokastisk variabel, $X$, hvor sten tilknyttes til 0, saks til 1 og papir til 2. Dermed er den stokastiske variabel, $X$, givet ved:  
 $X : \{Sten, saks, papir\} \rightarrow \{0, 1, 2\}$
 
@@ -38,7 +43,7 @@ Kvantitative variabler er defineret ved en numerisk  værdi, hvilket gør variab
 
 Et andet essentielt værktøj i dataanalyse er visualisering. På baggrund af middelværdi, varians og standardafvigelse, er det muligt at visualisere data med eksempelvis et histogram eller et boksplot.
 
-Kvantitative variabler kan opdeles i to underkategorier, interval og ratio. Derudover kan disse underkategorier inddeles yderligere i diskrete og kontinuerte variabler. __FIXME indsæt figur__ Disse beskrives i et efterfølgende afsnit.
+Kvantitative variabler kan opdeles i to underkategorier, interval og ratio. Derudover kan disse underkategorier inddeles yderligere i diskrete og kontinuerte variabler. Disse beskrives i et efterfølgende afsnit.
 
 Variabler, der tilhører intervalkategorien, er defineret som variabler, hvor det er muligt at bestemme forskellen mellem to mængder eller to tal. Det kunne eksempelvis være forskellen på temperaturen indenfor, $20 ~^\circ C$, og udenfor, $10 ~^\circ C$.
 
