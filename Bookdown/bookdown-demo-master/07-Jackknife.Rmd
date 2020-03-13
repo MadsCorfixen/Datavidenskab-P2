@@ -11,9 +11,9 @@ Ressampling er i denne sammenhæng, når der lave nye datasæt udfra en stikprø
 
 FIXME Ret følgende afsnit
 Jackknife metoden baserer sig på at fjerne en observation af gangen fra stikprøven, derefter udlede estimatoren, og sætte observationen tilbage igen. For en stikprøve på størrelse _n_, beregner algoritmen _n_ estimater. Jackknifing følger denne algoritme: $X_{[i]}=[{x1, x2, . . . , x_{i−1}, x_{i+1}, . . . , x_{n−1}, x_{n}]}$
-Som eksempel kan der være 5 datapunkter $X=[X_1,X_2,X_3,X_4,X_5]$, hvor $n=5$, som der vil udføres jackknife på.
+Som eksempel kan der være 5 datapunkter $X=[x_1,x_2,x_3,x_4,x_5]$, hvor $n=5$, som der vil udføres jackknife på.
 
-Første stikprøveudtagning: $X_{[1]}=[X_2,X_3,X_4,X_5]$, hvor $\Theta(X_{[1]})=\hat\theta_1$
+Første stikprøveudtagning: $X_{[1]}=[x_2,x_3,x_4,x_5]$, hvor $\Theta(X_{[1]})=\hat\theta_1$
 
 Den samme beregning hvor $\Theta(X_{[i]})$ er estimatoren og $\hat\theta_{i}$ er estimatet udføres de resterende fire gange, hvilket giver fem estimater $\hat{\theta} = [\hat\theta_1,\hat\theta_2,\hat\theta_3,\hat\theta_4,\hat\theta_5]$.
 [@Jackknife2, side 3]
