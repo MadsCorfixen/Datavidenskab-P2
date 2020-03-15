@@ -21,7 +21,7 @@ En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af
 ## Lineær kongruens generator
 
 Det følgende afsnit er primært baseret på [@LCGinfo].
-Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved rekursion, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
+Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved iteration, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
 > Lineær kongruens generator danner en talsekvens, $X = [X_0, X_1, \ldots, X_n]$, hvor $X_{i} = (a \cdot X_{i-1} + c) \mod m$.\
@@ -37,15 +37,15 @@ I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempl
  knitr::include_graphics("images/LCG_eksempel.PNG")
 ```
 
-I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal rekursioner vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette vil vises om lidt.
+I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal iterationer vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette vil vises om lidt.
 
 De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, man kan undersøge om ens parametre, genererer tilsyneladende tilfældige værdier.
 
-Først defineres en funktion for LCG algoritmen, som tager de nødvendige argumenter for algoritmen. Disse blev der redegjort for tidligere i afsnittet. Derudover angives også et argument, $n$, der fortæller hvor mange rekursioner algoritmen skal foretage. 
+Først defineres en funktion for LCG algoritmen, som tager de nødvendige argumenter for algoritmen. Disse blev der redegjort for tidligere i afsnittet. Derudover angives også et argument, $n$, der fortæller hvor mange iterationer algoritmen skal foretage. 
 
 ```{r}
 lcg <- function(m, a, c, seed, n) {
-  #M er modulus, a er faktoren, c er tilvæksten, seed er startværdien og n er antal rekursioner.
+  #M er modulus, a er faktoren, c er tilvæksten, seed er startværdien og n er antal iterationer.
   
   r <- numeric(n) #Definerer en ny variabel r, som er den numeriske værdi af n.
   r[1] <- seed #Angiver startpunktet. 
