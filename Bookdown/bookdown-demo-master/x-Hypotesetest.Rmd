@@ -1,0 +1,90 @@
+## Hypotesetest
+(FIXME: KILDER: https://asta.math.aau.dk/course/asta/2020-1/std/lecture/2-1?file=B/lecture-B-1.html#(1)
+https://asta.math.aau.dk/course/asta/2020-1/std/lecture/2-1?file=B/lecture-B-1.pdf
+http://people.math.aau.dk/~sorenh/misc/2019-mariagerfjord/hypotese-test-19.pdf)
+
+
+En hypotesetest er givet ved en formodning, derved hypotese, om en given population forholder sig på en bestemt måde, hvilket der undersøges. Heraf opstilles to hypoteser. En nul hypotese, $H_0$, og en alternativ hypotese $H_a$. Nul hypotesen er den antagelse der er taget, hvor den alternative hypotese påviser at det ikke er tilfældet, og derved at noget andet er gældende. 
+
+På baggrund af en normalfordeling er det muligt at lave en hypotesetest ud fra følgende med en t-test. (FIXME: https://asta.math.aau.dk/course/asta/2020-1/std/lecture/2-1?file=B/lecture-B-1.pdf)
+* Udregner estimater for parametrene af populationen, middelværdien, $\hat \mu = \bar y$ og standardafvigelsen, $\hat \sigma = s$ ud fra $n$ observationer.
+* En nul hypotese: $H_0 : \mu = \mu_{forventet}$ og en alternativ hypotese: $H_a : \mu \neq \mu_{forventet}$.
+* Udregne den observerede teststørrelse, $t_{obs} = \frac{\bar y - \mu_o}{\frac{s}{\sqrt{n}}}$.
+* Frihedsgrader, $df = n-1$.
+* *P*-værdien, som kan slåes op eller findes i r ved ```2 * (1 - pdist("t", q = t_obs, df = n-1))```.
+* Derudover sættes et signifikansniveau, $\alpha$, som vuderer hvorvidt $H_0$ forkastes eller ej.
+
+For at undersøge plausibiliteten af $H_0$, benyttes *p*-værdien, som er sandsynligheden for at observere en lignende, eller mere ekstrem værdi af $t_{obs}$ under antagelsen at $H_0$ er sand. Jo mindre *p*-værdi, des mere tilbøjelig er man til at forkaste $H_0$ og antage $H_a$. *P*-værdien er givet ved,(FIXME: Ikke helt sikker) $p(\hat H_0 \geq t_{obs})$. Er $p < \alpha$ forkastes $H_0$, hvor den ikke forkastes hvis $p > \alpha$.
+
+### Eksempler
+Har man et normaltfordelt datasæt er det muligt at undersøge om en observationerne modstrider hypotesen eller ej. Eksempelvis har man et datasæt med en middelværdi på ```x_mean``` og en forventet middelværdi på ```forventet_mean```, så kan man undersøge om forskellen er signifikant.
+
+```{r}
+set.seed(1)
+
+
+forventet_mean = 0.5 # Forventet middelværdi
+
+xdata <- c(0.514, 0.510, 0.512, 0.524, 0.494, 0.502, 0.522, 0.489)
+
+n = length(xdata)
+
+x_mean <- mean(xdata) # Middelværdi
+x_sd <- sd(xdata) # Standardafvigelsen
+x_ese <- x_sd/sqrt(n) # Estimeret standardfejl
+
+x_t_obs <- (x_mean-forventet_mean)/x_ese # Observeret teststørrelse
+
+x_p = 2 * (1 - pdist("t", q = x_t_obs, df = n-1, plot = FALSE))
+```
+
+```{r ECHO=FALSE}
+forventet_meanx = 0.49
+x_t_obsx <- (x_mean-forventet_meanx)/x_ese # Observeret teststørrelse
+x_px = 2 * (1 - pdist("t", q = x_t_obsx, df = n-1, plot = FALSE))
+```
+
+Eftersom *p*-værdien er ```x_p``` $> \alpha=0.05$, forkastes $H_0$ ikke. Havde det derimod været en forventet værdi på ```forventet_meanx```, ville *p*-værdien blive ```x_px``` $< \alpha=0.05$, hvilket vil medføre, at $H_0$ forkastes.
+
+Foretages en t-test på en ikke normaltfordelt fordeling. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdien af den procentmæssige tid brugt til en eksamen er 95%. Her opstilles så en nul hypotese, $H_0 : \mu = 0.95$ og en alternativ hypotese, $H_a : \mu \neq 0.95$. Herfra er der en stikprøve:
+
+```{r ECHO=FALSE}
+library(mosaic)
+n_eksamen = 1000
+
+set.seed(1)
+Eksamen <- rbeta(n_eksamen, 10, 2)
+```
+
+```{r}
+hist(Eksamen)
+```
+Fordelingen forekommer at være skæv, så det er ikke den bedste idé at foretage en t-test, men der forøges alligevel.
+
+I r, kan man foretage en t-test ved:
+```{r}
+set.seed(1)
+
+
+forventet_mean = 0.95 # Forventet middelværdi
+
+eksamen_mean <- mean(Eksamen) # Middelværdi
+eksamen_sd <- sd(Eksamen) # Standardafvigelsen
+eksamen_ese <- eksamen_sd/sqrt(n_eksamen) # Estimeret standardfejl
+
+eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret teststørrelse
+
+eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n-1, plot = FALSE))
+eksamen_p
+```
+FIXME: IKKE KØNT
+
+(FIXME: Det giver ikke mening at have dette med - det er dumt at foretage en t-test på ikke-normaltfordelt data)
+
+### Fejltyper
+(FIXME: https://www.biostat.au.dk/teaching/praegrad/for%C3%A5r2001/forelaesninger/biostatistik/uge2torsdag.pdf)
+
+Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-1 fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-2 fejl, er hvor $H_0$ accepteres, men i realiteten er falsk. En af de primære årsager til disse typer fejl er hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for hvorvidt en hypotese bliver forkastet eller ej. Sandsynligheden for type-1 fejl er lig med det valgte signifikansniveau - i de fleste tilfælde 5%. Sandsynligheden for type-2 fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-2 fejl hvis den virkelige sandhed er tæt på hypotesen og lille, hvis den er langt fra. Ligeledes har dataens størrelse indflydelse, eftersom meget data mindsker risikoen for type-2 fejl, hvor der er større risiko ved mindre data.
+
+Det er derved ikke altid den rigtige konklusion man kommer frem til, eftersom man ikke kender de virkelige værdier. 
+
