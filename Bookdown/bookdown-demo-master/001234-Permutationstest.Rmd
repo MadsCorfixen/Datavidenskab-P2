@@ -1,0 +1,54 @@
+# Permutationstest
+
+For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriablandt, at stikprøven skal være normalfordelt. Er disse krav ikke opfyldt, giver testen et misvisende restultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, der blev opnået i det foregående afsnit.
+
+## Permutationer
+
+I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af FIXME
+
+<!-- https://mathworld.wolfram.com/Permutation.html -->
+
+Givet en ordnet liste, $X = \{x_1, x_2, \ldots x_n \}$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = \{x_{\pi(1)}, x_{\pi(2)}, \ldots x_{\pi(n)}\}$. Antallet af mulige permutationer af en ordnet liste, $|X|$, af længde $n$, er givet ved $|X| = n!$.
+
+Som eksempel er en mulig permutation, $\pi_1$, af $A = \{1, 2, 3\}$ givet ved $A_{\pi_1} = \{2, 1, 3\}$, og der er i alt $|A| = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permuteringer af listen. 
+
+## Permutationstest
+
+
+
+## Modbevis af resultater fra Afsnit X.Y
+
+
+
+
+
+
+
+t-test krav
+  normalfordeling
+  forkert resultat
+  eftervis forkerthed / påvis rigtighed
+
+Hypotese
+
+Middelværdier lig hinanden
+
+En stikprøve - to grupper
+
+Find difference mellem middelværdier
+
+Ved hjælp af Monte Carlo, udvælges tilfældigt P permutationer af stikprøven.
+
+For hver permutation, udregnes difference.
+
+Hver gang differencen er højere end i stikprøven, lægges der 1 til (p = #højere / #total) 
+
+Kan også bruges til at eftervise et konfidensinterval (95 % sikker -> 95 % af tilfældene i permutationerne)
+
+
+
+
+
+
+
+
