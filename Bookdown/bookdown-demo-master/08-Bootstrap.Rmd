@@ -116,4 +116,4 @@ Dette kan ses ved for eksempel estimationer af stikprøve medianen. (figur 5.19)
 
 4. Stikprøve fordeling\
 Alt efter hvilken fordeling ens stikprøve har, er der forskellige fordele ved metoderne.
-For eksempel fungerer bootstrap bedre for skæve fordelinger, mens jackknife er mere nøjagtig i at estimere konfidensintervaller for pairwise agreement measures. (FIXME Hvad fuck er det Kilde: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019539)
+For eksempel fungerer bootstrap bedre for skæve fordelinger og har også den egenskab at den er god til at estimere ens stikprøve fordeling. Derimod er jackknife bedre til at fortælle noget om ens estimator. Derudover er den også mere nøjagtig i at estimere konfidensintervaller for pairwise agreement measures. (FIXME Hvad fuck er det Kilde: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019539)
