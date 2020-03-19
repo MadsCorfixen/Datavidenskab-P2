@@ -7,7 +7,7 @@ Det følgende afsnit er baseret på [@TDSBootstrap].
 
 Bootstrap er en resampling metode, til at genererer yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistik inferens for populationens parametre. 
 
-Når man genererer de nye datasæt, bliver der tilfældigt taget et datapunkt med tilbagelægning, som bliver indsat i det nye datasæt. Dette gentages indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange,hvor man tager en _resample_ af stikprøven, som man beregner inferens på.
+Når man genererer de nye datasæt, bliver der tilfældigt taget et datapunkt med tilbagelægning, som bliver indsat i det nye datasæt. Dette gentages indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor man tager en _resample_ af stikprøven, som man beregner inferens på.
 
 Fremgangsmåden for bootstrapping, er således:
 Man starter med at have en stikprøve af en population, hvilken man trækker yderligere stikprøver fra, kaldet bootstrap stikprøver. På hver bootstrap stikprøve udføres statistisk inferens.
@@ -78,3 +78,9 @@ confidence_interval(fastfood_boot, 0.95)
 
 Ved hjælp af bootstrapping, kan det altså siges, at det gennemsnitlige fastfood-budget for populationen, med 95% sikkerhed, ligger mellem 140,98 kr. og 146,56 kr.
 Man kan altså ud fra bootstrapping udføre statistik inferens, såsom middelværdien for en population, hvor man eventuelt kun har givet en enkelt stikprøve.
+
+###Oprindelig observationer i bootstrap stikprøver
+
+Da bootstrap stikprøver fungere med tilbagelægning, vil der i forbindelse med generering af nye stikprøver, forekomme gentagelser af observationer. Dette vil ligeledes betyder, at der vil være observationer som udelades. Derfor er det vigtigt, at have en viden om hvor mange af de oprindelige observationer som i gennemsnit medtages i nye bootstrap stikprøver, og ligeledes hvor mange som udelades. 
+Såfremt en stikprøve er af en tilpas stor størrelse, vil en bootstrap stikprøve i gennemsnit indeholde ca. $63,2~\%$ af de oprindelige observationer, og udelade $36,8~\%$. Dette kan beskrives således, den oprindelige stikprøve indeholder _n_ observationer og bootstrap stikprøven generes med tilbagelægning, således det hele tiden er muligt at "trække" alle observationer. Derfor er sandsynligheden for at en specifik observation ikke "trækkes" fra de oprindelige _n_ observationer $1-1/n$ og sandsynligheden for at denne observation ikke "trækkes" _n_ gange $(1-1/n)^n$. $n \rightarrow  \infty ~\text{for} ~ (1-1/n)^n$ er $1/e \approx 0,368$. Derfor vil en bootstrap stikprøve indholde $\approx$ $63,2\%$ observationer, fra den oprindelige stikprøve. [@SAS] 
+v
