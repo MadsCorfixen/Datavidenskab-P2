@@ -18,23 +18,75 @@ I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er
 
 <!-- https://www.r-bloggers.com/what-is-a-permutation-test/0 -->
 
-Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = \{x_1, x_2, \ldots, x_n\}$. Der opstilles nu en nulhypotese $H_0$ og en alternativ hypotese, $H_1$. Der vælges nu en relevant teststatistik at undersøge for at teste validiteten af $H_0$. Værdien af denne teststatistik er givet ved $S_{obs}$ for stikprøven.
+Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = \{x_1, x_2, \ldots, x_n\}$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststatistik at undersøge for at teste validiteten af $H_0$. Værdien af denne teststatistik er givet ved $S_{obs}$ for stikprøven.
 
 En permutationstest går ud på at forsøge at modbevise $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststatistikken for samtlige mulige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi_1}, X_{\pi_2}, \ldots X_{\pi_m} \}$, hvor $m$ er antallet af mulige permutationer af $X$. Teststatistikken for den $i$'te permutation benævnes $S_{\pi_i}$.
 
-Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der havde en mere ekstrem værdi end $S_{obs}$, findes en \textit{p}-værdi for testen. Dette kan skrives som $p = \frac{\text{#}S_{\pi_i}~ \text{mere ekstrem end}~ S_{obs}}{m}$.
+Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der har en mere ekstrem værdi end $S_{obs}$, findes en \textit{p}-værdi for testen. Dette kan skrives som $p = \frac{\text{#}S_{\pi_i}~ \text{mere ekstrem end}~ S_{obs}}{m}$.
 
-Denne form for test har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er FIXME exchangable. For det andet er det ikke alle teststatistikker, der kan testes ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger - hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer.
+Denne form for test har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er FIXME exchangable. For det andet er det ikke alle teststatistikker, der kan testes ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger - hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven.
 
-For at afhjælpe den tredje ulempe, kan $S_{\pi_i}$ beregnes for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
+Netop på grund af FIX exchangability af stikprøven, fungerer permutationstests. Hvis stikprøven er FIX exchangable, vil hver eneste permutation af stikprøven, inklusiv stikprøven selv, være lige sandsynlige. Dette medfører, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ være lille og tilfældig. Hvis værdien for $S_{obs}$ på den måde konkluderes at være væsentlig anderledes, tyder det på, at $H_0$ skal forkastes.
+
+Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
+
+### Eksempel
+
+Antag, at det ønskes undersøgt, om middelværdien af to populationer, $T_1$ og $T_2$, er signifikant anderledes. Til dette er nedenstående stikprøver tilgængelige.
+
+```{r}
+t_1 <- c(70, 75)
+t_2 <- c(76, 72)
+
+mean_difference <- abs(mean(t_1) - mean(t_2))
+mean_difference
+```
+
+Der opstilles en nulhypotese, der siger, at middelværdien af $t_1$, $\bar{t_1}$ er lig middelværdien af $t_2$, $\bar{t_2}$ - $H_0: \bar t_1 - \bar t_2 = 0$, med den alternative hypotese $H_1: \bar t_1 - \bar t_2 \neq 0$. Teststatistikken vil i dette tilfælde være forskellen mellem $t_1$ og $t_2$, $S_{obs} = |t_1 - t_2|$. Hvorvidt denne forskel er signifikant kan nu undersøges ved at undersøge forskellen i middelværdi for samtlige permutationer af stikprøven.
+
+I nedenstående kode oprettes en matrix, hvori hver søjle repræsenterer en permutation af stikprøven, hvor de to første rækker er værdier for $t_1$ og de to sidste rækker er værdier for $t_2$.
+```{r}
+set.seed(1)
+t <- c(70, 75, 76, 72)
+matrix_test <- matrix(t, nrow = 2, ncol = 2)
+
+perm_samples <- matrix(0, nrow = 4, ncol = 6)
+
+for(i in 1:6){
+  perm_samples[,i] <- sample(t, size = 4, replace = FALSE)
+}
+
+perm_samples
+```
+
+I nedenstående kode beregnes den absolutte forskel i middelværdierne af hver af de permuterede datasæt, og gemmer den forskel i en liste.
+```{r}
+mean_list <- c()
+
+for(i in 1: 6){
+  mean_list[i] <- abs(mean(perm_samples[1:2, i]) - mean(perm_samples[3:4, i]))
+}
+
+mean_list
+```
+
+Nu kan p-værdien beregnes, hvilket gøres i nedenstående kodestykke.
+```{r}
+numerator <- 0
+
+for(i in 1:length(mean_list)){
+  if(mean_list[i] >= mean_difference){
+    numerator <- numerator + 1
+  }
+}
+
+p_value <- numerator/length(mean_list)
+p_value
+```
+
+Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må være, at middelværdien for $T_1$ er lig middelværdien for $T_2$.
 
 ## Modbevis af resultater fra FIXME Afsnit X.Y
-
-
-
-
-
-
 
 t-test krav
   normalfordeling
