@@ -52,7 +52,7 @@ hist(fastfood_boot,
      main="Hustandes månedlige udgifter til fastfood" ,
      ylab="Frekvens", 
      xlab="Udgift i kroner")
-```)
+
 mean(fastfood_boot)
 sd(fastfood_boot)
 ```
