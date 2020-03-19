@@ -72,15 +72,15 @@ mean_list
 
 Nu kan p-værdien beregnes, hvilket gøres i nedenstående kodestykke.
 ```{r}
-numerator <- 0
+extreme_values <- 0
 
 for(i in 1:length(mean_list)){
   if(mean_list[i] >= mean_difference){
-    numerator <- numerator + 1
+    extreme_values <- extreme_values + 1
   }
 }
 
-p_value <- numerator/length(mean_list)
+p_value <- extreme_values/length(mean_list)
 p_value
 ```
 
@@ -88,26 +88,7 @@ Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må
 
 ## Modbevis af resultater fra FIXME Afsnit X.Y
 
-t-test krav
-  normalfordeling
-  forkert resultat
-  eftervis forkerthed / påvis rigtighed
 
-Hypotese
-
-Middelværdier lig hinanden
-
-En stikprøve - to grupper
-
-Find difference mellem middelværdier
-
-Ved hjælp af Monte Carlo, udvælges tilfældigt P permutationer af stikprøven.
-
-For hver permutation, udregnes difference.
-
-Hver gang differencen er højere end i stikprøven, lægges der 1 til (p = #højere / #total) 
-
-Kan også bruges til at eftervise et konfidensinterval (95 % sikker -> 95 % af tilfældene i permutationerne)
 
 
 
