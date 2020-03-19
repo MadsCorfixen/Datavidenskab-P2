@@ -1,6 +1,6 @@
 # Permutationstest
 
-For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriablandt, at stikprøven skal være normalfordelt. Er disse krav ikke opfyldt, giver testen et misvisende restultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, der blev opnået i FIXME Afsnit X.Y.
+For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriablandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse krav ikke opfyldt, giver testen et misvisende restultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, der blev opnået i FIXME Afsnit X.Y.
 
 ## Permutationer
 
@@ -14,7 +14,19 @@ Som eksempel er en mulig permutation, $\pi_1$, af $A = \{1, 2, 3\}$ givet ved $A
 
 ## Permutationstest
 
+I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af FIXME
 
+<!-- https://www.r-bloggers.com/what-is-a-permutation-test/0 -->
+
+Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = \{x_1, x_2, \ldots, x_n\}$. Der opstilles nu en nulhypotese $H_0$ og en alternativ hypotese, $H_1$. Der vælges nu en relevant teststatistik at undersøge for at teste validiteten af $H_0$. Værdien af denne teststatistik er givet ved $S_{obs}$ for stikprøven.
+
+En permutationstest går ud på at forsøge at modbevise $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststatistikken for samtlige mulige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi_1}, X_{\pi_2}, \ldots X_{\pi_m} \}$, hvor $m$ er antallet af mulige permutationer af $X$. Teststatistikken for den $i$'te permutation benævnes $S_{\pi_i}$.
+
+Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der havde en mere ekstrem værdi end $S_{obs}$, findes en \textit{p}-værdi for testen. Dette kan skrives som $p = \frac{\text{#}S_{\pi_i}~ \text{mere ekstrem end}~ S_{obs}}{m}$.
+
+Denne form for test har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er FIXME exchangable. For det andet er det ikke alle teststatistikker, der kan testes ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger - hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer.
+
+For at afhjælpe den tredje ulempe, kan $S_{\pi_i}$ beregnes for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
 
 ## Modbevis af resultater fra FIXME Afsnit X.Y
 
