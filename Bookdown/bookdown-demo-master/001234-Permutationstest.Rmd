@@ -1,3 +1,40 @@
+FIXME: Sæt afsnittet op, så det giver mening i forhold til permutationstesten!
+
+Foretages en t-test på en ikke normaltfordelt fordeling. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdien af den procentmæssige tid brugt til en eksamen er 95%. Her opstilles så en nul hypotese, $H_0 : \mu = 0.95$ og en alternativ hypotese, $H_a : \mu \neq 0.95$. Herfra er der en stikprøve:
+
+```{r ECHO=FALSE}
+library(mosaic)
+n_eksamen = 1000
+
+set.seed(1)
+Eksamen <- rbeta(n_eksamen, 10, 2)
+```
+
+```{r}
+hist(Eksamen)
+```
+Fordelingen forekommer at være skæv, så det er ikke den bedste idé at foretage en t-test, men der forøges alligevel.
+
+I r, kan man foretage en t-test ved:
+```{r}
+set.seed(1)
+
+
+forventet_mean = 0.95 # Forventet middelværdi
+
+eksamen_mean <- mean(Eksamen) # Middelværdi
+eksamen_sd <- sd(Eksamen) # Standardafvigelsen
+eksamen_ese <- eksamen_sd/sqrt(n_eksamen) # Estimeret standardfejl
+
+eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret teststørrelse
+
+eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n-1, plot = FALSE))
+eksamen_p
+```
+
+
+
+
 # Permutationstest
 
 For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriablandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse krav ikke opfyldt, giver testen et misvisende restultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, der blev opnået i FIXME Afsnit X.Y.
