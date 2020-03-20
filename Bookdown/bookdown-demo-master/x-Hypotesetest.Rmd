@@ -6,7 +6,7 @@ http://people.math.aau.dk/~sorenh/misc/2019-mariagerfjord/hypotese-test-19.pdf)
 
 En hypotesetest er givet ved en formodning, derved hypotese, om en given population forholder sig på en bestemt måde, hvilket der undersøges. Heraf opstilles to hypoteser. En nul hypotese, $H_0$, og en alternativ hypotese $H_a$. Nul hypotesen er den antagelse der er taget, hvor den alternative hypotese påviser at det ikke er tilfældet, og derved at noget andet er gældende. 
 
-På baggrund af en normalfordeling er det muligt at lave en hypotesetest ud fra følgende med en t-test. (FIXME: https://asta.math.aau.dk/course/asta/2020-1/std/lecture/2-1?file=B/lecture-B-1.pdf)
+På baggrund af en normalfordeling er det muligt at lave en hypotesetest ud fra følgende med en t-test. [@ASTA-HYPO] 
 * Udregner estimater for parametrene af populationen, middelværdien, $\hat \mu = \bar y$ og standardafvigelsen, $\hat \sigma = s$ ud fra $n$ observationer.
 * En nul hypotese: $H_0 : \mu = \mu_{forventet}$ og en alternativ hypotese: $H_a : \mu \neq \mu_{forventet}$.
 * Udregne den observerede teststørrelse, $t_{obs} = \frac{\bar y - \mu_o}{\frac{s}{\sqrt{n}}}$.
@@ -82,9 +82,8 @@ FIXME: IKKE KØNT
 (FIXME: Det giver ikke mening at have dette med - det er dumt at foretage en t-test på ikke-normaltfordelt data)
 
 ### Fejltyper
-(FIXME: https://www.biostat.au.dk/teaching/praegrad/for%C3%A5r2001/forelaesninger/biostatistik/uge2torsdag.pdf)
 
-Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-1 fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-2 fejl, er hvor $H_0$ accepteres, men i realiteten er falsk. En af de primære årsager til disse typer fejl er hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for hvorvidt en hypotese bliver forkastet eller ej. Sandsynligheden for type-1 fejl er lig med det valgte signifikansniveau - i de fleste tilfælde 5%. Sandsynligheden for type-2 fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-2 fejl hvis den virkelige sandhed er tæt på hypotesen og lille, hvis den er langt fra. Ligeledes har dataens størrelse indflydelse, eftersom meget data mindsker risikoen for type-2 fejl, hvor der er større risiko ved mindre data.
+Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-1 fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-2 fejl, er hvor $H_0$ accepteres, men i realiteten er falsk. En af de primære årsager til disse typer fejl er hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for hvorvidt en hypotese bliver forkastet eller ej. Sandsynligheden for type-1 fejl er lig med det valgte signifikansniveau - i de fleste tilfælde 5%. Sandsynligheden for type-2 fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-2 fejl hvis den virkelige sandhed er tæt på hypotesen og lille, hvis den er langt fra. Ligeledes har dataens størrelse indflydelse, eftersom meget data mindsker risikoen for type-2 fejl, hvor der er større risiko ved mindre data. [@Fejltyper]
 
 Det er derved ikke altid den rigtige konklusion man kommer frem til, eftersom man ikke kender de virkelige værdier. 
 
