@@ -37,7 +37,7 @@ eksamen_p
 
 # Permutationstest
 
-For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriablandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse krav ikke opfyldt, giver testen et misvisende restultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, der blev opnået i FIXME Afsnit X.Y.
+For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriblandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse krav ikke opfyldt, giver testen et misvisende resultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, der blev opnået i FIXME Afsnit X.Y.
 
 ## Permutationer
 
@@ -45,9 +45,9 @@ I dette afsnit defineres permutationer, og der gives et kort eksempel på en per
 
 <!-- https://mathworld.wolfram.com/Permutation.html -->
 
-Givet en ordnet liste, $X = \{x_1, x_2, \ldots x_n \}$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = \{x_{\pi(1)}, x_{\pi(2)}, \ldots x_{\pi(n)}\}$. Antallet af mulige permutationer af en ordnet liste, $|X|$, af længde $n$, er givet ved $|X| = n!$.
+Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2), \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $|X|$, af længde $n$, er givet ved $|X| = n!$.
 
-Som eksempel er en mulig permutation, $\pi_1$, af $A = \{1, 2, 3\}$ givet ved $A_{\pi_1} = \{2, 1, 3\}$, og der er i alt $|A| = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permutationer af listen. 
+Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_{\pi_1} = [2, 1, 3]$, og der er i alt $|A| = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permutationer af listen. 
 
 ## Permutationstest
 
@@ -55,15 +55,15 @@ I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er
 
 <!-- https://www.r-bloggers.com/what-is-a-permutation-test/0 -->
 
-Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = \{x_1, x_2, \ldots, x_n\}$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststatistik at undersøge for at teste validiteten af $H_0$. Værdien af denne teststatistik er givet ved $S_{obs}$ for stikprøven.
+Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at teste validiteten af $H_0$. Værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
 
-En permutationstest går ud på at forsøge at modbevise $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststatistikken for samtlige mulige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi_1}, X_{\pi_2}, \ldots X_{\pi_m} \}$, hvor $m$ er antallet af mulige permutationer af $X$. Teststatistikken for den $i$'te permutation benævnes $S_{\pi_i}$.
+En permutationstest går ud på at forsøge at modbevise $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststørrelsen for samtlige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi_1}, X_{\pi_2}, \ldots X_{\pi_m} \}$, hvor $m$ er antallet af mulige permutationer af $X$. Teststørrelsen for den $i$'te permutation benævnes $S_{\pi_i}$.
 
-Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der har en mere ekstrem værdi end $S_{obs}$, findes en \textit{p}-værdi for testen. Dette kan skrives som $p = \frac{\text{#}S_{\pi_i}~ \text{mere ekstrem end}~ S_{obs}}{m}$.
+Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der har en mere ekstrem værdi end $S_{obs}$, findes en _p_-værdi for testen. Dette kan skrives som $p = \frac{\text{#}S_{\pi_i}~ \text{mere ekstrem end}~ S_{obs}}{m}$.
 
-Denne form for test har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er FIXME exchangable. For det andet er det ikke alle teststatistikker, der kan testes ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger - hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven.
+Denne form for test har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er ombyttelig. For det andet er det ikke alle teststørrelser, der kan testes ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger - hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven.
 
-Netop på grund af FIX exchangability af stikprøven, fungerer permutationstests. Hvis stikprøven er FIX exchangable, vil hver eneste permutation af stikprøven, inklusiv stikprøven selv, være lige sandsynlige. Dette medfører, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ være lille og tilfældig. Hvis værdien for $S_{obs}$ på den måde konkluderes at være væsentlig anderledes, tyder det på, at $H_0$ skal forkastes.
+Netop på grund af ombytteligheden af stikprøven, fungerer permutationstests. Hvis stikprøven er ombyttelig, vil hver eneste permutation af stikprøven, inklusiv stikprøven selv, være lige sandsynlige. Dette medfører, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ være lille og tilfældig. Hvis værdien for $S_{obs}$ på den måde konkluderes at være væsentlig anderledes, tyder det på, at $H_0$ skal forkastes.
 
 Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
 
@@ -79,13 +79,12 @@ mean_difference <- abs(mean(t_1) - mean(t_2))
 mean_difference
 ```
 
-Der opstilles en nulhypotese, der siger, at middelværdien af $t_1$, $\bar{t_1}$ er lig middelværdien af $t_2$, $\bar{t_2}$ - $H_0: \bar t_1 - \bar t_2 = 0$, med den alternative hypotese $H_1: \bar t_1 - \bar t_2 \neq 0$. Teststatistikken vil i dette tilfælde være forskellen mellem $t_1$ og $t_2$, $S_{obs} = |t_1 - t_2|$. Hvorvidt denne forskel er signifikant kan nu undersøges ved at undersøge forskellen i middelværdi for samtlige permutationer af stikprøven.
+Der opstilles en nulhypotese, at middelværdien af $t_1$, $\bar{t_1}$ er lig middelværdien af $t_2$, $\bar{t_2}$ - $H_0: \bar t_1 - \bar t_2 = 0$, med den alternative hypotese $H_1: \bar t_1 - \bar t_2 \neq 0$. Teststørrelsen vil i dette tilfælde være forskellen mellem $t_1$ og $t_2$, $S_{obs} = |t_1 - t_2|$. Hvorvidt denne forskel er signifikant kan nu undersøges ved at undersøge forskellen i middelværdi for samtlige permutationer af stikprøven.
 
 I nedenstående kode oprettes en matrix, hvori hver søjle repræsenterer en permutation af stikprøven, hvor de to første rækker er værdier for $t_1$ og de to sidste rækker er værdier for $t_2$.
 ```{r}
 set.seed(1)
 t <- c(70, 75, 76, 72)
-matrix_test <- matrix(t, nrow = 2, ncol = 2)
 
 perm_samples <- matrix(0, nrow = 4, ncol = 6)
 
