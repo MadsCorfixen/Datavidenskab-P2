@@ -99,20 +99,28 @@ Jackknife er en ældre metode, og er derfor heller ikke lige så beregningsintes
 Jackknife kræver $n$ antal repetioner, for at estimere på en stikprøve med størrelsen $n$. Modsat, findes der et valg i bootstrap-metoden. Her har man et valgfrit antal repetioner, oftest mindst 1000. Teoretisk set, er antallet af repetioner for bootstrap-metoden arbitært (FIXME MAds?), men i praksis vil det ikke give mening at lave så mange bootstrap estimater, da ens resultat ikke vil ændre sig signifikant.
 Dette er også med til at gøre jackknife-metoden mere relevant for et mindre datasæt.
 
-3. Estimerings nøjagtighed
-For jackknife estimater er standardfejlen den samme for en given stikprøve. Dette er ikke tilfældet for bootstrap som har forskellige resultater hvergang den bruges. Derudover returnerer jackknife en smule større estimerede standardfejl.
 
-file:///C:/Users/magnu/Desktop/DV/B%C3%B8ger/Mathematical%20Statistics%20with%20Resampling%20and%20R.pdf s. 114
 
-Bootstrap nøjagtighed:
+3. Egenskaber\
+
+Jackknife:\
+Det gode ved jackknife er at metoden er god til at opfange outliers i ens data, og den er også nyttig til at undersøge ens estimatores standardafvigelser.
+For jackknife estimater er standardfejlen den samme for en given stikprøve, samt er dens standardfejl en smule større en bootstraps. Især for medianen vil jackknife understimere standardfejlen, da median ikke er en (FIXME) smooth statistik. (Kilde: Monte Carlo afsnit 8.3.3)
+Ligesom for mange andre statistike metoder til at infere estimater, har stikprøve størrelsen en stor betydning for nøjagtigheden af disse estimater. Det samme gør sig tilfældet for jackknife, især da stikprøven størrelsen har en afgørende betydning for hvor mange resamplings der kan foretages. FIXME kilde: file:///C:/Users/magnu/Desktop/DV/B%C3%B8ger/Monte%20Carlo%20Simulation%20and%20Resampling%20Methods%20for%20Social%20Sciences.pdf
+
+Bootstrap:\
+Modsat jacknife har bootstrap estimatet for standardfejlen forskellige resultater hvergang den bruges.  
 Der kan undersøges bootstrap-metodens nøjagtighed ved for eksempel estemering af stikprøve middelværdien.
 Ved en stor stikprøve størrelse, er bootstrap nøjagtigheden høj. Derudover kan man ved at se på billedet, se en god repræsentation af hvad bootstrap kan fortælle. Bootstrap stikprøven giver ikke et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøve. (Mathematical Statistics with Resampling and R, s. 135-136 figur 5.17)
-Ligesom for mange andre statistike metoder til at infere estimater, har stikprøve størrelsen en stor betydning for nøjagtigheden af disse estimater. Det samme gør sig tilfældet for bootstrap-metoden. (figur 5.18)
+Ligesom for mange andre statistike metoder til at infere estimater, har stikprøve størrelsen en stor betydning for nøjagtigheden af disse estimater. Det samme gør sig tilfældet for bootstrap-metoden. (figur 5.18) Derudover kan data med store outliers vise sig at være et problem for bootstrap-metoden. 
 
-FIXME skal oversættes til forståelgit dansk : The ordinary bootstrap tends not to work well for statistics such as the median or other quantiles that depend heavily on a small number of
+FIXME skal oversættes til forståeligt dansk : The ordinary bootstrap tends not to work well for statistics such as the median or other quantiles that depend heavily on a small number of
 observations out of a larger sample.
 
 Dette kan ses ved for eksempel estimationer af stikprøve medianen. (figur 5.19)
+
+file:///C:/Users/magnu/Desktop/DV/B%C3%B8ger/Mathematical%20Statistics%20with%20Resampling%20and%20R.pdf s. 114
+
 
 4. Stikprøve fordeling\
 Alt efter hvilken fordeling ens stikprøve har, er der forskellige fordele ved metoderne.
