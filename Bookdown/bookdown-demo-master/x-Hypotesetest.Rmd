@@ -1,6 +1,6 @@
 ## Hypotesetest
 (FIXME: KILDER: https://asta.math.aau.dk/course/asta/2020-1/std/lecture/2-1?file=B/lecture-B-1.html#(1)
-https://asta.math.aau.dk/course/asta/2020-1/std/lecture/2-1?file=B/lecture-B-1.pdf
+[@ASTA-HYPO]
 http://people.math.aau.dk/~sorenh/misc/2019-mariagerfjord/hypotese-test-19.pdf)
 
 
