@@ -21,7 +21,7 @@ Det vil være meget usandsynligt at $\hat\theta$ er mere end 3 standardafvigelse
 
 En illustrations af teststørrelsens betydning ved en normalfordeling kan ses i figuren herunder.
 
-```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
+```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Figurtekst", echo = FALSE}
 knitr::include_graphics('images/HippoHyppo.jpg')
 ```
 
@@ -51,14 +51,14 @@ x_middelvaerdi <- mean(xdata)
 
 ```
 
-```{r, echo=FALSE}
+```{r}
 hist(xdata,
      main="Simuleret Z-fordeling - norm(0,1) * 10" ,
      ylab="Frekvens",
      xlab="Værdi")
 ```
 
-Med et normalfordelt datasæt er det muligt at undersøge om observationerne modstrider hypotesen eller ej. Eksempelvis benyttes et datasættet over af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi``` og en forventet middelværdi på ```r forventet_middelvaerdi```, så kan der undersøge om forskellen er signifikant.
+Med et normalfordelt datasæt er det muligt at undersøge om observationerne modstrider hypotesen eller ej. Eksempelvis benyttes et datasæt med en middelværdi på ```r x_middelvaerdi``` og en forventet middelværdi på ```r forventet_middelvaerdi```, så kan der undersøge om forskellen er signifikant.
 
 ```{r}
 n <- 10
