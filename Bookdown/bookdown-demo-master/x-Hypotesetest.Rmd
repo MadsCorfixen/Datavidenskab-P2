@@ -6,8 +6,6 @@ library(mosaic)
 
 En hypotesetest er givet ved en formodning, derved hypotese, om en given population forholder sig på en bestemt måde, hvilket der undersøges. Heraf opstilles to hypoteser. En nulhypotese, $H_0$, og en alternativ hypotese $H_1$. Nulhypotesen er den antagelse der er taget, hvor den alternative hypotese påviser at det ikke er tilfældet, og derved at noget andet er gældende. 
 
-På baggrund af en normalfordeling er det muligt at lave en hypotesetest ud fra følgende med en t-test. [@ASTA-HYPO]
-
 Grunden til at benytte en hypotesetest er, at undersøge hvorvidt differencen på $H_0$ og den observerede værdi fra datasættet er sandsynlig. Sansynligheden for en difference er stor eftersom, der arbejdes på en stikprøve og ikke selve populationen.
 
 En hypotesetest evaluerer sandsynligheden for mulige udfald, for på den måde at kunne forkaste $H_0$ eller ej. [@HvorforHYPO]
