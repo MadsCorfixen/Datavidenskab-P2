@@ -19,7 +19,7 @@ Teststørrelsen sammenligner stikprøven med den forventede værdi fra $H_0$, og
 Teststørrelsen findes ofte ved $T(\hat\theta, \theta_0) =$ "Antallet af standardafvigelser fra $\hat\theta$ til $\theta_0$", hvor $\hat\theta$ er den estimerede værdi og $\theta_0$ er den forventede værdi fra $H_0$. Denne værdi kendetegnes ved den observerede værdi af t, $t_{obs}$.
 Det vil være meget usandsynligt at $\hat\theta$ er mere end 3 standardafvigelser fra $\theta_0$, hvilket påpeger, at $\theta_0$ højst sandsynligt ikke er populationens korrekte værdi. [@ASTA-HYPO]
 
-En illustrations af teststørrelsens betydning ved en normalfordeling kan ses i figuren herunder.
+En illustration af teststørrelsens betydning ved en normalfordeling kan ses i figuren herunder.
 
 ```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
 knitr::include_graphics('images/HippoHyppo.jpg')
@@ -48,7 +48,6 @@ n <- 10
 forventet_middelvaerdi <- 0
 xdata <- rnorm(n, forventet_middelvaerdi, 1)
 x_middelvaerdi <- mean(xdata)
-
 ```
 
 ```{r, echo=FALSE}
