@@ -89,7 +89,7 @@ Såfremt en stikprøve er af en tilpas stor størrelse, vil en bootstrap stikpr�
 
 FIXME kilde: inspiration fra https://www.datasciencecentral.com/profiles/blogs/resampling-methods-comparison. 
 
-De to resampling metoder, bootstrap og jackknife, er nu blevet vist, og afprøvet praktisk i R. I det følgende afsnit vil de to metoder sammenlignes på tværs af forskellige kategorier. Dette gøres for at undersøge deres svagheder og styrker, samt at se hvornår hvilken er mest oplagt at bruge. 
+De to _resampling_ metoder, bootstrap og jackknife, er nu blevet vist, og afprøvet praktisk i R. I det følgende afsnit vil de to metoder sammenlignes på tværs af forskellige kategorier. Dette gøres for at undersøge deres svagheder og styrker, samt at se hvornår hvilken er mest oplagt at bruge. 
 
 1. Computerkraft\
 Jackknife er en ældre metode, og er derfor heller ikke lige så beregningsintesiv som bootstrap, der er ca. ti gange mere beregningsintensiv. Dette har også noget med antal repetioner at gøre.
@@ -100,18 +100,17 @@ Jackknife kræver $n$ antal repetioner, for at estimere på en stikprøve med st
 3. Generlle egenskaber\
 
 Jackknife:[@MonteCarl, afsnit 8.3.3]\
-Jackknife metoden er nyttig til at opfange outliers i ens data, samt god til at undersøge ens estimatores standardafvigelser.
+Jackknife metoden er nyttig til at opfange outliers i ens data, samt god til at undersøge ens estimatores standardfejl.
 For jackknife estimater er standardfejlen den samme for en given stikprøve, og sammenlignet med bootstrap, en smule større. Især for medianen vil jackknife understimere standardfejlen, da median ikke er en glat statistik.
-Ligesom for mange andre statistike metoder til at infere estimater, har stikprøve størrelsen en stor betydning for nøjagtigheden af disse. Det samme gør sig tilfældet for jackknife, endda endnu mere her, da stikprøven størrelsen har en afgørende betydning for hvor mange resamplings der kan foretages. 
+Ligesom for mange andre statistike inferens metoder, har stikprøve størrelsen en stor betydning for nøjagtigheden af disse. Det samme gør sig tilfældet for jackknife, endda endnu mere her, da stikprøven størrelsen har en afgørende betydning for hvor mange _resamplings_ der kan foretages. 
 
 Bootstrap:\
 Se kilde [@BootvsJack afsnit, 5.8] for forklarende figurer.
 
-Bootstrap-metodens nøjagtighed kan undersøges ved for eksempel estemering af stikprøve middelværdien. Ved en stor stikprøve størrelse, er bootstrap nøjagtigheden høj. 
-
-Man skal dog være opmærksom på ved sådanne estimeringer, at bootstrap stikprøven ikke giver et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøves fordeling. Derfor bruges bootstrap altså ikke til at drage konklusiner om ens population, men derimod den valgte parametre estimats tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller. [@BootvsJack s. 114]
-
-Igen gør det sig gældende at stikprøve størrelsen har en stor betydning for nøjagtigheden af bootstrap. End for lav stikprøvestørrelse vil i mange sammenhænge vise sig at være problematisk. 
+Ligesom med jackknife, skal stikprøve størrelsen gerne være tilpas stor. Hvis den er for lille, vil nøjagtigheden af en bootstrap stikprøve falde betydeligt.
 Derudover kan data med store outliers vise sig at være et problem for bootstrap-metoden, samt kan estimationer af estimater såsom median og andre kvartiler, også vise sig at være et problem for den almindelige bootstrap-metode. Modsat jacknife har bootstrap estimatet for standardfejlen forskellige resultater hvergang den bruges. 
 
-Alt i alt, er bootstrap metoden i næsten altid, udover små nichetilfælde [@PairwiseAgreementMeasures], at foretrække frem for jackknifing. Især nu til dags hvor computerkraft oftest ikke noget der skal overvejes i statistisk inferens. 
+Man skal dog være opmærksom på ved brug af bootstrap, at bootstrap-stikprøven ikke giver et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøves fordeling. Derfor bruges bootstrap altså ikke til at drage konklusiner om ens population, men derimod den valgte estimators tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller. [@BootvsJack s. 114]
+
+
+Alt i alt, er bootstrap metoden i næsten altid, udover små nichetilfælde [@PairwiseAgreementMeasures], at foretrække frem for jackknifing. Især nu til dags hvor computerkraft og beregningsintesive algoritmer, oftest ikke noget der skal overvejes i statistisk inferens. 
