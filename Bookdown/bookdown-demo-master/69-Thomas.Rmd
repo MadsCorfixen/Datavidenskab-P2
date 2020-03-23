@@ -6,25 +6,26 @@ library(mosaic)
 
 En hypotesetest er givet ved en formodning, derved hypotese, om en given population forholder sig på en bestemt måde, hvilket der undersøges. Heraf opstilles to hypoteser. En nulhypotese, $H_0$, og en alternativ hypotese $H_1$. Nulhypotesen er den antagelse der er taget, hvor den alternative hypotese påviser at det ikke er tilfældet, og derved at noget andet er gældende. 
 
-Grunden til at benytte en hypotesetest er, at undersøge, hvorvidt differencen på $H_0$ og den observerede værdi fra datasættet er sandsynlig. Sandsynligheden for en difference er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen.
+På baggrund af en normalfordeling er det muligt at lave en hypotesetest ud fra følgende med en t-test. [@ASTA-HYPO]
+
+Grunden til at benytte en hypotesetest er, at undersøge hvorvidt differencen på $H_0$ og den observerede værdi fra datasættet er sandsynlig. Sansynligheden for en difference er stor eftersom, der arbejdes på en stikprøve og ikke selve populationen.
 
 En hypotesetest evaluerer sandsynligheden for mulige udfald, for på den måde at kunne forkaste $H_0$ eller ej. [@HvorforHYPO]
 
-For at kunne undersøge, hvorvidt der er en signifikant forskel mellem stikprøven og hypotesen benyttes en signifikanstest. For at kunne evaluere om en difference er signifikant, opstilles testtørrelsen og _p_-værdien findes.
+For at kunne undersøge hvorvidt der er en signifikant forskel mellem stikprøven og og hypotesen benyttes en signifikanstest. For at kunne evaluere om en diffenrence er signifikant opstilles testtørrelsen og _p_-værdien findes.
 
-Teststørrelsen sammenligner stikprøven med den forventede værdi fra $H_0$, og indikerer, hvor mange standardafvigelser stikprøven er fra $H_0$. Afhængig af den valgte hypotesetest benyttes forskellige teststørrelser. T-test benytter t-teststørrelse, hvor ANOVA benytter F-teststørrelse osv. [@TEST-HYPO]
+Teststørrelsen sammenligner stikprøven med den forventede værdi fra $H_0$, og indikerer hvor mange standardafvigelser stikprøven er fra $H_0$. Afhængigt af hypotesetest benyttes forskellige teststørrelser. T-test benytter t-teststørrelse, hvor ANOVA benytter F-teststørrelse osv. [@TEST-HYPO]
 
-Teststørrelsen findes ofte ved $T(\hat\theta, \theta_0) =$ "# standardafvigelser fra $\hat\theta$ til $\theta_0$", hvor $\hat\theta$ er den estimerede værdi og $\theta_0$ er den forventede værdi fra $H_0$. Denne værdi kendetegnes ved den observerede værdi af t, $t_{obs}$.
+Teststørrelsen findes ofte ved $T(\hat\theta, \theta_0) =$ "Antallet af standardafvigelser fra $\hat\theta$ til $\theta_0$", hvor $\hat\theta$ er den estimerede værdi og $\theta_0$ er den forventede værdi fra $H_0$. Denne værdi kendetegnes ved den observerede værdi af t, $t_{obs}$.
+Det vil være meget usandsynligt at $\hat\theta$ er mere end 3 standardafvigelser fra $\theta_0$, hvilket påpeger, at $\theta_0$ højst sandsynligt ikke er populationens korrekte værdi. [@ASTA-HYPO]
 
-Det vil være meget usandsynligt at $\hat\theta$ er mere end 3 standardafvigelser fra $\theta_0$, hvilket ville påpege, at $\theta_0$ højst sandsynligt ikke er populationens korrekte værdi. [@ASTA-HYPO]
+En illustrations af teststørrelsens betydning ved en normalfordeling kan ses i figuren herunder.
 
-En illustration af teststørrelsens betydning ved en normalfordeling kan ses i figuren herunder. FIXME referer til figuren.
-
-```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
+```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Figurtekst", echo = FALSE}
 knitr::include_graphics('images/HippoHyppo.jpg')
 ```
 
-Derudover benyttes testtørrelsen til at udregne _p_-værdien. Værdien af teststørrelsen påvirker _p_-værdien, og hvis testtørrelsen bliver for stor medfører det, at _p_-værdien bliver lille nok til at kunne forkaste $H_0$. Altså, jo mindre _p_-værdien er, des mindre stoles der på $H_0$. Hvis $p<\alpha$ forkastes $H_0$, hvor $p>\alpha$ ikke giver grundlag til at forkaste $H_0$. Normalt arbejder man med et signifikansniveau på 5%, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være 10% eller 1%. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper. [@ASTA-HYPO]
+Derudover benyttes testtørrelsen til at udregne _p_-værdien. Størrelsen af teststørrelsen påvirker _p_-værdien, og hvis testtørrelsen bliver for stor medfører det, at _p_-værdien bliver lille nok til at kunne forkaste $H_0$. Altså, jo mindre _p_-værdien er, des mindre stoles der på $H_0$. Hvis $p<\alpha$ forkastes $H_0$, hvor $p>\alpha$ ikke giver grundlag til at forkaste $p<\alpha$. Normalt arbejder man med et signifikansniveau på 5%, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne ligeså vel være 10% eller 1%. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper. [@ASTA-HYPO]
 
 ### Hypotesetest på normalfordeling
 På baggrund af en normalfordeling er det muligt at lave en hypotesetest ud fra følgende med en t-test. [@ASTA-HYPO] 
@@ -33,7 +34,7 @@ På baggrund af en normalfordeling er det muligt at lave en hypotesetest ud fra 
 
 * En nulhypotese: $H_0 : \mu = \mu_{forventet}$ og en alternativ hypotese: $H_a : \mu \neq \mu_{forventet}$.
 
-* Udregne den observerede teststørrelse, $t_{obs} = \frac{|\bar y - \mu_o|}{\frac{s}{\sqrt{n}}}$.
+* Udregne den observerede teststørrelse, $t_{obs} = \frac{\bar y - \mu_o}{\frac{s}{\sqrt{n}}}$.
 
 * Frihedsgrader, $df = n-1$.
 
@@ -47,16 +48,17 @@ n <- 10
 forventet_middelvaerdi <- 0
 xdata <- rnorm(n, forventet_middelvaerdi, 1)
 x_middelvaerdi <- mean(xdata)
+
 ```
 
-```{r, echo=FALSE}
+```{r}
 hist(xdata,
      main="Simuleret Z-fordeling - norm(0,1) * 10" ,
      ylab="Frekvens",
      xlab="Værdi")
 ```
 
-Med et normalfordelt datasæt er det muligt at undersøge om observationerne modstrider hypotesen eller ej. Eksempelvis benyttes et datasættet over af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi``` og en forventet middelværdi på ```r forventet_middelvaerdi```, så kan der undersøge om forskellen er signifikant.
+Med et normalfordelt datasæt er det muligt at undersøge om observationerne modstrider hypotesen eller ej. Eksempelvis benyttes et datasæt med en middelværdi på ```r x_middelvaerdi``` og en forventet middelværdi på ```r forventet_middelvaerdi```, så kan der undersøge om forskellen er signifikant.
 
 ```{r}
 n <- 10
@@ -64,7 +66,7 @@ forventet_middelvaerdi <- 0 # Forventet middelværdi
 middelvaerdi <- mean(xdata) # Middelværdi
 standardafvigelse <- sd(xdata) # Standardafvigelsen
 estimeret_standardfejl <- standardafvigelse/sqrt(n) # Estimeret standardfejl
-t_obs <- (abs(middelvaerdi-forventet_middelvaerdi))/estimeret_standardfejl # Observeret teststørrelse
+t_obs <- (middelvaerdi-forventet_middelvaerdi)/estimeret_standardfejl # Observeret teststørrelse
 alpha_halve <-  1 - pdist("t", q = t_obs, df = n-1, plot = FALSE)
 p <- 2 * alpha_halve
 ```
@@ -72,7 +74,7 @@ p <- 2 * alpha_halve
 ```{r include=FALSE}
 # Viser hvis forventede mean havde været lavere
 forventet_meanx <- -0.5
-t_obsx <- (abs(middelvaerdi-forventet_meanx))/estimeret_standardfejl # Observeret teststørrelse
+t_obsx <- (middelvaerdi-forventet_meanx)/estimeret_standardfejl # Observeret teststørrelse
 x_p = 2 * (1 - pdist("t", q = t_obsx, df = n-1, plot = FALSE))
 ```
 
