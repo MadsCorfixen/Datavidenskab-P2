@@ -100,12 +100,12 @@ Fordelingen forekommer at være skæv, så det er ikke den bedste idé at foretage e
 I r, kan man foretage en t-test ved nedenstående kode.
 ```{r}
 set.seed(1)
-forventet_mean = 0.95 # Forventet middelvÃ¦rdi
-eksamen_mean <- mean(Eksamen) # MiddelvÃ¦rdi
+forventet_mean = 0.95 # Forventet middelværdi
+eksamen_mean <- mean(Eksamen) # Middelværdi
 eksamen_sd <- sd(Eksamen) # Standardafvigelsen
 eksamen_ese <- eksamen_sd/sqrt(n_eksamen) # Estimeret standardfejl
-eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret teststÃ¸rrelse
-eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n_eksamen-1, plot = FALSE)) #P-vÃ¦rdi
+eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret teststørrelse
+eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n_eksamen-1, plot = FALSE)) #P-værdi
 eksamen_p
 ```
 
@@ -115,11 +115,12 @@ Dette giver, at stikprøven har en middelværdi på ```r eksamen_mean```, men at de
 
 perm_eksamen <- list()
 for(i in 1:10){
-  perm_eksamen[i] <- sample(x = Eksamen)
+  perm_eksamen[i] <- sample(x = Eksamen, size = 100, replace = FALSE, prob = NULL)
 }
 
-
-
+for(i in 1:10){
+  mean(perm_eksamen[i])
+}
 ```
 
 
