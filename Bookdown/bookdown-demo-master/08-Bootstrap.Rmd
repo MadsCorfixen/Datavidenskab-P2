@@ -97,7 +97,7 @@ Jackknife er en ældre metode, og er derfor heller ikke lige så beregningsintes
 2. Antal repetioner\
 Jackknife kræver $n$ antal repetioner, for at estimere på en stikprøve med størrelsen $n$. Modsat, findes der et valg i bootstrap-metoden. Her har man et valgfrit antal repetioner, oftest 10.000. Teoretisk set, er antallet af repetioner for bootstrap-metoden arbitært, men i praksis vil det ikke give mening at lave for mange bootstrap estimater, da ens resultat ikke vil ændre sig signifikant.
 
-3. Generlle egenskaber\
+3. Generelle egenskaber\
 
 Jackknife:[@MonteCarl, afsnit 8.3.3]\
 Jackknife metoden er nyttig til at opfange outliers i ens data, samt god til at undersøge ens estimatores standardfejl.
