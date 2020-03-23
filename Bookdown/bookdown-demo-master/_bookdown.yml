@@ -24,7 +24,6 @@ language:
 delete_merged_file: true
 
 
-rmd_files: ["index.Rmd", "01-Problemanalyse.Rmd", "02-Variabeltyper.Rmd",
-            "03-Outliers.Rmd", "04-Faldgruber.Rmd", "05-Simuleringer.Rmd", "06-PRNG.Rmd",
-            "07-Jackknife.Rmd", "08-Bootstrap.Rmd", "x-Hypotesetest.Rmd", "001234-Permutationstest.Rmd", "100-bibliografi.Rmd"]
+rmd_files: ["index.Rmd", "01-Problemanalyse.Rmd", "02-Simuleringer.Rmd", "03-PRNG.Rmd",
+            "04-Jackknife.Rmd", "05-Bootstrap.Rmd", "06-Hypotesetest.Rmd", "07-Permutationstest.Rmd", "100-bibliografi.Rmd"]
 
