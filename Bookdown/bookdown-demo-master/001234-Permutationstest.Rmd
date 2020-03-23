@@ -4,39 +4,39 @@ library(mosaic)
 
 # Permutationstest
 
-For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriblandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse krav ikke opfyldt, giver testen et misvisende resultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, opnåes, hvis en t-test udføres på data, der ikke overholder kravene.
+For at en t-test giver et korrekt resultat, er der visse krav, der skal vÃ¦re opfyldt, heriblandt, at stikprÃ¸ven skal vÃ¦re normalfordelt og opnÃ¥et ved tilfÃ¦ldig stikprÃ¸veudtagning. Er disse krav ikke opfyldt, giver testen et misvisende resultat, hvilket i dette afsnit vil eftervises ved hjÃ¦lp af en permutationstest i R. FÃ¸rst gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, opnÃ¥es, hvis en t-test udfÃ¸res pÃ¥ data, der ikke overholder kravene.
 
 ## Permutationer
 
-I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af FIXME.
+I dette afsnit defineres permutationer, og der gives et kort eksempel pÃ¥ en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet pÃ¥ baggrund af FIXME.
 
 <!-- https://mathworld.wolfram.com/Permutation.html -->
 
-Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2), \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $|X|$, af længde $n$, er givet ved $|X| = n!$.
+Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2), \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $|X|$, af l?ngde $n$, er givet ved $|X| = n!$.
 
 Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_{\pi_1} = [2, 1, 3]$, og der er i alt $|A| = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permutationer af listen. 
 
 ## Permutationstest
 
-I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af FIXME.
+I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet pÃ¥ baggrund af FIXME.
 
 <!-- https://www.r-bloggers.com/what-is-a-permutation-test/0 -->
 
-Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at teste validiteten af $H_0$. Værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
+Antag, at en tilfÃ¦ldig stikprÃ¸veudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersÃ¸ge. Der kan sÃ¥ vÃ¦lges en testst?rrelse at undersÃ¸ge for at teste validiteten af $H_0$. vÃ¦rdien af denne teststÃ¸rrelse er givet ved $S_{obs}$ for stikprÃ¸ven.
 
-En permutationstest går ud på at forsøge at modbevise $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststørrelsen for samtlige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi_1}, X_{\pi_2}, \ldots X_{\pi_m} \}$, hvor $m$ er antallet af mulige permutationer af $X$. Teststørrelsen for den $i$'te permutation benævnes $S_{\pi_i}$.
+En permutationstest gÃ¥r ud pÃ¥ at forsÃ¥ge at modbevise $H_0$, som i en almindelig t-test. Dette gÃ¸res ved at beregne teststÃ¸rrelsen for samtlige permutationer af $X$. Denne mÃ¦ngde af permutationer er givet ved $\Pi_X = \{X_{\pi_1}, X_{\pi_2}, \ldots X_{\pi_m} \}$, hvor $m$ er antallet af mulige permutationer af $X$. TeststÃ¸rrelsen for den $i$'te permutation benÃ¦vnes $S_{\pi_i}$.
 
-Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der har en mere ekstrem værdi end $S_{obs}$, findes en _p_-værdi for testen. Dette kan skrives som $p = \frac{\text{#}S_{\pi_i}~ \text{mere ekstrem end}~ S_{obs}}{m}$.
+Ved nu at undersÃ¸ge, hvor stor en andel af $S_{\pi_i}$, der har en mere ekstrem vÃ¦rdi end $S_{obs}$, findes en _p_-vÃ¦rdi for testen. Dette kan skrives som $p = \frac{\text{#}S_{\pi_i}~ \text{mere ekstrem end}~ S_{obs}}{m}$.
 
-Denne form for test har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er ombyttelig. For det andet er det ikke alle teststørrelser, der kan testes ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger - hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven.
+Denne form for test har den fordel, at den antager meget lidt omkring stikprÃ¸ven. I sÃ¥rdeleshed antager den hverken tilfÃ¦ldig stikprÃ¸veudtagning, eller at populationen, fra hvilken stikprÃ¸ven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det fÃ¦rste, skal det antages, at den del af data, der permuteres, er ombyttelig. For det andet er det ikke alle teststÃ¸rrelser, der kan testes ved hjÃ¦lp af en permutationstest - for eksempel vil middelvÃ¦rdien af samtlige permutationer vÃ¦re lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, nÃ¥r stÃ¸rrelsen af stikprÃ¸ven stiger - hvis der for eksempel er $n = 10$ datapunkter i stikprÃ¸ven, vil der vÃ¦re $10! = 3,628,800$ mulige permutationer af stikprÃ¸ven.
 
-Netop på grund af ombytteligheden af stikprøven, fungerer permutationstests. Hvis stikprøven er ombyttelig, vil hver eneste permutation af stikprøven, inklusiv stikprøven selv, være lige sandsynlige. Dette medfører, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ være lille og tilfældig. Hvis værdien for $S_{obs}$ på den måde konkluderes at være væsentlig anderledes, tyder det på, at $H_0$ skal forkastes.
+Netop pÃ¥ grund af ombytteligheden af stikprÃ¸ven, fungerer permutationstests. Hvis stikprÃ¸ven er ombyttelig, vil hver eneste permutation af stikprÃ¸ven, inklusiv stikprÃ¸ven selv, vÃ¦re lige sandsynlige. Dette medfÃ¸rer, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ vÃ¦re lille og tilfÃ¦ldig. Hvis vÃ¦rdien for $S_{obs}$ pÃ¥ den mÃ¥de konkluderes at vÃ¦re vÃ¦sentlig anderledes, tyder det pÃ¥, at $H_0$ skal forkastes.
 
-Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
+Det store antal af permutationer afhjÃ¦lpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfÃ¦ldigt udvalgte, permutationer af stikprÃ¸ven, og et acceptabelt resultat vil stadig blive opn?et.
 
 ### Eksempel
 
-Antag, at det ønskes undersøgt, om middelværdien af to populationer, $T_1$ og $T_2$, er signifikant anderledes. Til dette er nedenstÃående stikprøver tilgængelige.
+Antag, at det Ã¸nskes undersÃ¸gt, om middelvÃ¦rdien af to populationer, $T_1$ og $T_2$, er signifikant anderledes. Til dette er nedenstÃ¥ende stikprÃ¸ver tilgÃ¦ngelige.
 
 ```{r}
 t_1 <- c(70, 75)
@@ -45,9 +45,9 @@ mean_difference <- abs(mean(t_1) - mean(t_2))
 mean_difference
 ```
 
-Der opstilles en nulhypotese, at middelværdien af $t_1$, $\bar{t_1}$ er lig middelværdien af $t_2$, $\bar{t_2}$ - $H_0: \bar t_1 - \bar t_2 = 0$, med den alternative hypotese $H_1: \bar t_1 - \bar t_2 \neq 0$. Teststørrelsen vil i dette tilfælde være forskellen mellem $t_1$ og $t_2$, $S_{obs} = |t_1 - t_2|$. Hvorvidt denne forskel er signifikant kan nu undersøges ved at beregne forskellen i middelværdi for samtlige permutationer af stikprøven.
+Der opstilles en nulhypotese, at middelvÃ¦rdien af $t_1$, $\bar{t_1}$ er lig middelvÃ¦rdien af $t_2$, $\bar{t_2}$ - $H_0: \bar t_1 - \bar t_2 = 0$, med den alternative hypotese $H_1: \bar t_1 - \bar t_2 \neq 0$. TeststÃ¸rrelsen vil i dette tilfÃ¦lde vÃ¦re forskellen mellem $t_1$ og $t_2$, $S_{obs} = |t_1 - t_2|$. Hvorvidt denne forskel er signifikant kan nu undersÃ¸ges ved at beregne forskellen i middelvÃ¦rdi for samtlige permutationer af stikprÃ¸ven.
 
-I nedenstående kode oprettes en matrix, hvori hver søjle repræsenterer en permutation af stikprøven, hvor de to første rækker er værdier for $t_1$ og de to sidste rækker er værdier for $t_2$.
+I nedenstÃ¥ende kode oprettes en matrix, hvori hver sÃ¸jle reprÃ¦senterer en permutation af stikprÃ¸ven, hvor de to fÃ¸rste rÃ¦kker er vÃ¦rdier for $t_1$ og de to sidste rÃ¦kker er vÃ¦rdier for $t_2$.
 ```{r}
 set.seed(1)
 t <- c(70, 75, 76, 72)
@@ -58,7 +58,7 @@ for(i in 1:6){
 perm_samples
 ```
 
-I nedenstående kode beregnes den absolutte forskel i middelværdierne af hver af de permuterede datasæt, og gemmer den forskel i en liste.
+I nedenstÃ¥ende kode beregnes den absolutte forskel i middelvÃ¦rdierne af hver af de permuterede datasÃ¥t, og gemmer den forskel i en liste.
 ```{r}
 mean_list <- c()
 for(i in 1: 6){
@@ -67,7 +67,7 @@ for(i in 1: 6){
 mean_list
 ```
 
-Nu kan p-værdien beregnes, hvilket gøres i nedenstående kodestykke.
+Nu kan p-vÃ¦rdien beregnes, hvilket gÃ¸res i nedenstÃ¥ende kodestykke.
 ```{r}
 extreme_values <- 0
 for(i in 1:length(mean_list)){
@@ -79,12 +79,13 @@ p_value <- extreme_values/length(mean_list)
 p_value
 ```
 
-Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må være, at middelværdien for $T_1$ er lig middelværdien for $T_2$.
+Der er altsÃ¥ ikke belÃ¦g for at forkaste nulhypotesen, hvorfor konklusionen mÃ¥ vÃ¦re, at middelvÃ¦rdien for $T_1$ er lig middelvÃ¦rdien for $T_2$.
 
-## T-test for ikke-normalfordelt stikprøve
-FIXME: Sæt afsnittet op, så det giver mening i forhold til permutationstesten!
+## T-test for ikke-normalfordelt stikprÃ¸ve
 
-Foretages en t-test på en ikke-normaltfordelt stikprøve, giver det forkerte resultater. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdien af den procentmæssige tid brugt til en eksamen er 95%. Her opstilles en nul hypotese, $H_0 : \mu = 0.95$ og en alternativ hypotese, $H_a : \mu \neq 0.95$. Til denne undersøgelse er der en stikprøve på størrelse 100.
+FIXME: SÃ¦t afsnittet op, sÃ¥ det giver mening i forhold til permutationstesten!
+
+Foretages en t-test pÃ¥ en ikke-normaltfordelt stikprÃ¸ve, giver det forkerte resultater. Eksempelvis kunne dette vÃ¦re, at der er en hypotese om, at middelvÃ¦rdien af den procentmÃ¦ssige tid brugt til en eksamen er 95%. Her opstilles en nulhypotese, $H_0 : \mu = 0.95$ og en alternativ hypotese, $H_a : \mu \neq 0.95$. Til denne undersÃ¸gelse er der en stikprÃ¸ve pÃ¥ stÃ¸rrelse 100.
 
 ```{r}
 n_eksamen = 100
@@ -95,21 +96,21 @@ Eksamen <- rbeta(n_eksamen, 10, 2)
 ```{r}
 hist(Eksamen)
 ```
-Fordelingen forekommer at være skæv, så det er ikke den bedste idé at foretage en t-test, men det forøges alligevel.
+Fordelingen forekommer at vÃ¦re skÃ¦v, sÃ¥ det er ikke den bedste idÃ¨ at foretage en t-test, men det forÃ¸ges alligevel.
 
-I r, kan man foretage en t-test ved nedenstående kode.
+I r, kan man foretage en t-test ved nedenst?ende kode.
 ```{r}
 set.seed(1)
-forventet_mean = 0.95 # Forventet middelværdi
-eksamen_mean <- mean(Eksamen) # Middelværdi
+forventet_mean = 0.95 # Forventet middelvÃ¦rdi
+eksamen_mean <- mean(Eksamen) # MiddelvÃ¦rdi
 eksamen_sd <- sd(Eksamen) # Standardafvigelsen
 eksamen_ese <- eksamen_sd/sqrt(n_eksamen) # Estimeret standardfejl
-eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret teststørrelse
-eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n_eksamen-1, plot = FALSE)) #P-værdi
+eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret testst?rrelse
+eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n_eksamen-1, plot = FALSE)) #P-vÃ¦rdi
 eksamen_p
 ```
 
-Dette giver, at stikprøven har en middelværdi på ```r eksamen_mean```, men at den tilhørende t-værdi er ```r eksamen_t_obs``` med en p-værdi på ```r eksamen_p```. Altså forkastes nulhypotesen, og resultatet er, at den procentvise tid brugt til en eksamen ikke er 95%. Samme undersøgelse udførsen nu igen, men denne gang på baggrund af en permutationstest.
+Dette giver, at stikprÃ¸ven har en middelvÃ¦rdi pÃ¥ ```r eksamen_mean```, men at den tilhÃ¸rende t-vÃ¦rdi er ```r eksamen_t_obs``` med en p-vÃ¦rdi pÃ¥ ```r eksamen_p```. altsÃ¥ forkastes nulhypotesen, og resultatet er, at den procentvise tid brugt til en eksamen ikke er 95%. Samme undersÃ¸gelse udfÃ¸rsen nu igen, men denne gang pÃ¥ baggrund af en permutationstest.
 
 # ```{r}
 # 
@@ -124,7 +125,7 @@ Dette giver, at stikprøven har en middelværdi på ```r eksamen_mean```, men at de
 # }
 # ```
 
-Som forklaret, beregnes nu p-værdien som andelen af middelværdier, der ligger over 95%.
+Som forklaret, beregnes nu p-vÃ¦rdien som andelen af middelvÃ¦rdier, der ligger over 95%.
 
 # ```{r}
 # numerator_eksamen <- 0
