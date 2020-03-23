@@ -111,18 +111,29 @@ eksamen_p
 
 Dette giver, at stikprøven har en middelværdi på ```r eksamen_mean```, men at den tilhørende t-værdi er ```r eksamen_t_obs``` med en p-værdi på ```r eksamen_p```. Altså forkastes nulhypotesen, og resultatet er, at den procentvise tid brugt til en eksamen ikke er 95%. Samme undersøgelse udførsen nu igen, men denne gang på baggrund af en permutationstest.
 
-```{r, echo = FALSE}
+# ```{r}
+# 
+# perm_eksamen <- list()
+# for(i in 1:10){
+#   perm_eksamen[i] <- sample(x = Eksamen, size = 100, replace = FALSE, prob = NULL)
+# }
+# 
+# means_eksamen <- list()
+# for(i in 1:10){
+#   means_eksamen[i] <- mean(perm_eksamen[i])
+# }
+# ```
 
-perm_eksamen <- list()
-for(i in 1:10){
-  perm_eksamen[i] <- sample(x = Eksamen, size = 100, replace = FALSE, prob = NULL)
-}
+Som forklaret, beregnes nu p-værdien som andelen af middelværdier, der ligger over 95%.
 
-for(i in 1:10){
-  mean(perm_eksamen[i])
-}
-```
-
+# ```{r}
+# numerator_eksamen <- 0
+# for(i in 1:10){
+#   if(means_eksamen[i] > 0.95){
+#     numerator_eksamen <- numerator_eksamen+1
+#   }
+# }
+# ```
 
 
 
