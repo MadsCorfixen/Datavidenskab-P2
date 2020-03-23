@@ -1,10 +1,14 @@
+```{r, include = FALSE}
+library(mosaic)
+```
+
 # Permutationstest
 
-For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriblandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse krav ikke opfyldt, giver testen et misvisende resultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, en t-test giver, hvis dens krav ikke er opfyldt.
+For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriblandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse krav ikke opfyldt, giver testen et misvisende resultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, opnåes, hvis en t-test udføres på data, der ikke overholder kravene.
 
 ## Permutationer
 
-I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af FIXME
+I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af FIXME.
 
 <!-- https://mathworld.wolfram.com/Permutation.html -->
 
@@ -14,7 +18,7 @@ Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_
 
 ## Permutationstest
 
-I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af FIXME
+I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af FIXME.
 
 <!-- https://www.r-bloggers.com/what-is-a-permutation-test/0 -->
 
@@ -32,7 +36,7 @@ Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et
 
 ### Eksempel
 
-Antag, at det ønskes undersøgt, om middelværdien af to populationer, $T_1$ og $T_2$, er signifikant anderledes. Til dette er nedenstående stikprøver tilgængelige.
+Antag, at det ønskes undersøgt, om middelværdien af to populationer, $T_1$ og $T_2$, er signifikant anderledes. Til dette er nedenstÃående stikprøver tilgængelige.
 
 ```{r}
 t_1 <- c(70, 75)
@@ -41,7 +45,7 @@ mean_difference <- abs(mean(t_1) - mean(t_2))
 mean_difference
 ```
 
-Der opstilles en nulhypotese, at middelværdien af $t_1$, $\bar{t_1}$ er lig middelværdien af $t_2$, $\bar{t_2}$ - $H_0: \bar t_1 - \bar t_2 = 0$, med den alternative hypotese $H_1: \bar t_1 - \bar t_2 \neq 0$. Teststørrelsen vil i dette tilfælde være forskellen mellem $t_1$ og $t_2$, $S_{obs} = |t_1 - t_2|$. Hvorvidt denne forskel er signifikant kan nu undersøges ved at undersøge forskellen i middelværdi for samtlige permutationer af stikprøven.
+Der opstilles en nulhypotese, at middelværdien af $t_1$, $\bar{t_1}$ er lig middelværdien af $t_2$, $\bar{t_2}$ - $H_0: \bar t_1 - \bar t_2 = 0$, med den alternative hypotese $H_1: \bar t_1 - \bar t_2 \neq 0$. Teststørrelsen vil i dette tilfælde være forskellen mellem $t_1$ og $t_2$, $S_{obs} = |t_1 - t_2|$. Hvorvidt denne forskel er signifikant kan nu undersøges ved at beregne forskellen i middelværdi for samtlige permutationer af stikprøven.
 
 I nedenstående kode oprettes en matrix, hvori hver søjle repræsenterer en permutation af stikprøven, hvor de to første rækker er værdier for $t_1$ og de to sidste rækker er værdier for $t_2$.
 ```{r}
@@ -77,14 +81,13 @@ p_value
 
 Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må være, at middelværdien for $T_1$ er lig middelværdien for $T_2$.
 
-## T-test
+## T-test for ikke-normalfordelt stikprøve
 FIXME: Sæt afsnittet op, så det giver mening i forhold til permutationstesten!
 
-Foretages en t-test på en ikke normaltfordelt fordeling. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdien af den procentmæssige tid brugt til en eksamen er 95%. Her opstilles så en nul hypotese, $H_0 : \mu = 0.95$ og en alternativ hypotese, $H_a : \mu \neq 0.95$. Herfra er der en stikprøve:
+Foretages en t-test på en ikke-normaltfordelt stikprøve, giver det forkerte resultater. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdien af den procentmæssige tid brugt til en eksamen er 95%. Her opstilles en nul hypotese, $H_0 : \mu = 0.95$ og en alternativ hypotese, $H_a : \mu \neq 0.95$. Til denne undersøgelse er der en stikprøve på størrelse 100.
 
-```{r ECHO=FALSE}
-library(mosaic)
-n_eksamen = 1000
+```{r}
+n_eksamen = 100
 set.seed(1)
 Eksamen <- rbeta(n_eksamen, 10, 2)
 ```
@@ -92,16 +95,37 @@ Eksamen <- rbeta(n_eksamen, 10, 2)
 ```{r}
 hist(Eksamen)
 ```
-Fordelingen forekommer at være skæv, så det er ikke den bedste idé at foretage en t-test, men der forøges alligevel.
+Fordelingen forekommer at være skæv, så det er ikke den bedste idé at foretage en t-test, men det forøges alligevel.
 
-I r, kan man foretage en t-test ved:
+I r, kan man foretage en t-test ved nedenstående kode.
 ```{r}
 set.seed(1)
-forventet_mean = 0.95 # Forventet middelværdi
-eksamen_mean <- mean(Eksamen) # Middelværdi
+forventet_mean = 0.95 # Forventet middelvÃ¦rdi
+eksamen_mean <- mean(Eksamen) # MiddelvÃ¦rdi
 eksamen_sd <- sd(Eksamen) # Standardafvigelsen
 eksamen_ese <- eksamen_sd/sqrt(n_eksamen) # Estimeret standardfejl
-eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret teststørrelse
-eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n-1, plot = FALSE))
+eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret teststÃ¸rrelse
+eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n_eksamen-1, plot = FALSE)) #P-vÃ¦rdi
 eksamen_p
 ```
+
+Dette giver, at stikprøven har en middelværdi på ```r eksamen_mean```, men at den tilhørende t-værdi er ```r eksamen_t_obs``` med en p-værdi på ```r eksamen_p```. Altså forkastes nulhypotesen, og resultatet er, at den procentvise tid brugt til en eksamen ikke er 95%. Samme undersøgelse udførsen nu igen, men denne gang på baggrund af en permutationstest.
+
+```{r, echo = FALSE}
+
+perm_eksamen <- list()
+for(i in 1:10){
+  perm_eksamen[i] <- sample(x = Eksamen)
+}
+
+
+
+```
+
+
+
+
+
+
+
+
