@@ -1,12 +1,13 @@
 ```{r, include = FALSE}
 library(mosaic)
 ```
+# Resamplingmetoder
 
-# Permutationstest
+## Permutationstest
 
 For at en t-test giver et korrekt resultat, er der visse krav, der skal være opfyldt, heriblandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse krav ikke opfyldt, giver testen et misvisende resultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, opnåes, hvis en t-test udføres på data, der ikke overholder kravene.
 
-## Permutationer
+### Permutationer
 
 I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer].
 
@@ -14,7 +15,7 @@ Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$,
 
 Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_{\pi_1} = [2, 1, 3]$, og der er i alt $|A| = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permutationer af listen. 
 
-## Permutationstest
+### Permutationstest
 
 I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af [@Permutationstest]
 
@@ -30,7 +31,7 @@ Netop på grund af ombytteligheden af stikprøven, fungerer permutationstests. H
 
 Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opn?et.
 
-### Eksempel
+#### Eksempel
 
 Antag, at det ønskes undersøgt, om middelværdien af to populationer, $T_1$ og $T_2$, er signifikant anderledes. Til dette er nedenstående stikprøver tilgængelige.
 
@@ -77,7 +78,7 @@ p_value
 
 Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må være, at middelværdien for $T_1$ er lig middelværdien for $T_2$.
 
-## T-test for ikke-normalfordelt stikprøve
+### T-test for ikke-normalfordelt stikprøve
 
 FIXME: Færdiggør afsnittet med et andet eksempel end middelværdier.
 

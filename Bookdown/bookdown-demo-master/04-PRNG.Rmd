@@ -1,4 +1,6 @@
-# Pseudorandom Number Generator
+# Simuleringer
+
+## Pseudorandom Number Generator
 
 En computer fungerer ved, at den modtager et input, der bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at generere faktisk tilfældige tal. Grunden til dette er, hvis der gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere, fordi en computer fungerer på baggrund af matematik og derfor er deterministisk. Det er dog muligt ved hjælp af en beregningsmodel at skabe en illusion af ægte tilfældighed. Denne model kaldes _Pseudorandom Number Generator_ (PRNG).
 
@@ -18,7 +20,7 @@ En PRNGs funktionalitet beskrives ved nedenstående karakteristika.
 
 En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af John von Neumann. Svagheden ved denne metode er, at dens periode oftest er ret kort og derfor hurtigt begynder at gentage den samme talsekvens [@PRNGintro, s. 12-13]. I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algortimer til PRNG. En af de mere kendte og hyppigt anvendte er Lineær Kongruens Generator, som gennemgåes i det følgnede afsnit.
 
-## Lineær kongruens generator
+### Lineær kongruens generator
 
 Det følgende afsnit er primært baseret på [@LCGinfo].
 Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved iteration, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
@@ -99,7 +101,7 @@ plot(lcg3, main = "'Tilfældig' LCG Sekvens", xlab = "Indeks",
      ylab = "Sekvens værdier", type = "l")
 ```
 
-## Box-Muller-transformation
+### Box-Muller-transformation
 
 I dette afsnit beskrives Box-Muller-transformation, hvilket er en metode til at generere standard normalfordelte tal ud fra uniformt fordelte tal. Dette gøres for at belyse, hvordan en computer kan generere tilsyneladende tilfældige tal, der er normalfordelt. Afsnittet er skrevet med inspiration fra [@Box-Muller]. Metoden beskrives konkret i nedenstående sætning.
 
@@ -109,7 +111,7 @@ I dette afsnit beskrives Box-Muller-transformation, hvilket er en metode til at 
 > Antag, at $U_1$ og $U_2$ er uafhængige stokastiske variabler, der begge er uniformt fordelt på intervallet $[0, 1]$. Lad $$Z_1 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{cos}(2\pi U_2)~ \wedge~ Z_2 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{sin}(2\pi U_2)$$. Så er $Z_1$ og $Z_2$ uafhængige stokastiske variabler, der er standard normalfordelt.
 >```
 
-### Efterprøvning i R
+#### Efterprøvning i R
 
 I det følgende afsnit efterprøves Box-Muller-transformationen i R.
 

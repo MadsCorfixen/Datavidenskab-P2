@@ -1,0 +1,3 @@
+# Dataanalyse
+
+Dataanalyse ved hjælp af bootstrap 
