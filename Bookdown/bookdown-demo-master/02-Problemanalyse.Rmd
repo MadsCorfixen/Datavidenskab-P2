@@ -1,5 +1,7 @@
 # Problemanalyse
 
+FIXME: Evt. emner: Fortæl om statistik. Fortæl om “almindelig” t-test og dens krav. Se, at resultater ikke giver mening, hvis krav ikke er opfyldt. 
+
 ## Statistik og historien bag
 
 Ordet _statistik_ stammer tilbage fra det latinske _statisticum collegium_ ("statsrådgiver") og det italienske _statista_ ("statsmand" eller "politiker"). [@Orddef] At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statistik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrere befolkningen og dennes tilhørselsforhold. Derfor anvendte statsrådgivere og statsmænd statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik.
@@ -35,13 +37,12 @@ Hvis dette er tilfældet, vil nulhypotesen forkastes og den alternative hypotese
 
 _Hvorvidt kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyser?_
 
-1. Hvordan simulerer man data?
+1. Hvilke faldgruber skal man være opmærksom på ved hypotesetest?
 
-2. Hvilke faldgruber skal man være opmærksom på?
+2. Hvordan simulerer en computer data?
 
 3. Hvordan kan teoretiske resultater eftervises ved hjælp af simulering?
 
-4. Er parametrisk eller ikke-parametrisk bootstrap bedst egnet til at estimere standardfejl i lineær regression?
 
 
 

@@ -3,6 +3,8 @@ library(mosaic)
 ```
 ## Bootstrap
 
+FIXME: Mangler at skrive om parametrisk bootstrap
+
 Det følgende afsnit er baseret på [@TDSBootstrap].
 
 Bootstrap er en resampling metode, til at generere yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistik inferens for ens estimator.
@@ -80,16 +82,22 @@ Ved hjælp af bootstrapping, kan det altså siges, at det gennemsnitlige fastfoo
 Man kan altså ud fra bootstrapping udføre statistik inferens, såsom middelværdien for en population, hvor man eventuelt kun har givet en enkelt stikprøve.
 
 
-### Oprindelig observationer i bootstrap stikprøver
+__Andel af Oprindelige Observationer__
 
-Da bootstrap stikprøver fungere med tilbagelægning, vil der i forbindelse med generering af nye stikprøver, forekomme gentagelser af observationer. Dette vil ligeledes betyder, at der vil være observationer som udelades. Derfor er det vigtigt, at have en viden om hvor mange af de oprindelige observationer som i gennemsnit medtages i nye bootstrap stikprøver, og ligeledes hvor mange som udelades.
-Såfremt en stikprøve er af en tilpas stor størrelse, vil en bootstrap stikprøve i gennemsnit indeholde ca. $63,2~\%$ af de oprindelige observationer, og udelade $36,8~\%$. Dette kan beskrives således, den oprindelige stikprøve indeholder _n_ observationer og bootstrap stikprøven generes med tilbagelægning, således det hele tiden er muligt at "trække" alle observationer. Derfor er sandsynligheden for at en specifik observation ikke "trækkes" fra de oprindelige _n_ observationer $1-1/n$ og sandsynligheden for at denne observation ikke "trækkes" _n_ gange $(1-1/n)^n$. $n \rightarrow  \infty ~\text{for} ~ (1-1/n)^n$ er $1/e \approx 0,368$. Derfor vil en bootstrap stikprøve indholde $\approx$ $63,2\%$ observationer, fra den oprindelige stikprøve. [@SAS]
+Da bootstrap-stikprøver fungerer med tilbagelægning, vil der i forbindelse med generering af nye stikprøver, forekomme gentagelser af observationer. Dette vil ligeledes betyde, at der vil være observationer som udelades. Derfor er det vigtigt at have en viden om, hvor mange af de oprindelige observationer, som i gennemsnit medtages i nye bootstrap-stikprøver, og ligeledes, hvor mange, som udelades.
 
-## Bootstrap versus jackknife
+<!-- Såfremt en stikprøve er af en tilpas stor størrelse, vil en bootstrap-stikprøve i gennemsnit indeholde $\approx 63.2\%$ af de oprindelige observationer, og udelade $\approx 36.8\%$. -->
 
-FIXME kilde: inspiration fra https://www.datasciencecentral.com/profiles/blogs/resampling-methods-comparison. 
+<!-- Dette kan beskrives således, den oprindelige stikprøve indeholder _n_ observationer og bootstrap-stikprøven genereres med tilbagelægning, således det hele tiden er muligt at "trække" alle observationer.  -->
 
-De to _resampling_ metoder, bootstrap og jackknife, er nu blevet vist, og afprøvet praktisk i R. I det følgende afsnit vil de to metoder sammenlignes på tværs af forskellige kategorier. Dette gøres for at undersøge deres svagheder og styrker, samt at se hvornår hvilken er mest oplagt at bruge. 
+Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige _n_ observationer er $1-1/n$, og sandsynligheden for, at denne observation ikke udtages _n_ gange er $(1-1/n)^n$. For en stikprøve af hvis størrelse går mod uendeligt gælder, at $(1-1/n)^n  = 1/e \approx 0.368, ~\text{når}~ n \rightarrow  \infty$. Derfor vil en bootstrap-stikprøve af tilpas stor størrelse indeholde $\approx 63.2\%$ observationer fra den oprindelige stikprøve, og udelade $\approx 36.8\%$. [@SAS]
+
+## Bootstrap versus Jackknife
+
+FIXME: inspiration fra https://www.datasciencecentral.com/profiles/blogs/resampling-methods-comparison. 
+FIXME: Skal overvejes at inkorporeres i de oprindelige afsnit om bootstrap og jackknife
+
+De to resamplingmetoder, bootstrap og jackknife, er nu blevet vist, og afprøvet praktisk i R. I det følgende afsnit vil de to metoder sammenlignes på tværs af forskellige kategorier. Dette gøres for at undersøge deres svagheder og styrker, samt at se hvornår hvilken er mest oplagt at bruge. 
 
 1. Computerkraft\
 Jackknife er en ældre metode, og er derfor heller ikke lige så beregningsintesiv som bootstrap, der er ca. ti gange mere beregningsintensiv. Dette har også noget med antal repetioner at gøre.
@@ -113,4 +121,5 @@ Derudover kan data med store outliers vise sig at være et problem for bootstrap
 Man skal dog være opmærksom på ved brug af bootstrap, at bootstrap-stikprøven ikke giver et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøves fordeling. Derfor bruges bootstrap altså ikke til at drage konklusiner om ens population, men derimod den valgte estimators tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller. [@BootvsJack s. 114]
 
 
-Alt i alt, er bootstrap metoden i næsten altid, udover små nichetilfælde [@PairwiseAgreementMeasures], at foretrække frem for jackknifing. Især nu til dags hvor computerkraft og beregningsintesive algoritmer, oftest ikke noget der skal overvejes i statistisk inferens. 
+Alt i alt, er bootstrap metoden i næsten altid, udover små nichetilfælde [@PairwiseAgreementMeasures], at foretrække frem for jackknifing. 
+<!-- Især nu til dags hvor computerkraft og beregningsintesive algoritmer, oftest ikke noget der skal overvejes i statistisk inferens.  -->

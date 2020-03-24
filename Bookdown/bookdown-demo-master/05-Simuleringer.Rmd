@@ -77,3 +77,6 @@ mean(Z_replicate)
 Her bliver en stikprøve af ```Z_fordeling``` foretaget 10x100 gange, hvorefter middelværdien på de 100 gentagelser bliver fundet.
 
 <!-- Det med at tage et stort antal stikprøver af nogle observationer er også kaldet bootstrapping, hvilket forklares i FIXME [REFERER TIL BOOTSTRAP] (Tror ikke det er præcis nok forklaring af bootstrapping -christian)-->
+
+## Monte Carlo Simulering
+
