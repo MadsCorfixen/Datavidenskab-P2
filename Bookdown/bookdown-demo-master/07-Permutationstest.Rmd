@@ -8,9 +8,7 @@ For at en t-test giver et korrekt resultat, er der visse krav, der skal være op
 
 ## Permutationer
 
-I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af FIXME.
-
-<!-- https://mathworld.wolfram.com/Permutation.html -->
+I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer].
 
 Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2)}, \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $|X|$, af l?ngde $n$, er givet ved $|X| = n!$.
 
@@ -18,9 +16,7 @@ Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_
 
 ## Permutationstest
 
-I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af FIXME.
-
-<!-- https://www.r-bloggers.com/what-is-a-permutation-test/0 -->
+I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af [@Permutationstest]
 
 Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en testst?rrelse at undersøge for at teste validiteten af $H_0$. værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
 
@@ -83,7 +79,7 @@ Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må
 
 ## T-test for ikke-normalfordelt stikprøve
 
-FIXME: Sæt afsnittet op, så det giver mening i forhold til permutationstesten!
+FIXME: Færdiggør afsnittet med et andet eksempel end middelværdier.
 
 Foretages en t-test på en ikke-normaltfordelt stikprøve, giver det forkerte resultater. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdien af den procentmæssige tid brugt til en eksamen er 95%. Her opstilles en nulhypotese, $H_0 : \mu = 0.95$ og en alternativ hypotese, $H_a : \mu \neq 0.95$. Til denne undersøgelse er der en stikprøve på størrelse 100.
 
@@ -111,6 +107,7 @@ eksamen_p
 ```
 
 Dette giver, at stikprøven har en middelværdi på ```r eksamen_mean```, men at den tilhørende t-værdi er ```r eksamen_t_obs``` med en p-værdi på ```r eksamen_p```. altså forkastes nulhypotesen, og resultatet er, at den procentvise tid brugt til en eksamen ikke er 95%. Samme undersøgelse udførsen nu igen, men denne gang på baggrund af en permutationstest.
+
 ```{r}
 perm_eksamen <- sample(x = Eksamen, size = 100, replace = FALSE, prob = NULL)
 ```
