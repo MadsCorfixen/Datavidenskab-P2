@@ -29,6 +29,7 @@ For jackknife-metoden er standardfejlen den samme for en given stikprøve, hvilk
 
 Derudover gør metoden det nemmere at lave statistisk inferens uden at have teoretisk viden omkring estimatorens standardafvigelse. Nogle gange er der ikke en formel til at beregne standardfejlen til en given estimator, derfor er jackknifing en brugbar metode, da den kan frembringe standardfejlen for estimatoren alligevel.
 [@Jackknife2, side 2]
+
 <!-- FIXME: Forklaring(?): Din estimator, standardfejlen, for den er for nogle nem at beregne, men for andre er der ikke nødvendigvis ikke en formel. -->
 
 
