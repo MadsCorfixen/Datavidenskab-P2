@@ -1,5 +1,6 @@
 ```{r, include = FALSE}
 library(mosaic)
+library(SimDesign)
 ```
 # Resamplingmetoder
 
@@ -29,7 +30,7 @@ Denne form for test har den fordel, at den antager meget lidt omkring stikprøve
 
 Netop på grund af ombytteligheden af stikprøven, fungerer permutationstests. Hvis stikprøven er ombyttelig, vil hver eneste permutation af stikprøven, inklusiv stikprøven selv, være lige sandsynlige. Dette medfører, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ være lille og tilfældig. Hvis værdien for $S_{obs}$ på den måde konkluderes at være væsentlig anderledes, tyder det på, at $H_0$ skal forkastes.
 
-Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opn?et.
+Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
 
 #### Eksempel
 
@@ -55,7 +56,7 @@ for(i in 1:6){
 perm_samples
 ```
 
-I nedenstående kode beregnes den absolutte forskel i middelværdierne af hver af de permuterede datasåt, og gemmer den forskel i en liste.
+I nedenstående kode beregnes den absolutte forskel i middelværdierne af hver af de permuterede datasæt, og gemmer den forskel i en liste.
 ```{r}
 mean_list <- c()
 for(i in 1: 6){
@@ -80,68 +81,88 @@ Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må
 
 ### T-test for Ikke-normalfordelt Stikprøve
 
-FIXME: Færdiggør afsnittet med et andet eksempel end middelværdier.
-
-Foretages en t-test på en ikke-normaltfordelt stikprøve, giver det forkerte resultater. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdien af den procentmæssige tid brugt til en eksamen er 95%. Her opstilles en nulhypotese, $H_0 : \mu = 0.95$ og en alternativ hypotese, $H_a : \mu \neq 0.95$. Til denne undersøgelse er der en stikprøve på størrelse 100.
+Foretages en t-test på en ikke-normaltfordelt stikprøve, giver det forkerte resultater. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdidifferencen for tiden brugt på to forskellige eksaminer er $0$. Her opstilles en nulhypotese, $H_0 : \mu_1 - \mu_2 = 0$ og en alternativ hypotese, $H_a : \mu_1 - \mu_2 \neq 0.8$. Til denne undersøgelse er der to stikprøve på størrelse $10,000$.
 
 ```{r}
 n_eksamen = 100
 set.seed(1)
-Eksamen <- rbeta(n_eksamen, 10, 2)
+Eksamen_1 <- rValeMaurelli(10000, mean=10, sigma=5, skew=1, kurt=3)
+Eksamen_2 <- rValeMaurelli(10000, mean=1, sigma=10, skew=-1, kurt=2)
 ```
 
 ```{r}
-hist(Eksamen)
-```
-Fordelingen forekommer at være skæv, så det er ikke den bedste idè at foretage en t-test, men det forøges alligevel.
-
-I r, kan man foretage en t-test ved nedenstående kode.
-```{r}
-set.seed(1)
-forventet_mean = 0.95 # Forventet middelværdi
-eksamen_mean <- mean(Eksamen) # Middelværdi
-eksamen_sd <- sd(Eksamen) # Standardafvigelsen
-eksamen_ese <- eksamen_sd/sqrt(n_eksamen) # Estimeret standardfejl
-eksamen_t_obs <- (eksamen_mean-forventet_mean)/eksamen_ese # Observeret testst?rrelse
-eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n_eksamen-1, plot = FALSE)) # P-værdi
-eksamen_p
+hist(Eksamen_1)
+hist(Eksamen_2)
 ```
 
-Dette giver, at stikprøven har en middelværdi på ```r eksamen_mean```, men at den tilhørende t-værdi er ```r eksamen_t_obs``` med en p-værdi på ```r eksamen_p```. altså forkastes nulhypotesen, og resultatet er, at den procentvise tid brugt til en eksamen ikke er 95%. Samme undersøgelse udførsen nu igen, men denne gang på baggrund af en permutationstest.
-
+Den indbyggede funktion til t-test, `t.test`, benyttes, hvilket giver følgende resultat.
 ```{r}
-perm_eksamen <- sample(x = Eksamen, size = 100, replace = FALSE, prob = NULL)
+observeret_forskel <- abs(mean(Eksamen_1) - mean(Eksamen_2))
+eksamen_t_obs <- 234.33
+eksamen_p <- 2.2e-16
+
+t.test(Eksamen_1, Eksamen_2, alternative = "two.sided", mu = 0, conf.level = 0.95)
 ```
 
-```{r}
+Dette giver, at stikprøverne har en forskel i middelværdier på ```r observeret_forskel```, men at den tilhørende t-værdi er ```r eksamen_t_obs``` med en p-værdi på ```r eksamen_p```. altså forkastes nulhypotesen, og resultatet er, at der er forskel er i tiden brugt på de to eksaminer, og at den sande difference med 95 % sikkerhed ligger i intervallet $[8.91; 9.07]$. Samme undersøgelse udførsen nu igen, men denne gang på baggrund af en permutationstest.
 
-perm_eksamen <- matrix(0, nrow = 100, ncol = 10)
-for(i in 1:10){
-  perm_eksamen[,i] <- sample(x = Eksamen, size = 100, replace = FALSE, prob = NULL)
+```{r}
+perm_eksamen_1 <- matrix(0, nrow = 100, ncol = 100)
+for(i in 1:100){
+  perm_eksamen_1[,i] <- sample(x = Eksamen_1, size = 100, replace = FALSE, prob = NULL)
 }
-means_eksamen <- list()
-for(i in 1:10){
-  means_eksamen[i] <- median(perm_eksamen[,i])
+
+perm_eksamen_2 <- matrix(0, nrow = 100, ncol = 100)
+for(i in 1:100){
+  perm_eksamen_2[,i] <- sample(x = Eksamen_2, size = 100, replace = FALSE, prob = NULL)
 }
-# perm_eksamen
-means_eksamen
-```
 
-Som forklaret, beregnes nu p-værdien som andelen af middelværdier, der ligger over 95%.
-
-```{r}
-numerator_eksamen <- 0
-for(i in 1:10){
-  if(means_eksamen[i] > 0.95){
-    numerator_eksamen <- numerator_eksamen+1
-  }
+means_perm_eksamen <- list()
+for(i in 1:100){
+  means_perm_eksamen[i] <- abs(mean(perm_eksamen_1[,i]) - mean(perm_eksamen_2[,i]))
 }
 ```
 
+Andelen af differencer, der ligger i konfidensintervallet kan nu beregnes.
+
 ```{r}
 
+forekomst_konf <- 0
+for(i in 1:100){
+  if( (means_perm_eksamen[i] >= 8.91)&(means_perm_eksamen[i] <= 9.07) ){
+    forekomst_konf <- forekomst_konf +1}
+}
+
+andel_perm <- forekomst_konf/100
 ```
 
+Dette giver en andel af middelværdidifferencer på ```r andel_perm```, som betyder, at i $16\%$ af tilfældene lå middelværdidifferencen i konfidensintervallet, hvilket ikke stemmer overens med t-testens konfidens på $95\%$. Resultaterne for en t-test udført på stikprøver, der ikke overholder kravene, giver altså en forkert konfidens.
+
+
+
+
+
+
+
+
+<!-- Fordelingen forekommer at være skæv, så det er ikke den bedste idè at foretage en t-test, men det forøges alligevel. -->
+
+<!-- I R kan man foretage en t-test ved nedenstående kode. -->
+<!-- ```{r} -->
+<!-- set.seed(1) -->
+
+<!-- forventet_forskel <- 0 # Forventet median -->
+<!-- observeret_forskel <- abs(mean(Eksamen_1) - mean(Eksamen_2)) # Observeret median -->
+
+<!-- eksamen1_sd <- sd(Eksamen_1) # Standardafvigelsen for eksamen 1 -->
+<!-- eksamen2_sd <- sd(Eksamen_2) # Standardafvigelsen for eksamen 2 -->
+
+<!-- eksamen_ese <- sqrt((eksamen1_sd^2/n_eksamen) + (eksamen2_sd^2/n_eksamen)) # Estimeret standardfejl -->
+
+<!-- eksamen_t_obs <- abs((observeret_forskel - forventet_forskel)/eksamen_ese) # Observeret teststørrelse -->
+<!-- eksamen_p = 2 * (1 - pdist("t", q = eksamen_t_obs, df = n_eksamen-1, plot = FALSE)) # P-værdi -->
+<!-- eksamen_p -->
+<!-- ``` -->
 
 
 
