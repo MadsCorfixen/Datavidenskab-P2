@@ -109,7 +109,7 @@ Jackknife kræver $n$ antal repetioner, for at estimere på en stikprøve med st
 
 Jackknife:[@MonteCarl, afsnit 8.3.3]\
 Jackknife metoden er nyttig til at opfange outliers i ens data, samt god til at undersøge ens estimatores standardfejl.
-For jackknife estimater er standardfejlen den samme for en given stikprøve, og sammenlignet med bootstrap, en smule større. Især for medianen vil jackknife understimere standardfejlen, da median ikke er en glat statistik.
+For jackknife estimater er standardfejlen den samme for en given stikprøve, og sammenlignet med bootstrap, en smule større. Især for medianen vil jackknife understimere standardfejlen, da median ikke er en glat statistik. FIXME (smooth statistic)
 Ligesom for mange andre statistike inferens metoder, har stikprøve størrelsen en stor betydning for nøjagtigheden af disse. Det samme gør sig tilfældet for jackknife, endda endnu mere her, da stikprøven størrelsen har en afgørende betydning for hvor mange _resamplings_ der kan foretages. 
 
 Bootstrap:\
