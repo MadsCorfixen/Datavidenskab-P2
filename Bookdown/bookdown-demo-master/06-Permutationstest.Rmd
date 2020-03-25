@@ -134,9 +134,19 @@ for(i in 1:100){
 }
 
 andel_perm <- forekomst_konf/100
+
+p_numerator <- 0
+for(i in 1:100){
+  if (means_perm_eksamen[i] >= observeret_forskel){
+    p_numerator <- p_numerator + 1
+  }
+}
+
+p_vaerdi <- p_numerator / 100
+
 ```
 
-Dette giver en andel af middelværdidifferencer på ```r andel_perm```, som betyder, at i $16\%$ af tilfældene lå middelværdidifferencen i konfidensintervallet, hvilket ikke stemmer overens med t-testens konfidens på $95\%$. Resultaterne for en t-test udført på stikprøver, der ikke overholder kravene, giver altså en forkert konfidens.
+Dette giver en andel af middelværdidifferencer på ```r andel_perm```, som betyder, at i $16\%$ af tilfældene lå middelværdidifferencen i konfidensintervallet, hvilket ikke stemmer overens med t-testens konfidens på $95\%$. Resultaterne for en t-test udført på stikprøver, der ikke overholder kravene, giver altså en forkert konfidens. Desuden fåes en p-værdi på ```r p_vaerdi```, hvorfor nulhypotesen ikke kan forkastes. Dette strider også mod resultatet fra t-testen. 
 
 
 
