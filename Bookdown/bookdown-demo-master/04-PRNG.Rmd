@@ -41,7 +41,7 @@ I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempl
 
 I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal iterationer vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette vil vises om lidt.
 
-De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, man kan undersøge om ens parametre, genererer tilsyneladende tilfældige værdier.
+De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, der undersøges om ens parametre, genererer tilsyneladende tilfældige værdier.
 
 Først defineres en funktion for LCG algoritmen, som tager de nødvendige argumenter for algoritmen. Disse blev der redegjort for tidligere i afsnittet. Derudover angives også et argument, $n$, der fortæller hvor mange iterationer algoritmen skal foretage. 
 
@@ -67,7 +67,7 @@ lcg1 <- lcg(64, 33, 12, 57, 17)
 lcg1
 ```
 
-Plottes denne sekvens, vil man se at værdierne ikke er tilfældige, da det er tydeligt se perioderne. Selv hvis man ændrer antallet af gange LCG køres igennem, vil det tydelige mønster ikke ændre sig.
+Plottes denne sekvens, vil det sse at værdierne ikke er tilfældige, da det er tydeligt se perioderne. Selv hvis antallet af gange LCG køres igennem ændrers, vil det tydelige mønster ikke ændre sig.
 
 ```{r}
 lcg1_plot <- lcg(64, 33, 12, 57, 100)
@@ -75,7 +75,7 @@ plot(lcg1_plot, main = "Eksempel på en ikke tilfældig LCG sekvens",
      xlab = "Indeks", ylab = "Sekvens værdier", type = "l")
 ```
 
-Nedenfor vises et eksempel på hvordan man kan bruge LCG algortimen til at lave en uniform fordeling i intervallet [0, 1].
+Nedenfor vises et eksempel på hvordan LCG algortimen kan bruges  til at lave en uniform fordeling i intervallet [0, 1].
 
 ```{r}
 lcg2 <- lcg(86436, 1093, 0, 12, 1000)
@@ -84,7 +84,7 @@ hist((lcg2 + 0.05)/ 86436, main = "LCG Uniform fordeling",
      xlab = "Sekvens værdier", ylab = "Frekvens")
 ```
 
-Her kan det også nævnes, at hvis man plotter de værdier algoritmen returnerer i et 2d punktplot, vil man se en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
+Her kan det også nævnes, at hvis de værdier algoritmen returnerer plottes i et 2d punktplot, vil der fremgå en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
 
 ```{r}
 plot(lcg2, main = "2d plot af LCG sekvens", xlab = "Indeks", 
