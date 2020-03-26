@@ -4,8 +4,6 @@ library(mosaic)
 
 # Hypotesetest
 
-FIXME: Omskrivning af afsnittet. Husk at beskrive antagelserne, der skal være opfyldt for en t-test.
-
 En hypotesetest baserer sig på det videnskabelige princip om falsificering. Der opstilles en indledende formodning om en population, kaldet nulhypotesen $H_0$, og en alternativ, modsat hypotese $H_1$. Er den indledende formodning ikke korrekt, må den alternative hypotese være gældende.
 
 Ved en hypotesetest undersøges, hvorvidt der er en differencen mellem observerede værdier og forventede værdier, hvis $H_0$ er sand.
