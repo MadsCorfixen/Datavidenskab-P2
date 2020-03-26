@@ -25,7 +25,7 @@ En illustration af teststørrelsens betydning ved en normalfordeling kan ses i f
 FIXME: Figuren er lidt utydelig. De kritiske punkter skal være mere synlige. Eventulet zoom ind på halerne.
 
 ```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
-knitr::include_graphics('images/HippoHyppo.jpg')
+knitr::include_graphics('images/HippoHyppo.jpeg')
 ```
 
 Derudover benyttes testtørrelsen til at udregne _p_-værdien. Værdien af teststørrelsen påvirker _p_-værdien, og hvis testtørrelsen bliver for stor medfører det, at _p_-værdien bliver lille nok til at kunne forkaste $H_0$. Altså, jo mindre _p_-værdien er, des mindre stoles der på $H_0$. Hvis $p<\alpha$ forkastes $H_0$, hvor $p>\alpha$ ikke giver grundlag til at forkaste $H_0$. Normalt arbejder man med et signifikansniveau på 5%, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være 10% eller 1%. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper. [@ASTA-HYPO]
