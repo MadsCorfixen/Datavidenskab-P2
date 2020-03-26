@@ -91,15 +91,10 @@ En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bli
 
 Sandsynligheden for type-1 fejl er lig med det valgte signifikansniveau - i de fleste tilfælde 5%. Sandsynligheden for type-2 fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-2 fejl, hvis den virkelige sandhed er tæt på hypotesen og lille, hvis den er langt fra. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-2 fejl, hvor der er større risiko ved mindre data. [@Fejltyper]
 
-```{r}
-tabel_fejltyper <- matrix(c("Korrekt", "Type 2-fejl", "Type 1-fejl", "Korrekt"), nrow = 2, ncol = 2, 
-                          dimnames = list(konklusion = c("H_0", "H_1"), virkelighed = c("H_0", "H_1")))
-# dimnames = 
 
-tabel_fejltyper
+```{r, figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
+knitr::include_graphics('images/Typefejl.png')
 ```
-
-FIXME: Tegn en pæn tabel.
 
 FIXME: Skriv om 'styrken' (jævnfør arbejdsblad fra 26/3)
 
