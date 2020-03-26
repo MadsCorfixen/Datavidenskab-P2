@@ -4,6 +4,8 @@ library(mosaic)
 
 # Hypotesetest
 
+FIXME: Omskrivning af afsnittet. Husk at beskrive antagelserne, der skal være opfyldt for en t-test.
+
 En hypotesetest er givet ved en formodning, derved hypotese, om en given population forholder sig på en bestemt måde, hvilket der undersøges. Heraf opstilles to hypoteser. En nulhypotese, $H_0$, og en alternativ hypotese $H_1$. Nulhypotesen er den antagelse der er taget, hvor den alternative hypotese påviser at det ikke er tilfældet, og derved at noget andet er gældende. 
 
 Grunden til at benytte en hypotesetest er, at undersøge, hvorvidt differencen på $H_0$ og den observerede værdi fra datasættet er sandsynlig. Sandsynligheden for en difference er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen.
@@ -20,6 +22,8 @@ Det vil være meget usandsynligt at $\hat\theta$ er mere end 3 standardafvigelse
 
 En illustration af teststørrelsens betydning ved en normalfordeling kan ses i figuren herunder. FIXME referer til figuren.
 
+FIXME: Figuren er lidt utydelig. De kritiske punkter skal være mere synlige. Eventulet zoom ind på halerne.
+
 ```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
 knitr::include_graphics('images/HippoHyppo.jpg')
 ```
@@ -27,19 +31,20 @@ knitr::include_graphics('images/HippoHyppo.jpg')
 Derudover benyttes testtørrelsen til at udregne _p_-værdien. Værdien af teststørrelsen påvirker _p_-værdien, og hvis testtørrelsen bliver for stor medfører det, at _p_-værdien bliver lille nok til at kunne forkaste $H_0$. Altså, jo mindre _p_-værdien er, des mindre stoles der på $H_0$. Hvis $p<\alpha$ forkastes $H_0$, hvor $p>\alpha$ ikke giver grundlag til at forkaste $H_0$. Normalt arbejder man med et signifikansniveau på 5%, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være 10% eller 1%. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper. [@ASTA-HYPO]
 
 ## Hypotesetest på normalfordeling
+
 På baggrund af en normalfordeling er det muligt at lave en hypotesetest ud fra følgende med en t-test. [@ASTA-HYPO] 
 
-* Udregner estimater for parametrene af populationen, middelværdien, $\hat \mu = \bar y$ og standardafvigelsen, $\hat \sigma = s$ ud fra $n$ observationer.
+* Først sættes et signifikansniveau, $\alpha$, som vurderer med hvilken sikkerhed $H_0$ forkastes eller ej.
 
-* En nulhypotese: $H_0 : \mu = \mu_{forventet}$ og en alternativ hypotese: $H_a : \mu \neq \mu_{forventet}$.
+* Herefter udregnes estimater for parametrene af populationen, middelværdien, $\hat \mu = \bar y$ og standardafvigelsen, $\hat \sigma = s$ ud fra $n$ observationer.
 
-* Udregne den observerede teststørrelse, $t_{obs} = \frac{|\bar y - \mu_o|}{\frac{s}{\sqrt{n}}}$.
+* En nulhypotese: $H_0 : \mu = \mu_0$ og en alternativ hypotese: $H_1 : \mu \neq \mu_0$ opstilles, hvor $\mu_0$ er den forventede værdi, hvis nulhypotesen er sand.
 
-* Frihedsgrader, $df = n-1$.
+* Herefter kan den observerede teststørrelse, $t_{obs} = \frac{|\bar y - \mu_o|}{\frac{s}{\sqrt{n}}}$ udregnes.
 
-* *P*-værdien, som kan slåes op eller findes i r ved ```2 * (1 - pdist("t", q = t_obs, df = n-1))```.
+<!-- * Frihedsgrader, $df = n-1$. FIXME: Beskriv antallet af frihedsgrader tidligere. -->
 
-* Derudover sættes et signifikansniveau, $\alpha$, som vuderer hvorvidt $H_0$ forkastes eller ej.
+* *p*-værdien, som kan slåes op på baggrund af antal frihedsgrader og signifikantniveauet, eller findes i R ved ```2 * (1 - pdist("t", q = t_obs, df = n-1))```.
 
 ```{r include=FALSE}
 set.seed(1)
@@ -49,14 +54,13 @@ xdata <- rnorm(n, forventet_middelvaerdi, 1)
 x_middelvaerdi <- mean(xdata)
 ```
 
-```{r, echo=FALSE}
-hist(xdata,
-     main="Simuleret Z-fordeling - norm(0,1) * 10" ,
+```{r, echo=FALSE, fig.align='center', fig.cap = "Histogram over 10 simulerede standardnormalfordelte tal."}
+hist(xdata, main = NULL,
      ylab="Frekvens",
      xlab="Værdi")
 ```
 
-Med et normalfordelt datasæt er det muligt at undersøge om observationerne modstrider hypotesen eller ej. Eksempelvis benyttes et datasættet over af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi``` og en forventet middelværdi på ```r forventet_middelvaerdi```, så kan der undersøge om forskellen er signifikant.
+Med et normalfordelt datasæt er det muligt at undersøge om der er evidens imod hypotesen. Eksempelvis benyttes et datasættet over af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi``` og en forventet middelværdi på ```r forventet_middelvaerdi```, så kan der undersøge om forskellen er signifikant.
 
 ```{r}
 n <- 10
@@ -79,8 +83,6 @@ x_p = 2 * (1 - pdist("t", q = t_obsx, df = n-1, plot = FALSE))
 
 Eftersom *p*-værdien er ```r p``` $> \alpha=0.05$, forkastes $H_0$ ikke. Havde det derimod været en forventet værdi på ```r forventet_meanx```, ville *p*-værdien blive ```r x_p``` $< \alpha=0.05$, hvilket vil medføre, at $H_0$ forkastes og det vil formodes, at $H_0$ ikke er korrekt for populationen.
 
-T-testen kan kun benyttes på normalfordelinger, eftersom det antages, at stikprøven efterligner en normalfordeling. __FIXME:__ [Noget vi vil kigge på?]
-
 ## Fejltyper
 
 Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-1 fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-2 fejl, er hvor $H_0$ accepteres, men i realiteten er falsk.
@@ -88,3 +90,22 @@ Der er risiko for to primære fejl når der foretages en hypotesetest. Den førs
 En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
 
 Sandsynligheden for type-1 fejl er lig med det valgte signifikansniveau - i de fleste tilfælde 5%. Sandsynligheden for type-2 fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-2 fejl, hvis den virkelige sandhed er tæt på hypotesen og lille, hvis den er langt fra. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-2 fejl, hvor der er større risiko ved mindre data. [@Fejltyper]
+
+```{r}
+tabel_fejltyper <- matrix(c("Korrekt", "Type 2-fejl", "Type 1-fejl", "Korrekt"), nrow = 2, ncol = 2, 
+                          dimnames = list(konklusion = c("H_0", "H_1"), virkelighed = c("H_0", "H_1")))
+# dimnames = 
+
+tabel_fejltyper
+```
+
+FIXME: Tegn en pæn tabel.
+
+FIXME: Skriv om 'styrken' (jævnfør arbejdsblad fra 26/3)
+
+
+
+
+
+
+

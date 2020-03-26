@@ -29,13 +29,13 @@ Processen med at bruge dataanalyse til at drage konklusioner om en underliggende
 
 I statistisk inferens differentieres der mellem to metoder, _estimering_ og _hypotesetest_. Når der estimeres på baggrund af en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan f.eks være gennemsnitsindkomst af danskere, hvorved der findes et estimat $\hat{\mu}$ som bruges til at beskrive $\mu$. Dette betegnes som et punktestimat, og vil oftest suppleres med at intervalestimat. Årsagen til dette er, at punktestimater i sin essens er tilfældig (det ændrer sig fra stikprøve til stikprøve). Derfor tilstræbes det at anvende et intervalestimat, hvor det kan siges at $\mu$ med 95% sikkerhed ligger, fremfor et punktestimat. Dette kaldes for et konfidensinterval.  
 
-Den anden form for statistisk infernes er hypotesetest. I hypotesetest opstilles først en nulhypotese, $H_0$, og en modhypotese, $H_1$. Målet er at indsamle nok evidens imod $H_0$, så den kan forkastes, og man er dermed blevet klogere på populationen. 
+Den anden form for statistisk infernes er hypotesetest. I hypotesetest opstilles først en nulhypotese, $H_0$, og en alternativ hypotese, $H_1$. Målet er at indsamle nok evidens imod $H_0$, så den kan forkastes, og man er dermed blevet klogere på populationen. 
 En nulhypotese kunne være, at danskere tjener det samme i gennemsnit som folk fra Sverige. Der vil ved hjælp af forskellige statistike metoder, ses om der er en signifikant forskel i gennemsnittet.
 Hvis dette er tilfældet, vil nulhypotesen forkastes og den alternative hypotese vil antages at være sand.
 
 ## Problemformulering
 
-_Hvorvidt kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyser?_
+_Kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyser, og i så fald, hvordan?_
 
 1. Hvilke faldgruber skal man være opmærksom på ved hypotesetest?
 
@@ -43,7 +43,7 @@ _Hvorvidt kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyse
 
 3. Hvordan kan teoretiske resultater eftervises ved hjælp af simulering?
 
-
+FIXME: arbejdsspørgsmål i samme rækkefølge som i rapporten. Ret løbende.
 
 
 

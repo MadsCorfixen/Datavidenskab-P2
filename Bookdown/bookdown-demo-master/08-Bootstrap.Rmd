@@ -90,12 +90,13 @@ Da bootstrap-stikprøver fungerer med tilbagelægning, vil der i forbindelse med
 
 <!-- Dette kan beskrives således, den oprindelige stikprøve indeholder _n_ observationer og bootstrap-stikprøven genereres med tilbagelægning, således det hele tiden er muligt at "trække" alle observationer.  -->
 
-Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige _n_ observationer er $1-1/n$, og sandsynligheden for, at denne observation ikke udtages _n_ gange er $(1-1/n)^n$. For en stikprøve af hvis størrelse går mod uendeligt gælder, at $(1-1/n)^n  = 1/e \approx 0.368, ~\text{når}~ n \rightarrow  \infty$. Derfor vil en bootstrap-stikprøve af tilpas stor størrelse indeholde $\approx 63.2\%$ observationer fra den oprindelige stikprøve, og udelade $\approx 36.8\%$. [@SAS]
+Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige _n_ observationer er $1-1/n$, og sandsynligheden for, at denne observation ikke udtages _n_ gange er $(1-1/n)^n$. Når stikprøvestørrelsen, $n$, går mod uendeligt gælder, at $(1-1/n)^n  = 1/e \approx 0.368$. Derfor vil en bootstrap-stikprøve af tilpas stor størrelse indeholde $\approx 63.2\%$ observationer fra den oprindelige stikprøve, og udelade $\approx 36.8\%$. [@SAS]
 
 ## Bootstrap versus Jackknife
 
 FIXME: inspiration fra https://www.datasciencecentral.com/profiles/blogs/resampling-methods-comparison. 
 FIXME: Skal overvejes at inkorporeres i de oprindelige afsnit om bootstrap og jackknife
+FIXME: Overvej, om jackknife overhovedet skal være en del af rapporten.
 
 De to resamplingmetoder, bootstrap og jackknife, er nu blevet vist, og afprøvet praktisk i R. I det følgende afsnit vil de to metoder sammenlignes på tværs af forskellige kategorier. Dette gøres for at undersøge deres svagheder og styrker, samt at se hvornår hvilken er mest oplagt at bruge. 
 
