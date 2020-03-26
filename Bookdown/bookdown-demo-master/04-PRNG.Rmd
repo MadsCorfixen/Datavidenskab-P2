@@ -13,7 +13,7 @@ En PRNGs funktionalitet beskrives ved nedenstående karakteristika.
 3. Fordeling af de tal værdier der generes. Som det ses på figuren nedenunder, kan fordelingen af de genererede tal være jævn, hvilket viser en ligelig fordeling af tallene. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og alvendeligheden formindskes.  
 
 ```{r, out.width='75%', fig.align='center', fig.cap="PRNG fordelinger", echo = FALSE}
- knitr::include_graphics("images/prngfordeling.PNG")
+ knitr::include_graphics("images/prngfordelingerDK.jpeg")
 ```
 
 <!-- FIXME[https://www.youtube.com/watch?v=4sYawx70iP4, 0-4:05], fra videoen er billedet taget 3.09, men kan overvejes selv at lave en eftervisning af disse fordelinger -->
@@ -60,7 +60,7 @@ lcg <- function(m, a, c, seed, n) {
 }
 ```
 
-Det følgende er et eksempel på en LCG sekvens med en periode på 16. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
+Det følgende er et eksempel på en LCG sekvens med en periode på $16$. Perioden fortæller, hvor mange værdier generatoren returnerer inden den gentager sig selv.  
 
 ```{r}
 lcg1 <- lcg(64, 33, 12, 57, 17)
@@ -169,7 +169,7 @@ median_Z2 <- median(Z2)
 
 Dette giver henholdsvis en middelværdi og median for ```Z1``` på $`r mean_Z1`$ og $`r median_Z1`$, samt for ```Z2```  på $`r mean_Z2`$ og $`r median_Z2`$. Disse resultater ligger meget tæt på hinanden, og den meget lave værdi stemmer overens med forventningen om, at ```Z1``` og ```Z2``` er standard normalfordelt.
 
-For at tjekke punkt 4, beregnes andelen af outliers i hvert boksplot i kodestykket nedenfor.
+For at tjekke punkt $4$, beregnes andelen af outliers i hvert boksplot i kodestykket nedenfor.
 
 ```{r}
 OutVals1 <- boxplot(Z1, plot = FALSE)$out
