@@ -25,7 +25,7 @@ At $\hat \theta$ ligger mere end $3$ standardafvigelser fra $\theta_0$, er højs
 En illustration af teststørrelsens betydning ved en normalfordeling kan ses på Figur \@ref(fig:figur-Hypotesetest).
 
 ```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
-knitr::include_graphics('images/HippoHyppo.jpg')
+knitr::include_graphics('images/HippoHyppo.jpeg')
 ```
 
 Derudover benyttes testtørrelsen til at udregne _p_-værdien, som er sandsynligheden for at få en teststørrelse, der er lige så eller mere ekstrem end $t_{obs}$, hvis $H_0$ er sand.

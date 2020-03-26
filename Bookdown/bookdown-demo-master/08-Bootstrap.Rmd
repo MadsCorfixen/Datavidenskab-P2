@@ -3,19 +3,24 @@ library(mosaic)
 ```
 ## Bootstrap
 
+<!-- FIXME: Man skal dog være opmærksom på ved brug af bootstrap, at bootstrap-stikprøven ikke giver et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøves fordeling.  -->
+<!-- Derudover kan data med store outliers vise sig at være et problem for bootstrap-metoden, samt kan estimationer af estimater såsom median og andre kvartiler, også vise sig at være et problem for den almindelige bootstrap-metode. Modsat jacknife har bootstrap estimatet for standardfejlen forskellige resultater hvergang den bruges.  -->
+
 FIXME: Mangler at skrive om parametrisk bootstrap
 
 Det følgende afsnit er baseret på [@TDSBootstrap].
 
-Bootstrap er en resampling metode, til at generere yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistik inferens for ens estimator.
+Bootstrap er en resampling metode, til at generere yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistik inferens for den valgte estimator. Det kan give indblik i tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller [@BootvsJack s. 114]. Det er her vigtigt, at stikprøven har en tilpas stor størrelse for nøjagtigheden af bootstrap.
 
-Når man genererer de nye datasæt, bliver der tilfældigt taget et datapunkt med tilbagelægning, som bliver indsat i det nye datasæt. Dette gentages indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor man tager en _resample_ af stikprøven, som man beregner inferens på.
+Når der genereres nye datasæt, udtages der et tilfældigt datapunkt, som indsættes i et nyt datasæt. Det udtaget datapunkt, føres tilbage i det oprindelige datasæt (kaldet tilbagelægning), og processen gentages  indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor der tages en _resample_ af stikprøven, der udføres inferens på.
 
 Fremgangsmåden for bootstrapping, er således:
-Man starter med at have en stikprøve af en population, hvilken man trækker yderligere stikprøver fra, kaldet bootstrap stikprøver. På hver bootstrap stikprøve udføres statistisk inferens.
-Efter $b$ gentagelser, kan man udregne standardfejlen og et konfidensinterval for denne, for stikprøven.
+Indledningsvis udtages en stikprøve fra en population, hvorfra der trækkes yderligere stikprøver fra. Disse kaldes bootstrap-stikprøver. På hver bootstrap-stikprøve udføres statistisk inferens.
+Efter $b$ gentagelser, kan der eksempelvis udregnes standardfejl og et tilhørende konfidensinterval for stikprøven.
 
-Nu vil der vises et eksempel på hvordan bootstrapping kan udføres:
+__Eksempel__
+
+Af det nedenstående eksempel illustreres det hvorledes bootstrapping kan udføres:
 Her er et datasæt over gennemsnitlig månedlig udgift i kroner til fastfood per hustand:
 
 ```{r}
@@ -35,6 +40,8 @@ sd(fastfood)
 
 Derefter kan der tages en bootstrap-stikprøve ( _resample_ ) af stikprøven. Middelværdien og standardafvigelsen udregnes for bootstrap-stikprøven:
 
+FIXME: Indsæt fordelingen for en bootstrap-stikprøve, evt. se (Mathematical Statistics with Resampling and R side 136)
+
 ```{r}
 set.seed(1)
 resample <- sample(fastfood, size = length(fastfood), replace = TRUE)
@@ -43,7 +50,7 @@ mean(resample)
 sd(resample)
 ```
 
-Dette gøres i praksis et passende antal gange, $b$, f.eks. 10.000, hvilket gør at man får 10.000 nye estimater for bootstrap-stikprøve middelværdien:
+Dette gøres i praksis et passende antal gange, $b$, f.eks. $10,000$, hvilket gør, at der fås $10,000$ nye estimater for bootstrap-stikprøvens middelværdi:
 
 ```{r}
 set.seed(1)
@@ -59,7 +66,7 @@ mean(fastfood_boot)
 sd(fastfood_boot)
 ```
 
-Et 95% konfidensinterval kan udregnes ved:
+Et $95%$ konfidensinterval kan udregnes ved:
 ```{r}
 confidence_interval <- function(fastfood_boot, interval) {
   # Standardafvigelsen af bootstrappet
@@ -78,11 +85,12 @@ confidence_interval <- function(fastfood_boot, interval) {
 confidence_interval(fastfood_boot, 0.95)
 ```
 
-Ved hjælp af bootstrapping, kan det altså siges, at det gennemsnitlige fastfood-budget for populationen, med 95% sikkerhed, ligger mellem 140,98 kr. og 146,56 kr.
-Man kan altså ud fra bootstrapping udføre statistik inferens, såsom middelværdien for en population, hvor man eventuelt kun har givet en enkelt stikprøve.
+Ved hjælp af bootstrapping, kan det altså konkluderes, at det gennemsnitlige fastfood-budget for populationen, med $95\%$ sikkerhed, ligger mellem $140.98$ kr. og $146.56$ kr.
+
+Der kan altså ud fra bootstrapping udføre statistik inferens, såsom middelværdien for en population, hvor der eventuelt kun er givet en enkelt stikprøve.
 
 
-__Andel af Oprindelige Observationer__
+__Andel af oprindelige observationer__
 
 Da bootstrap-stikprøver fungerer med tilbagelægning, vil der i forbindelse med generering af nye stikprøver, forekomme gentagelser af observationer. Dette vil ligeledes betyde, at der vil være observationer som udelades. Derfor er det vigtigt at have en viden om, hvor mange af de oprindelige observationer, som i gennemsnit medtages i nye bootstrap-stikprøver, og ligeledes, hvor mange, som udelades.
 
@@ -92,35 +100,26 @@ Da bootstrap-stikprøver fungerer med tilbagelægning, vil der i forbindelse med
 
 Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige _n_ observationer er $1-1/n$, og sandsynligheden for, at denne observation ikke udtages _n_ gange er $(1-1/n)^n$. Når stikprøvestørrelsen, $n$, går mod uendeligt gælder, at $(1-1/n)^n  = 1/e \approx 0.368$. Derfor vil en bootstrap-stikprøve af tilpas stor størrelse indeholde $\approx 63.2\%$ observationer fra den oprindelige stikprøve, og udelade $\approx 36.8\%$. [@SAS]
 
-## Bootstrap versus Jackknife
+<!-- ## Bootstrap versus Jackknife -->
 
-FIXME: inspiration fra https://www.datasciencecentral.com/profiles/blogs/resampling-methods-comparison. 
-FIXME: Skal overvejes at inkorporeres i de oprindelige afsnit om bootstrap og jackknife
-FIXME: Overvej, om jackknife overhovedet skal være en del af rapporten.
+<!-- FIXME: inspiration fra https://www.datasciencecentral.com/profiles/blogs/resampling-methods-comparison.  -->
+<!-- FIXME: Skal overvejes at inkorporeres i de oprindelige afsnit om bootstrap og jackknife -->
+<!-- FIXME: Overvej, om jackknife overhovedet skal være en del af rapporten. -->
 
-De to resamplingmetoder, bootstrap og jackknife, er nu blevet vist, og afprøvet praktisk i R. I det følgende afsnit vil de to metoder sammenlignes på tværs af forskellige kategorier. Dette gøres for at undersøge deres svagheder og styrker, samt at se hvornår hvilken er mest oplagt at bruge. 
+<!-- De to resamplingmetoder, bootstrap og jackknife, er nu blevet vist, og afprøvet praktisk i R. I det følgende afsnit vil de to metoder sammenlignes på tværs af forskellige kategorier. Dette gøres for at undersøge deres svagheder og styrker, samt at se hvornår hvilken er mest oplagt at bruge.  -->
 
-1. Computerkraft\
-Jackknife er en ældre metode, og er derfor heller ikke lige så beregningsintesiv som bootstrap, der er ca. ti gange mere beregningsintensiv. Dette har også noget med antal repetioner at gøre.
+<!-- 1. Computerkraft\ -->
+<!-- Jackknife er en ældre metode, og er derfor heller ikke lige så beregningsintesiv som bootstrap, der er ca. ti gange mere beregningsintensiv. Dette har også noget med antal repetioner at gøre. -->
 
-2. Antal repetioner\
-Jackknife kræver $n$ antal repetioner, for at estimere på en stikprøve med størrelsen $n$. Modsat, findes der et valg i bootstrap-metoden. Her har man et valgfrit antal repetioner, oftest 10.000. Teoretisk set, er antallet af repetioner for bootstrap-metoden arbitært, men i praksis vil det ikke give mening at lave for mange bootstrap estimater, da ens resultat ikke vil ændre sig signifikant.
+<!-- 2. Antal repetioner\ -->
+<!-- Jackknife kræver $n$ antal repetioner, for at estimere på en stikprøve med størrelsen $n$. Modsat, findes der et valg i bootstrap-metoden. Her har man et valgfrit antal repetioner, oftest 10.000. Teoretisk set, er antallet af repetioner for bootstrap-metoden arbitært, men i praksis vil det ikke give mening at lave for mange bootstrap estimater, da ens resultat ikke vil ændre sig signifikant. -->
 
-3. Generelle egenskaber\
+<!-- 3. Generelle egenskaber\ -->
 
-Jackknife:[@MonteCarl, afsnit 8.3.3]\
-Jackknife metoden er nyttig til at opfange outliers i ens data, samt god til at undersøge ens estimatores standardfejl.
-For jackknife estimater er standardfejlen den samme for en given stikprøve, og sammenlignet med bootstrap, en smule større. Især for medianen vil jackknife understimere standardfejlen, da median ikke er en glat statistik. FIXME (smooth statistic)
-Ligesom for mange andre statistike inferens metoder, har stikprøve størrelsen en stor betydning for nøjagtigheden af disse. Det samme gør sig tilfældet for jackknife, endda endnu mere her, da stikprøven størrelsen har en afgørende betydning for hvor mange _resamplings_ der kan foretages. 
+<!-- Jackknife:[@MonteCarl, afsnit 8.3.3]\ -->
+<!-- Jackknife metoden er nyttig til at opfange outliers i ens data, samt god til at undersøge ens estimatores standardfejl. -->
+<!-- For jackknife estimater er standardfejlen den samme for en given stikprøve, og sammenlignet med bootstrap, en smule større. Især for medianen vil jackknife understimere standardfejlen, da median ikke er en glat statistik. FIXME (smooth statistic) -->
+<!-- Ligesom for mange andre statistike inferens metoder, har stikprøve størrelsen en stor betydning for nøjagtigheden af disse. Det samme gør sig tilfældet for jackknife, endda endnu mere her, da stikprøven størrelsen har en afgørende betydning for hvor mange _resamplings_ der kan foretages.  -->
 
-Bootstrap:\
-Se kilde [@BootvsJack afsnit, 5.8] for forklarende figurer.
-
-Ligesom med jackknife, skal stikprøve størrelsen gerne være tilpas stor. Hvis den er for lille, vil nøjagtigheden af en bootstrap stikprøve falde betydeligt.
-Derudover kan data med store outliers vise sig at være et problem for bootstrap-metoden, samt kan estimationer af estimater såsom median og andre kvartiler, også vise sig at være et problem for den almindelige bootstrap-metode. Modsat jacknife har bootstrap estimatet for standardfejlen forskellige resultater hvergang den bruges. 
-
-Man skal dog være opmærksom på ved brug af bootstrap, at bootstrap-stikprøven ikke giver et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøves fordeling. Derfor bruges bootstrap altså ikke til at drage konklusiner om ens population, men derimod den valgte estimators tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller. [@BootvsJack s. 114]
-
-
-Alt i alt, er bootstrap metoden i næsten altid, udover små nichetilfælde [@PairwiseAgreementMeasures], at foretrække frem for jackknifing. 
+<!-- Alt i alt, er bootstrap metoden i næsten altid, udover små nichetilfælde [@PairwiseAgreementMeasures], at foretrække frem for jackknifing.  -->
 <!-- Især nu til dags hvor computerkraft og beregningsintesive algoritmer, oftest ikke noget der skal overvejes i statistisk inferens.  -->
