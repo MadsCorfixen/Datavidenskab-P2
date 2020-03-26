@@ -40,8 +40,6 @@ sd(fastfood)
 
 Derefter kan der tages en bootstrap-stikprøve ( _resample_ ) af stikprøven. Middelværdien og standardafvigelsen udregnes for bootstrap-stikprøven:
 
-FIXME: Indsæt fordelingen for en bootstrap-stikprøve, evt. se (Mathematical Statistics with Resampling and R side 136)
-
 ```{r}
 set.seed(1)
 resample <- sample(fastfood, size = length(fastfood), replace = TRUE)
