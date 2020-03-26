@@ -9,7 +9,7 @@ Det følgende afsnit er baseret på [@TDSBootstrap].
 
 Bootstrap er en resampling metode, til at generere yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistik inferens for på estimatorer.
 
-Når der genereres nye datasæt, bliver der tilfældigt taget et datapunkt med tilbagelægning, som bliver indsat i det nye datasæt. Dette gentages indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor man tager en _resample_ af stikprøven, som man beregner inferens på.
+Når man genererer de nye datasæt, bliver der tilfældigt taget et datapunkt med tilbagelægning, som bliver indsat i det nye datasæt. Dette gentages indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor man tager en _resample_ af stikprøven, som man beregner inferens på.
 
 Fremgangsmåden for bootstrapping, er således:
 Man starter med at have en stikprøve af en population, hvilken man trækker yderligere stikprøver fra, kaldet bootstrap stikprøver. På hver bootstrap stikprøve udføres statistisk inferens.
