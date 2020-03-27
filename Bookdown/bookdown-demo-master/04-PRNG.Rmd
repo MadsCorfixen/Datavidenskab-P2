@@ -218,10 +218,10 @@ cor(X, Y) = \frac{cov(X, Y)}{sd(X) \cdot sd(Y)}
 $$
 Hvor $cov$ angiver kovariansen og $sd$ angiver standardafvigelsen.
 
-Korrelation fortæller hvor stor en lineær sammenhæng der er mellem to variabler. Denne værdi ligger i intervallet $[-1, 1]$, hvor $-1$ påviser en perfekt negativ lineær sammenhæng, $1$ påviser en perfekt positiv lineær sammenhæng, og $0$ viser, at der ingen lineær sammenhæng er. 
+Korrelation fortæller, hvor stor en lineær sammenhæng der er mellem to variabler. Denne værdi ligger i intervallet $[-1, 1]$, hvor $-1$ påviser en perfekt negativ lineær sammenhæng, $1$ påviser en perfekt positiv lineær sammenhæng, og $0$ viser, at der ingen lineær sammenhæng er. 
 
 ```{r}
 cor(Z1, Z2)
 ```
 
-Et resultat på afrundet $-0.00048$, hvilket næsten er 0, viser altså også at der ingen korrelation er mellem ```Z1``` og ```Z2```, hvilket giver en god indiktion for, at de er uafhængige.
+Et resultat på afrundet $-0.00048$, hvilket næsten er 0, viser altså også at der ingen lineær korrelation er mellem ```Z1``` og ```Z2```, hvilket giver en indiktion for, at de er uafhængige.
