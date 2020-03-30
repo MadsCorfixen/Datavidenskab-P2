@@ -6,7 +6,7 @@ library(mosaic)
 
 En hypotesetest baserer sig på det videnskabelige princip om falsificering. Der opstilles en indledende formodning om en population, kaldet nulhypotesen $H_0$, og en alternativ, modsat hypotese $H_1$. Er den indledende formodning ikke korrekt, må den alternative hypotese være gældende.
 
-Ved en hypotesetest undersøges, hvorvidt der er en differencen mellem observerede værdier og forventede værdier, hvis $H_0$ er sand.
+Ved en hypotesetest undersøges, hvorvidt der er en difference mellem observerede værdier og forventede værdier, hvis $H_0$ er sand.
 
 Sandsynligheden for at der er en difference er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen, og derfor benyttes et mål for, hvornår differencen er _for_ stor, kaldet signifikansniveauet, $\alpha$.
 
@@ -16,7 +16,7 @@ Et mål for, hvor usandsynlig en observeret værdi er, hvis $H_0$ er sand, kalde
 
 For at kunne bestemme, om en difference mellem en observeret og forventet værdi er signifikant, benyttes en signifikanstest. En signifikanstest er en metode til at finde teststørrelsen og undersøge, om den er signifikant eller ej.
 
-Teststørrelsen findes ofte som antallet af standardafvigelser, den observerede værdi, $\hat \theta$, ligger fra den forventede værdi $\theta_0$. Teststørrelsen benævnes i dette tilfælde $t_{obs}$.
+Teststørrelsen findes ofte som antallet af standardafvigelser, den observerede værdi, $\hat \theta$, ligger fra den forventede værdi $\theta_0$.
 
 At $\hat \theta$ ligger mere end $3$ standardafvigelser fra $\theta_0$, er højst usandsynligt, da $\hat \theta$ i så fald er en outlier i populationen. I et sådan tilfælde er $\theta_0$ højst sandsynligt ikke populationens korrekte værdi.
 
@@ -26,11 +26,11 @@ En illustration af teststørrelsens betydning ved en normalfordeling kan ses på
 knitr::include_graphics('images/HippoHyppo.jpeg')
 ```
 
-Derudover benyttes testtørrelsen til at udregne _p_-værdien, som er sandsynligheden for at få en teststørrelse, der er lige så eller mere ekstrem end $t_{obs}$, hvis $H_0$ er sand.
+Derudover benyttes testtørrelsen til at udregne _p_-værdien, som er sandsynligheden for at få en teststørrelse, der er lige så eller mere ekstrem, hvis $H_0$ er sand.
 
 Værdien af teststørrelsen påvirker _p_-værdien på den måde, at når teststørrelsen bliver mere ekstrem, falder _p_-værdien. Jo mindre _p_-værdien er, des mindre stoles på $H_0$, og hvis _p_-værdien er mindre end signifikansniveauet, $\alpha$, forkastes $H_0$. Er _p_-værdien derimod større end $\alpha$, er der ikke belæg for at forkaste $H_0$ - dette betyder dog ikke, at $H_0$ givetvis er sand.
 
-Normalt arbejdes der med et signifikansniveau på 5%, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være $10\%$ eller $1\%$. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper. [@ASTA-HYPO]
+Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være $10\%$ eller $1\%$. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper. [@ASTA-HYPO]
 
 ## Hypotesetest for middelværdier (t-test)
 
@@ -38,9 +38,9 @@ I dette afsnit gennemgåes fremgangsmåden for, hvordan en hypotesetest kan brug
 
 Først er der nogle antagelser, der skal være opfyldt, for at t-testen ikke giver misvisende resultater.
 
-1. Variablen er kvantitativ
-2. Stikprøveudtagning er udført med tilfældighed
-3. Populationen er normalfordelt
+1. Variablen er kvantitativ.
+2. Stikprøveudtagning er udført med tilfældighed.
+3. Populationen er normalfordelt.
 
 Herefter opstilles hypoteserne. Nulhypotesen, $H_0: \mu = \mu_0$ og den alternative hypotese $H_1: \mu \neq \mu_0$.
 
@@ -98,7 +98,7 @@ Der er risiko for to primære fejl når der foretages en hypotesetest. Den førs
 
 En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
 
-Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau - i de fleste tilfælde $5\%$. Sandsynligheden for type-II fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på hypotesen og lille, hvis den er langt fra. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved mindre data. [@Fejltyper]
+Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau - i de fleste tilfælde $5\%$. Sandsynligheden for type-II fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen og lille, hvis den er langt fra. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved mindre data. [@Fejltyper]
 
 ```{r, figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
 knitr::include_graphics('images/Typefejl.png')

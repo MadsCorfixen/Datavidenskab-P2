@@ -6,13 +6,15 @@ library(mosaic)
 <!-- FIXME: Man skal dog være opmærksom på ved brug af bootstrap, at bootstrap-stikprøven ikke giver et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøves fordeling.  -->
 <!-- Derudover kan data med store outliers vise sig at være et problem for bootstrap-metoden, samt kan estimationer af estimater såsom median og andre kvartiler, også vise sig at være et problem for den almindelige bootstrap-metode. Modsat jacknife har bootstrap estimatet for standardfejlen forskellige resultater hvergang den bruges.  -->
 
-FIXME: Mangler at skrive om parametrisk bootstrap
+__FIXME:__ Mangler at skrive om parametrisk bootstrap
 
 Det følgende afsnit er baseret på [@TDSBootstrap].
 
-Bootstrap er en resampling metode, til at generere yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistik inferens for den valgte estimator. Det kan give indblik i tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller [@BootvsJack s. 114]. Det er her vigtigt, at stikprøven har en tilpas stor størrelse for nøjagtigheden af bootstrap.
+Bootstrap er en resampling-metode, til at generere yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistisk inferens for den valgte estimator. Det kan give indblik i tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller [@BootvsJack s. 114]. Det er her vigtigt for nøjagtigheden af bootstrap, at stikprøven har en tilpas stor størrelse.
 
-Når der genereres nye datasæt, udtages der et tilfældigt datapunkt, som indsættes i et nyt datasæt. Det udtaget datapunkt, føres tilbage i det oprindelige datasæt (kaldet tilbagelægning), og processen gentages  indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor der tages en _resample_ af stikprøven, der udføres inferens på.
+Når der genereres nye datasæt, udtages der et tilfældigt datapunkt, som indsættes i et nyt datasæt. Det udtagede datapunkt, føres tilbage i det oprindelige datasæt (kaldet tilbagelægning), og processen gentages  indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor der tages en _resample_ af stikprøven, der udføres inferens på.
+
+__FIXME:__ Afsnittet over og under skal skrives sammen.
 
 Fremgangsmåden for bootstrapping, er således:
 Indledningsvis udtages en stikprøve fra en population, hvorfra der trækkes yderligere stikprøver fra. Disse kaldes bootstrap-stikprøver. På hver bootstrap-stikprøve udføres statistisk inferens.
