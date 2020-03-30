@@ -6,7 +6,7 @@ library(mosaic)
 <!-- FIXME: Man skal dog være opmærksom på ved brug af bootstrap, at bootstrap-stikprøven ikke giver et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøves fordeling.  -->
 <!-- Derudover kan data med store outliers vise sig at være et problem for bootstrap-metoden, samt kan estimationer af estimater såsom median og andre kvartiler, også vise sig at være et problem for den almindelige bootstrap-metode. Modsat jacknife har bootstrap estimatet for standardfejlen forskellige resultater hvergang den bruges.  -->
 
-__FIXME:__ Mangler at skrive om parametrisk bootstrap
+__FIXME:__ Mangler at skrive om parametrisk bootstrap + Bootstrap-stikprøve følger ikke populationens fordeling
 
 Det følgende afsnit er baseret på [@TDSBootstrap].
 
