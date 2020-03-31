@@ -1,0 +1,127 @@
+# Exercise Session 01
+
+## Exercise 1.
+
+### (A)
+Input: $A(a_1...a_n)$
+
+Output: $a_k \wedge a_j$, hvor $a_k\leq a_j \leq ... \leq a_n$
+
+### (B)
+
+```
+Find-Tiny(A)
+  min_1 = A[1]
+  min_2 = ∞
+  for i = 2 to A.length
+    if A[i] < min_1
+      min_2 = min_1
+      min_1 = A[i]
+    elseif min_1 < A[i] < min_2
+      min_2 = A[i]
+  return (min_1, min_2)
+```
+### (C)
+
+```
+Find-Tiny(A)                        
+  min_1 = A[1]                      1
+  min_2 = ∞                         1
+  for i = 2 to A.length             n+1
+    if A[i] < min_1                 n
+      min_2 = min_1                 n
+      min_1 = A[i]                  n
+    elseif min_1 < A[i] < min_2     0
+      min_2 = A[i]                  0
+  return (min_1, min_2)             1
+```
+$T(n)=c_1+c_2+c_3(n+1)+c_4n+c_5n+c_6n+c_9$
+$T(n)=n(c_3+c_4+c_5+c_6)+c_1+c_2+c_3+c_9$
+
+## Exercise 2.
+
+### (A)
+Stopper ved return. Kører igennem 3 gange og retunerer 3
+
+### (B)
+Opfyldes ikke, retunerer ikke 0, hvis ikke tallet findes.
+
+## Exercise 3.
+```
+Kick-Flipper(A)
+B = []
+for i=A.length downto 1
+  for j=1 to A.length
+    B[j]=A[i]
+return B
+```
+### (A)
+```
+Kick-Flipper(A)            
+  B = []                     1
+  for i=A.length downto 1    n+1
+    for j=1 to A.length      n+1
+      B[j]=A[i]              n
+  return B                   1
+```
+
+$T(n)=c_1+c_2(n+1)+c_3(n+1)+c_4n+c_5$
+$T(n)=n(c_2+c_3+c_4)+c_1+c_2+c_3+c_5$
+
+### (B)
+Ellers tak!
+
+## Exercise 4.
+Det vokser kraftigt, meget, meget, meget hurtigt.
+
+## Exercise 5.
+Input: $A[1...n]$ og $B[1...m]$
+Output: True hvis $\{a_i, \text{hvor } i=1,...n\}=\{b_j, \text{hvor } j=1,...m\}$ er opfyldt, ellers False.
+
+```
+EqualElements(A,B)
+  A2=[]
+  B2=[]
+  A2[1]=A[1]
+  B2[1]=B[1]
+  
+  for i=1 to A.length
+    if A[1+i] != A[i]
+      A[2]
+      
+    for i=1 to A.length
+    if A[i] == B[i]
+    
+  ---------
+
+  if A[1] == B[1]
+    for i=2 to A.length
+      if A[i] == B[1] or A[1] == B[i]
+        
+      
+      
+  else
+    return False
+      
+ --------
+ 
+  i=1
+  j=1
+  if A[i] == B[i]
+    for i=2 to A.length
+      if A[i] == B[j-1+i]
+    
+  ---------
+  if A[1] == B[1]
+    i=2
+    j=2
+    while A[i] > B[j]
+      j += 1
+```
+
+
+
+
+
+
+
