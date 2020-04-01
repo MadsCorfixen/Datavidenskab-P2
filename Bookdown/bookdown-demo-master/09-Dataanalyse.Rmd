@@ -58,6 +58,77 @@ Population -> Almindelig statistisk inferens (middelværdi og standardfejl) -> N
 
 Konfidensintervaller 
 
+## Konfidensinterval ved hjælp af bootstrap
+
+Af det nedenstående eksempel illustreres det hvorledes bootstrapping kan udføres:
+Her er et datasæt over gennemsnitlig månedlig udgift i kroner til fastfood per hustand:
+
+```{r}
+fastfood <- c(200, 0, 100, 50, 500, 100, 0, 250, 100, 150)
+hist(fastfood, breaks = 18,
+     main="Hustandes månedlige udgifter til fastfood" ,
+     ylab="Frekvens",
+     xlab="Udgift i kroner")
+```
+
+Nu kan stikprøvens gennemsnitlige udgift og standardafvigelsen findes:
+
+```{r}
+mean(fastfood)
+sd(fastfood)
+```
+
+Derefter kan der tages en bootstrap-stikprøve ( _resample_ ) af stikprøven. Middelværdien og standardafvigelsen udregnes for bootstrap-stikprøven:
+
+```{r}
+set.seed(1)
+resample <- sample(fastfood, size = length(fastfood), replace = TRUE)
+resample
+mean(resample)
+sd(resample)
+```
+
+Dette gøres i praksis et passende antal gange, $b$, f.eks. $10,000$, hvilket gør, at der fås $10,000$ nye estimater for bootstrap-stikprøvens middelværdi:
+
+```{r}
+set.seed(1)
+fastfood_boot <- replicate(10000, {
+  mean(sample(fastfood, size = length(fastfood), replace = TRUE))
+})
+hist(fastfood_boot,
+     main="Hustandes månedlige udgifter til fastfood" ,
+     ylab="Frekvens",
+     xlab="Udgift i kroner")
+
+mean(fastfood_boot)
+sd(fastfood_boot)
+```
+
+Et $95%$ konfidensinterval kan udregnes ved:
+```{r}
+confidence_interval <- function(fastfood_boot, interval) {
+  # Standardafvigelsen af bootstrappet
+  fastfood_boot_sd <- sd(fastfood_boot)
+  # Bootstrap størrelsen
+  n <- length(fastfood_boot)
+  # Middelværdien af bootstrappet
+  fastfood_boot_mean <- mean(fastfood_boot)
+  # Estimeret standard fejl fra t-fordeling
+  standard_error <- qt((interval+1)/2, df = n - 1) * fastfood_boot_sd / sqrt(n)
+  # Konfidensintervallet som vektor
+  result <- c("lower" = fastfood_boot_mean - standard_error,
+              "upper" = fastfood_boot_mean + standard_error)
+  return(result)
+}
+confidence_interval(fastfood_boot, 0.95)
+```
+
+Ved hjælp af bootstrapping, kan det altså konkluderes, at det gennemsnitlige fastfood-budget for populationen, med $95\%$ sikkerhed, ligger mellem $140.98$ kr. og $146.56$ kr.
+
+Der kan altså ud fra bootstrapping udføre statistik inferens, såsom middelværdien for en population, hvor der eventuelt kun er givet en enkelt stikprøve.
+
+
+
 ## Parametrisk vs ikke-parametrisk
 
 Hvad er forskellen på parametrisk og ikke-parametrisk
