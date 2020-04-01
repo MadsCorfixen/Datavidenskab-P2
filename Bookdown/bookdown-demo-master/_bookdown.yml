@@ -26,6 +26,6 @@ delete_merged_file: true
 
 rmd_files: ["index.Rmd", "02-Problemanalyse.Rmd", "03-Hypotesetest.Rmd", "04-PRNG.Rmd",
             "05-Simuleringer.Rmd", "06-Permutationstest.Rmd", "07-Jackknife.Rmd",
-            "08-Bootstrap.Rmd", "09-Dataanalyse.Rmd", "96-Diskussion.Rmd", "97-Konklusion",
+            "08-Bootstrap.Rmd", "09-Dataanalyse.Rmd", "96-Diskussion.Rmd", "97-Konklusion.Rmd",
             "98-Perspektivering.Rmd", "99-Bibliografi.Rmd"]
 
