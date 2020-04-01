@@ -6,11 +6,42 @@
 
 <!-- 3. Sammenligning af parametrisk og ikke-parametrisk bootstrap.  -->
 
-## Simulere data
+## Simulere data 
+
+Til dataanalysen skal der simuleres populationer.
 
 Populationer:
-Normalfordeling.
-Skæv fordeling.
+Normalfordeling. *
+
+```{r, echo=FALSE}
+pop_norm <- rnorm(n = 100000, mean = 0, sd = 1)
+hist(pop_norm)
+```
+
+```{r,echo=FALSE}
+stik_norm <- sample(x = pop_norm, size = 100)
+hist(stik_norm)
+```
+
+```{r}
+mean(pop_norm)
+sd(pop_norm)
+mean(stik_norm)
+sd(stik_norm)
+```
+
+```{r}
+boot_norm <- replicate(10000, mean(sample(stik_norm, size = 100, replace = TRUE)))
+hist(boot_norm)
+mean(boot_norm)
+```
+
+
+
+
+
+
+Skæv fordeling. *
 Bimodal fordeling.
 Uniform fordeling.
 T-fordeling i forhold til antal frihedsgrader.
@@ -32,8 +63,10 @@ Konfidensintervaller
 Hvad er forskellen på parametrisk og ikke-parametrisk
 Hvornår kan de hver anvendens
 
-_Andre former for bootstrap der skal kigges på?_
+Andre former for bootstrap der skal kigges på?
 
 ## Resultater
 
 Diskutere resultater af dataanalysen?
+
+Er P-hacking relevant for bootstrap?

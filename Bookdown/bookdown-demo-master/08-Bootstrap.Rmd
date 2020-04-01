@@ -89,7 +89,6 @@ Ved hjælp af bootstrapping, kan det altså konkluderes, at det gennemsnitlige f
 
 Der kan altså ud fra bootstrapping udføre statistik inferens, såsom middelværdien for en population, hvor der eventuelt kun er givet en enkelt stikprøve.
 
-
 __Andel af oprindelige observationer__
 
 Da bootstrap-stikprøver fungerer med tilbagelægning, vil der i forbindelse med generering af nye stikprøver, forekomme gentagelser af observationer. Dette vil ligeledes betyde, at der vil være observationer som udelades. Derfor er det vigtigt at have en viden om, hvor mange af de oprindelige observationer, som i gennemsnit medtages i nye bootstrap-stikprøver, og ligeledes, hvor mange, som udelades.
@@ -123,3 +122,5 @@ Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige 
 
 <!-- Alt i alt, er bootstrap metoden i næsten altid, udover små nichetilfælde [@PairwiseAgreementMeasures], at foretrække frem for jackknifing.  -->
 <!-- Især nu til dags hvor computerkraft og beregningsintesive algoritmer, oftest ikke noget der skal overvejes i statistisk inferens.  -->
+
+### Parametrisk / Ikke-Parametrisk Bootstrap
