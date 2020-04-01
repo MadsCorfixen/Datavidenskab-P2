@@ -3,30 +3,53 @@ library(mosaic)
 ```
 ## Bootstrap
 
-<!-- FIXME: Man skal dog være opmærksom på ved brug af bootstrap, at bootstrap-stikprøven ikke giver et bedre bud på populationens middelværdi end stikprøvens, da bootstrap-stikprøven følger den orginiale stikprøves fordeling.  -->
+FIXME: Vil gerne lave en tegning ligesom https://www.youtube.com/watch?v=O_Fj4q8lgmc&list=PLqzoL9-eJTNDp_bWyWBdw2ioA43B3dBrl&index=2&t=0s  ved 11:18. 
 
-<!-- Derudover kan data med store outliers vise sig at være et problem for bootstrap-metoden, samt kan estimationer af estimater såsom median og andre kvartiler, også vise sig at være et problem for den almindelige bootstrap-metode. Modsat jacknife har bootstrap estimatet for standardfejlen forskellige resultater hvergang den bruges.  -->
+__Indledning__
 
-__FIXME:__ Mangler at skrive om parametrisk bootstrap + Bootstrap-stikprøve følger ikke populationens fordeling
+I det følgende afsnit vil den teoretiske del af en resampling metode, kaldet bootstrap, blive beskrevet. Senere vil der blive undersøgt hvordan bootstrap kan bruges praktisk. 
+I denne resampling metode, findes der mange undergrene, og afhængigt af den individuelle situation hvor der skal udføres statistisk inferens, vil man vælge en undergren af bootstrap. Der gøres opmærksom på, at i den resterende del af rapporten, vil ordet bootstrap henvise til den ikke-parametriske bootstrap. Den ikke-parametriske bootstrap-metode, er når der ikke sættes specifikke antagelser eller en præcis model for population, når undersøgelsen udføres.(FIXME: Kilde file:///C:/Users/magnu/Downloads/Berrar_EBCB_Bootstrapping_preprint.pdf side 3)
 
-__FIXME:__ Mere teoretiske ting - bootstrap-stikprøvens fordeling samt standardfejl, hypotesetest og konfidensinterval vha. bootstrap
+__Hvad er bootstrap?__
 
-Det følgende afsnit er baseret på [@TDSBootstrap].
+Helt basalt, er bootstrap en resampling-metode, der bruges til at generere yderligere datasæt ud fra den givne stikprøve, hvor målet er at udføre statistisk inferens for den valgte estimator. For eksempel kan bootstrap bruges til at give et indblik i tendenser for estimatoren, såsom standardfejlen, forventningsrethed eller den kan bruges til at udregne konfidensintervaller [@BootvsJack s. 114]. Der gøres opmærksom på at, bootstrap ikke bruges til at få et bedre parameter estimat, da bootstrap-fordelingen er centreret omkring stikprøvens estimat, f.eks. middelværdien $\bar {y}$, og ikke populationens middelværdi, $\mu$.
 
-Bootstrap er en resampling-metode, til at generere yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistisk inferens for den valgte estimator. Det kan give indblik i tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller [@BootvsJack s. 114]. Det er her vigtigt for nøjagtigheden af bootstrap, at stikprøven har en tilpas stor størrelse.
+Det er vigtigt for nøjagtigheden af bootstrap, at stikprøven har en tilpas stor størrelse. (FIXME: Er det? Mente vi så at en af grundene til at bruge bootstrap er hvis ens stikprøve er lille ... YouTube). Når der genereres nye datasæt, udtages der et tilfældigt datapunkt, som indsættes i et nyt datasæt.
 
-Når der genereres nye datasæt, udtages der et tilfældigt datapunkt, som indsættes i et nyt datasæt. Det udtagede datapunkt, føres tilbage i det oprindelige datasæt (kaldet tilbagelægning), og processen gentages indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor der tages en _resample_ af stikprøven, der udføres inferens på.
+Bootstrap opererer med tilbagelægning, så der er en sandsynlighed for at et givent datapunkt bliver udtaget mere end en gang, samt er der en sandsynlighed for at et datapunkt slet ikke bliver udvalgt. Denne process gentages indtil det nye datasæt har sammme størrelse som stikprøven. I alt bliver der genereret $b$ antal datasæt, som der hver især udføres statistisk inferens på. Ud fra disse estimater, kan der udarbejdes en parameterfordeling (FIXME), hvor der udfra kan udføres yderligere statistisk inferens. 
 
-__FIXME:__ Afsnittet over og under skal skrives sammen.
+Fordelen ved bootstrap er at, selvom man kun har en stikprøve fra den underliggende population, er der stadig mulighed for at udregne en parameter fordeling, uden at der kræves yderligere stikprøver fra fordelingen. (Illustrer)
 
-Fremgangsmåden for bootstrapping, er således:
-Indledningsvis udtages en stikprøve fra en population, hvorfra der trækkes yderligere stikprøver fra. Disse kaldes bootstrap-stikprøver. På hver bootstrap-stikprøve udføres statistisk inferens.
-Efter $b$ gentagelser, kan der eksempelvis udregnes standardfejl og et tilhørende konfidensinterval for stikprøven.
+__Antal resamples__
 
-### Andel af oprindelige observationer
+Standarden for størrelsen af $b$ har typisk været mindst 1000, men nu til dags, med den computerkraft der findes, er anbefalingen 10,000 gange. Det kan undres, at der ikke vælges at genere et endnu større antal bootstrap-stikprøver end de 10,000. Grunden til dette er, at da bootstrap-stikprøven generes ud fra den obseveret data med $n$ størrelse, vil der ikke skaffes yderlige information fra stikprøven med et større $b$. Det eneste der vil opnås ved et højere $b$, er et lidt bedre estimat. 
 
-Da bootstrap-stikprøver fungerer med tilbagelægning, vil der i forbindelse med generering af nye stikprøver, forekomme gentagelser af observationer. Dette vil ligeledes betyde, at der vil være observationer som udelades. Derfor er det vigtigt at have en viden om, hvor mange af de oprindelige observationer, som i gennemsnit medtages i nye bootstrap-stikprøver, og ligeledes, hvor mange, som udelades.
+__Andel af oprindelige observationer__
 
+Da bootstrap-stikprøver fungerer med tilbagelægning, vil der i forbindelse med generering af nye stikprøver, forekomme gentagelser af observationer. Dette vil ligeledes betyde, at der vil være observationer som udelades. 
+
+Som nævnt, udnytter bootstrap-metoden tilbagelægning, og det er derfor vigtigt at have en viden om, hvor mange af de oprindelige observationer, som i gennemsnit medtages i nye bootstrap-stikprøver, og ligeledes, hvor mange, som udelades.
+
+FIXME Læs lige igennem
 Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige _n_ observationer er $1-1/n$, og sandsynligheden for, at denne observation ikke udtages _n_ gange er $(1-1/n)^n$. Når stikprøvestørrelsen, $n$, går mod uendeligt gælder, at $(1-1/n)^n  = 1/e \approx 0.368$. Derfor vil en bootstrap-stikprøve af tilpas stor størrelse indeholde $\approx 63.2\%$ observationer fra den oprindelige stikprøve, og udelade $\approx 36.8\%$. [@SAS]
 
-## Parametrisk / Ikke-Parametrisk Bootstrap
+<!-- GAMMELT AFSNIT -->
+<!-- __FIXME:__ Mangler at skrive om parametrisk bootstrap + Bootstrap-stikprøve følger ikke populationens fordeling -->
+
+<!-- __FIXME:__ Mere teoretiske ting - bootstrap-stikprøvens fordeling samt standardfejl, hypotesetest og konfidensinterval vha. bootstrap -->
+
+<!-- Det følgende afsnit er baseret på [@TDSBootstrap]. -->
+
+<!-- Bootstrap er en resampling-metode, til at generere yderligere datasæt ud fra stikprøven, hvor målet er at udføre statistisk inferens for den valgte estimator. Det kan give indblik i tendenser, såsom standardfejlen, forventingsrethed eller konfidensintervaller [@BootvsJack s. 114]. Det er her vigtigt for nøjagtigheden af bootstrap, at stikprøven har en tilpas stor størrelse. -->
+
+<!-- Når der genereres nye datasæt, udtages der et tilfældigt datapunkt, som indsættes i et nyt datasæt. Det udtagede datapunkt, føres tilbage i det oprindelige datasæt (kaldet tilbagelægning), og processen gentages indtil det nye datasæt har samme størrelse som stikprøven. Hvert datapunkt har lige stor sandsynlighed for at blive udvalgt, $\frac{1}{n}$, hvor $n$ er antal observationer. Hele denne process gentages $b$ antal gange, hvor der tages en _resample_ af stikprøven, der udføres inferens på. -->
+
+<!-- Fremgangsmåden for bootstrapping, er således: -->
+<!-- Indledningsvis udtages en stikprøve fra en population, hvorfra der trækkes yderligere stikprøver fra. Disse kaldes bootstrap-stikprøver. På hver bootstrap-stikprøve udføres statistisk inferens. -->
+<!-- Efter $b$ gentagelser, kan der eksempelvis udregnes standardfejl og et tilhørende konfidensinterval for stikprøven. -->
+
+<!-- ### Andel af oprindelige observationer -->
+
+<!-- Da bootstrap-stikprøver fungerer med tilbagelægning, vil der i forbindelse med generering af nye stikprøver, forekomme gentagelser af observationer. Dette vil ligeledes betyde, at der vil være observationer som udelades. Derfor er det vigtigt at have en viden om, hvor mange af de oprindelige observationer, som i gennemsnit medtages i nye bootstrap-stikprøver, og ligeledes, hvor mange, som udelades. -->
+
+<!-- Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige _n_ observationer er $1-1/n$, og sandsynligheden for, at denne observation ikke udtages _n_ gange er $(1-1/n)^n$. Når stikprøvestørrelsen, $n$, går mod uendeligt gælder, at $(1-1/n)^n  = 1/e \approx 0.368$. Derfor vil en bootstrap-stikprøve af tilpas stor størrelse indeholde $\approx 63.2\%$ observationer fra den oprindelige stikprøve, og udelade $\approx 36.8\%$. [@SAS] -->
