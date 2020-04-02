@@ -13,22 +13,22 @@ Der findes en del forskellige bootstrap-metoder, som varierer på forskellige pu
 
 __Hvad er bootstrap?__
 
-Bootstrap en resampling-metode, der bruges til at generere yderligere datasæt ud fra den givne stikprøve, hvor målet er at udføre statistisk inferens for den valgte estimator (FIXME måske teststørrelse i stedet?). For eksempel kan bootstrap bruges til at give et indblik i tendenser for estimatoren (FIXME teststørrelsen?), såsom standardfejlen og forventningsrethed, eller den kan bruges til at udregne konfidensintervaller. Der gøres opmærksom på, at bootstrap ikke kan bruges til at få et bedre estimat for parameteren, da bootstrap-fordelingen er centreret omkring stikprøvens estimat, f.eks. middelværdien $\bar {y}$, og ikke populationens middelværdi, $\mu$ [@BootvsJack s. 114].
+Bootstrap en resampling-metode, der bruges til at generere yderligere datasæt ud fra den givne stikprøve, hvor målet er at udføre statistisk inferens for en valgt teststørrelse. For eksempel kan bootstrap bruges til at give et indblik i tendenser for teststørrelsen, såsom standardfejlen og forventningsrethed, eller den kan bruges til at udregne konfidensintervaller. Der gøres opmærksom på, at bootstrap ikke kan bruges til at få et bedre estimat for parameteren, da bootstrap-fordelingen er centreret omkring stikprøvens estimat, f.eks. middelværdien $\bar {y}$, og ikke populationens middelværdi, $\mu$ [@BootvsJack s. 114].
 
-Det er vigtigt for nøjagtigheden af bootstrap, at stikprøven har en tilpas stor størrelse. (FIXME: Er det? Mente vi så at en af grundene til at bruge bootstrap er hvis ens stikprøve er lille ... YouTube. Jeg tror, det skal forstås sådan, at fordi man antager, at ens stikprøve er repræsentativ for populationen, når man bootstrapper, så vil et bootstrap-estimat gælde for en lille del af populationen, hvis ens stikprøve er lille. En lille stikprøve vil ikke give meget information omkring populationen, selvom den er repræsentativ. Se https://stats.stackexchange.com/questions/33300/determining-sample-size-necessary-for-bootstrap-method-proposed-method).
+<!-- Det er vigtigt for nøjagtigheden af bootstrap, at stikprøven har en tilpas stor størrelse. (FIXME: Er det? Mente vi så at en af grundene til at bruge bootstrap er hvis ens stikprøve er lille ... YouTube. Jeg tror, det skal forstås sådan, at fordi man antager, at ens stikprøve er repræsentativ for populationen, når man bootstrapper, så vil et bootstrap-estimat gælde for en lille del af populationen, hvis ens stikprøve er lille. En lille stikprøve vil ikke give meget information omkring populationen, selvom den er repræsentativ. Se https://stats.stackexchange.com/questions/33300/determining-sample-size-necessary-for-bootstrap-method-proposed-method). -->
 
-Bootstrap opererer med tilbagelægning, så der er en sandsynlighed for at et givent datapunkt bliver udtaget mere end en gang, samt er der en sandsynlighed for at et datapunkt slet ikke bliver udvalgt. Hver bootstrap-stikprøve har størrelsen $n$, altså den samme størrelse som stikprøven. (FIXME her kunne andelen af oprindelige observationer passe godt ind) I alt bliver der genereret $b$ antal bootstrap-stikprøver, som der hver især udføres statistisk inferens på. Ud fra disse estimater, kan der estimeres en stikprøvefordeling, hvor der udfra kan udføres yderligere statistisk inferens. (FIXME: Kilde på tilbagelægning? måske [@TDSBootstrap]) (FIXME Her kunne antal resamples passe godt ind)
+Bootstrap opererer med tilbagelægning, så der er en sandsynlighed for at et givent datapunkt bliver udtaget mere end en gang, samt er der en sandsynlighed for at et datapunkt slet ikke bliver udvalgt. Hver bootstrap-stikprøve har størrelsen $n$, altså den samme størrelse som stikprøven. (FIXME her kunne andelen af oprindelige observationer passe godt ind) I alt bliver der genereret $b$ antal bootstrap-stikprøver, som der hver især udføres statistisk inferens på. Ud fra disse estimater, kan der estimeres en stikprøvefordeling, hvor der udfra kan udføres yderligere statistisk inferens [@TDSBootstrap]. (FIXME Her kunne antal resamples passe godt ind)
 
-Fordelen ved bootstrap er, at selvom man kun har en stikprøve fra den underliggende population, er der stadig mulighed for at estimere stikprøvefordelingen, uden at der kræves yderligere stikprøver fra populatonen. (Illustrer)
+Fordelen ved bootstrap er, at selvom man kun har en stikprøve fra den underliggende population, er der stadig mulighed for at estimere stikprøvefordelingen, uden at der kræves yderligere stikprøver fra populatonen. 
 
-```{r, figur-Bootstrap, out.width='75%', fig.align='center', fig.cap = "Her er illustreret hvordan, der teoretisk set kan udregnes en stikprøvefordeling, ved mange stikprøve udtræk fra population (Mange stikprøver). Kan dette ikke lade sig gøre, kan bootstrap udnyttes, til at finde et estimat af stikprøvefordelingen.", echo = FALSE}
+```{r, figur-Bootstrap_illustration, out.width='75%', fig.align='center', fig.cap = "Her er illustreret forskellen mellem at finde den teoretiske stikprøvefordeling ved hjælp af mange stikprøver fra population, og måden hvorpå stikprøvefordelingen kan findes ved hjælp af kun en stikprøve, der udføres bootstrap på", echo = FALSE}
 knitr::include_graphics('images/normalvboot.PNG')
 ```
 
 
 __Antal resamples__
 
-Standarden for størrelsen af $b$ har typisk været mindst 1000, men nu til dags, med den computerkraft der findes, er anbefalingen 10,000 gange (FIXME synes bare, vi skal beskrive, hvad der er normen nu - ved godt, han siger det i videoen, men synes ikke, det er super relevant). Det kan undres, at der ikke vælges at genere et endnu større antal bootstrap-stikprøver end de 10,000. Grunden til dette er, at bootstrap-stikprøven generes ud fra den obseveret data med $n$ størrelse, og der vil derfor ikke skaffes yderlige information fra stikprøven med et større $b$. Det eneste der vil opnås ved et højere $b$, er et lidt bedre estimat. (FIXME: Kilde? Er fra 10:20 https://www.youtube.com/watch?v=O_Fj4q8lgmc&list=PLqzoL9-eJTNDp_bWyWBdw2ioA43B3dBrl&index=2&t=0s)
+Med den eksisterende computerkraft tilgængelig i dag, anbefales der mindst 10,000 resamples, derved $b = \geq 10,000$, for at få et nøjagtigt estimat. Det kan undres, at der ikke vælges at genere et endnu større antal bootstrap-stikprøver end de 10,000. Grunden til dette er, at bootstrap-stikprøven generes ud fra den obseveret data med $n$ størrelse, og der vil derfor ikke skaffes yderlige information om populationen med et større $b$. Det eneste der vil opnås ved et højere $b$, er et lidt bedre estimat. (FIXME: Kilde? Er fra 10:20 https://www.youtube.com/watch?v=O_Fj4q8lgmc&list=PLqzoL9-eJTNDp_bWyWBdw2ioA43B3dBrl&index=2&t=0s)
 
 __Andel af oprindelige observationer__
 
@@ -39,15 +39,14 @@ Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige 
 
 
 __Ikke færdigt__
-
-
+FIXME
+Overvejer at lave en illustration ligesom i bogen Mathematical Statistics with Resampling and R side 108
 ```{r}
 set.seed(1)
-norm_pop <- rnorm(n = 100, mean = 23, sd = 7)
+norm_pop <- rnorm(n = 1000, mean = 23, sd = 7^2)
 hist(norm_pop, prob = TRUE)
 lines(density(norm_pop))
 
-norm_stik <- 
 ```
 
 <!-- GAMMELT AFSNIT -->
