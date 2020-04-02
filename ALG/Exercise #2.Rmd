@@ -1,0 +1,65 @@
+# ALG 2
+
+## Exercise 1.
+
+### 3.1-1
+Prove that $max(f(n),g(n))= \Theta(f(n)+g(n))$
+
+$f(n) = 1$
+$g(n) = 2$
+
+$max(f(n),g(n))=2$
+$\Theta(f(n)+g(n))=3$
+
+Summen vil altid være større end de enkelte led. Gennemsnittet vil altid være mindre end det største led. $c_1 = 0.5$, og $c_2 = 2$, så har man de to konstanter.
+
+### 3.1-4
+Is $2^{n+1} = O(2^n)?$
+
+$2^{n+1} = 2^n \cdot 2^1= O(2^n)$ Yay
+
+is $2^{2n}= O(2^n)?$
+
+$2^{2n} = 2^{2^n} \neq O(2^n)$ Nay
+
+## Exercise 2.
+```
+SumUpTo(n)
+  s = 0
+  for i = 1 to n
+    s = s + i
+  return s
+```
+Prove that given $n \in \mathbb{N}$, SumUpTo terminates and returns $\frac{n(n+1)}{2}$.
+
+__Loop Invariants:__
+
+_Initialisation:_ $s = \frac{(i-1)i}{2}$. Inden første iteration $i=1$ og $s=0$. Korrekt.
+
+_Maintenance:_ 
+
+Fuck det her pis
+
+## Exercise 3.
+a. $0.001n^2+70000n = \Theta(n^2)$
+b. $2^n + n^10000 = \Theta(2^n)$
+c. $n^k+c^n = \Theta(c^n)$
+d. $log^kn+n^e = \Theta(n^e)$
+e. $2^n+2^{n/2} = \Theta(2^n)$
+f. $n^{log{c}}+c^{logn} = \Theta(n^{logc}) \wedge \Theta(c^{logn})$
+
+## Exercise 4.
+
+$c_1(n+1)+c_2(n)+c_3(\sum_{i=1}^{n}t_j)+c_4(\sum_{i=1}^{n}t_j-1)+c_5(\sum_{i=1}^{n}t_j-1)+c_6(\sum_{i=1}^{n}t_j-1)$
+
+$\Updownarrow$
+
+$c_1(n+1)+c_2(n)+c_3(\frac{n\cdot(n+1)}{2})+c_4(\frac{n\cdot(n-1)}{2})+c_5(\frac{n\cdot(n-1)}{2})+c_6(\frac{n\cdot(n-1)}{2})$ 
+
+$\Updownarrow$
+
+$c_1+(c_1+c_2)n+c_3(\frac{n\cdot(n+1)}{2})+(c_4+c_5+c_6)(\frac{n\cdot(n-1)}{2})$
+
+$\Updownarrow$
+
+$\Theta(n^2)$
