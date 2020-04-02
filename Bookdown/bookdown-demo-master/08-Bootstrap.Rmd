@@ -37,6 +37,19 @@ Som nævnt, udnytter bootstrap-metoden tilbagelægning, og det er derfor vigtigt
 FIXME Læs lige igennem
 Sandsynligheden for, at en specifik observation ikke udtages fra de oprindelige _n_ observationer er $1-1/n$, og sandsynligheden for, at denne observation ikke udtages _n_ gange er $(1-1/n)^n$. Når stikprøvestørrelsen, $n$, går mod uendeligt gælder, at $(1-1/n)^n  = 1/e \approx 0.368$. Derfor vil en bootstrap-stikprøve af tilpas stor størrelse indeholde $\approx 63.2\%$ observationer fra den oprindelige stikprøve, og udelade $\approx 36.8\%$. [@SAS]
 
+
+__Ikke færdigt__
+
+
+```{r}
+set.seed(1)
+norm_pop <- rnorm(n = 100, mean = 23, sd = 7)
+hist(norm_pop, prob = TRUE)
+lines(density(norm_pop))
+
+norm_stik <- 
+```
+
 <!-- GAMMELT AFSNIT -->
 <!-- __FIXME:__ Mangler at skrive om parametrisk bootstrap + Bootstrap-stikprøve følger ikke populationens fordeling -->
 
