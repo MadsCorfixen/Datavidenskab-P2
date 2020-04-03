@@ -1,0 +1,85 @@
+# ALG - Exercise 8
+
+## Exercise 1.
+Implement a recursive variant of the Tree-Insert procedure.
+
+Normal variant:
+
+```
+TREE-INSERT(T, z)
+  y = NIL
+  x = T.root
+  while x != NIL
+    y = x
+    if z.key < x.key
+      x = x.left
+    else x = x.right
+  z.p = y
+  if y == NIL
+    T.root = z
+  elseif z.key < y.key
+    y.left = z
+  else y.right = z
+```
+
+Recursive variant:
+
+```
+TREE-INSERT-REC(T, z)
+  
+```
+  
+## Exercise 2.
+We can sort a sequence of $n$ numbers by iteratively inserting each number in a binary search tree and then performing an inorder tree walk. Write the pseudocode of this algorithm. What are the worst-case and best-case running times for this sorting algorithm?
+
+### Algorithm
+
+```
+TREE-INSERT-SEQ(T, Z)
+  let T be an empty BST
+  for i = 1 to Z.length
+    TREE-INSERT(T, z[i])
+  INORDER-TREE-WALK(T.root)
+```
+
+### Worst-case running time
+
+Tree i unbalanced, therefore the height is $n$.
+
+$T(n) = c_1 + (n+1)c_2 + (n\cdot \Theta(h))c_3 + \Theta(n)c_4$
+
+Height of the tree is $n$, so the term $n \cdot \Theta(h) c_3$ dominates.
+
+$T(n) = \Theta(n^2)$
+
+### Best-case running time
+
+Tree is balanced, therefore the height is $lg(n)$
+
+$T(n) = c_1 + (n+1)c_2 + (n\cdot \Theta(h))c_3 + \Theta(n)c_4$
+
+Height of the tree is $n \cdot lg(n)$, so the term $n \cdot \Theta(lg(n))$ dominates
+
+$T(n) = \Theta(n \cdot lg(n))$
+
+
+## Exercise 3.
+Consider the binary search tree $T$ depicted in Figure 1. Delete the node with $key = 10$ from $T$ by applying the procedure Tree-Delete(T, z) as described in CLRS pp. 298.
+
+(Case D) Node 10 is replaced by node 11. And the node that was previously node 11 is replaced by node 12.
+
+## Exercise 4.
+Show the red-black trees that result after successively inserting the keys $41; 38; 31; 12; 19; 8$ into an initially empty red-black tree.
+
+
+
+
+
+
+
+
+
+
+
+
+
