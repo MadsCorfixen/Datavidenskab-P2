@@ -4,29 +4,44 @@ library(mosaic)
 ## Bootstrap Hypotesetest
 
 Der startes med at der er to uafhængige stikprøver: 
-En observeret stikprøve 1 med størrelen _n_: $\bar{x}_{obs}=\{x_{obs1},x_{obs2},...,x_{obs~n}\}$\ 
+
+En observeret stikprøve 1 med størrelen _n_: $\bar{x}_{obs}=\{x_{obs1},x_{obs2},...,x_{obs~n}\}$
+
+
 En observeret stikprøve 2 med størrelen _m_: $\bar{y}_{obs}=\{y_{obs1},y_{obs2},...,y_{obs~m}\}$ 
+
+
 Her kan den observeret stikprøve middelværdi forskel beregnes: $t^*_{obs}=\bar{x}^*_{obs}-\bar{y}^*_{obs}$
 
 Så opsættes der en hypotese, $H_0$, en alternativ hypotese, $H_1$, og et signifikansniveau, $\alpha$:
 
 $H_0=\text{Begge stikprøver kommer fra den samme population}$
+
+
 $H_1=\text{Begge stikprøver kommer IKKE fra den samme population og } \mu_x>\mu_y$
+
+
 $\alpha=0.05$
+
 
 Herefter udføres bootstrap metoden for at finde en _p-værdi_:
 
+
 Det første punkt, er at forene de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer.
+
 
 Andet punkt, laver man en _bootstrap_ stikprøve af $n+m$ observationer med _erstatning_ fra den samlede stikprøve
 
+
 Tredje punkt, udregnes middelværdien af de første _n_-observationer og kalder denne for $\bar{x}^*$. Der udregnes middelværdien af de resterende _m_-observationer og kalder denne for $\bar{y}^*$. Til sidst, vurder test-størrelsen: $t^*=\bar{x}^*-\bar{y}^*$
+
 
 Fjerde punkt, gentages andet og tredje punkt _B_ gange, og få _B_ værdier af test-størrelsen.
 
+
 Femte punkt, udregnes den ønskede _p-værdi_ som: $\text{p-værdi}=\frac{\text{antal gange }\{t^*>t^*_{obs}\}}{B}$
 
-forkast $H_0$ hvis $\text{p-værdi}<\alpha$, ellers kan $H_0$ ikke forkastes, og dermed kan $H_1$ accepteres som værende sandsynlig.
 
+Forkast $H_0$ hvis $\text{p-værdi}<\alpha$, ellers kan $H_0$ ikke forkastes, og dermed kan $H_1$ accepteres som værende sandsynlig.
+[@BooHypo] 
 
-https://faculty.psy.ohio-state.edu/myung/personal/course/826/bootstrap_hypo.pdf
