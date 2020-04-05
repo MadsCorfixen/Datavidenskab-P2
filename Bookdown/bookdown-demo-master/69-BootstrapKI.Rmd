@@ -60,33 +60,12 @@ __Bootstrap-konfidensintervaller ved hjælp af t-metoden__
 
 Konfidensintervaller kan også findes ved den mere traditionelle måde ved hjælp af standardfejlen.
 
-__FIXME:__ (Det er pænt umuligt at finde en brugbar kilde) Skal nok også øverst, så man kan sige at det er noget lort, som der ikke vil benyttes
+
+
+__FIXME:__ (Kilde + kræver det er t-fordelt, og er kun brugbart hvis det er tilfældet)
 
 Formlen for konfidensintervallet er:
 
 $\text{KI}=[\hat\theta-t^{(\alpha/2)}_{n-1}\cdot \hat{\text{se}},\hat\theta-t^{(1-\alpha/2)}_{n-1}\cdot\hat{\text{se}}]$
-
-
-```{r}
-ESF <- sd(bootstrap_fordeling) # /sqrt(n)
-
-bs <- (SortedData[IndexUpper]-theta_hat)/ESF
-bss <- 
-
-KI_SF <- c(Lower = theta_hat-1.96*ESF, Upper = theta_hat+1.96*ESF)
-KI_SF1 <- c(Lower = theta_hat-ESF*SortedData[IndexUpper], Upper = theta_hat+ESF*SortedData[IndexLower]) # NEJ
-
-KI_SF
-KI_SF1 # NEJ
-```
-
-```{r}
-hist(bootstrap_fordeling)
-```
-
-
-__Bias-corrected bootstrap-konfidensintervaller__
-xx
-
 
 __FIXME:__ (Eventuel sammenligning)
