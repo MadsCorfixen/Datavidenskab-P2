@@ -26,6 +26,24 @@ knitr::include_graphics('images/normalvboot.PNG')
 ```
 
 
+__Beregning af standard fejl__ 
+
+Det følgende afsnit at primært skrevet på baggrund af [@TDSBootstrap]
+
+Standardafvigelsen for en estimator, beskrives som _standard fejl_. Den er et udtryk for, hvor stor en afvigelse der er fra den aktuelle parameter til stikprøvens estimat. Jo mindre _standard fejlen_ er, desto mindre er afvigelsen mellem estimatet og parameteren, derved en højere nøjagtighed for estimatet. __FIXME__ Som udgangspunkt vil en stikprøves middelværdi, $\bar{X}$, aldrig være $= \mu$, fordi der ved udtagning af en stikprøve, i hvert tilfælde vil være variabilitet
+
+$\sigma_\bar{x} = \frac{\sigma}{\sqrt{n}}$, hvor $\sigma$ er standardafvigelsen for populationen og n er størrelsen på stikprøven. 
+
+__FIXME__ Når der arbejdes med data udover det teoretiske, vil standardafvigelsen for populationen, $\sigma$, altid være ukendt. Derfor anvendes den _estimeret standardfejl_ ofte som måling i stedet for populationens standardafvigelse. Den _estimeret stadardfejl_ bruger stikprøvens standardafvigesle, _S_ som et estimat for standardafvigelsen for populationen: 
+
+$SE_\bar{X} = \sigma_\bar{x} \approx \frac{S}{\sqrt{n}}$, hvor $S = \sum_{i=1}^{n} \frac{(x_i - \bar{x})^2}{n - 1}$, er stikprøvens standardafvigelse for n uafhængige datapunkter, og n er størrelsen på stikprøven.
+
+Såfremt en estimator er normalfordelt eller tilnærmelsesvis er normalfordelt, kan det forventes at et estimat vil være mindre end en standardafvigelse fra det forventet i $68%$ af tilfældene og mindre end to standardfejl fra i $95%$ af tilfældene. 
+
+Dette kan kombineres med _den centrale grænseværdisætning_, om en tilpas stor stikprøve, som derved giver en stikprøve fordeling som er tilnærmelsesvis normalfordelt er det muligt at sige med overvejende sikkerhed at $\mu$ ligger indenfor to standardfejl af $\bar{X}$, $(\bar{X} - 2 \cdot SE_\bar{X}, \bar{X} + 2 \cdot SE_\bar{X} )$
+
+Dog er dette ikke altid lige til i virkeligheden, oftest er der ikke tilstrækkelig informationer om populationen eller fordeligen af denne, samtidig kræver det at der er nogle specifikke krav som er tilstede. Anvendelse af standardfejl i forbindelse med bootstrap-stikprøver...
+
 __Antal resamples__
 
 Med den eksisterende computerkraft tilgængelig i dag, anbefales der mindst 10,000 resamples, derved $b = \geq 10,000$, for at få et nøjagtigt estimat. Det kan undres, at der ikke vælges at genere et endnu større antal bootstrap-stikprøver end de 10,000. Grunden til dette er, at bootstrap-stikprøven generes ud fra den obseveret data med $n$ størrelse, og der vil derfor ikke skaffes yderlige information om populationen med et større $b$. Det eneste der vil opnås ved et højere $b$, er et lidt bedre estimat. (FIXME: Kilde? Er fra 10:20 https://www.youtube.com/watch?v=O_Fj4q8lgmc&list=PLqzoL9-eJTNDp_bWyWBdw2ioA43B3dBrl&index=2&t=0s)
