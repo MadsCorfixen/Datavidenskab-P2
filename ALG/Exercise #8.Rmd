@@ -83,3 +83,7 @@ Show the red-black trees that result after successively inserting the keys $41; 
 
 
 
+
+
+
+
