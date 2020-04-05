@@ -1,0 +1,92 @@
+### Bootstrap-konfidensintervaller
+
+__FIXME:__ (KILDER... fuck kilder... rip wiki)
+
+Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan foreteages ved $\text{KI} = [\hat\theta - 1.96\cdot \frac{\sigma}{\sqrt{n}},\hat\theta + 1.96\cdot \frac{\sigma}{\sqrt{n}}]$. Hvis ikke fordelingen er kendt, er det ikke muligt, at foretage et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres på flere forskellige metoder.
+
+__Bootstrap-konfidensintervaller ved hjælp af percentiler__
+
+__FIXME:__(Kan man skrive noget andet end -te)
+En intuitiv fremgangsmåde til at bestemme et konfidansinterval ved percentiler er, at bruge det $b \cdot \frac{\alpha}{2}$-te og $b(1-\frac{\alpha}{2})$-te percentil, hvor $b$ er antallet af bootstrap repitationer.
+
+Efterfølgende foretages bootstrap på stikprøven, hvor efter der foretages statistisk inferens, som så sorteres.
+
+```{r}
+data <- rnorm(100, mean = 0, sd = 1) # Tilfældig stikprøve
+n <- length(data)
+b <- 100000 # Bootstrap repitaioner. Gerne større end 10.000
+
+bootstrap_fordeling <- replicate(b, {
+  x <- mean(sample(data, size = n, replace = TRUE))
+}) # Bootstrap over middelværdien
+
+SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
+```
+
+Dernæst vælges et konfidensniveau, somregl $90\%$, $95\%$ eller $99\%$.
+
+Bootstrap-konfidensinterval ved hjælp af percentiler kan findes ved:
+```{r}
+KI_niveau <- 0.95 # Konfidensinterval interval
+alpha <- 1-KI_niveau # Benyttes til percentilerne
+
+IndexLower <- round(b * alpha/2) # Nedre percentil
+IndexUpper <- round(b * (1-alpha/2)) # Øvre percentil
+
+KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper]) # Konfidensinterval vha. percentiler
+
+KI_Percentil
+```
+
+Ulempen ved brug af percentiler er, at konfidensintervallet ofte er ukorrekt hvis fordelingen af stikprøven er skæv. En mere præcis metode er basic-metoden.
+
+__Bootstrap-konfidensintervaller ved hjælp af basic bootstrap__
+
+__FIXME:__ (Kilde: http://www2.stat.duke.edu/~banks/111-lectures.dir/lect13.pdf )
+
+Denne type konfidensinterval ud fra bootstrap er også kendt som "reversed percentile interval". Denne metode benytter formlen:
+
+$\text{KI} = [2\hat\theta- \theta^{*}_{(1-\alpha/2)}, 2\hat\theta- \theta^{*}_{(\alpha/2)}]$, hvor $\theta^{*}$ refererer til bootstrap koefficienterne på henholdsvis det $(1-\alpha/2)$-te og $(\alpha/2)$-te percentil.
+
+```{r}
+theta_hat <- mean(bootstrap_fordeling)
+
+KI_Basic <- c(Lower = 2*theta_hat-SortedData[IndexUpper], Upper = 2*theta_hat-SortedData[IndexLower])
+
+KI_Basic
+```
+
+__Bootstrap-konfidensintervaller ved hjælp af t-metoden__
+
+Konfidensintervaller kan også findes ved den mere traditionelle måde ved hjælp af standardfejlen.
+
+__FIXME:__ (Det er pænt umuligt at finde en brugbar kilde) Skal nok også øverst, så man kan sige at det er noget lort, som der ikke vil benyttes
+
+Formlen for konfidensintervallet er:
+
+$\text{KI}=[\hat\theta-t^{(\alpha/2)}_{n-1}\cdot \hat{\text{se}},\hat\theta-t^{(1-\alpha/2)}_{n-1}\cdot\hat{\text{se}}]$
+
+
+```{r}
+ESF <- sd(bootstrap_fordeling) # /sqrt(n)
+
+bs <- (SortedData[IndexUpper]-theta_hat)/ESF
+bss <- 
+
+KI_SF <- c(Lower = theta_hat-1.96*ESF, Upper = theta_hat+1.96*ESF)
+KI_SF1 <- c(Lower = theta_hat-ESF*SortedData[IndexUpper], Upper = theta_hat+ESF*SortedData[IndexLower]) # NEJ
+
+KI_SF
+KI_SF1 # NEJ
+```
+
+```{r}
+hist(bootstrap_fordeling)
+```
+
+
+__Bias-corrected bootstrap-konfidensintervaller__
+xx
+
+
+__FIXME:__ (Eventuel sammenligning)
