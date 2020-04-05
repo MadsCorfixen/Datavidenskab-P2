@@ -14,9 +14,10 @@ Efterfølgende foretages bootstrap på stikprøven, hvor efter der foretages sta
 
 __FIXME:__ (Bootstrappet er delvist forkert -> mean)
 ```{r}
-#data <- rnorm(100, mean = 0, sd = 1) # Tilfældig stikprøve
+data <- rnorm(20, mean = 0, sd = 1) # Tilfældig stikprøve
 #data <- rbeta(100, 7, 2)
-data <- c(1,1,2,7,-1,-3,2,6,-11,4,-4)
+#data <- c(1,1,2,7,-1,-3,2,6,-11,4,-4)
+
 n <- length(data)
 b <- 100000 # Bootstrap repitaioner. Gerne større end 10.000
 
