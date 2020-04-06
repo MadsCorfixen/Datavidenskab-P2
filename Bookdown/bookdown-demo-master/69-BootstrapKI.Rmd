@@ -11,7 +11,7 @@ En intuitiv fremgangsmåde til at bestemme et konfidansinterval ved percentiler 
 
 $\text{KI} = [\theta^{*}_{(\alpha/2)}, \theta^{*}_{(1-\alpha/2)}]$
 
-Efterfølgende foretages bootstrap på stikprøven, hvor efter der foretages statistisk inferens, som så sorteres.
+Efterfølgende foretages bootstrap på stikprøven, hvor efter der beregnes statistisk inferens, hvilket sorteres.
 
 
 __FIXME:__ (Bootstrappet er delvist forkert -> mean)
