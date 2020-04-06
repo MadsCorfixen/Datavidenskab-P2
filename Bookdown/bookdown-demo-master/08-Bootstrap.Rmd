@@ -25,8 +25,9 @@ Fordelen ved bootstrap er, at selvom man kun har en stikprøve fra den underligg
 knitr::include_graphics('images/normalvboot.PNG')
 ```
 
+Der er to hovedårsager til at benytte bootstrap, som beskrevet i [@BootYouTube1]. For det første, hvis stikprøven ikke er stor, og stikprøvefordelingen derfor ikke kan antages at være normalfordelt. For det andet, hvis metoden til at beregne teststørrelsens standardfejl er teoretisk avanceret. Eksempelvis er standardfejlen for middelværdien nem at løse, $\hat \sigma_{MV} = \frac{\text{sd}}{\sqrt n}$, mens det ikke er tilfældet, hvis det i stedet er er afstanden mellem to percentiler, der estimeres.
 
-__Beregning af standard fejl__ 
+__Beregning af standardfejl__ 
 
 Det følgende afsnit at primært skrevet på baggrund af [@TDSBootstrap]
 
