@@ -3,9 +3,7 @@ library(mosaic)
 ```
 ## Bootstrap Hypotesetest
 
-FIXME: indledning
-
-Der startes med at der er to uafhængige stikprøver: 
+I dette afsnit vil der gennemgåes fremgangsmåden for at udføre en hypotesetest på en given population, ved hjælp af bootstrapmetoden. Fremgangsmåden startes med at der er to uafhængige stikprøver: 
 
 En observeret stikprøve 1 med størrelen _n_: $x=\{x_{1},x_{2},...,x_{n}\}$
 
@@ -15,7 +13,7 @@ En observeret stikprøve 2 med størrelen _m_: $y=\{y_{1},y_{2},...,y_{m}\}$
 
 Her kan forskellen i stikprøvernes middelværdi beregnes: $t_{obs}=\hat{x}-\hat{y}$
 
-Så opsættes der en hypotese, $H_0$, en alternativ hypotese, $H_1$, og et signifikansniveau, $\alpha$:
+Når de to stikprøver er på plads, så opsættes der en hypotese, $H_0$, en alternativ hypotese, $H_1$, og et signifikansniveau, $\alpha$:
 
 $H_0:$ Begge stikprøver kommer fra den samme population
 
@@ -26,7 +24,7 @@ $H_1:$ Begge stikprøver kommer IKKE fra den samme population og $\mu_x>\mu_y$
 $\alpha=0.05$
 
 
-Nedenfor beskrives fremgangsmåden for at lave en hypotesetest ved hjælp af bootstrap:
+Herefter kan der påbegyndes 5 punkter der skal udføres, som vil ende ud i en _p_-værdi:
 
 1. Foren de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer.
 
