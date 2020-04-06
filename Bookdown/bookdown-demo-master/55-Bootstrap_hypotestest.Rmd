@@ -32,7 +32,7 @@ Herefter kan der påbegyndes 5 punkter der skal udføres, som vil ende ud i en _
 2. Lav en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve
 
 
-3. udregn middelværdien af de første $n$ observationer og kald denne for $\hat{x}^*$. Udregn desuden middelværdien af de resterende $m$ observationer og kald denne for $\hat{y}^*$. Udregn til sidst test-størrelsen: $t^*=\hat{x}^*-\hat{y}^*$
+3. Udregn middelværdien af de første $n$ observationer og kald denne for $\hat{x}^*$. Udregn desuden middelværdien af de resterende $m$ observationer og kald denne for $\hat{y}^*$. Udregn til sidst test-størrelsen: $t^*=\hat{x}^*-\hat{y}^*$
 
 
 4. Gentag punkt 2 og 3 $B$ gange, hvilket giver $B$ værdier af test-størrelsen.
