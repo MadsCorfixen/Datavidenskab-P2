@@ -1,12 +1,10 @@
 ### Bootstrap-konfidensintervaller
 
-__FIXME:__ (KILDER... fuck kilder... rip wiki)
-
-Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan foreteages ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$. Hvis ikke fordelingen er kendt, er det ikke muligt, at foretage et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
+Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan foreteages ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$. [@BootKI] Hvis ikke fordelingen er kendt, er det ikke muligt, at foretage et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
 __Bootstrap-konfidensintervaller ved hjælp af percentiler__
 
-En intuitiv fremgangsmåde til at bestemme et konfidensinterval ved percentiler er, at bruge det $B \cdot \frac{\alpha}{2}$'te og $B(1-\frac{\alpha}{2})$'te percentil, hvor $B$ er antallet af bootstrap-repetitioner. Lad $\Theta^* = [\theta^*_1, \ldots,\theta^*_B]$ være en sorteret liste af bootstrap-estimater. Derved er formlen for et konfidensinterval på baggrund af percentiler:
+En intuitiv fremgangsmåde til at bestemme et konfidensinterval ved percentiler er, at bruge det $B \cdot \frac{\alpha}{2}$'te og $B(1-\frac{\alpha}{2})$'te percentil, hvor $B$ er antallet af bootstrap-repetitioner. Lad $\Theta^* = [\theta^*_1, \ldots,\theta^*_B]$ være en sorteret liste af bootstrap-estimater. Derved er formlen for et konfidensinterval på baggrund af percentiler: [@TPKI]
 
 $$\text{KI}_p = [\theta^{*}_{(\alpha/2)}, \theta^{*}_{(1-\alpha/2)}]$$
 
@@ -49,12 +47,10 @@ Ulempen ved brug af percentiler er, at konfidensintervallet ofte er ukorrekt hvi
 
 __Bootstrap-konfidensintervaller ved hjælp af basic-metoden__
 
-__FIXME:__ (Kilde: http://www2.stat.duke.edu/~banks/111-lectures.dir/lect13.pdf )
-
 Denne type konfidensinterval ud fra bootstrap er også kendt som "reversed percentile interval". Denne metode benytter formlen:
 
 $$\text{KI}_b = [2\hat\theta- \theta^{*}_{(1-\alpha/2)}, ~ 2\hat\theta- \theta^{*}_{(\alpha/2)}]$$ 
-Hvor $\theta^*_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven.
+Hvor $\theta^*_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven. [@BasicKI]
 
 __Eksempel__
 
@@ -72,9 +68,9 @@ __Bootstrap-konfidensintervaller ved hjælp af t-metoden__
 
 Konfidensintervaller kan også findes ved hjælp af standardfejl fra stikprøven, hvis stikprøven er tilnærmelsesvist t-fordelt.
 
-Formlen for konfidensintervallet er:
+Formlen for konfidensintervallet er: [@TPKI]
 
-$$\text{KI}_t=[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}}(\theta),~\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}(\theta)]$$
+$$\text{KI}_t=[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}}(\theta),~\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}(\theta)]$$ 
 
 Hvor $\hat\theta$ er middelværdien af stikprøven, $\theta^*_i$ er det $i$'te percentil i $\Theta^*$ og $t^{*}=\frac{\theta^{*}-\hat\theta}{\hat{\text{se}}(\hat\theta^*)}$.
 
@@ -90,6 +86,4 @@ KI_Normal <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)), Upper = theta_ha
 KI_Normal
 ```
 
-__FIXME:__ (Kilde)
-
-__FIXME:__ (Eventuel sammenligning - Tænker det gøres i dataanalysen)
+__FIXME:__ (Eventuel sammenligning / Undersøgelse af dækningsgraden - Tænker det gøres i dataanalysen)
