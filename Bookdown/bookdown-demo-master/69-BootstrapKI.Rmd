@@ -83,7 +83,7 @@ __FIXME:__ (Kilde + kræver det er t-fordelt, og er kun brugbart hvis det er til
 
 Formlen for konfidensintervallet er:
 
-$\text{KI}=[\hat\theta-t^{(\alpha/2)}_{n-1}\cdot \hat{\text{se}},\hat\theta-t^{(1-\alpha/2)}_{n-1}\cdot\hat{\text{se}}]$
+$\text{KI}=[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}},\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}]$, hvor $t^{*}=\frac{\hat\theta-\theta^{*}}{\text{sd}(\theta)}$.
 
 __FIXME:__ (Eventuel sammenligning - Tænker det gøres i dataanalysen)
 ```{r}
