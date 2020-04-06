@@ -2,14 +2,16 @@
 
 __FIXME:__ (KILDER... fuck kilder... rip wiki)
 
-Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan foreteages ved $\text{KI} = [\hat\theta - 1.96\cdot \frac{\sigma}{\sqrt{n}},\hat\theta + 1.96\cdot \frac{\sigma}{\sqrt{n}}]$. Hvis ikke fordelingen er kendt, er det ikke muligt, at foretage et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres på flere forskellige metoder.
+Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan foreteages ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$. Hvis ikke fordelingen er kendt, er det ikke muligt, at foretage et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
 __Bootstrap-konfidensintervaller ved hjælp af percentiler__
 
-__FIXME:__(Kan man skrive noget andet end -te)
-En intuitiv fremgangsmåde til at bestemme et konfidansinterval ved percentiler er, at bruge det $b \cdot \frac{\alpha}{2}$-te og $b(1-\frac{\alpha}{2})$-te percentil, hvor $b$ er antallet af bootstrap repitationer. Derved er formlen for et konfidensinterval på baggrund af percentiler:
+En intuitiv fremgangsmåde til at bestemme et konfidensinterval ved percentiler er, at bruge det $B \cdot \frac{\alpha}{2}$'te og $B(1-\frac{\alpha}{2})$'te percentil, hvor $B$ er antallet af bootstrap-repetitioner. Lad $\Theta^* = [\theta^*_1, \ldots,\theta^*_B]$ være en sorteret liste af bootstrap-estimater. Derved er formlen for et konfidensinterval på baggrund af percentiler:
 
-$\text{KI} = [\theta^{*}_{(\alpha/2)}, \theta^{*}_{(1-\alpha/2)}]$
+$$\text{KI}_p = [\theta^{*}_{(\alpha/2)}, \theta^{*}_{(1-\alpha/2)}]$$
+
+Hvor $\theta^*_i$ er estimatet for det $i$'te percentil i $\Theta^*$.  
+
 
 Efterfølgende foretages bootstrap på stikprøven, hvor efter der beregnes statistisk inferens, hvilket sorteres.
 
