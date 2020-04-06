@@ -7,7 +7,9 @@ Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan foreteages ved $
 __Bootstrap-konfidensintervaller ved hjælp af percentiler__
 
 __FIXME:__(Kan man skrive noget andet end -te)
-En intuitiv fremgangsmåde til at bestemme et konfidansinterval ved percentiler er, at bruge det $b \cdot \frac{\alpha}{2}$-te og $b(1-\frac{\alpha}{2})$-te percentil, hvor $b$ er antallet af bootstrap repitationer.
+En intuitiv fremgangsmåde til at bestemme et konfidansinterval ved percentiler er, at bruge det $b \cdot \frac{\alpha}{2}$-te og $b(1-\frac{\alpha}{2})$-te percentil, hvor $b$ er antallet af bootstrap repitationer. Derved er formlen for et konfidensinterval på baggrund af percentiler:
+
+$\text{KI} = [\theta^{*}_{(\alpha/2)}, \theta^{*}_{(1-\alpha/2)}]$
 
 Efterfølgende foretages bootstrap på stikprøven, hvor efter der foretages statistisk inferens, som så sorteres.
 
