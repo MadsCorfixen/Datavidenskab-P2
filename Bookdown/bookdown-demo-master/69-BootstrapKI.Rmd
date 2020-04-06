@@ -10,37 +10,35 @@ En intuitiv fremgangsmåde til at bestemme et konfidensinterval ved percentiler 
 
 $$\text{KI}_p = [\theta^{*}_{(\alpha/2)}, \theta^{*}_{(1-\alpha/2)}]$$
 
-Hvor $\theta^*_i$ er estimatet for det $i$'te percentil i $\Theta^*$.  
+Hvor $\theta^*_i$ er det $i$'te percentil i $\Theta^*$.  
 
 
-Efterfølgende foretages bootstrap på stikprøven, hvor efter der beregnes statistisk inferens, hvilket sorteres.
+__Eksempel__
 
+I kodetstykket nedenfor udtages en tilfældig stikprøve fra en standard normalfordeling. Herefter laves $10,000$ bootstrap-stikprøver, som der udregnes middelværdien på. Til sidst sorteres middelværdierne i en liste.  
 
-__FIXME:__ (Bootstrappet er delvist forkert -> mean)
 ```{r}
-data <- rnorm(20, mean = 0, sd = 1) # Tilfældig stikprøve
-#data <- rbeta(100, 7, 2)
-#data <- c(1,1,2,7,-1,-3,2,6,-11,4,-4)
+data <- rnorm(100, mean = 0, sd = 1) # Tilfældig stikprøve
 
 n <- length(data)
-b <- 100000 # Bootstrap repitaioner
+B <- 10000 # Bootstrap-repetitioner
 
-bootstrap_fordeling <- replicate(b, {
-  x <- mean(sample(data, size = n, replace = TRUE)) # Ved at tage mean fucker det SD op senere, hvis man ikke tager mean, fucker det KI'er op
+bootstrap_fordeling <- replicate(B, {
+  x <- mean(sample(data, size = n, replace = TRUE))
 }) # Bootstrap over middelværdien
 
 SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
 ```
 
-Dernæst vælges et konfidensniveau, somregl $90\%$, $95\%$ eller $99\%$.
+Dernæst vælges et konfidensniveau, som regel $90\%$, $95\%$ eller $99\%$.
 
 Bootstrap-konfidensinterval ved hjælp af percentiler kan findes ved:
 ```{r}
 KI_niveau <- 0.95 # Konfidensinterval
 alpha <- 1-KI_niveau # Benyttes til percentilerne
 
-IndexLower <- round(b * alpha/2) # Nedre percentil
-IndexUpper <- round(b * (1-alpha/2)) # Øvre percentil
+IndexLower <- round(B * alpha/2) # Nedre percentil
+IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil
 
 KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper]) # Konfidensinterval vha. percentiler
 
@@ -49,16 +47,21 @@ KI_Percentil
 
 Ulempen ved brug af percentiler er, at konfidensintervallet ofte er ukorrekt hvis fordelingen af stikprøven er skæv. En mere præcis metode er basic-metoden.
 
-__Bootstrap-konfidensintervaller ved hjælp af basic bootstrap__
+__Bootstrap-konfidensintervaller ved hjælp af basic-metoden__
 
 __FIXME:__ (Kilde: http://www2.stat.duke.edu/~banks/111-lectures.dir/lect13.pdf )
 
 Denne type konfidensinterval ud fra bootstrap er også kendt som "reversed percentile interval". Denne metode benytter formlen:
 
-$\text{KI} = [2\hat\theta- \theta^{*}_{(1-\alpha/2)}, 2\hat\theta- \theta^{*}_{(\alpha/2)}]$, hvor $\theta^{*}$ refererer til bootstrap koefficienterne på henholdsvis det $(1-\alpha/2)$-te og $(\alpha/2)$-te percentil.
+$$\text{KI}_b = [2\hat\theta- \theta^{*}_{(1-\alpha/2)}, ~ 2\hat\theta- \theta^{*}_{(\alpha/2)}]$$ 
+Hvor $\theta^*_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven.
+
+__Eksempel__
+
+I kodestykket nedenfor beregnes middelværdien af $\Theta^*$ og benyttes i formlen.
 
 ```{r}
-theta_hat <- mean(bootstrap_fordeling)
+theta_hat <- mean(data)
 
 KI_Basic <- c(Lower = 2*theta_hat-SortedData[IndexUpper], Upper = 2*theta_hat-SortedData[IndexLower])
 
@@ -67,32 +70,26 @@ KI_Basic
 
 __Bootstrap-konfidensintervaller ved hjælp af t-metoden__
 
-Konfidensintervaller kan også findes ved den mere traditionelle måde ved hjælp af standardfejlen.
-
-
-```{r}
-# TEST - Tror det kører
-tLower <- (SortedData[IndexUpper]-theta_hat) / (sd(bootstrap_fordeling)) # SD er egentligt ESE
-tUpper <- (SortedData[IndexLower]-theta_hat) / (sd(bootstrap_fordeling))
-
-theta_hat-(theta_hat-SortedData[IndexLower])
-
-KI_Normal <- c(Lower = theta_hat - tUpper * sd(bootstrap_fordeling), Upper = theta_hat - tLower * sd(bootstrap_fordeling))
-KI_Normal # Virker - //nope// Giver dog samme resultat som Percentil, hvilket 
-```
-
-__FIXME:__ (Kilde + kræver det er t-fordelt, og er kun brugbart hvis det er tilfældet?)
+Konfidensintervaller kan også findes ved hjælp af standardfejl fra stikprøven, hvis stikprøven er tilnærmelsesvist t-fordelt.
 
 Formlen for konfidensintervallet er:
 
-$\text{KI}=[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}},\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}]$, hvor $t^{*}=\frac{\hat\theta-\theta^{*}}{\text{se}(\hat\theta)}$.
+$$\text{KI}_t=[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}}(\theta),~\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}(\theta)]$$
 
-__FIXME:__ (Eventuel sammenligning - Tænker det gøres i dataanalysen)
+Hvor $\hat\theta$ er middelværdien af stikprøven, $\theta^*_i$ er det $i$'te percentil i $\Theta^*$ og $t^{*}=\frac{\theta^{*}-\hat\theta}{\hat{\text{se}}(\hat\theta^*)}$.
+
+__Eksempel__
+
+I kodestykket forneden beregnes $t^{*}$ for det nedre og øvre percentil. Dernæst beregnes konfidensintervallet ud fra formlen. 
+
 ```{r}
-KI_Percentil
-KI_Basic
-KI_Normal
+tLower <- (SortedData[IndexUpper]-mean(data)) / (sd(bootstrap_fordeling)) # SD udregner standardfejl
+tUpper <- (SortedData[IndexLower]-mean(data)) / (sd(bootstrap_fordeling)) # SD udregner standardfejl
 
-KI_Percentil == KI_Normal # Hvorfor?
+KI_Normal <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)), Upper = theta_hat - tUpper * (sd(data)/sqrt(n)))
+KI_Normal
 ```
 
+__FIXME:__ (Kilde)
+
+__FIXME:__ (Eventuel sammenligning - Tænker det gøres i dataanalysen)
