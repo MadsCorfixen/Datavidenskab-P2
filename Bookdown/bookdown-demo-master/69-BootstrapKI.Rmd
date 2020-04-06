@@ -70,8 +70,8 @@ Konfidensintervaller kan også findes ved den mere traditionelle måde ved hjæl
 
 ```{r}
 # TEST - Tror det kører
-tLower <- (theta_hat - SortedData[IndexUpper]) / (sd(bootstrap_fordeling)) # SD er egentligt ESE
-tUpper <- (theta_hat - SortedData[IndexLower]) / (sd(bootstrap_fordeling))
+tLower <- (SortedData[IndexUpper]-theta_hat) / (sd(bootstrap_fordeling)) # SD er egentligt ESE
+tUpper <- (SortedData[IndexLower]-theta_hat) / (sd(bootstrap_fordeling))
 
 theta_hat-(theta_hat-SortedData[IndexLower])
 
@@ -83,7 +83,7 @@ __FIXME:__ (Kilde + kræver det er t-fordelt, og er kun brugbart hvis det er til
 
 Formlen for konfidensintervallet er:
 
-$\text{KI}=[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}},\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}]$, hvor $t^{*}=\frac{\hat\theta-\theta^{*}}{\text{sd}(\theta)}$.
+$\text{KI}=[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}},\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}]$, hvor $t^{*}=\frac{\hat\theta-\theta^{*}}{\text{se}(\hat\theta)}$.
 
 __FIXME:__ (Eventuel sammenligning - Tænker det gøres i dataanalysen)
 ```{r}
