@@ -47,9 +47,11 @@ Først defineres en funktion for LCG algoritmen, som tager de nødvendige argume
 
 ```{r}
 lcg <- function(m, a, c, seed, n) {
-  #M er modulus, a er faktoren, c er tilvæksten, seed er startværdien og n er antal iterationer.
+  #M er modulus, a er faktoren, c er tilvæksten, seed er
+  #startværdien og n er antal iterationer.
   
-  r <- numeric(n) #Definerer en ny variabel r, som er den numeriske værdi af n.
+  r <- numeric(n) #Definerer en ny variabel r,
+                  #som er den numeriske værdi af n.
   r[1] <- seed #Angiver startpunktet. 
   
   for (i in 1: (n-1)) {
@@ -203,12 +205,12 @@ Det ses på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at d
 
 Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges ved hjælp af nedenstående graf.
 
-```{r}
+<!--```{r}
 plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2", 
      col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25), 
      pch = 1, cex = 0.5)
 
-```
+```-->
 
 Udover at eftervise uafhængigheden af ```Z1``` og ```Z2``` grafisk, kan det også undersøges ved hjælp af funktionen ```cor``` i R, som giver en værdi for korrelationen af de to talsekvenser.
 Korrelationen af to variabler udregnes ved formlen 

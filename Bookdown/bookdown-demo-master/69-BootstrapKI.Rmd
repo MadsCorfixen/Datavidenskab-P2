@@ -38,7 +38,8 @@ alpha <- 1-KI_niveau # Benyttes til percentilerne
 IndexLower <- round(B * alpha/2) # Nedre percentil
 IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil
 
-KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper]) # Konfidensinterval vha. percentiler
+KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper])
+  # Konfidensinterval vha. percentiler
 
 KI_Percentil
 ```
@@ -60,7 +61,8 @@ I kodestykket nedenfor beregnes middelværdien af stikprøven og benyttes i form
 ```{r}
 theta_hat <- mean(data)
 
-KI_Basic <- c(Lower = 2*theta_hat-SortedData[IndexUpper], Upper = 2*theta_hat-SortedData[IndexLower])
+KI_Basic <- c(Lower = 2*theta_hat-SortedData[IndexUpper],
+              Upper = 2*theta_hat-SortedData[IndexLower])
 
 KI_Basic
 ```
@@ -80,10 +82,13 @@ __Eksempel__
 I kodestykket forneden beregnes $t^{*}$ for det nedre og øvre percentil. Dernæst beregnes konfidensintervallet ud fra formlen. 
 
 ```{r}
-tLower <- (SortedData[IndexUpper]-mean(data)) / (sd(bootstrap_fordeling)) # SD udregner standardfejl
-tUpper <- (SortedData[IndexLower]-mean(data)) / (sd(bootstrap_fordeling)) # SD udregner standardfejl
+tLower <- (SortedData[IndexUpper]-mean(data)) /
+  (sd(bootstrap_fordeling)) # SD udregner standardfejl
+tUpper <- (SortedData[IndexLower]-mean(data)) /
+  (sd(bootstrap_fordeling)) # SD udregner standardfejl
 
-KI_Normal <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)), Upper = theta_hat - tUpper * (sd(data)/sqrt(n)))
+KI_Normal <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)),
+               Upper = theta_hat - tUpper * (sd(data)/sqrt(n)))
 KI_Normal
 ```
 

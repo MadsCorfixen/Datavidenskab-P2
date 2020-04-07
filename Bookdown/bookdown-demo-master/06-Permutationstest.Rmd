@@ -113,12 +113,14 @@ Dette giver, at stikprøvernes middelværdier har en forskel på ```r observeret
 ```{r}
 perm_eksamen_1 <- matrix(0, nrow = 100, ncol = 100)
 for(i in 1:100){
-  perm_eksamen_1[,i] <- sample(x = Eksamen_1, size = 100, replace = FALSE, prob = NULL)
+  perm_eksamen_1[,i] <- sample(x = Eksamen_1, size = 100, 
+                               replace = FALSE, prob = NULL)
 }
 
 perm_eksamen_2 <- matrix(0, nrow = 100, ncol = 100)
 for(i in 1:100){
-  perm_eksamen_2[,i] <- sample(x = Eksamen_2, size = 100, replace = FALSE, prob = NULL)
+  perm_eksamen_2[,i] <- sample(x = Eksamen_2, size = 100,
+                               replace = FALSE, prob = NULL)
 }
 
 means_perm_eksamen <- list()

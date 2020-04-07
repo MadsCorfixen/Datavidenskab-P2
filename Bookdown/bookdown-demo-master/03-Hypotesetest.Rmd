@@ -74,19 +74,28 @@ I kodestykket nedenfor gennemgås den beskrevede fremgangsmåde for en t-test.
 
 ```{r}
 n <- 10
+
 forventet_middelvaerdi <- 0 # Forventet middelværdi
+
 middelvaerdi <- mean(xdata) # Middelværdi
+
 standardafvigelse <- sd(xdata) # Standardafvigelsen
+
 estimeret_standardfejl <- standardafvigelse/sqrt(n) # Estimeret standardfejl
-t_obs <- (abs(middelvaerdi-forventet_middelvaerdi))/estimeret_standardfejl # Observeret teststørrelse
+
+t_obs <- (abs(middelvaerdi-forventet_middelvaerdi))/estimeret_standardfejl
+  # Observeret teststørrelse
+
 alpha_halve <-  1 - pdist("t", q = t_obs, df = n-1, plot = FALSE)
+
 p <- 2 * alpha_halve
 ```
 
 ```{r include=FALSE}
 # Viser hvis forventede mean havde været lavere
 forventet_meanx <- -0.5
-t_obsx <- (abs(middelvaerdi-forventet_meanx))/estimeret_standardfejl # Observeret teststørrelse
+t_obsx <- (abs(middelvaerdi-forventet_meanx))/
+  estimeret_standardfejl # Observeret teststørrelse
 x_p = 2 * (1 - pdist("t", q = t_obsx, df = n-1, plot = FALSE))
 ```
 
