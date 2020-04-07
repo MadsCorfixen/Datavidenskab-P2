@@ -2,7 +2,7 @@
 library(mosaic)
 library(SimDesign)
 ```
-# Resamplingmetoder
+# Resampling-metoder
 
 FIXME: Bland med kapitel 3 (overvej)
 
@@ -150,7 +150,7 @@ p_vaerdi <- p_numerator / 100
 
 ```
 
-Dette giver en andel af middelværdidifferencer på ```r andel_perm```, som betyder, at i $16\%$ af tilfældene lå middelværdidifferencen i konfidensintervallet, hvilket ikke stemmer overens med t-testens konfidens på $95\%$. Resultaterne for en t-test udført på stikprøver, der ikke overholder kravene, giver altså en forkert konfidens. Desuden fåes en p-værdi på ```r p_vaerdi```, hvorfor nulhypotesen ikke kan forkastes. Dette strider også mod resultatet fra t-testen. 
+Dette giver en andel af middelværdidifferencer på ```r andel_perm```, som betyder, at i $11\%$ af tilfældene lå middelværdidifferencen i konfidensintervallet, hvilket ikke stemmer overens med t-testens konfidens på $95\%$. Resultaterne for en t-test udført på stikprøver, der ikke overholder kravene, giver altså en forkert konfidens. Desuden fåes en p-værdi på ```r p_vaerdi```, hvorfor nulhypotesen ikke kan forkastes. Dette strider også mod resultatet fra t-testen. 
 
 
 
