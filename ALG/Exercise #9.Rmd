@@ -1,0 +1,37 @@
+## Exercise 1.
+Consider the rod-cutting problem, as defined at page 360 of CLRS, on the following price table for rods.
+length i 1 2 3 4 5   6  7  8  9 10
+price pi 1 3 4 6 12 14 16 22 26 32
+Consider the algorithm Memoized-Cut-Rod described in CLRS pp. 365. What is the output of Memoized-Cut-Rod (p, 3)? What is the subproblem graph relative to the problem instance (p, 3)?
+
+Memoized-Cut-Rod (p, 3) = 4, se png for forklaring. 
+
+Subproblem graph er illustreret i png. ALG ex 9_1b. 
+
+
+## Exercise 2.
+The Fibonacci sequence is the series of numbers 1, 1, 2, 3, 5, 8, 13, 21, . . . where the next number in the
+sequence is found by adding up the two numbers before it. The n-th Fibonacci number in the sequence is typically defined by the following recurrence (see CLRS pp. 99).
+
+$F(n) = 1 \text{ if } n ∈ \{0, 1\}$
+
+$F(N) = F(n − 1) + F(n − 2) \text{ if } n > 1, \text{where}~ n \in \mathbb{N}$0
+
+$$
+F(n) = \left\{
+    \begin{array}{ll}
+        1 \text{ if } n ∈ \{0, 1\}, \\
+        F(n − 1) + F(n − 2) \text{ if } n > 1, \text{where}~ n \in \mathbb{N}
+    \end{array}
+\right.
+$$
+
+### (a) Write a recursive algorithm Fib-Rec(n) which computes the n-th Fibonacci number corresponding to a naive implementation of the recurrence F(n).
+
+### (b) What is the time complexity of Fib-Rec(n)?
+
+### (c) Write a top-down memoized version of Fib-Rec. What are the time and space complexities?
+
+### (d) Write, the corresponding bottom-up version of Fib-Rec following
+
+
