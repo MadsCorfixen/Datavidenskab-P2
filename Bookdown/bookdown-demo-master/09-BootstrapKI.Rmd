@@ -82,9 +82,9 @@ __Eksempel__
 I kodestykket forneden beregnes $t^{*}$ for det nedre og øvre percentil. Dernæst beregnes konfidensintervallet ud fra formlen. 
 
 ```{r}
-tLower <- (SortedData[IndexUpper]-mean(data)) /
+tLower <- (SortedData[IndexUpper]-theta_hat) /
   (sd(bootstrap_fordeling)) # SD udregner standardfejl
-tUpper <- (SortedData[IndexLower]-mean(data)) /
+tUpper <- (SortedData[IndexLower]-theta_hat) /
   (sd(bootstrap_fordeling)) # SD udregner standardfejl
 
 KI_Normal <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)),
