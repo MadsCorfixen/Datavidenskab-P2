@@ -1,10 +1,12 @@
-```{r include=FALSE, MESSAGE = FALSE}
+  ```{r include=FALSE, MESSAGE = FALSE}
 library(mosaic)
 ```
 ### Bootstrap-hypotesetest
 __FIXME__ forklaring af * tilhører bootstrap. Gør det klart, om det er en parret eller uparret, og gør hypoteserne klarere. Benyt numerisk værdi af $t_{obs}$, for en tosidet test.
 
-I dette afsnit vil fremgangsmåden for at udføre en hypotesetest på en given population, ved hjælp af bootstrap-metoden, blive gennemgået. Fremgangsmåden startes med at der er to uafhængige stikprøver: 
+__FIXME__ Mangler vi lidt at forklare hvorfor man bruger bootstrap til hypotesetest? Måske hvis de to / en population(er) ikke er normalfordelt, går t_obs galt.
+
+I dette afsnit vil fremgangsmåden for at udføre en hypotesetest på en given population, ved hjælp af bootstrap-metoden, blive gennemgået. Fremgangsmåden startes med at der er to uafhængige stikprøver:
 
 Lad to stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$. På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs}=\hat{X}-\hat{Y}$.
 <!-- En stikprøve med størrelsen _n_: $X=[x_{1},~x_{2},~...,~x_{n}]$ -->
@@ -21,9 +23,9 @@ Så opsættes der en hypotese, $H_0:$ begge stikprøver kommer fra den samme pop
 
 <!-- $\alpha=0.05$ -->
 
-Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$. 
+Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$.
 
-Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. Herefter kan p-værdien udregnes, som andelen af bootstrap-teststørrelser, der er større end stikprøve-teststrørrelsen, $\text{p-værdi}\approx\frac{\text{antal gange }\{t^*>t_{obs}\}}{B}$. Forkast $H_0$, hvis $\text{p-værdi}<\alpha$. [@BootHypo] 
+Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. Herefter kan p-værdien udregnes, som andelen af bootstrap-teststørrelser, der er større end stikprøve-teststrørrelsen, $\text{p-værdi}\approx\frac{\text{antal gange }\{t^*>t_{obs}\}}{B}$. Forkast $H_0$, hvis $\text{p-værdi}<\alpha$. [@BootHypo]
 
 
 
@@ -47,4 +49,3 @@ Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ tests
 
 <!-- Forkast $H_0$ hvis $\text{p-værdi}<\alpha$, ellers kan $H_0$ ikke forkastes. -->
 <!-- [@BootHypo]  -->
-
