@@ -1,7 +1,8 @@
-```{r include=FALSE, MESSAGE = FALSE}
+  ```{r include=FALSE, MESSAGE = FALSE}
 library(mosaic)
 ```
 ### Bootstrap-hypotesetest
+__FIXME__ Mangler vi lidt at forklare hvorfor man bruger bootstrap til hypotesetest? Måske hvis de to / en population(er) ikke er normalfordelt, går t_obs galt. 
 __FIXME__ forklaring af * tilhører bootstrap.
 
 I dette afsnit vil fremgangsmåden for at udføre en hypotesetest på en given population, ved hjælp af bootstrap-metoden, blive gennemgået. Fremgangsmåden startes med at der er to uafhængige stikprøver: 
