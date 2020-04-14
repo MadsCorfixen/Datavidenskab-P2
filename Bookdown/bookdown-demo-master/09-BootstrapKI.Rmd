@@ -26,6 +26,7 @@ bootstrap_fordeling <- replicate(B, {
 }) # Bootstrap over middelværdien
 
 SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
+
 ```
 
 Dernæst vælges et konfidensniveau, som regel $90\%$, $95\%$ eller $99\%$.
@@ -44,7 +45,9 @@ KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper]
 KI_Percentil
 ```
 
-Ulempen ved brug af percentiler er, at konfidensintervallet ofte er ukorrekt hvis fordelingen af stikprøven er skæv. En mere præcis metode er basic-metoden.
+__FIXME__ Mangler kilde, plus hvis eventuelt hvordan fordelingen ser ud hvis den er skæv.
+
+Ulempen ved brug af percentiler er, at konfidensintervallet ofte er ukorrekt hvis fordelingen af stikprøven er skæv. En mere præcis metode er basic-metoden. 
 
 __Bootstrap-konfidensintervaller ved hjælp af basic-metoden__
 
