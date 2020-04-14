@@ -2,9 +2,14 @@
 library(mosaic)
 ```
 ### Bootstrap-hypotesetest
+
+__FIXME__ Omskriv afsnittet jf. Mikkels rettelser fra vejledermøde 5 og de andre fixme's
+
 __FIXME__ forklaring af * tilhører bootstrap. Gør det klart, om det er en parret eller uparret, og gør hypoteserne klarere. Benyt numerisk værdi af $t_{obs}$, for en tosidet test.
 
 __FIXME__ Mangler vi lidt at forklare hvorfor man bruger bootstrap til hypotesetest? Måske hvis de to / en population(er) ikke er normalfordelt, går t_obs galt.
+
+
 
 I dette afsnit vil fremgangsmåden for at udføre en hypotesetest på en given population, ved hjælp af bootstrap-metoden, blive gennemgået. Fremgangsmåden startes med at der er to uafhængige stikprøver:
 
