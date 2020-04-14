@@ -1,0 +1,86 @@
+__FIXME:__ (OBS: Det er skrevet i noteform)
+
+# Dataanalyse (Kun KI _so far_)
+
+## Simulation af population
+```{r}
+set.seed(1)
+population <- rnorm(1000, mean = 0, sd = 1)
+pop_mean <- mean(population)
+```
+
+## Udtag stikprøver fra populationen
+
+* Uden replacement
+
+* Forskellig størrelse
+
+ * Test $n$'s betydning for resultatet
+ 
+```{r}
+set.seed(29)
+# stikproeve_10 <- sample(z_population, 10, replace = FALSE)
+stikproeve_25 <- sample(population, 25, replace = FALSE)
+# stikproeve_100 <- sample(z_population, 100, replace = FALSE)
+
+# s_10_mean <- mean(stikproeve_10)
+s_25_mean <- mean(stikproeve_25)
+# s_100_mean <- mean(stikproeve_100)
+```
+
+_Fortsætter med stikprøven hvor_ $n=25$ og $\hat\mu=$ ```s_25_mean```.
+
+## Bootstrap på stikprøven
+
+```{r}
+set.seed(1)
+n <- length(stikproeve_25)
+B <- 10000 # Bootstrap-repetitioner
+
+bootstrap_fordeling <- replicate(B, {
+  x <- mean(sample(stikproeve_25, size = n, replace = TRUE))
+}) # Bootstrap over middelværdien
+
+sorted_stikproeve_25 <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
+```
+
+## Bootstrap-KI på stikprøven
+
+
+```{r}
+KI_niveau <- 0.95 # Konfidensinterval
+alpha <- 1-KI_niveau # Benyttes til percentilerne
+
+IndexLower <- round(B * alpha/2) # Nedre percentil
+IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil
+
+KI_Percentil <- c(Lower = sorted_stikproeve_25[IndexLower], Upper = sorted_stikproeve_25[IndexUpper])
+  # Konfidensinterval vha. percentiler
+
+KI_Percentil
+#
+
+KI_Basic <- c(Lower = 2*s_25_mean-sorted_stikproeve_25[IndexUpper],
+              Upper = 2*s_25_mean-sorted_stikproeve_25[IndexLower])
+
+KI_Basic
+#
+
+tLower <- (sorted_stikproeve_25[IndexUpper]-s_25_mean)/(sd(bootstrap_fordeling)) # SD udregner standardfejl
+tUpper <- (sorted_stikproeve_25[IndexLower]-s_25_mean)/(sd(bootstrap_fordeling)) # SD udregner standardfejl
+
+KI_Normal <- c(Lower = s_25_mean - tLower * (sd(sorted_stikproeve_25)/sqrt(n)), Upper = s_25_mean - tUpper * (sd(sorted_stikproeve_25)/sqrt(n)))
+
+KI_Normal
+```
+
+I dette tilfælde ligger intervallet korrekt nok inden for middelværdien af stikprøven, $\hat\mu=$```r s_25_mean```. Dog ligger de ikke inde for populationens middelværdi, $\mu=$ ```r pop_mean```.
+
+* Hvilke ofte er konfidensintervallet forkert?
+
+* Hvilke konfidensintervaller er bedst (mere præcise)?
+
+* Hvilken betydning har stikprøven for resulatet?
+
+* Hvad kan der gøres for at imødekomme fejl?
+
