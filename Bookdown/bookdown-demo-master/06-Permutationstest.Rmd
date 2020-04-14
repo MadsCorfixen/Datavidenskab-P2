@@ -85,6 +85,8 @@ Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må
 
 ### T-test for ikke-normalfordelt stikprøve
 
+FIXME: Skriv afsnittet om på baggrund af Mikkels kommentarer fra vejledermøde 14/4-2020.
+
 Foretages en t-test på en ikke-normaltfordelt stikprøve, giver det forkerte resultater. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdidifferencen for tiden brugt på to forskellige eksaminer er $0$. Her opstilles en nulhypotese, $H_0 : \mu_1 - \mu_2 = 0$ og en alternativ hypotese, $H_a : \mu_1 - \mu_2 \neq 0$. Til denne undersøgelse er der to stikprøver på størrelsen, $n=10,000$.
 
 ```{r}
