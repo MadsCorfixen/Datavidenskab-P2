@@ -83,79 +83,54 @@ p_value
 
 Der er altså ikke belæg for at forkaste nulhypotesen, hvorfor konklusionen må være, at middelværdien for $T_1$ er lig middelværdien for $T_2$.
 
-### T-test for ikke-normalfordelt stikprøve
+### Ikke-parret T-test for ikke-normalfordelt stikprøve
 
 FIXME: Skriv afsnittet om på baggrund af Mikkels kommentarer fra vejledermøde 14/4-2020.
 
-Foretages en t-test på en ikke-normaltfordelt stikprøve, giver det forkerte resultater. Eksempelvis kunne dette være, at der er en hypotese om, at middelværdidifferencen for tiden brugt på to forskellige eksaminer er $0$. Her opstilles en nulhypotese, $H_0 : \mu_1 - \mu_2 = 0$ og en alternativ hypotese, $H_a : \mu_1 - \mu_2 \neq 0$. Til denne undersøgelse er der to stikprøver på størrelsen, $n=10,000$.
+Foretages en t-test på en ikke-normaltfordelt stikprøve, kan resultaterne ikke altid antages at være retvisende. Dette vil nu vises. Først opstilles to ikke-normalfordelte populationer hvor, at nulhypotesen er $H_0: \mu_1 - \mu_2 = 0$ og en alternativ hypotese er $H_1 : \mu_1 - \mu_2 \neq 0$. Der vil undersøges ved hjælp af t-test om middelværdien af de to populationer er ens.
+
+```{r,include=FALSE}
+n<-10000
+#To populationer
+Pop1 <- rbeta(n, 2, 8)
+Pop2 <- rbeta(n, 8, 2)
+```
+
+```{r, echo=FALSE}
+hist(Pop1, main = "Population 1", ylab = "", xlab = "")
+hist(Pop2, main = "Population 2", ylab = "", xlab = "")
+```
+
+
+Der udtrækkes en stikprøve for hver population og udfra disse udføres der to-sidet uparret t-test, ved hjælp af den indbygget funktion `t.test`.
+```{r}
+#To stikprøver trukket fra populationerne
+Stik1 <- sample(Pop1, 100)
+Stik2 <- sample(Pop2, 100)
+```
 
 ```{r}
-n_eksamen = 100
-set.seed(1)
-Eksamen_1 <- rValeMaurelli(10000, mean=10, sigma=5, skew=1, kurt=3)
-Eksamen_2 <- rValeMaurelli(10000, mean=1, sigma=10, skew=-1, kurt=2)
+#t.test ud fra de to stikprøver
+t1 <- t.test(Stik1, Stik2, alternative = "two.sided", mu = 0, conf.level = 0.95)
+#Det tilhørende konfidensinterval fra t.testen
+konfinterval <- t1$conf.int
 ```
 
-```{r echo=FALSE}
-hist(Eksamen_1)
-hist(Eksamen_2)
-```
-
-Den indbyggede funktion til t-test, `t.test`, benyttes, hvilket giver følgende resultat.
-```{r}
-observeret_forskel <- abs(mean(Eksamen_1) - mean(Eksamen_2))
-eksamen_t_obs <- 234.33
-eksamen_p <- 2.2e-16
-
-t.test(Eksamen_1, Eksamen_2, alternative = "two.sided", mu = 0, conf.level = 0.95)
-```
-
-Dette giver, at stikprøvernes middelværdier har en forskel på ```r observeret_forskel```, men at den tilhørende t-værdi er ```r eksamen_t_obs``` med en p-værdi på ```r eksamen_p```. altså forkastes nulhypotesen, og resultatet er, at der er forskel i tiden brugt på de to eksaminer, og at den sande difference med $95\%$ sikkerhed ligger i intervallet $[8.91; 9.07]$. Samme undersøgelse udføres nu igen, men denne gang på baggrund af en permutationstest.
+Udfra t-testen fåes et konfidensinterval på [```r t1$conf.int```]. Med et signifikansniveau på $5\%$ vil det sige at ifølge t-testen vil den observerede forskel mellem populationernes middelværdier ligge i dette interval i $95\%$ af tilfældene. Dækningsgraden af dette konfidensinterval kan undersøges ved at trække nye stikprøver fra populationerne, i alt $10,000$ gange. Dette gøres ved at udregne den nye observerede forskel i middelværdi og sammenligne med konfidensintervallet. Hvis den observede forskel er indeholdt i konfidensintervallet er det en succes, ellers er det en fiasko.
 
 ```{r}
-perm_eksamen_1 <- matrix(0, nrow = 100, ncol = 100)
-for(i in 1:100){
-  perm_eksamen_1[,i] <- sample(x = Eksamen_1, size = 100, 
-                               replace = FALSE, prob = NULL)
-}
-
-perm_eksamen_2 <- matrix(0, nrow = 100, ncol = 100)
-for(i in 1:100){
-  perm_eksamen_2[,i] <- sample(x = Eksamen_2, size = 100,
-                               replace = FALSE, prob = NULL)
-}
-
-means_perm_eksamen <- list()
-for(i in 1:100){
-  means_perm_eksamen[i] <- abs(mean(perm_eksamen_1[,i]) - mean(perm_eksamen_2[,i]))
-}
+#Undersøg dækningsgrad af konfidensintervallet ved udtræk af nye stikprøver.
+res <- replicate(1000, {
+  x1 <- sample(Pop1, 100)
+  x2 <- sample(Pop2, 100)
+  
+  mean_diff <- mean(x1) - mean(x2)
+  
+  konfinterval[1L] <= mean_diff & konfinterval[2L] >= mean_diff
+})
+tf <- table(res)
+pie(x = tf, labels = c("Fiasko","Succes"), main = "Andel af succeser")
 ```
-
-Andelen af differencer, der ligger i konfidensintervallet kan nu beregnes.
-
-```{r}
-
-forekomst_konf <- 0
-for(i in 1:100){
-  if( (means_perm_eksamen[i] >= 8.91)&(means_perm_eksamen[i] <= 9.07) ){
-    forekomst_konf <- forekomst_konf +1}
-}
-
-andel_perm <- forekomst_konf/100
-
-p_numerator <- 0
-for(i in 1:100){
-  if (means_perm_eksamen[i] >= observeret_forskel){
-    p_numerator <- p_numerator + 1
-  }
-}
-
-p_vaerdi <- p_numerator / 100
-
-```
-
-Dette giver en andel af middelværdidifferencer på ```r andel_perm```, som betyder, at i $11\%$ af tilfældene lå middelværdidifferencen i konfidensintervallet, hvilket ikke stemmer overens med t-testens konfidens på $95\%$. Resultaterne for en t-test udført på stikprøver, der ikke overholder kravene, giver altså en forkert konfidens. Desuden fåes en p-værdi på ```r p_vaerdi```, hvorfor nulhypotesen ikke kan forkastes. Dette strider også mod resultatet fra t-testen. 
-
 
 
 
