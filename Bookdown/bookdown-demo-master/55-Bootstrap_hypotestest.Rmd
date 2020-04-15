@@ -9,48 +9,40 @@ __FIXME__ forklaring af * tilhører bootstrap. Gør det klart, om det er en parr
 
 __FIXME__ Mangler vi lidt at forklare hvorfor man bruger bootstrap til hypotesetest? Måske hvis de to / en population(er) ikke er normalfordelt, går t_obs galt.
 
+Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, for at garantere rigtigheden af resultaterne af en t-test. 
+
+1. Variablen er kvantitativ.
+2. Stikprøveudtagning er udført med tilfældighed.
+3. Populationen er normalfordelt.
+
+Er antagelserne ikke opfyldt kan bootstrap benyttes til at udføre t-test. Fremgangsmåden for en parret dobbeltsidet t-test ved hjælpe af bootstrap vil blive gennemgået i dette afsnit. 
+
+<!-- I dette afsnit vil fremgangsmåden for at udføre en hypotesetest på en given population, ved hjælp af bootstrap-metoden, blive gennemgået. Fremgangsmåden startes med at der er to uafhængige stikprøver: -->
+
+Lad to parrede stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$.
+Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne en ny teststørrelse, $t_{obs}=\hat{Z}$.
+
+<!-- På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs}=\hat{X-Y}$. -->
+
+Så opsættes der en nul hypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande middelværdi for differencerne for $X$ og $Y$, og en alternativ hypotese, $H_1:~\mu\neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
+
+<!-- Så opsættes der en hypotese, $H_0:$ begge stikprøver kommer fra den samme population, en alternativ hypotese, $H_1:$ begge stikprøver kommer IKKE fra den samme population og $\mu_{_X}>\mu_{_Y}$, og et signifikansniveau, $\alpha = 0.05$. -->
+
+Der foretages bootstrap på $X$ og $Y$ $B$ gange, hvilket giver $B$ bootstrap-stikprøver for henholdsvis $X$ og $Y$. Lad $X^*_i = [x^*_{1,i},~x^*_{2,i},~...,~x^*_{n,i}]$ betegne den $i$'te bootstrap-stikprøve for $X$ og tilsvarende for $Y$. [@Paired_test]
+
+På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$. [@Paired_test]
+
+<!-- Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$. -->
+
+Herefter kan p-værdien udregnes, som antal gange teststørrelsen er mere ekstrem end den forventet teststørrelse. Dette gøres ved at finde den mindste af de to ensidet p-værdier og gange den med $2$.[@Hypo_test]
+
+\begin{align}
+p_{mindre} &= \frac{\text{antal gange }\{t^*<0\}}{B} \\
+p_{større} &= \frac{\text{antal gange }\{t^*>0\}}{B} \\
+p_{tosidet} &= 2\text{min}(p_{mindre},~p_{større})
+\end{align}
 
 
-I dette afsnit vil fremgangsmåden for at udføre en hypotesetest på en given population, ved hjælp af bootstrap-metoden, blive gennemgået. Fremgangsmåden startes med at der er to uafhængige stikprøver:
-
-Lad to stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$. På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs}=\hat{X}-\hat{Y}$.
-<!-- En stikprøve med størrelsen _n_: $X=[x_{1},~x_{2},~...,~x_{n}]$ -->
-
-<!-- En anden stikprøve med størrelsen _m_: $Y=[y_{1},~y_{2},~...,~y_{m}]$  -->
-
-<!-- Her kan forskellen i stikprøvernes middelværdi beregnes: $t_{obs}=\hat{X}-\hat{Y}$ -->
-
-Så opsættes der en hypotese, $H_0:$ begge stikprøver kommer fra den samme population, en alternativ hypotese, $H_1:$ begge stikprøver kommer IKKE fra den samme population og $\mu_{_X}>\mu_{_Y}$, og et signifikansniveau, $\alpha = 0.05$.
-
-<!-- $H_0:$ Begge stikprøver kommer fra den samme population -->
-
-<!-- $H_1:$ Begge stikprøver kommer IKKE fra den samme population og $\mu_x>\mu_y$ -->
-
-<!-- $\alpha=0.05$ -->
-
-Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$.
-
-Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. Herefter kan p-værdien udregnes, som andelen af bootstrap-teststørrelser, der er større end stikprøve-teststrørrelsen, $\text{p-værdi}\approx\frac{\text{antal gange }\{t^*>t_{obs}\}}{B}$. Forkast $H_0$, hvis $\text{p-værdi}<\alpha$. [@BootHypo]
+<!-- Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. Herefter kan p-værdien udregnes, som andelen af bootstrap-teststørrelser, der er større end stikprøve-teststrørrelsen, $\text{p-værdi}\approx\frac{\text{antal gange }\{t^*>t_{obs}\}}{B}$. Forkast $H_0$, hvis $\text{p-værdi}<\alpha$. [@BootHypo] -->
 
 
-
-
-<!-- Herefter kan der påbegyndes 5 punkter der skal udføres, som vil ende ud i en _p_-værdi: -->
-
-<!-- 1. Foren de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. -->
-
-
-<!-- 2. Lav en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve -->
-
-
-<!-- 3. Udregn middelværdien af de første $n$ observationer og kald denne for $\hat{x}^*$. Udregn desuden middelværdien af de resterende $m$ observationer og kald denne for $\hat{y}^*$. Udregn til sidst test-størrelsen: $t^*=\hat{x}^*-\hat{y}^*$ -->
-
-
-<!-- 4. Gentag punkt 2 og 3 $B$ gange, hvilket giver $B$ værdier af test-størrelsen. -->
-
-
-<!-- 5. Udregn _p_-værdien: $\text{p-værdi}\approx\frac{\text{antal gange }\{t^*>t_{obs}\}}{B}$ -->
-
-
-<!-- Forkast $H_0$ hvis $\text{p-værdi}<\alpha$, ellers kan $H_0$ ikke forkastes. -->
-<!-- [@BootHypo]  -->
