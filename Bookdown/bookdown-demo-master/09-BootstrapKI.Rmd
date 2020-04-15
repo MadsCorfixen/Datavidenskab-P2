@@ -8,9 +8,9 @@ __Bootstrap-konfidensintervaller ved hjælp af percentiler__
 
 En intuitiv fremgangsmåde til at bestemme et konfidensinterval ved percentiler, er at bruge det $(B(\frac{\alpha}{2}))$'te og $(B(1-\frac{\alpha}{2}))$'te percentil, hvor $B$ er antallet af bootstrap-repetitioner. Lad $\Theta^* = [\vartheta_1,~ \ldots,~\vartheta_B]$ være en sorteret liste af bootstrap-estimater. Derved er formlen for et konfidensinterval på baggrund af percentiler: 
 
-$$\text{KI}_p = \left[\theta^{*}_{(\alpha/2)},~\theta^{*}_{(1-\alpha/2)}\right]$$
+$$\text{KI}_p = \left[\theta^{{\sim}}_{(\alpha/2)},~\theta^{{\sim}}_{(1-\alpha/2)}\right]$$
 
-Hvor $\theta^*_i$ er det $i$'te percentil i $\Theta^*$. [@TPKI]  
+Hvor $\theta^{\sim}_i$ er det $i$'te percentil i $\Theta^*$. [@TPKI]  
 
 
 __Eksempel__
@@ -55,9 +55,9 @@ __Bootstrap-konfidensintervaller ved hjælp af basic-metoden__
 
 Denne type konfidensinterval ud fra bootstrap er også kendt som _reversed percentile interval_. Denne metode benytter formlen:
 
-$$\text{KI}_b = \left[2\hat\theta- \theta^{*}_{(1-\alpha/2)}, ~ 2\hat\theta- \theta^{*}_{(\alpha/2)}\right]$$ 
+$$\text{KI}_b = \left[2\hat\theta- \theta^{{\sim}}_{(1-\alpha/2)}, ~ 2\hat\theta- \theta^{{\sim}}_{(\alpha/2)}\right]$$
 
-Hvor $\theta^*_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven. [@BasicKI]
+Hvor $\theta^{\sim}_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven. [@BasicKI]
 
 __Eksempel__
 

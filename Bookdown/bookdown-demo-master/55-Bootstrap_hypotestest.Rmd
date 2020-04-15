@@ -9,7 +9,7 @@ library(mosaic)
 
 <!-- __FIXME__ Mangler vi lidt at forklare hvorfor man bruger bootstrap til hypotesetest? Måske hvis de to / en population(er) ikke er normalfordelt, går t_obs galt. -->
 
-Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, for at garantere rigtigheden af resultaterne af en t-test. 
+Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test. 
 
 1. Variablen er kvantitativ.
 2. Stikprøveudtagning er udført med tilfældighed.
@@ -20,7 +20,7 @@ Er antagelserne ikke opfyldt kan bootstrap anvendes til at udføre t-test, og i 
 #### Parret bootstrap-test
 
 Lad to parrede stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{n}]$.
-Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne en ny teststørrelse, $t_{obs}=\hat{Z}$.
+Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne teststørrelsen, $t_{obs}=\hat{Z}$.
 
 Så opstilles der en nulhypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande middelværdi for differencerne for $X$ og $Y$, og en alternativ hypotese, $H_1:~\mu\neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
 
@@ -28,15 +28,15 @@ Der foretages bootstrap på $X$ og $Y$ $B$ gange, hvilket giver $B$ bootstrap-st
 
 På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$. [@Paired_test]
 
-Herefter kan p-værdien udregnes, som antal gange teststørrelsen er mere ekstrem end den forventede teststørrelse. Dette gøres ved at finde den mindste af de to ensidet p-værdier og gange den med $2$.[@Hypo_test]
+Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$.[@Hypo_test]
 
 \begin{align}
-p_{mindre} &= \frac{\text{antal gange }\{|t^*|<|t_{obs}|\}}{B} \\
-p_{større} &= \frac{\text{antal gange }\{|t^*|>|t_{obs}|\}}{B} \\
-p_{tosidet} &= 2~\text{min}(p_{mindre},~p_{større})
+p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<t_{obs}\}}{B} \\
+p_{_{større}} &= \frac{\text{antal gange }\{t^*>t_{obs}\}}{B} \\
+p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
 \end{align}
 
-Forkast $H_0$, hvis $\text{p}_{tosidet}<\alpha$.
+Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
 
 __Eksempel__
 
@@ -84,13 +84,16 @@ Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og
 Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$.[@BootHypo]
 
 Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. 
-Herefter kan p-værdien udregnes, som antal gange teststørrelsen er mere ekstrem end den forventet teststørrelse. Dette gøres ved at finde den mindste af de to ensidet p-værdier og gange den med $2$.[@Hypo_test]
+
+Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$.[@Hypo_test]
 
 \begin{align}
-p_{mindre} &= \frac{\text{antal gange }\{|t^*|<|t_{obs}|\}}{B} \\
-p_{større} &= \frac{\text{antal gange }\{|t^*|>|t_{obs}|\}}{B} \\
-p_{tosidet} &= 2\text{min}(p_{mindre},~p_{større})
+p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<t_{obs}\}}{B} \\
+p_{_{større}} &= \frac{\text{antal gange }\{t^*>t_{obs}\}}{B} \\
+p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
 \end{align}
+
+Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
 
 Forkast $H_0$, hvis $\text{p}_{tosidet}<\alpha$. 
 
