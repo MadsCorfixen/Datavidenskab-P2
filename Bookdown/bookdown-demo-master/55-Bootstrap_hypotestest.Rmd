@@ -3,11 +3,11 @@ library(mosaic)
 ```
 ### Bootstrap-hypotesetest
 
-__FIXME__ Omskriv afsnittet jf. Mikkels rettelser fra vejledermøde 5 og de andre fixme's
+<!-- __FIXME__ Omskriv afsnittet jf. Mikkels rettelser fra vejledermøde 5 og de andre fixme's -->
 
-__FIXME__ forklaring af * tilhører bootstrap. Gør det klart, om det er en parret eller uparret, og gør hypoteserne klarere. Benyt numerisk værdi af $t_{obs}$, for en tosidet test.
+<!-- __FIXME__ forklaring af * tilhører bootstrap. Gør det klart, om det er en parret eller uparret, og gør hypoteserne klarere. Benyt numerisk værdi af $t_{obs}$, for en tosidet test. -->
 
-__FIXME__ Mangler vi lidt at forklare hvorfor man bruger bootstrap til hypotesetest? Måske hvis de to / en population(er) ikke er normalfordelt, går t_obs galt.
+<!-- __FIXME__ Mangler vi lidt at forklare hvorfor man bruger bootstrap til hypotesetest? Måske hvis de to / en population(er) ikke er normalfordelt, går t_obs galt. -->
 
 Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, for at garantere rigtigheden af resultaterne af en t-test. 
 
@@ -15,38 +15,71 @@ Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, 
 2. Stikprøveudtagning er udført med tilfældighed.
 3. Populationen er normalfordelt.
 
-Er antagelserne ikke opfyldt kan bootstrap benyttes til at udføre t-test. Benyttes bootstrap til at udføre en t-test, kaldes det i det følgende for en bootstrap-test. 
+Er antagelserne ikke opfyldt kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en parret bootstrap-test, og dernæst fremgangsmåden for en uparret bootstrap-test.
 
 #### Parret bootstrap-test
-
-Fremgangsmåden for en parret tosidet bootstrap-test vil blive gennemgået i dette afsnit.
 
 Lad to parrede stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{n}]$.
 Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne en ny teststørrelse, $t_{obs}=\hat{Z}$.
 
-Så opsættes der en nulhypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande middelværdi for differencerne for $X$ og $Y$, og en alternativ hypotese, $H_1:~\mu\neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
+Så opstilles der en nulhypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande middelværdi for differencerne for $X$ og $Y$, og en alternativ hypotese, $H_1:~\mu\neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
 
 Der foretages bootstrap på $X$ og $Y$ $B$ gange, hvilket giver $B$ bootstrap-stikprøver for henholdsvis $X$ og $Y$. Lad $X^*_i = [x^*_{1,i},~x^*_{2,i},~...,~x^*_{n,i}]$ betegne den $i$'te bootstrap-stikprøve for $X$ og tilsvarende for $Y$. [@Paired_test]
 
 På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$. [@Paired_test]
 
-Herefter kan p-værdien udregnes, som antal gange teststørrelsen er mere ekstrem end den forventet teststørrelse. Dette gøres ved at finde den mindste af de to ensidet p-værdier og gange den med $2$.[@Hypo_test]
+Herefter kan p-værdien udregnes, som antal gange teststørrelsen er mere ekstrem end den forventede teststørrelse. Dette gøres ved at finde den mindste af de to ensidet p-værdier og gange den med $2$.[@Hypo_test]
 
 \begin{align}
-p_{mindre} &= \frac{\text{antal gange }\{t^*<t_{obs}\}}{B} \\
-p_{større} &= \frac{\text{antal gange }\{t^*>t_{obs}\}}{B} \\
+p_{mindre} &= \frac{\text{antal gange }\{|t^*|<|t_{obs}|\}}{B} \\
+p_{større} &= \frac{\text{antal gange }\{|t^*|>|t_{obs}|\}}{B} \\
 p_{tosidet} &= 2~\text{min}(p_{mindre},~p_{større})
 \end{align}
 
 Forkast $H_0$, hvis $\text{p}_{tosidet}<\alpha$.
 
+__Eksempel__
+
+```{r}
+#Opretter stikprøver
+n <- 15
+stik1 <- rnorm(n)
+stik2 <- rnorm(n, mean = 10, sd = 2)
+
+#Beregner t_obs
+stikdiff <- NULL
+for(i in 1:n){
+  stikdiff[i] <- abs(stik1[i] - stik2[i])
+}
+t_obs <- mean(stikdiff)
+
+#Opretter bootstrap-stikprøver
+B <- 100
+boot <- replicate(B, sample(x = c(stik1, stik2), size = 2*n, replace = TRUE))
+
+boot1 <- boot[1:15,]
+boot2 <- boot[16:30,]
+
+bootdiff <- matrix(data = boot1, nrow = n, ncol = B/2)
+bootmeans <- NULL
+for(i in 1:B/2){
+  bootdiff[1:15, i] <- abs(boot1[1:15, i] - boot2[1:15, i])
+  bootmeans[i] <- mean(bootdiff[1:15, i])
+}
+
+andel_mindre <- bootmeans < t_obs
+andel_mindre
+
+```
+
+
 #### Uparret bootstrap-test
 
-I dette afsnit vil fremgangsmåden for en uparret tosidet bootstrap-test blive gennemgået. Fremgangsmåden startes med at der er to uafhængige stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$.
+Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$, med ens varians, være givet.
 
 På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs}=\hat{X}-\hat{Y}$.
 
-Så opsættes der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} \neq \mu_{_Y}$, samt et signifikansniveau, $\alpha = 0.05$. 
+Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} \neq \mu_{_Y}$, samt et signifikansniveau, $\alpha = 0.05$. 
 
 Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$.[@BootHypo]
 
@@ -54,8 +87,8 @@ Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ tests
 Herefter kan p-værdien udregnes, som antal gange teststørrelsen er mere ekstrem end den forventet teststørrelse. Dette gøres ved at finde den mindste af de to ensidet p-værdier og gange den med $2$.[@Hypo_test]
 
 \begin{align}
-p_{mindre} &= \frac{\text{antal gange }\{t^*<t_{obs}\}}{B} \\
-p_{større} &= \frac{\text{antal gange }\{t^*>t_{obs}\}}{B} \\
+p_{mindre} &= \frac{\text{antal gange }\{|t^*|<|t_{obs}|\}}{B} \\
+p_{større} &= \frac{\text{antal gange }\{|t^*|>|t_{obs}|\}}{B} \\
 p_{tosidet} &= 2\text{min}(p_{mindre},~p_{større})
 \end{align}
 
