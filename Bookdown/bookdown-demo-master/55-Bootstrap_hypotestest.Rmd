@@ -24,7 +24,7 @@ Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ 
 
 Så opstilles der en nulhypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande middelværdi for differencerne for $X$ og $Y$, og en alternativ hypotese, $H_1:~\mu\neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
 
-Der foretages bootstrap på $X$ og $Y$ $B$ gange, hvilket giver $B$ bootstrap-stikprøver for henholdsvis $X$ og $Y$. Lad $X^*_i = [x^*_{1,i},~x^*_{2,i},~...,~x^*_{n,i}]$ betegne den $i$'te bootstrap-stikprøve for $X$ og tilsvarende for $Y$. [@Paired_test]
+Først forenes de to stikprøver til en samlet stikprøve med størrelsen $2n$ observationer. Derefter laves en bootstrap-stikprøve af $2n$ observationer med tilbagelægning fra den samlede stikprøve. Herefter trækkes den første halvdel af indgangene i bootstrap-stikprøven, som betegnes $X^*$, og den sidste halvdel, der betegnes $Y^*$. Lad $X^*_i = [x^*_{1,i},~x^*_{2,i},~...,~x^*_{n,i}]$ betegne den $i$'te bootstrap-stikprøve for $X$ og tilsvarende for $Y$. [@Paired_test, slide 1-2]
 
 På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$. [@Paired_test]
 
@@ -40,6 +40,8 @@ Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
 
 __Eksempel__
 
+I nedenstående kode, vises et eksempel på en parret bootstrap-test.
+
 ```{r}
 # Opretter stikprøver
 n <- 15
@@ -54,7 +56,7 @@ for(i in 1:n){
 t_obs <- mean(stikdiff)
 
 # Opretter bootstrap-stikprøver
-B <- 100
+B <- 10000
 boot <- replicate(B, sample(x = c(stik1, stik2), size = 2*n, replace = TRUE))
 
 boot1 <- boot[1:15,]
@@ -75,8 +77,10 @@ p_mindre <- (length(andel_mindre)-(sum(andel_mindre))) / length(andel_mindre)
 # P-værdien for en tosidet bootstrap-test
 p_tosidet <- 2*min(p_mindre, p_stoerre)
 p_tosidet
+
 ```
 
+Der ses altså at p-værdien er lig ```r p_tosidet```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
 
 #### Uparret bootstrap-test
 
@@ -100,6 +104,43 @@ p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
 
 Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
 
-Forkast $H_0$, hvis $\text{p}_{tosidet}<\alpha$. 
+__Eksempel__
 
+Nu vil der vises et eksempel på en uparret bootstrap t-test.
 
+```{r}
+# Opretter to stikprøver
+n2 = 15
+m2 = 30
+stik3 <- rbeta(n2, 8, 2)
+stik4 <- rbeta(m2, 2, 8)
+
+# Beregner t_obs
+t_obs2 <- mean(stik3) - mean(stik4)
+
+#Opretter bootstrap-stikprøver og returnerer difference i middelværdi
+B2 <- 10000
+
+res <- replicate(B2, {
+  
+  boot <- sample(c(stik3, stik4), replace = TRUE)
+  
+  bootx <- boot[1 : n2]
+  booty <- boot[(n2+1) : (n2+m2)]
+  
+  diffmean <- (mean(bootx) - mean(booty))
+  diffmean
+  
+})
+
+andel_mindre2 <- res < t_obs2
+
+p_stoerre2 <- (sum(andel_mindre2)) / length(andel_mindre2)
+p_mindre2 <- (length(andel_mindre2)-(sum(andel_mindre2))) / length(andel_mindre2)
+
+# P-værdien for en tosidet bootstrap-test
+p_tosidet2 <- 2*min(p_mindre2, p_stoerre2)
+p_tosidet2
+```
+
+Der ses altså at p-værdien er lig ```r p_tosidet2```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.

@@ -6,7 +6,7 @@
 
 <!-- 3. Sammenligning af parametrisk og ikke-parametrisk bootstrap.  -->
 
-## Simulere data
+## Simulering af data
 
 Populationer:
 Normalfordeling.
@@ -26,13 +26,6 @@ Population -> Almindelig statistisk inferens (middelværdi og standardfejl) -> N
 Population -> Almindelig statistisk inferens (middelværdi og standardfejl) -> Nay -> Bootstrap -> Nay
 
 Konfidensintervaller 
-
-## Parametrisk vs ikke-parametrisk
-
-Hvad er forskellen på parametrisk og ikke-parametrisk
-Hvornår kan de hver anvendens
-
-_Andre former for bootstrap der skal kigges på?_
 
 ## Resultater
 
