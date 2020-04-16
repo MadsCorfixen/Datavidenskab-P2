@@ -41,19 +41,19 @@ Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
 __Eksempel__
 
 ```{r}
-#Opretter stikprøver
+# Opretter stikprøver
 n <- 15
-stik1 <- rnorm(n)
-stik2 <- rnorm(n, mean = 10, sd = 2)
+stik1 <- rbeta(n, 8, 2)
+stik2 <- rbeta(n, 2, 8)
 
-#Beregner t_obs
+# Beregner t_obs
 stikdiff <- NULL
 for(i in 1:n){
   stikdiff[i] <- abs(stik1[i] - stik2[i])
 }
 t_obs <- mean(stikdiff)
 
-#Opretter bootstrap-stikprøver
+# Opretter bootstrap-stikprøver
 B <- 100
 boot <- replicate(B, sample(x = c(stik1, stik2), size = 2*n, replace = TRUE))
 
@@ -68,8 +68,13 @@ for(i in 1:B/2){
 }
 
 andel_mindre <- bootmeans < t_obs
-andel_mindre
 
+p_stoerre <- (sum(andel_mindre)) / length(andel_mindre)
+p_mindre <- (length(andel_mindre)-(sum(andel_mindre))) / length(andel_mindre)
+
+# P-værdien for en tosidet bootstrap-test
+p_tosidet <- 2*min(p_mindre, p_stoerre)
+p_tosidet
 ```
 
 
