@@ -11,15 +11,15 @@ set.seed(1)
 
 n <- 10000
 
-pop_hs <- rbeta(n, 2, 8) # Højreskæv population
 pop_vs <- rbeta(n, 8, 2) # Venstreskæv population
+pop_hs <- rbeta(n, 2, 8) # Højreskæv population
 ```
 
 
 ```{r, echo=FALSE, fig.cap= "To skæve populationer"}
 par(mfrow=c(1,2))
-hist(pop_hs, main = "Højreskæv population", ylab = "Andel", xlab = "Sandsynlighed")
 hist(pop_vs, main = "Venstreskæv population", ylab = "Andel", xlab = "Sandsynlighed")
+hist(pop_hs, main = "Højreskæv population", ylab = "Andel", xlab = "Sandsynlighed")
 ```
 
 Derudover simuleres en standard normalfordelt population af størrelsen, $n=$ ```r n```.

@@ -87,6 +87,8 @@ Der er altså ikke belæg for at forkaste nulhypotesen.
 
 Foretages en t-test på en ikke-normaltfordelt stikprøve, kan resultaterne ikke altid antages at være retvisende. Dette vil nu vises. Først opstilles to ikke-normalfordelte populationer.
 
+__FIXME:__ (THOMAS: I stedet for populationer, så udtag stikprøver fra de i forvejen simulerede populationer og plot dem. [@ref] eventuelt til simuleringen)
+
 ```{r,include=FALSE}
 n <- 100000
 #To populationer
