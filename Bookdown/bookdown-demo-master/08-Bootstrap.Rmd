@@ -3,12 +3,12 @@ library(mosaic)
 ```
 ## Bootstrap
 
-FIXME: Evt se på figuren i file:///C:/Users/magnu/Desktop/DV/B%C3%B8ger/Mathematical%20Statistics%20with%20Resampling%20and%20R.pdf side 108 for at vise fordelinger
+FIXME: Evt se på figuren i [@MathStat, side 108] for at vise fordelinger
 
 
 I det følgende afsnit vil den teoretiske del af en resampling-metode, kaldet bootstrap, blive beskrevet. Senere vil det blive undersøgt, hvordan bootstrap kan bruges praktisk.
 
-Der findes forskellige bootstrap-metoder, som varierer på forskellige punkter. Valget af bootstrap-metode afhænger af den individuelle situation, hvor der skal udføres statistisk inferens. Der gøres opmærksom på, at i den resterende del af rapporten, vil ordet bootstrap henvise til den ikke-parametriske bootstrap-metode. Ikke-parametrisk bootstrap, er når der ikke sættes specifikke antagelser eller en præcis model for populationen, når undersøgelsen udføres. Derimod antages det, at en stikprøve er repræsentativ for hele populationen. (FIXME: Kilde file:///C:/Users/magnu/Downloads/Berrar_EBCB_Bootstrapping_preprint.pdf side 3)
+Der findes forskellige bootstrap-metoder, som varierer på forskellige punkter. Valget af bootstrap-metode afhænger af den individuelle situation, hvor der skal udføres statistisk inferens. Der gøres opmærksom på, at i den resterende del af rapporten, vil ordet bootstrap henvise til den ikke-parametriske bootstrap-metode. Ikke-parametrisk bootstrap, er når der ikke sættes specifikke antagelser eller en præcis model for populationen, når undersøgelsen udføres. Derimod antages det, at en stikprøve er repræsentativ for hele populationen. [@nonparaboot, side 3]
 
 Bootstrap er en resampling-metode, der bruges til at generere yderligere datasæt ud fra den givne stikprøve, hvor målet er at udføre statistisk inferens for en valgt teststørrelse. For eksempel kan bootstrap give et indblik i tendenser for teststørrelsen, såsom standardfejlen og forventningsrethed, eller udregne konfidensintervaller. Der gøres opmærksom på, at bootstrap ikke kan bruges til at få et bedre estimat for parameteren, da bootstrap-fordelingen er centreret omkring stikprøvens estimat, for eksempel middelværdien $\hat {\mu}$, og ikke populationens middelværdi, $\mu$ [@BootvsJack s. 114].
 
