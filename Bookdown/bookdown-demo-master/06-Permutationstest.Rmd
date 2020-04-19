@@ -96,6 +96,7 @@ Stik2 <- sample(pop_vs, size = 100)
 ```{r figurpop1, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra højreskæv betafordeling hvor n = 10,000, &alpha; = 2, &beta; = 8"}
 hist(Stik1, main = "", ylab = "", xlab = "")
 ```
+
 ```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra venstreskæv betafordeling hvor n = 10,000, &alpha; = 8, &beta; = 2."}
 hist(Stik2, main = "", ylab = "", xlab = "")
 ```
