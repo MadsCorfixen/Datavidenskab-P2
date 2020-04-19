@@ -6,6 +6,8 @@ library(SimDesign)
 
 FIXME: Bland med kapitel 3 (overvej)
 
+I de følgende to underafsnit beskrives to metoder, som anvendes til at permutere eller resample fra en stikprøve.  
+
 ## Permutationstest
 
 For at en t-test overholder den nominelle risiko for fejl, er der visse antagelser, der skal være opfyldt, heriblandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse antagelser ikke opfyldt, giver testen ikke et retvisende resultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, opnåes, hvis en t-test udføres på data, der ikke overholder kravene.
@@ -22,7 +24,7 @@ Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_
 
 I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af [@Permutationstest]
 
-Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at teste validiteten af $H_0$. værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
+Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at teste validiteten af $H_0$. Værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
 
 En permutationstest går ud på at forsøge at måle evidens imod $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststørrelsen for samtlige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi(1)}, X_{\pi(2)}, \ldots X_{\pi(m)} \}$, hvor $m$ er antallet af mulige permutationer af $X$. Teststørrelsen for den $i$'te permutation benævnes $S_{\pi_i}$.
 
@@ -83,3 +85,58 @@ p_value
 
 Der er altså ikke belæg for at forkaste nulhypotesen.
 
+<<<<<<< HEAD
+=======
+### Uparret t-test for ikke-normalfordelt stikprøve
+
+I dette afsnit vil det eftervises, at en t-test foretaget på en ikke-normaltfordelt stikprøve, kan resultaterne ikke altid antages at være retvisende. Først udtrækkes to stikprøver på de skæve populationer i afsnit \@ref(pop-sim).
+
+```{r}
+#To stikprøver trukket fra populationerne
+Stik1 <- sample(pop_hs, size = 100)
+Stik2 <- sample(pop_vs, size = 100)
+```
+
+```{r figurpop1, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra højreskæv betafordeling hvor n = 100, &alpha; = 2, &beta; = 8"}
+hist(Stik1, main = "", ylab = "", xlab = "")
+```
+
+```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra venstreskæv betafordeling hvor n = 100, &alpha; = 8, &beta; = 2."}
+hist(Stik2, main = "", ylab = "", xlab = "")
+```
+
+Nulhypotesen er at $H_0: \mu_1 - \mu_2 = 0$ og den alternative hypotese er $H_1 : \mu_1 - \mu_2 \neq 0$. Denne nulhypotese undersøges ved hjælp af en uparret t-test. Udfra stikprøverne udføres der to-sidet uparret t-test, ved hjælp af den indbyggede funktion `t.test`.
+
+```{r}
+#t.test ud fra de to stikprøver
+t1 <- t.test(Stik1, Stik2, alternative = "two.sided", mu = 0, conf.level = 0.95)
+#Det tilhørende konfidensinterval fra t.testen
+konfinterval <- t1$conf.int
+```
+
+Udfra t-testen fåes et konfidensinterval på [```r t1$conf.int```]. Med et signifikansniveau på $5\%$, vil den observerede forskel mellem populationernes middelværdier ligge i dette interval i $95\%$ af tilfældene, ifølge t-testen. Dækningsgraden af dette konfidensinterval kan undersøges ved at trække nye stikprøver fra populationerne, i alt $10,000$ gange. Dette gøres ved at udregne den nye observerede forskel i middelværdi og sammenligne med konfidensintervallet. Hvis den observede forskel er indeholdt i konfidensintervallet er det en succes, ellers er det en fiasko.
+
+```{r}
+#Undersøg dækningsgraden af konfidensintervallet ved udtræk af nye stikprøver.
+res <- replicate(10000, {
+  x1 <- sample(pop_hs, 100)
+  x2 <- sample(pop_vs, 100)
+  
+  mean_diff <- mean(x1) - mean(x2)
+  
+  konfinterval[1L] <= mean_diff & konfinterval[2L] >= mean_diff
+})
+tf <- table(res)
+```
+
+```{r piettest, fig.align="center", fig.cap= "Andel af succeser og fiaskoer", echo=FALSE}
+labels <- c("Fiasko","Succes")
+pctf <- tf[1]/sum(tf)*100
+pctt <- tf[2]/sum(tf)*100
+labels <- paste(labels, c(pctf, pctt))
+labels <- paste(labels, "%", sep = "")
+pie(x = tf, labels, main = "", col = c("brown3", "cornflowerblue"))
+```
+
+Det fremgår at i ```r pctf```$\%$ af tilfældene ligger den observerede forskel i middelværdierne uden for konfidensintervallet. Dette stemmer ikke overens med antagelsen om at $5\%$ burde ligge udenfor. Konklusionen er derfor at en t-test udført på ikke-normalfordelte stikprøver ikke nødvendigvis giver et retvisende resultat.
+>>>>>>> b99bc18d1a5f46ce3542a38352a6eec3dcb860b8

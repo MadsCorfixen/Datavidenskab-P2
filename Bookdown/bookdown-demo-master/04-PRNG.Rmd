@@ -2,6 +2,8 @@
 
 ## Pseudorandom Number Generator
 
+I dette afsnit introduceres begrebet pseudorandom Number Generator og hvorledes disse kan bringes i anvendelse i forbindelse med simuleringer. I de tilhørende underafsnit beskrives forskellige typer af Pseudorandom Number Generator, samt hvordan den enkelte algoritme anvendes i praksis. 
+
 En computer fungerer ved, at den modtager et input, der bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at generere faktisk tilfældige tal. Grunden til dette er, hvis der gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere, fordi en computer fungerer på baggrund af matematik og derfor er deterministisk. Det er dog muligt ved hjælp af en beregningsmodel at skabe en illusion af ægte tilfældighed. Denne model kaldes _Pseudorandom Number Generator_ (PRNG).
 
 En PRNGs funktionalitet beskrives ved nedenstående karakteristika. 
@@ -22,7 +24,9 @@ En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af
 
 ### Lineær kongruens generator
 
+Dette afsnit beskriver teoretisk hvorledes lineær kongruens generator på baggrund af et arbitrær parameter kan generer en sekvens af tilfældige tal, som kan være unifor fordelte. __FIXME__ (Er gives et eks. på uniform fordelte tal, kan den også laves standard normalfordelte tal? - som box-muller)
 Det følgende afsnit er primært baseret på [@LCGinfo].
+
 Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved iteration, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
 >```{definition}
@@ -77,7 +81,7 @@ plot(lcg1_plot, main = "Eksempel på en ikke tilfældig LCG sekvens",
      xlab = "Indeks", ylab = "Sekvens værdier", type = "l")
 ```
 
-Nedenfor vises et eksempel på hvordan LCG algortimen kan bruges  til at lave en uniform fordeling i intervallet [0, 1].
+Nedenfor vises et eksempel på hvordan LCG algortimen kan bruges til at lave en uniform fordeling i intervallet [0, 1].
 
 ```{r}
 lcg2 <- lcg(86436, 1093, 0, 12, 1000)
