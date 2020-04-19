@@ -2,6 +2,8 @@
 
 FIXME: Evt. emner: Fortæl om statistik. Fortæl om “almindelig” t-test og dens krav. Se, at resultater ikke giver mening, hvis krav ikke er opfyldt. 
 
+
+
 ## Statistik og historien bag
 
 Ordet _statistik_ stammer tilbage fra det latinske _statisticum collegium_ ("statsrådgiver") og det italienske _statista_ ("statsmand" eller "politiker"). [@Orddef] At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statistik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrere befolkningen og dennes tilhørselsforhold. Derfor anvendte statsrådgivere og statsmænd statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik.
