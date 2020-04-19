@@ -24,7 +24,7 @@ En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af
 
 ### Lineær kongruens generator
 
-Dette afsnit beskriver teoretisk hvorledes lineær kongruens generator på baggrund af et arbitrær parameter kan generer en sekvens af uniform fordelte tal. __FIXME__ (Er gives et eks. på uniform fordelte tal, kan den også laves standard normalfordelte tal? - som box-muller)
+Dette afsnit beskriver teoretisk hvorledes lineær kongruens generator på baggrund af et arbitrær parameter kan generer en sekvens af tilfældige tal, som kan være unifor fordelte. __FIXME__ (Er gives et eks. på uniform fordelte tal, kan den også laves standard normalfordelte tal? - som box-muller)
 Det følgende afsnit er primært baseret på [@LCGinfo].
 
 Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved iteration, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
