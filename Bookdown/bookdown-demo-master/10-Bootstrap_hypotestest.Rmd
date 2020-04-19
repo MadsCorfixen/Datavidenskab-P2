@@ -1,7 +1,7 @@
   ```{r include=FALSE, MESSAGE = FALSE}
 library(mosaic)
 ```
-### Bootstrap-hypotesetest
+## Bootstrap-hypotesetest
 
 <!-- __FIXME__ Omskriv afsnittet jf. Mikkels rettelser fra vejledermøde 5 og de andre fixme's -->
 

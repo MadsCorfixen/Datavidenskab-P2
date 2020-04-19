@@ -1,0 +1,19 @@
+# Dataanalyse
+
+## Simulering af populationer
+
+
+
+## Inferens
+
+Når almindelig statistisk inferens fejler, er det fordi antagelserne ikke er opfyldt. 
+
+Population -> Almindelig statistisk inferens (middelværdi og standardfejl) -> Yay
+Population -> Almindelig statistisk inferens (middelværdi og standardfejl) -> Nay -> Bootstrap -> Yay
+Population -> Almindelig statistisk inferens (middelværdi og standardfejl) -> Nay -> Bootstrap -> Nay
+
+Konfidensintervaller 
+
+## Resultater
+
+Diskutere resultater af dataanalysen?

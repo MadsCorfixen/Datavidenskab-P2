@@ -11,7 +11,7 @@ Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Fo
 
 
 ### Simulering i R
-Meta-forklaring til afsnittet. Afsnittet er primært baseret på kilden [@Rsimulation]:
+I dette afsnit gives eksempler på hvorledes der kan udføres simuleringer af forskellige fordelinger, således disse fordelinger kan anvendes til statistisk inferens. Afsnittet er primært baseret på kilden [@Rsimulation]:
 
 Simuleringer i R udføres ved at estimere udfald fra en fordeling, hvor der bliver generet pseudo-tilfældige tal.
 Disse generede tal forekommer at være tilfældige, men er det reelt set ikke. [@PRNG]
