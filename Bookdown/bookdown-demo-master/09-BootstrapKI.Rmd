@@ -2,6 +2,8 @@
 
 __FIXME__ Bedre begrundelse for, hvorfor vi har flere forskellige metoder på konfidensintervaller med. Er der nogle, der er bedre end andre? 
 
+I følgende afsnit beskrives det hvorledes konfidensintervallet for en bootstrap-stikprøves beregnes ved hjælp af standardfejlen, beskrevet i afsnittet ovenfor, percentiler, basic-metoden og t-metoden. 
+
 Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$. [@BootKI] Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
 __Bootstrap-konfidensintervaller ved hjælp af percentiler__
