@@ -115,7 +115,58 @@ knitr::include_graphics('images/Typefejl.png')
 
 FIXME: Skriv om 'styrken' (jævnfør arbejdsblad fra 26/3)
 
+## Uparret t-test for ikke-normalfordelt stikprøve
 
+Foretages en t-test på en ikke-normaltfordelt stikprøve, kan resultaterne ikke altid antages at være retvisende. Dette vil nu vises. Først udtrækkes to stikprøver på de skæve populationer i afsnit \@ref(pop-sim).
+
+```{r}
+#To stikprøver trukket fra populationerne
+Stik1 <- sample(pop_hs, size = 100)
+Stik2 <- sample(pop_vs, size = 100)
+```
+
+```{r figurpop1, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra højreskæv betafordeling hvor n = 100, &alpha; = 2, &beta; = 8"}
+hist(Stik1, main = "", ylab = "", xlab = "")
+```
+
+```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra venstreskæv betafordeling hvor n = 100, &alpha; = 8, &beta; = 2."}
+hist(Stik2, main = "", ylab = "", xlab = "")
+```
+
+Nulhypotesen er at $H_0: \mu_1 - \mu_2 = 0$ og den alternative hypotese er $H_1 : \mu_1 - \mu_2 \neq 0$. Denne nulhypotese undersøges ved hjælp af en uparret t-test. Udfra stikprøverne udføres der to-sidet uparret t-test, ved hjælp af den indbyggede funktion `t.test`.
+
+```{r}
+#t.test ud fra de to stikprøver
+t1 <- t.test(Stik1, Stik2, alternative = "two.sided", mu = 0, conf.level = 0.95)
+#Det tilhørende konfidensinterval fra t.testen
+konfinterval <- t1$conf.int
+```
+
+Udfra t-testen fåes et konfidensinterval på [```r t1$conf.int```]. Med et signifikansniveau på $5\%$, vil den observerede forskel mellem populationernes middelværdier ligge i dette interval i $95\%$ af tilfældene, ifølge t-testen. Dækningsgraden af dette konfidensinterval kan undersøges ved at trække nye stikprøver fra populationerne, i alt $10,000$ gange. Dette gøres ved at udregne den nye observerede forskel i middelværdi og sammenligne med konfidensintervallet. Hvis den observede forskel er indeholdt i konfidensintervallet er det en succes, ellers er det en fiasko.
+
+```{r}
+#Undersøg dækningsgraden af konfidensintervallet ved udtræk af nye stikprøver.
+res <- replicate(10000, {
+  x1 <- sample(pop_hs, 100)
+  x2 <- sample(pop_vs, 100)
+  
+  mean_diff <- mean(x1) - mean(x2)
+  
+  konfinterval[1L] <= mean_diff & konfinterval[2L] >= mean_diff
+})
+tf <- table(res)
+```
+
+```{r piettest, fig.align="center", fig.cap= "Andel af succeser og fiaskoer", echo=FALSE}
+labels <- c("Fiasko","Succes")
+pctf <- tf[1]/sum(tf)*100
+pctt <- tf[2]/sum(tf)*100
+labels <- paste(labels, c(pctf, pctt))
+labels <- paste(labels, "%", sep = "")
+pie(x = tf, labels, main = "", col = c("brown3", "cornflowerblue"))
+```
+
+Det fremgår at i ```r pctf```$\%$ af tilfældene ligger den observerede forskel i middelværdierne uden for konfidensintervallet. Dette stemmer ikke overens med antagelsen om at $5\%$ burde ligge udenfor. Konklusionen er derfor at en t-test udført på ikke-normalfordelte stikprøver ikke nødvendigvis giver et retvisende resultat.
 
 
 

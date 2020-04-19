@@ -1,4 +1,4 @@
-### Bootstrap-konfidensintervaller
+## Bootstrap-konfidensintervaller
 
 __FIXME__ Bedre begrundelse for, hvorfor vi har flere forskellige metoder på konfidensintervaller med. Er der nogle, der er bedre end andre? 
 
