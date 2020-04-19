@@ -4,7 +4,9 @@ library(mosaic)
 ## Bootstrap
 
 FIXME: Evt se på figuren i [@MathStat, side 108] for at vise fordelinger
-
+```{r, out.width='75%', fig.align='center', fig.cap="(a) Populationsfordelingen, N(23, 7^2). (b) Fordelingen på en stikprøve af størrelsen 50. (c) Den teoretiske fordeling af stikprøvefordelingen \bar{X}, N(23, (7^2)/50). (d) Bootstrap fordelingen baseret på den stikprøve. De stiplede linjer representerer middelværdien [@MathStat, side 108]", echo = FALSE}
+ knitr::include_graphics("images/Bootstrap_fordelinger.png")
+```
 
 I det følgende afsnit vil den teoretiske del af en resampling-metode, kaldet bootstrap, blive beskrevet. Senere vil det blive undersøgt, hvordan bootstrap kan bruges praktisk.
 

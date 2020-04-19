@@ -97,11 +97,11 @@ Stik1 <- sample(pop_hs, size = 100)
 Stik2 <- sample(pop_vs, size = 100)
 ```
 
-```{r figurpop1, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra højreskæv betafordeling hvor n = 100, &alpha; = 2, &beta; = 8"}
+```{r , fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra højreskæv betafordeling hvor n = 100, &alpha; = 2, &beta; = 8"}
 hist(Stik1, main = "", ylab = "", xlab = "")
 ```
 
-```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra venstreskæv betafordeling hvor n = 100, &alpha; = 8, &beta; = 2."}
+```{r , fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra venstreskæv betafordeling hvor n = 100, &alpha; = 8, &beta; = 2."}
 hist(Stik2, main = "", ylab = "", xlab = "")
 ```
 
@@ -129,7 +129,7 @@ res <- replicate(10000, {
 tf <- table(res)
 ```
 
-```{r piettest, fig.align="center", fig.cap= "Andel af succeser og fiaskoer", echo=FALSE}
+```{r , fig.align="center", fig.cap= "Andel af succeser og fiaskoer", echo=FALSE}
 labels <- c("Fiasko","Succes")
 pctf <- tf[1]/sum(tf)*100
 pctt <- tf[2]/sum(tf)*100
@@ -139,4 +139,4 @@ pie(x = tf, labels, main = "", col = c("brown3", "cornflowerblue"))
 ```
 
 Det fremgår at i ```r pctf```$\%$ af tilfældene ligger den observerede forskel i middelværdierne uden for konfidensintervallet. Dette stemmer ikke overens med antagelsen om at $5\%$ burde ligge udenfor. Konklusionen er derfor at en t-test udført på ikke-normalfordelte stikprøver ikke nødvendigvis giver et retvisende resultat.
->>>>>>> b99bc18d1a5f46ce3542a38352a6eec3dcb860b8
+

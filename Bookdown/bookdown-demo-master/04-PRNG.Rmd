@@ -39,7 +39,7 @@ Der startes ved en værdi angivet med $X_0$, som bliver multipliceret med $a$ og
 
 I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempler har samme parametre, men forskellige startpunkter.
 
-```{r, out.width='75%', fig.align='center', fig.cap=" 3 eksempler på LCG. Kilde: By Cmglee - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=38637545 ", echo = FALSE}
+```{r, out.width='75%', fig.align='center', fig.cap=" 3 eksempler på LCG. [@lincongenvis]", echo = FALSE}
  knitr::include_graphics("images/LCG_eksempel.PNG")
 ```
 
