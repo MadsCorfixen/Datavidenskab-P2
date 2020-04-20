@@ -9,8 +9,6 @@ Der findes forskellige bootstrap-metoder, som varierer på forskellige punkter. 
 
 Bootstrap er en resampling-metode, der bruges til at generere yderligere datasæt ud fra den givne stikprøve, hvor målet er at udføre statistisk inferens for en valgt teststørrelse. For eksempel kan bootstrap give et indblik i tendenser for teststørrelsen, såsom standardfejlen og forventningsrethed, eller udregne konfidensintervaller. Der gøres opmærksom på, at bootstrap ikke kan bruges til at få et bedre estimat for parameteren, da bootstrap-fordelingen er centreret omkring stikprøvens estimat, se Figur \@ref(fig:fig-boot-fordeling), for eksempel middelværdien $\hat {\mu}$, og ikke populationens middelværdi, $\mu$ [@BootvsJack s. 114].
 
-__FIXME:__ (Ref til fig i teksten over)
-
 ```{r fig-boot-fordeling, out.width='90%', fig.align='center', fig.cap="(a) Populationens fordeling,  N(23, 49). (b) Fordelingen på en stikprøve af størrelsen 50. (c) Den teoretiske fordeling af stikprøvens middelværdi. (d) Fordelingen af bootstrap-stikprøvernes middelværdi. De stiplede linjer representerer middelværdien [@MathStat, side 108]", echo = FALSE}
 par(mfrow=c(2,2))
 
