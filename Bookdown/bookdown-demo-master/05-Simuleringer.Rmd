@@ -4,7 +4,7 @@ Simuleringer er generering af estimater på mulige udfald, og på den måde en e
 
 En definition på simulering er;
 
->A situation or event that seems real but is not real, used especially in order to help people deal with such situations or events. - Cambridge Dictonary [@CambridgeSimulation]
+>A situation or event that seems real but is not real, used especially in order to help people deal with such situations or events. - Cambridge Dictonary, [@CambridgeSimulation].
 
 Ud fra definitionen, er formålet altså ved simuleringer at efterligne virkeligheden, så de analyser der gøres på baggrund af simuleringerne, kan bruges i virkeligheden når lignende situationer opstår.
 Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producere dem i virkeligheden for at spare penge. Derved kan de analysere, hvilke forskellige dele der producerer mest _down-force_, uden at skulle teste dem i virkelig, [@MercedesF1].

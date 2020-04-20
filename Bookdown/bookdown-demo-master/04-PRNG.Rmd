@@ -20,11 +20,11 @@ En PRNGs funktionalitet beskrives ved nedenstående karakteristika.
 
 <!-- FIXME[https://www.youtube.com/watch?v=4sYawx70iP4, 0-4:05], fra videoen er billedet taget 3.09, men kan overvejes selv at lave en eftervisning af disse fordelinger -->
 
-En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af John von Neumann. Svagheden ved denne metode er, at dens periode oftest er ret kort og derfor hurtigt begynder at gentage den samme talsekvens [@PRNGintro, s. 12-13]. I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algortimer til PRNG. En af de mere kendte og hyppigt anvendte algoritmer er lineær kongruens generator, som gennemgåes i det følgnede afsnit.
+En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af John von Neumann. Svagheden ved denne metode er, at dens periode oftest er ret kort og derfor hurtigt begynder at gentage den samme talsekvens, [@PRNGintro, s. 12-13]. I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algortimer til PRNG. En af de mere kendte og hyppigt anvendte algoritmer er lineær kongruens generator, som gennemgåes i det følgnede afsnit.
 
 ### Lineær kongruens generator
 
-Dette afsnit beskriver teoretisk hvorledes lineær kongruens generator på baggrund af en arbitrær parameter kan generere en sekvens af tilfældige tal, som kan være uniformt fordelte. Det følgende afsnit er primært baseret på [@LCGinfo].
+Dette afsnit beskriver teoretisk hvorledes lineær kongruens generator på baggrund af en arbitrær parameter kan generere en sekvens af tilfældige tal, som kan være uniformt fordelte. Det følgende afsnit er primært baseret på kilden [@LCGinfo].
 
 Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved iteration, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
@@ -46,9 +46,9 @@ I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere 
 
 __Eksempel__
 
-De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, der undersøges om ens parametre, genererer tilsyneladende tilfældige værdier.
+De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden med hvordan, der undersøges om ens parametre genererer tilsyneladende tilfældige værdier.
 
-Først defineres en funktion for LCG algoritmen, som tager de nødvendige argumenter for algoritmen. Disse blev der redegjort for tidligere i afsnittet. Derudover angives også et argument, $n$, der fortæller hvor mange iterationer algoritmen skal foretage. 
+Først defineres en funktion for LCG algoritmen, som tager de nødvendige argumenter for algoritmen. Disse blev der redegjort for tidligere i afsnittet. Derudover angives også et argument, $n$, der fortæller hvor mange iterationer algoritmen skal foretage.
 
 ```{r}
 lcg <- function(m, a, c, seed, n) {
@@ -91,7 +91,7 @@ hist((lcg2 + 0.05)/ 86436, main = "LCG Uniform fordeling",
      xlab = "Sekvens værdier", ylab = "Frekvens")
 ```
 
-Her kan det også nævnes, at hvis de værdier algoritmen returnerer plottes i et 2d punktplot, vil der fremgå en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
+Her kan det også nævnes, at hvis de værdier algoritmen returnerer plottes i et 2d-punktplot, vil der fremgå en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
 
 ```{r}
 plot(lcg2, main = "2d plot af LCG sekvens", xlab = "Indeks", 
@@ -115,7 +115,7 @@ I dette afsnit beskrives Box-Muller-transformation, hvilket er en metode til at 
 >```{theorem}
 > Box-Muller-transformation
 >
-> Antag, at $U_1$ og $U_2$ er uafhængige stokastiske variabler, der begge er uniformt fordelt på intervallet $[0, 1]$. Lad $$Z_1 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{cos}(2\pi U_2)~ \wedge~ Z_2 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{sin}(2\pi U_2)$$. Så er $Z_1$ og $Z_2$ uafhængige stokastiske variabler, der er standard normalfordelt.
+> Antag, at $U_1$ og $U_2$ er uafhængige stokastiske variabler, der begge er uniformt fordelt på intervallet $[0, 1]$. Lad $$Z_1 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{cos}(2\pi U_2)~ \wedge~ Z_2 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{sin}(2\pi U_2)$$. Så er $Z_1$ og $Z_2$ uafhængige stokastiske variabler, der er standard normalfordelte.
 >```
 
 __Eksempel__
@@ -214,6 +214,7 @@ Det ses på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at d
 
 Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges ved hjælp af nedenstående graf.
 
+__FIXME:__ (Husk at indsætte figuren inden aflevering! :-))
 <!--```{r}
 plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2", 
      col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25), 
