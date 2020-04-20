@@ -7,13 +7,37 @@ I det følgende afsnit vil den teoretiske del af en resampling-metode, kaldet bo
 
 Der findes forskellige bootstrap-metoder, som varierer på forskellige punkter. Valget af bootstrap-metode afhænger af den individuelle situation, hvor der skal udføres statistisk inferens. Der gøres opmærksom på, at i den resterende del af rapporten, vil ordet bootstrap henvise til den ikke-parametriske bootstrap-metode. Ikke-parametrisk bootstrap, er når der ikke sættes specifikke antagelser eller en præcis model for populationen, når undersøgelsen udføres. Derimod antages det, at en stikprøve er repræsentativ for hele populationen. [@nonparaboot, side 3]
 
-Bootstrap er en resampling-metode, der bruges til at generere yderligere datasæt ud fra den givne stikprøve, hvor målet er at udføre statistisk inferens for en valgt teststørrelse. For eksempel kan bootstrap give et indblik i tendenser for teststørrelsen, såsom standardfejlen og forventningsrethed, eller udregne konfidensintervaller. Der gøres opmærksom på, at bootstrap ikke kan bruges til at få et bedre estimat for parameteren, da bootstrap-fordelingen er centreret omkring stikprøvens estimat, for eksempel middelværdien $\hat {\mu}$, og ikke populationens middelværdi, $\mu$ [@BootvsJack s. 114].
+Bootstrap er en resampling-metode, der bruges til at generere yderligere datasæt ud fra den givne stikprøve, hvor målet er at udføre statistisk inferens for en valgt teststørrelse. For eksempel kan bootstrap give et indblik i tendenser for teststørrelsen, såsom standardfejlen og forventningsrethed, eller udregne konfidensintervaller. Der gøres opmærksom på, at bootstrap ikke kan bruges til at få et bedre estimat for parameteren, da bootstrap-fordelingen er centreret omkring stikprøvens estimat, se Figur \@ref(fig:fig-boot-fordeling), for eksempel middelværdien $\hat {\mu}$, og ikke populationens middelværdi, $\mu$ [@BootvsJack s. 114].
 
 __FIXME:__ (Ref til fig i teksten over)
 
-```{r, out.width='75%', fig.align='center', fig.cap="(a) Populationsfordelingen, N(23, 49). (b) Fordelingen på en stikprøve af størrelsen 50. (c) Den teoretiske fordeling af stikprøvefordelingen bar{X}, N(23, 49/50). (d) Bootstrap fordelingen baseret på den stikprøve. De stiplede linjer representerer middelværdien [@MathStat, side 108]", echo = FALSE}
- knitr::include_graphics("images/Bootstrap_fordelinger.png")
+```{r fig-boot-fordeling, out.width='90%', fig.align='center', fig.cap="(a) Populationens fordeling,  N(23, 49). (b) Fordelingen på en stikprøve af størrelsen 50. (c) Den teoretiske fordeling af stikprøvens middelværdi. (d) Fordelingen af bootstrap-stikprøvernes middelværdi. De stiplede linjer representerer middelværdien [@MathStat, side 108]", echo = FALSE}
+par(mfrow=c(2,2))
+
+norm_pop <- rnorm(n = 500000, mean = 23, sd = 7^2)
+plot(density(norm_pop), xlim = c(-150, 200), main = "(a)", xlab = "", ylab ="", bty = "n")
+abline(v = mean(norm_pop), lty = 3)
+
+norm_stik <- rnorm(n = 50, mean = 23, sd = 7^2)
+hist(norm_stik, xlim = c(-150, 200), main = "(b)", xlab = "", ylab ="")
+abline(v = mean(norm_stik), lty = 3)
+
+stik_fordeling <- replicate(10000, mean(rnorm(n = 50, mean = 23, sd = 7^2)))
+plot(density(stik_fordeling), xlim = c(-150, 200), main = "(c)", xlab = "", ylab ="", bty = "n")
+abline(v = mean(stik_fordeling), lty = 3)
+
+boot_fordeling <- replicate(10000, mean(sample(norm_stik, replace = TRUE, size = 50)))
+hist(boot_fordeling, xlim = c(-150, 200), main = "(d)", xlab = "", ylab ="")
+abline(v = mean(boot_fordeling), lty = 3)
+
+par(mfrow=c(1,1))
 ```
+
+
+<!-- ```{r, out.width='75%', fig.align='center', fig.cap="(a) Populationsfordelingen, N(23, 49). (b) Fordelingen på en stikprøve af størrelsen 50. (c) Den teoretiske fordeling af stikprøvefordelingen bar{X}, N(23, 49/50). (d) Bootstrap fordelingen baseret på den stikprøve. De stiplede linjer representerer middelværdien [@MathStat, side 108]", echo = FALSE} -->
+<!-- knitr::include_graphics("images/Bootstrap_fordelinger.png") -->
+<!-- ``` -->
+
 
 Hver bootstrap-stikprøve har størrelsen $n$, altså den samme størrelse som stikprøven. Bootstrap opererer med tilbagelægning, så der er en sandsynlighed for, at et givent datapunkt bliver udtaget mere end en gang. Samtidig er der en sandsynlighed for, at et datapunkt slet ikke bliver udvalgt. Det er relevant at undersøge, hvor mange af de oprindelige observationer, som i gennemsnit medtages i nye bootstrap-stikprøver, og ligeledes, hvor mange, som udelades.
 
