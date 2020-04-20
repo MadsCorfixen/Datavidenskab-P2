@@ -52,7 +52,7 @@ Derefter beregnes den observerede teststørrelse, $t_{obs} = \frac{|\bar y - \mu
 
 Til slut findes _p_-værdien, og på baggrund af denne, bliver nulhypotesen enten forkastet eller ej.
 
-### Eksempel
+__Eksempel__
 
 I dette afsnit gennemgåes et eksempel på en t-test.
 

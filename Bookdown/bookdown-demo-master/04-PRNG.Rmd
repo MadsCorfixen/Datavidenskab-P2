@@ -45,6 +45,8 @@ I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempl
 
 I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal iterationer vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette vil vises om lidt.
 
+__Eksempel__
+
 De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden om hvordan, der undersøges om ens parametre, genererer tilsyneladende tilfældige værdier.
 
 Først defineres en funktion for LCG algoritmen, som tager de nødvendige argumenter for algoritmen. Disse blev der redegjort for tidligere i afsnittet. Derudover angives også et argument, $n$, der fortæller hvor mange iterationer algoritmen skal foretage. 
@@ -117,9 +119,9 @@ I dette afsnit beskrives Box-Muller-transformation, hvilket er en metode til at 
 > Antag, at $U_1$ og $U_2$ er uafhængige stokastiske variabler, der begge er uniformt fordelt på intervallet $[0, 1]$. Lad $$Z_1 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{cos}(2\pi U_2)~ \wedge~ Z_2 = \sqrt{-2 \mathrm{ln} U_1} \mathrm{sin}(2\pi U_2)$$. Så er $Z_1$ og $Z_2$ uafhængige stokastiske variabler, der er standard normalfordelt.
 >```
 
-#### Efterprøvning i R
+__Eksempel__
 
-I det følgende afsnit efterprøves Box-Muller-transformationen i R.
+I dette afsnit oprettes to normalfordelinger ved hjælp af Box-Muller-transformationen i R.
 
 Først simuleres to populationer, ```U1``` og ```U2```, hvor $\mathrm{U1 \sim unif(0,1)}$ og $\mathrm{U2 \sim unif(0,1)}$, som er de to uniformt fordelte populationer, der genereres normalfordelinger ud fra.
 
@@ -140,6 +142,10 @@ Disse to populationer benyttes nu til at oprette de to påstået standard normal
 Z1 <- sqrt(-2*log(U1))*cos(2*pi*U2)
 Z2 <- sqrt(-2*log(U1))*sin(2*pi*U2)
 ```
+
+__Efterprøvning i R__
+
+I det følgende afsnit efterprøves den forventede normalfordeling af Box-Muller-transformationen i R.
 
 Det kan nu undersøges deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har.
 

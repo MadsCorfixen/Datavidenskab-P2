@@ -43,7 +43,7 @@ runif(10, min = 1, max = 2)
 
 Den uniforme fordelingen er derimod angivet med en minimum- og maksimumværdi, hvor der genereres værdier imellem.
 
-#### Sample og replicate (Bootstrapping)
+#### Sample og replicate
 
 Derudover kan der simuleres på baggrund af observeret data. Ved at benytte funktionerne ```sample``` og ```replicate``` kan der dannes nye simuleringer. ```sample``` tager en stikprøve af den observerede data, hvor ```replicate``` kan gentage forskellige stikprøver.
 ```{r}
@@ -59,7 +59,7 @@ Dernæst kan der foretages en ```sample``` af variablen ```Z_fordeling```.
 
 ```{r}
 set.seed(1)
-Z_sample <- sample(Z_fordeling, size = 10, replace = TRUE)
+Z_sample <- sample(Z_fordeling, size = 10)
 
 Z_sample
 mean(Z_sample)

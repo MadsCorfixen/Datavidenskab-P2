@@ -36,7 +36,7 @@ Netop på grund af ombytteligheden af stikprøven, fungerer permutationstests. H
 
 Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
 
-#### Eksempel
+__Eksempel__
 
 FIXME: Lav et eksempel, der tager udgangspunkt i realistisk data. Overvej, om eksemplet skal slettes.
 
