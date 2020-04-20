@@ -20,8 +20,6 @@ pop_hs <- rbeta(n, shape1 = 2, shape2 = 8) # Højreskæv population
 
 Figur \@ref(fig:VSHS) viser populationernes fordelinger.
 
-__FIXME:__ (Vis fordelingens densitet)
-
 ```{r VSHS, echo=FALSE, fig.cap= "To skæve populationer genereret fra en betafordeling"}
 par(mfrow=c(1,2))
 hist(pop_vs, main = "Venstreskæv population", ylab = "", xlab = "", xlim = c(0,1), ylim = c(0,3.5), prob = TRUE)
@@ -44,8 +42,6 @@ pop_z <- rnorm(n) # Standard normaltfordelt population
 ```
 
 Figur \@ref(fig:Zpop) viser et histogram over den standard normaltefordelte population.
-
-__FIXME:__ (Vis fordelingens densitet)
 
 ```{r Zpop, echo=FALSE, fig.cap= "Standard normaltfordelt population"}
 hist(pop_z, main = "", ylab = "", xlab = "")
