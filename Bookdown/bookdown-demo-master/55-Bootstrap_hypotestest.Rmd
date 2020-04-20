@@ -17,7 +17,7 @@ Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, 
 
 Er antagelserne ikke opfyldt kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en parret bootstrap-test, og dernæst fremgangsmåden for en uparret bootstrap-test.
 
-#### Parret bootstrap-test
+### Parret bootstrap-test
 
 Lad to parrede stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{n}]$.
 Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne teststørrelsen, $t_{obs}=\hat{Z}$.
@@ -80,9 +80,9 @@ p_tosidet
 
 ```
 
-Der ses altså at p-værdien er lig ```r p_tosidet```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
+Der ses altså, at p-værdien er lig ```r p_tosidet```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for, at differencen ikke er $0$.
 
-#### Uparret bootstrap-test
+### Uparret bootstrap-test
 
 Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$, med ens varians, være givet.
 
@@ -90,7 +90,7 @@ På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at u
 
 Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} \neq \mu_{_Y}$, samt et signifikansniveau, $\alpha = 0.05$. 
 
-Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$.[@BootHypo]
+Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$, [@BootHypo].
 
 Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. 
 

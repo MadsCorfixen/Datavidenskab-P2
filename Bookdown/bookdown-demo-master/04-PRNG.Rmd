@@ -1,10 +1,10 @@
 # Simuleringer
 
-## Pseudorandom Number Generator
+## Pseudorandom number generator
 
-I dette afsnit introduceres begrebet pseudorandom Number Generator og hvorledes disse kan bringes i anvendelse i forbindelse med simuleringer. I de tilhørende underafsnit beskrives forskellige typer af Pseudorandom Number Generator, samt hvordan den enkelte algoritme anvendes i praksis. 
+I dette afsnit introduceres begrebet _pseudorandom number generator_ (PRNG) og hvorledes den kan bringes i anvendelse i forbindelse med simuleringer. I de tilhørende underafsnit beskrives først en type af PRNG kaldet lineær kongruens generator, og dernæst en metode til at omdanne uniformt fordelte talt til standard normalfordelte tal kaldet Box-Muller-transformation. 
 
-En computer fungerer ved, at den modtager et input, der bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at generere faktisk tilfældige tal. Grunden til dette er, hvis der gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere, fordi en computer fungerer på baggrund af matematik og derfor er deterministisk. Det er dog muligt ved hjælp af en beregningsmodel at skabe en illusion af ægte tilfældighed. Denne model kaldes _Pseudorandom Number Generator_ (PRNG).
+En computer fungerer ved, at den modtager et input, der bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at generere faktisk tilfældige tal. Grunden til dette er, hvis der gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere, fordi en computer fungerer på baggrund af matematik og derfor er deterministisk. Det er dog muligt ved hjælp af en beregningsmodel at skabe en illusion af ægte tilfældighed. Denne model kaldes _pseudorandom number generator_ (PRNG).
 
 En PRNGs funktionalitet beskrives ved nedenstående karakteristika. 
 
@@ -20,12 +20,11 @@ En PRNGs funktionalitet beskrives ved nedenstående karakteristika.
 
 <!-- FIXME[https://www.youtube.com/watch?v=4sYawx70iP4, 0-4:05], fra videoen er billedet taget 3.09, men kan overvejes selv at lave en eftervisning af disse fordelinger -->
 
-En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af John von Neumann. Svagheden ved denne metode er, at dens periode oftest er ret kort og derfor hurtigt begynder at gentage den samme talsekvens [@PRNGintro, s. 12-13]. I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algortimer til PRNG. En af de mere kendte og hyppigt anvendte er Lineær Kongruens Generator, som gennemgåes i det følgnede afsnit.
+En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af John von Neumann. Svagheden ved denne metode er, at dens periode oftest er ret kort og derfor hurtigt begynder at gentage den samme talsekvens [@PRNGintro, s. 12-13]. I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algortimer til PRNG. En af de mere kendte og hyppigt anvendte algoritmer er lineær kongruens generator, som gennemgåes i det følgnede afsnit.
 
 ### Lineær kongruens generator
 
-Dette afsnit beskriver teoretisk hvorledes lineær kongruens generator på baggrund af et arbitrær parameter kan generer en sekvens af tilfældige tal, som kan være unifor fordelte. __FIXME__ (Er gives et eks. på uniform fordelte tal, kan den også laves standard normalfordelte tal? - som box-muller)
-Det følgende afsnit er primært baseret på [@LCGinfo].
+Dette afsnit beskriver teoretisk hvorledes lineær kongruens generator på baggrund af en arbitrær parameter kan generere en sekvens af tilfældige tal, som kan være uniformt fordelte. Det følgende afsnit er primært baseret på [@LCGinfo].
 
 Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved iteration, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 

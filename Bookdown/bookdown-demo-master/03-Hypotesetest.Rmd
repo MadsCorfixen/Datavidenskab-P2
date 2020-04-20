@@ -4,7 +4,7 @@ library(mosaic)
 
 # Hypotesetest
 
-I det følgende afsnit introduceres hypotesetest, samt hvorledes disse anvendes til at __FIXME__ (beskrive/drage konklusioner for) en population, ved at opstille to hyposeser. 
+I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at __FIXME__ (beskrive/drage konklusioner for) en population, ved at opstille to hyposeser. 
 
 En hypotesetest baserer sig på det videnskabelige princip om falsificering. Der opstilles en indledende formodning om en population, kaldet nulhypotesen $H_0$, og en alternativ, modsat hypotese $H_1$. Er den indledende formodning ikke korrekt, må den alternative hypotese være gældende.
 
