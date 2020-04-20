@@ -24,9 +24,11 @@ language:
 delete_merged_file: true
 
 
-rmd_files: ["index.Rmd", "xx-PopulationSimulering.Rmd", "02-Problemanalyse.Rmd",
-            "03-Hypotesetest.Rmd", "04-PRNG.Rmd", "05-Simuleringer.Rmd", "06-Permutationstest.Rmd",
-            "08-Bootstrap.Rmd", "09-BootstrapKI.Rmd", "10-Bootstrap_hypotestest.Rmd",
-            "11-Dataanalyse.Rmd", "96-Diskussion.Rmd", "97-Konklusion.Rmd",
+rmd_files: ["index.Rmd", "02-Problemanalyse.Rmd",
+            "03-Simuleringer.Rmd", "04-Hypotesetest.Rmd",
+            "05-Resampling.Rmd",
+            "06-Bootstrap.Rmd", "07-Boot_anvendelser.Rmd",
+            "08-Dataanalyse.Rmd",
+            "96-Diskussion.Rmd", "97-Konklusion.Rmd",
             "98-Perspektivering.Rmd", "99-Bibliografi.Rmd"]
 
