@@ -1,26 +1,28 @@
 ## Simulering af populationer {#pop-sim}
-I følgende afsnit simuleres der populationer, som i senere afsnit vil blive benyttet. Der simuleres to forskellige forskellige skæve fordelinger og en enkelt standard normalfordelt fordeling, hvorfra stikprøverne vil blive taget. Er det nødvendigt at benytte andre populationer, vil disse blive simuleret i de enkelte afsnit.
+I det følgende afsnit simuleres der populationer, som i senere afsnit vil blive benyttet. Der simuleres to forskellige skæve fordelinger og en enkelt standard normalfordeling, hvorfra stikprøverne vil blive udtaget. Er det nødvendigt at benytte andre populationer, vil disse blive simuleret i de enkelte afsnit.
 
-De to skæve fordelinger simuleres ud fra en betafordeling, $\text{Beta}(\alpha, \beta)$, hvor $\alpha-1$ angiver antallet af succeser og $\beta-1$ angiver antallet af fiaskoer. Betafordelingen af tilnærmelsesvis normaltfordelt hvis $\alpha$ og $\beta$ begge er store eller omtrent ens [@TDSBeta].
+De to skæve fordelinger simuleres ud fra en betafordeling, $\text{Beta}(\alpha, \beta)$, hvor $\alpha-1$ angiver antallet af succeser og $\beta-1$ angiver antallet af fiaskoer. Betafordelingen er tilnærmelsesvis normaltfordelt, hvis $\alpha$ og $\beta$ begge er store eller omtrent ens, [@TDSBeta].
 
 ```{r echo=FALSE}
 n <- 10000
 ```
 
-
-Der simuleres en højreskæv og venstreskæv population af størrelsen, $n=$ ```r n```.
-
+Der simuleres en højreskæv og venstreskæv population af størrelsen, $n=$ ```r n```. Den venstreskæve population har $\alpha = 8$ og $\beta = 2$, hvor den højreskæve population har $\alpha = 2$ og $\beta = 8$.
 
 ```{r}
 set.seed(1)
 
 n <- 10000
 
-pop_vs <- rbeta(n, 8, 2) # Venstreskæv population
-pop_hs <- rbeta(n, 2, 8) # Højreskæv population
+pop_vs <- rbeta(n, shape1 = 8, shape2 = 2) # Venstreskæv population
+pop_hs <- rbeta(n, shape1 = 2, shape2 = 8) # Højreskæv population
 ```
 
-```{r, echo=FALSE, fig.cap= "To skæve populationer genereret fra en betafordeling"}
+Figur \@ref(fig:VSHS) viser populationernes fordelinger.
+
+__FIXME:__ (Vis fordelingens densitet)
+
+```{r VSHS, echo=FALSE, fig.cap= "To skæve populationer genereret fra en betafordeling"}
 par(mfrow=c(1,2))
 hist(pop_vs, main = "Venstreskæv population", ylab = "", xlab = "")
 hist(pop_hs, main = "Højreskæv population", ylab = "", xlab = "")
@@ -39,7 +41,11 @@ Derudover simuleres en standard normalfordelt population af størrelsen, $n=$ ``
 pop_z <- rnorm(n) # Standard normaltfordelt population
 ```
 
-```{r, echo=FALSE, fig.cap= "Standard normaltfordelt population"}
+Figur \@ref(fig:Zpop) viser et histogram over den standard normaltefordelte population.
+
+__FIXME:__ (Vis fordelingens densitet)
+
+```{r Zpop, echo=FALSE, fig.cap= "Standard normaltfordelt population"}
 hist(pop_z, main = "", ylab = "", xlab = "")
 ```
 
