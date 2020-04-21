@@ -36,7 +36,7 @@ I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikpr
 
 Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$, [@BootKI]. Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
-__Bootstrap-konfidensintervaller ved hjælp af percentiler__
+### Percentilmetoden
 
 En intuitiv fremgangsmåde til at bestemme et konfidensinterval ved percentiler, er at bruge det $(B(\frac{\alpha}{2}))$'te og $(B(1-\frac{\alpha}{2}))$'te percentil, hvor $B$ er antallet af bootstrap-repetitioner. Lad $\Theta^* = [\vartheta_1,~ \ldots,~\vartheta_B]$ være en sorteret liste af bootstrap-estimater. Derved er formlen for et konfidensinterval på baggrund af percentiler: 
 
@@ -75,7 +75,61 @@ IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil
 
 KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper])
   # Konfidensinterval vha. percentiler
+
+KI_Percentil
 ```
+
+__FIXME__ Mangler kilde, plus hvis eventuelt hvordan fordelingen ser ud hvis den er skæv.
+
+Ulempen ved brug af percentiler er, at konfidensintervallet ofte er ukorrekt hvis fordelingen af stikprøven er skæv. En mere præcis metode er basic-metoden. 
+
+### Basic-metoden
+
+Denne type konfidensinterval ud fra bootstrap er også kendt som _reversed percentile interval_. Denne metode benytter formlen:
+
+$$\text{KI}_b = \left[2\hat\theta- \theta^{{\sim}}_{(1-\alpha/2)}, ~ 2\hat\theta- \theta^{{\sim}}_{(\alpha/2)}\right]$$
+
+Hvor $\theta^{\sim}_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven, [@BasicKI].
+
+__Eksempel__
+
+I kodestykket nedenfor beregnes middelværdien af stikprøven og benyttes i formlen.
+
+```{r}
+theta_hat <- mean(data)
+
+KI_Basic <- c(Lower = 2*theta_hat-SortedData[IndexUpper],
+              Upper = 2*theta_hat-SortedData[IndexLower])
+
+KI_Basic
+```
+
+### T-metoden
+
+Konfidensintervaller kan også findes ved hjælp af standardfejl fra stikprøven, hvis stikprøven er tilnærmelsesvist t-fordelt.
+
+Formlen for konfidensintervallet er: 
+
+$$\text{KI}_t=\left[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}}(\theta),~\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}(\theta)\right]$$ 
+
+Hvor $\hat\theta$ er middelværdien af stikprøven, $\hat{\vartheta}$ er middelværdien for $\Theta^*$ og $t^{*}=\frac{\hat{\vartheta}-\hat\theta}{\hat{\text{se}}(\hat\vartheta)}$, [@TPKI].
+
+__Eksempel__
+
+I kodestykket forneden beregnes $t^{*}$ for det nedre og øvre percentil. Dernæst beregnes konfidensintervallet ud fra formlen. 
+
+```{r}
+tLower <- (SortedData[IndexUpper]-theta_hat) /
+  (sd(bootstrap_fordeling)) # SD udregner standardfejl
+tUpper <- (SortedData[IndexLower]-theta_hat) /
+  (sd(bootstrap_fordeling)) # SD udregner standardfejl
+
+KI_Normal <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)),
+               Upper = theta_hat - tUpper * (sd(data)/sqrt(n)))
+KI_Normal
+```
+
+__FIXME:__ (Eventuel sammenligning / Undersøgelse af dækningsgraden - Tænker det gøres i dataanalysen)
 
 ## Bootstrap-hypotesetest
 
@@ -87,7 +141,7 @@ Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, 
 
 Er antagelserne ikke opfyldt kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en parret bootstrap-test, og dernæst fremgangsmåden for en uparret bootstrap-test.
 
-#### Parret bootstrap-test
+### Parret bootstrap-test
 
 Lad to parrede stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{n}]$.
 Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne teststørrelsen, $t_{obs}=\hat{Z}$.
@@ -152,7 +206,7 @@ p_tosidet
 
 Der ses altså at p-værdien er lig ```r p_tosidet```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
 
-#### Uparret bootstrap-test
+### Uparret bootstrap-test
 
 Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$, med ens varians, være givet.
 

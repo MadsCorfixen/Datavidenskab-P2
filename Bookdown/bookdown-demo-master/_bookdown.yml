@@ -1,4 +1,4 @@
-book_filename: "bookdown-demo"
+book_filename: "P2-rapport"
 language:
   label:
     fig: 'Figur '
@@ -28,7 +28,6 @@ rmd_files: ["index.Rmd", "02-Problemanalyse.Rmd",
             "03-Simuleringer.Rmd", "04-Hypotesetest.Rmd",
             "05-Resampling.Rmd",
             "06-Bootstrap.Rmd", "07-Boot_anvendelser.Rmd",
-            "08-Dataanalyse.Rmd",
             "96-Diskussion.Rmd", "97-Konklusion.Rmd",
             "98-Perspektivering.Rmd", "99-Bibliografi.Rmd"]
 
