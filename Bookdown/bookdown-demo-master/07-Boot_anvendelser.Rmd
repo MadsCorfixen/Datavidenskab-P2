@@ -3,7 +3,7 @@ library(mosaic)
 ```
 # Bootstrap anvendelser
 
-__FIXME__ Metaafsnit
+I dette kapitel, vil der blive undersøgt hvordan bootstrap kan anvendes i praksis. Herunder, når der skal udregnes standardfejl for en estimator, til at angive konfidensintervaller, samt hvis der skal udføres hypotesetest vha. bootstrap. Til hver anvendelse, vil der også blive givet et eksempel på dataanalyse. 
 
 ## Bootstrap-standardfejl 
 

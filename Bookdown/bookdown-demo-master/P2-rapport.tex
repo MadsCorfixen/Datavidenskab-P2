@@ -242,7 +242,7 @@ En PRNGs funktionalitet beskrives ved nedenstående karakteristika.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.75\linewidth]{images/prngfordelingerDK}
+{\centering \includegraphics[width=0.75\linewidth]{images/prngfordelingerDK} 
 
 }
 
@@ -272,7 +272,7 @@ I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempl
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.75\linewidth]{images/LCG_eksempel}
+{\centering \includegraphics[width=0.75\linewidth]{images/LCG_eksempel} 
 
 }
 
@@ -292,14 +292,14 @@ Først defineres en funktion for LCG algoritmen, som tager de nødvendige argume
 \NormalTok{lcg <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(m, a, c, seed, n) \{}
   \CommentTok{#M er modulus, a er faktoren, c er tilvæksten, seed er}
   \CommentTok{#startværdien og n er antal iterationer.}
-
+  
 \NormalTok{  r <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(n) }\CommentTok{#Definerer en ny variabel r,}
                   \CommentTok{#som er den numeriske værdi af n.}
 \NormalTok{  r[}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{seed }\CommentTok{#Angiver startpunktet. }
-
+  
   \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\StringTok{ }\NormalTok{(n}\DecValTok{-1}\NormalTok{)) \{}
 \NormalTok{  r[i }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{] <-}\StringTok{ }\NormalTok{(a }\OperatorTok{*}\StringTok{ }\NormalTok{r[i] }\OperatorTok{+}\StringTok{ }\NormalTok{c) }\OperatorTok{%%}\StringTok{ }\NormalTok{m}
-
+  
 \NormalTok{\}}
  \KeywordTok{return}\NormalTok{(r)}
 \NormalTok{\}}
@@ -493,7 +493,7 @@ Udover at eftervise uafhængigheden af \texttt{Z1} og \texttt{Z2} grafisk, kan d
 Korrelationen af to variabler udregnes ved formlen
 
 \[
-cor(X, Y) = \frac{cov(X, Y)}{sd(X) \cdot sd(Y)}
+cor(X, Y) = \frac{cov(X, Y)}{sd(X) \cdot sd(Y)}  
 \]
 Hvor \(cov\) angiver kovariansen og \(sd\) angiver standardafvigelsen.
 
@@ -702,7 +702,7 @@ Figur \ref{fig:VSHS} viser populationernes fordelinger.
 
 \begin{figure}
 
-{\centering \includegraphics{P2-rapport_files/figure-latex/VSHS-1}
+{\centering \includegraphics{P2-rapport_files/figure-latex/VSHS-1} 
 
 }
 
@@ -734,7 +734,7 @@ En illustration af teststørrelsens betydning ved en normalfordeling kan ses på
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.75\linewidth]{images/HippoHyppo}
+{\centering \includegraphics[width=0.75\linewidth]{images/HippoHyppo} 
 
 }
 
@@ -781,7 +781,7 @@ Følgende histogram viser en stikprøve af \texttt{10} observationer med en midd
 
 \begin{figure}
 
-{\centering \includegraphics{P2-rapport_files/figure-latex/unnamed-chunk-29-1}
+{\centering \includegraphics{P2-rapport_files/figure-latex/unnamed-chunk-29-1} 
 
 }
 
@@ -824,7 +824,7 @@ Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau - i de f
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.75\linewidth]{images/Typefejl}
+{\centering \includegraphics[width=0.75\linewidth]{images/Typefejl} 
 
 }
 
@@ -848,7 +848,7 @@ Foretages en t-test på en ikke-normaltfordelt stikprøve, kan resultaterne ikke
 
 \begin{figure}
 
-{\centering \includegraphics{P2-rapport_files/figure-latex/figurpop1-1}
+{\centering \includegraphics{P2-rapport_files/figure-latex/figurpop1-1} 
 
 }
 
@@ -857,7 +857,7 @@ Foretages en t-test på en ikke-normaltfordelt stikprøve, kan resultaterne ikke
 
 \begin{figure}
 
-{\centering \includegraphics{P2-rapport_files/figure-latex/figurpop2-1}
+{\centering \includegraphics{P2-rapport_files/figure-latex/figurpop2-1} 
 
 }
 
@@ -883,9 +883,9 @@ Udfra t-testen fåes et konfidensinterval på {[}\texttt{-0.6544852,\ -0.5919858
 \NormalTok{res <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(}\DecValTok{10000}\NormalTok{, \{}
 \NormalTok{  x1 <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(pop_hs, }\DecValTok{100}\NormalTok{)}
 \NormalTok{  x2 <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(pop_vs, }\DecValTok{100}\NormalTok{)}
-
+  
 \NormalTok{  mean_diff <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(x1) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(x2)}
-
+  
 \NormalTok{  konfinterval[1L] }\OperatorTok{<=}\StringTok{ }\NormalTok{mean_diff }\OperatorTok{&}\StringTok{ }\NormalTok{konfinterval[2L] }\OperatorTok{>=}\StringTok{ }\NormalTok{mean_diff}
 \NormalTok{\})}
 \NormalTok{tf <-}\StringTok{ }\KeywordTok{table}\NormalTok{(res)}
@@ -894,7 +894,7 @@ Udfra t-testen fåes et konfidensinterval på {[}\texttt{-0.6544852,\ -0.5919858
 
 \begin{figure}
 
-{\centering \includegraphics{P2-rapport_files/figure-latex/piettest-1}
+{\centering \includegraphics{P2-rapport_files/figure-latex/piettest-1} 
 
 }
 
@@ -1032,7 +1032,7 @@ Bootstrap er en resampling-metode, der bruges til at generere yderligere datasæ
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.9\linewidth]{P2-rapport_files/figure-latex/fig-boot-fordeling-1}
+{\centering \includegraphics[width=0.9\linewidth]{P2-rapport_files/figure-latex/fig-boot-fordeling-1} 
 
 }
 
@@ -1049,7 +1049,7 @@ Fordelen ved bootstrap er, at selvom der kun er én tilgængelig stikprøve fra 
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.75\linewidth]{images/normalvboot}
+{\centering \includegraphics[width=0.75\linewidth]{images/normalvboot} 
 
 }
 
@@ -1146,7 +1146,7 @@ Bootstrap-konfidensinterval ved hjælp af percentiler kan findes ved:
 \end{Shaded}
 
 \begin{verbatim}
-##      Lower      Upper
+##      Lower      Upper 
 ## -0.2471011  0.1543761
 \end{verbatim}
 
@@ -1179,7 +1179,7 @@ I kodestykket nedenfor beregnes middelværdien af stikprøven og benyttes i form
 \end{Shaded}
 
 \begin{verbatim}
-##      Lower      Upper
+##      Lower      Upper 
 ## -0.2375702  0.1639069
 \end{verbatim}
 
@@ -1212,7 +1212,7 @@ I kodestykket forneden beregnes \(t^{*}\) for det nedre og øvre percentil. Dern
 \end{Shaded}
 
 \begin{verbatim}
-##      Lower      Upper
+##      Lower      Upper 
 ## -0.2394553  0.1658837
 \end{verbatim}
 
@@ -1349,15 +1349,15 @@ Nu vil der vises et eksempel på en uparret bootstrap t-test.
 \NormalTok{B2 <-}\StringTok{ }\DecValTok{10000}
 
 \NormalTok{res <-}\StringTok{ }\KeywordTok{replicate}\NormalTok{(B2, \{}
-
+  
 \NormalTok{  boot <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(stik3, stik4), }\DataTypeTok{replace =} \OtherTok{TRUE}\NormalTok{)}
-
+  
 \NormalTok{  bootx <-}\StringTok{ }\NormalTok{boot[}\DecValTok{1} \OperatorTok{:}\StringTok{ }\NormalTok{n2]}
 \NormalTok{  booty <-}\StringTok{ }\NormalTok{boot[(n2}\OperatorTok{+}\DecValTok{1}\NormalTok{) }\OperatorTok{:}\StringTok{ }\NormalTok{(n2}\OperatorTok{+}\NormalTok{m2)]}
-
+  
 \NormalTok{  diffmean <-}\StringTok{ }\NormalTok{(}\KeywordTok{mean}\NormalTok{(bootx) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(booty))}
 \NormalTok{  diffmean}
-
+  
 \NormalTok{\})}
 
 \NormalTok{andel_mindre2 <-}\StringTok{ }\NormalTok{res }\OperatorTok{<}\StringTok{ }\NormalTok{t_obs2}

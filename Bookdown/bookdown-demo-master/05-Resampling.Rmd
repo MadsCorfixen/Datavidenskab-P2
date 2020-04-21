@@ -6,10 +6,12 @@ library(SimDesign)
 
 FIXME: Bland med kapitel 3 (overvej)
 
-I de følgende to underafsnit beskrives to metoder, som anvendes til at permutere eller resample fra en stikprøve.  
+
+I de følgende to underafsnit beskrives to metoder, der er yderst relevante når der arbejdes med statistik. Først vil der ses på permutationstest, og hvordan, permutationer af data kan udnyttes i forskellige test. Derefter vil der blive redegjort for en _resampling_-metode kaldet bootstrap, hvis anvendelser, der vil undersøges nærmere senere i rapporten.
 
 ## Permutationstest
 
+__FIXME__ afsnittet under passer ikke helt til kapitlet mere.
 For at en t-test overholder den nominelle risiko for fejl, er der visse antagelser, der skal være opfyldt, heriblandt, at stikprøven skal være normalfordelt og opnået ved tilfældig stikprøveudtagning. Er disse antagelser ikke opfyldt, giver testen ikke et retvisende resultat, hvilket i dette afsnit vil eftervises ved hjælp af en permutationstest i R. Først gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst modbevises de resultater, opnåes, hvis en t-test udføres på data, der ikke overholder kravene.
 
 ### Permutationer

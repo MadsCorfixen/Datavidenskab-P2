@@ -119,7 +119,9 @@ FIXME: Skriv om 'styrken' (jævnfør arbejdsblad fra 26/3)
 
 ## Uparret t-test for ikke-normalfordelt stikprøve
 
-Foretages en t-test på en ikke-normaltfordelt stikprøve, kan resultaterne ikke altid antages at være retvisende. Dette vil nu vises. Først udtrækkes to stikprøver på de skæve populationer i afsnit \@ref(pop-sim).
+I nogle tilfælde er det ikke muligt at overholde alle de pågældende antagelser der hører til en t-test når der udføres statistisk inferens. Når dette sker, kan det ikke altid antages at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis ens stikprøve ikke er normalfordelt, når der arbejdes med en uparret t-test. 
+
+Først udtrækkes to stikprøver på de skæve populationer i afsnit \@ref(pop-sim).
 
 ```{r}
 #To stikprøver trukket fra populationerne

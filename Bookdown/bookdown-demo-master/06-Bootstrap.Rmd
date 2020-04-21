@@ -3,7 +3,7 @@ library(mosaic)
 ```
 ## Bootstrap
 
-I det følgende afsnit vil den teoretiske del af en resampling-metode, kaldet bootstrap, blive beskrevet. Senere vil det blive undersøgt, hvordan bootstrap kan bruges praktisk.
+I det følgende afsnit vil den teoretiske del af bootstrap blive beskrevet. Senere vil det blive undersøgt, hvordan bootstrap kan anvendes til statistisk inferens.
 
 Der findes forskellige bootstrap-metoder, som varierer på forskellige punkter. Valget af bootstrap-metode afhænger af den individuelle situation, hvor der skal udføres statistisk inferens. Der gøres opmærksom på, at i den resterende del af rapporten, vil ordet bootstrap henvise til den ikke-parametriske bootstrap-metode. Ikke-parametrisk bootstrap, er når der ikke sættes specifikke antagelser eller en præcis model for populationen, når undersøgelsen udføres. Derimod antages det, at en stikprøve er repræsentativ for hele populationen, [@nonparaboot, side 3].
 
