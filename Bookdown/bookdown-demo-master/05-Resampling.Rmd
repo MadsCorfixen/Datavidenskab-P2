@@ -38,7 +38,7 @@ Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for e
 
 __Eksempel__
 
-FIXME: Lav et eksempel, der tager udgangspunkt i realistisk data. Overvej, om eksemplet skal slettes.
+__FIXME:__ (Lav et eksempel, der tager udgangspunkt i realistisk data. Overvej, om eksemplet skal slettes.)
 
 Antag, at det ønskes undersøgt, om middelværdien af to populationer, $T_1$ og $T_2$, er signifikant anderledes. Til dette er nedenstående stikprøver tilgængelige.
 

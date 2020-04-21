@@ -1,0 +1,216 @@
+```{r, echo=FALSE, message=FALSE}
+library(mosaic)
+```
+# Bootstrap anvendelser
+
+__FIXME__ Metaafsnit
+
+## Bootstrap-standardfejl 
+
+Der vil i dette afsnit beskrives, hvordan standardfejl af en bootstrap-stikprøve udregnes. I det efterfølgende afsnit vil standardfejlen inddrages i beregningen af konfidensintervallet for en bootstrap-stikprøve. Det følgende afsnit er primært skrevet på baggrund af [@TDSBootstrap].
+
+Standardafvigelsen for en estimator beskrives som estimatorens standardfejl. Standardfejlen er et udtryk for, hvor stor en afvigelse der er fra populationens parameter til stikprøvens estimat. Jo mindre standardfejlen er, desto mindre er afvigelsen mellem estimatet og parameteren. Som udgangspunkt vil en stikprøves estimat aldrig være lig populationens parameter, fordi der ved udtagning af en stikprøve, i hvert tilfælde vil være variabilitet. Et mål for denne variabilitet er standardfejlen.
+
+Som eksempel vil standardfejlen for estimatet af middelværdien, $\hat{\mu}$, være $\text{se}(\hat{\mu}) = \frac{\sigma}{\sqrt{n}}$.
+
+Når der arbejdes med data udover det teoretiske, vil standardafvigelsen for populationen, $\sigma$, altid være ukendt. Derfor bruges stikprøvens estimat for standardafvigelsen, $S$ til at beregne den estimerede standardfejl, $\hat{\text{se}}$. 
+
+Som eksempel vil den estimerede standardfejl for estimatet af middelværdien, $\hat{\mu}$, være  $\hat{\text{se}}(\hat{\mu}) = \frac{S}{\sqrt{n}}$, hvor $S = \sum_{i=1}^{n} \frac{(x_i - \hat{\mu})^2}{n - 1}$ er stikprøvens standardafvigelse for middelværdien, og $n$ er størrelsen på stikprøven.
+
+Såfremt en estimator er normalfordelt eller tilnærmelsesvist er normalfordelt, kan det forventes, at et estimat vil være mindre end én standardfejl fra det forventede i $68\%$ af tilfældene og mindre end to standardfejl fra i $95\%$ af tilfældene. 
+
+Dog er dette ikke altid ligetil i virkeligheden, oftest er der ikke tilstrækkelig informationer om populationen eller fordeligen af denne. Samtidig kræver det, at der er nogle specifikke krav som er opfyldt. Disse problemer kan undgås ved at benytte bootstrap til at estimere standardfejlen, givet ved nedstående formel.
+
+$$se(\hat{\theta}) = \sqrt{\frac{1}{B-1}\sum_{b=1}^{B}(\hat{\theta_b^*} - \bar{\theta} )^2}$$
+
+Hvor $\hat{\theta}$ er stikprøvens estimat for den ønskede parameter, $B$ er antal bootstrap-stikprøver, $\hat\theta_b^*$ er estimatet for den $b$'te bootstrap-stikprøve og $\bar{\theta} = (\frac{1}{B}) \sum_{b=1}^{B}\hat{\theta_b^*}$, [@BootMiracle].
+
+__FIXME__ overgang til KI
+Anvendelse af standardfejl i forbindelse med bootstrap-stikprøver...
+
+## Bootstrap-konfidensintervaller
+
+__FIXME:__ (Bedre begrundelse for, hvorfor vi har flere forskellige metoder på konfidensintervaller med. Er der nogle, der er bedre end andre?) 
+
+I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøves beregnes ved hjælp af standardfejlen, percentiler, basic-metoden og t-metoden. 
+
+Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$, [@BootKI]. Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
+
+__Bootstrap-konfidensintervaller ved hjælp af percentiler__
+
+En intuitiv fremgangsmåde til at bestemme et konfidensinterval ved percentiler, er at bruge det $(B(\frac{\alpha}{2}))$'te og $(B(1-\frac{\alpha}{2}))$'te percentil, hvor $B$ er antallet af bootstrap-repetitioner. Lad $\Theta^* = [\vartheta_1,~ \ldots,~\vartheta_B]$ være en sorteret liste af bootstrap-estimater. Derved er formlen for et konfidensinterval på baggrund af percentiler: 
+
+$$\text{KI}_p = \left[\theta^{{\sim}}_{(\alpha/2)},~\theta^{{\sim}}_{(1-\alpha/2)}\right]$$
+
+Hvor $\theta^{\sim}_i$ er det $i$'te percentil i $\Theta^*$. [@TPKI]  
+
+
+__Eksempel__
+
+I kodetstykket nedenfor udtages en tilfældig stikprøve fra en standard normalfordeling. Herefter laves $10,000$ bootstrap-stikprøver, som middelværdien udregnes på. Til sidst sorteres middelværdierne i en liste.
+
+```{r}
+data <- rnorm(100, mean = 0, sd = 1) # Tilfældig stikprøve
+
+n <- length(data)
+B <- 10000 # Bootstrap-repetitioner
+
+bootstrap_fordeling <- replicate(B, {
+  x <- mean(sample(data, size = n, replace = TRUE))
+}) # Bootstrap over middelværdien
+
+SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
+
+```
+
+Dernæst vælges et konfidensniveau, som regel $90\%$, $95\%$ eller $99\%$.
+
+Bootstrap-konfidensinterval ved hjælp af percentiler kan findes ved:
+```{r}
+KI_niveau <- 0.95 # Konfidensinterval
+alpha <- 1-KI_niveau # Benyttes til percentilerne
+
+IndexLower <- round(B * alpha/2) # Nedre percentil
+IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil
+
+KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper])
+  # Konfidensinterval vha. percentiler
+```
+
+## Bootstrap-hypotesetest
+
+Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test. 
+
+1. Variablen er kvantitativ.
+2. Stikprøveudtagning er udført med tilfældighed.
+3. Populationen er normalfordelt.
+
+Er antagelserne ikke opfyldt kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en parret bootstrap-test, og dernæst fremgangsmåden for en uparret bootstrap-test.
+
+#### Parret bootstrap-test
+
+Lad to parrede stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{n}]$.
+Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne teststørrelsen, $t_{obs}=\hat{Z}$.
+
+Så opstilles der en nulhypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande middelværdi for differencerne for $X$ og $Y$, og en alternativ hypotese, $H_1:~\mu\neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
+
+Først forenes de to stikprøver til en samlet stikprøve med størrelsen $2n$ observationer. Derefter laves en bootstrap-stikprøve af $2n$ observationer med tilbagelægning fra den samlede stikprøve. Herefter trækkes den første halvdel af indgangene i bootstrap-stikprøven, som betegnes $X^*$, og den sidste halvdel, der betegnes $Y^*$. Lad $X^*_i = [x^*_{1,i},~x^*_{2,i},~...,~x^*_{n,i}]$ betegne den $i$'te bootstrap-stikprøve for $X$ og tilsvarende for $Y$, [@Paired_test, slide 2].
+
+På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$, [@Paired_test].
+
+Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$, [@Hypo_test].
+
+\begin{align}
+p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<t_{obs}\}}{B} \\
+p_{_{større}} &= \frac{\text{antal gange }\{t^*>t_{obs}\}}{B} \\
+p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
+\end{align}
+
+Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
+
+__Eksempel__
+
+I nedenstående kode, vises et eksempel på en parret bootstrap-test.
+
+```{r}
+# Opretter stikprøver
+n <- 15
+stik1 <- sample(pop_vs, size = n)
+stik2 <- sample(pop_hs, size = n)
+
+# Beregner t_obs
+stikdiff <- NULL
+for(i in 1:n){
+  stikdiff[i] <- abs(stik1[i] - stik2[i])
+}
+t_obs <- mean(stikdiff)
+
+# Opretter bootstrap-stikprøver
+B <- 10000
+boot <- replicate(B, sample(x = c(stik1, stik2), size = 2*n, replace = TRUE))
+
+boot1 <- boot[1:15,]
+boot2 <- boot[16:30,]
+
+bootdiff <- matrix(data = boot1, nrow = n, ncol = B/2)
+bootmeans <- NULL
+for(i in 1:B/2){
+  bootdiff[1:15, i] <- abs(boot1[1:15, i] - boot2[1:15, i])
+  bootmeans[i] <- mean(bootdiff[1:15, i])
+}
+
+andel_mindre <- bootmeans < t_obs
+
+p_stoerre <- (sum(andel_mindre)) / length(andel_mindre)
+p_mindre <- (length(andel_mindre)-(sum(andel_mindre))) / length(andel_mindre)
+
+# P-værdien for en tosidet bootstrap-test
+p_tosidet <- 2*min(p_mindre, p_stoerre)
+p_tosidet
+
+```
+
+Der ses altså at p-værdien er lig ```r p_tosidet```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
+
+#### Uparret bootstrap-test
+
+Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$, med ens varians, være givet.
+
+På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs}=\hat{X}-\hat{Y}$.
+
+Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} \neq \mu_{_Y}$, samt et signifikansniveau, $\alpha = 0.05$. 
+
+Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$, [@BootHypo].
+
+Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. 
+
+Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$, [@Hypo_test].
+
+\begin{align}
+p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<t_{obs}\}}{B} \\
+p_{_{større}} &= \frac{\text{antal gange }\{t^*>t_{obs}\}}{B} \\
+p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
+\end{align}
+
+Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
+
+__Eksempel__
+
+Nu vil der vises et eksempel på en uparret bootstrap t-test.
+
+```{r}
+# Opretter to stikprøver
+n2 = 15
+m2 = 30
+stik3 <- sample(pop_vs, size = n2)
+stik4 <- sample(pop_hs, size = m2)
+
+# Beregner t_obs
+t_obs2 <- mean(stik3) - mean(stik4)
+
+#Opretter bootstrap-stikprøver og returnerer difference i middelværdi
+B2 <- 10000
+
+res <- replicate(B2, {
+  
+  boot <- sample(c(stik3, stik4), replace = TRUE)
+  
+  bootx <- boot[1 : n2]
+  booty <- boot[(n2+1) : (n2+m2)]
+  
+  diffmean <- (mean(bootx) - mean(booty))
+  diffmean
+  
+})
+
+andel_mindre2 <- res < t_obs2
+
+p_stoerre2 <- (sum(andel_mindre2)) / length(andel_mindre2)
+p_mindre2 <- (length(andel_mindre2)-(sum(andel_mindre2))) / length(andel_mindre2)
+
+# P-værdien for en tosidet bootstrap-test
+p_tosidet2 <- 2*min(p_mindre2, p_stoerre2)
+p_tosidet2
+```
+
+Der ses altså at p-værdien er lig ```r p_tosidet2```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
