@@ -1,0 +1,207 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+```{r, include=FALSE}
+library(mosaic)
+```
+
+
+# Exam exercise: Logistic regression analysis of Berkely admission data
+
+You may use the combined lecture notes for this module available at
+<https://asta.math.aau.dk> to guide you to the relevant methods and R commands
+for this exam.
+
+The following table shows the total number of admitted and rejected
+applicants to the six largest departments at University of Berkeley in 1973.
+
+|       | Admitted| Rejected|
+|:------|--------:|--------:|
+|Male   |     1198|     1493|
+|Female |      557|     1278|
+
+Use a $\chi^2$-test to check whether the admission statistics for
+Berkeley show any sign of gender discrimination. To enter the table
+in R you can do:
+
+```{r}
+admit <- matrix(c(1198, 557, 1493, 1278), 2, 2)
+rownames(admit) <- c("Male", "Female")
+colnames(admit) <- c("Admitted", "Rejected")
+admit <- as.table(admit)
+
+# Beregning af forventet procentvis
+n <- margin.table(admit)
+pctGoals <- round(100 * margin.table(admit, 2)/n, 1)
+
+expected_admit_freq <- (1198+557)/n
+expected_reject_freq <- (1493+1278)/n
+
+# Beregning af forventet i tal (rækketotal delt med 100, ganget med forventet procent)
+admit_expected_male <- ((1198+1493)/100)*38.8
+reject_expected_male <- ((1198+1493)/100)*61.2
+admit_expected_fem <- ((557+1278)/100)*38.8
+reject_expected_fem <- ((557+1278)/100)*61.2
+
+# Opsætning af forventet tabel for at tjekke overensstemmelse mellem den og funktionens output.
+expected_admit <- matrix(c(admit_expected_male, reject_expected_male, admit_expected_fem, reject_expected_fem), 2, 2, byrow = TRUE)
+rownames(expected_admit) <- c("Male", "Female")
+colnames(expected_admit) <- c("Admitted", "Rejected")
+expected_admit <- as.table(expected_admit)
+
+# Chi^2-test
+teststat <- chisq.test(admit, correct = FALSE)
+round(teststat$expected, 0)
+teststat
+```
+
+Your analysis should as a minimum
+contain **arguments** that support: 
+
+- Statement of hypotheses
+
+$H_0:$ De to grupper, mænd og kvinder, er statistisk uafhængige.
+
+$H_1:$ De to grupper, mænd og kvinder, er statistisk afhængige.
+
+- Calculation of expected frequencies
+
+$\pi_{admit} = 0.388$
+
+$\pi_{reject} = 0.612$
+
+- Calculation of test statistic
+
+$\chi^2 = \sum \frac{(f_0-f_e)^2}{f_e}$
+
+$\chi^2 = 92.205$
+
+- Calculation and interpretation of p-value.
+
+```{r}
+p <- 1 - pdist("chisq", 92.205, df = 1, return = "value", plot = FALSE)
+p
+```
+
+$p = 2.2 \cdot 10^{-16} \approx 0$
+
+p-værdien er praktisk talt lig 0, hvorfor nulhypotesen forkastes, og det må konkluderes, at der er en signifikant statistisk afhængighed mellem de to grupper.
+
+
+
+A more detailed data set with the admissions for each department is 
+available on the course web page. The variables are:
+
+- `Gender` (male/female)
+- `Dept` (department A, B, C, D, E, F)
+- `Admit` (frequency of admitted for each combination)
+- `Reject` (frequency of rejected for each combination)
+
+Load the data into RStudio:
+```{r }
+admission <-
+    read.table("http://asta.math.aau.dk/dan/static/datasets?file=admission.dat",
+               header=TRUE)
+admission
+```
+In order to do logistic regression for this kind of data, the response is the columns `Admit` and `Reject` (which
+means that we model the probability of admit) :
+
+```{r }
+m0 <- glm(cbind(Admit, Reject) ~ Gender + Dept, family = binomial, data = admission)
+```
+The glm-object `m0` is a logistic model with main effects of `Gender`
+and `Department`.
+
+- Investigate whether there is any effect of these predictors.
+
+```{r}
+mainEffects <- glm(cbind(Admit, Reject)~ ., data=admission, family=binomial)
+noEffects <- glm(cbind(Admit, Reject) ~ 1, data=admission, family=binomial)
+
+anova(mainEffects, noEffects, test = "Chisq")
+```
+
+Med en p-værdi på praktisk talt 0, kan vi kan forkaste $H_0: \beta_1 = \beta_2 = \ldots = \beta_n = 0$
+
+
+
+As a hint you might look at section 9.3 in the combined lecture notes.
+
+```{r }
+summary(m0)
+```
+
+Looking at the summary of `m0`:
+
+- Is there a significant gender difference?
+
+Med en p-værdi på $0.217$ kan nulhypotesen ikke forkastes, hvorfor køn ikke har en signifikant betydning for at blive optaget på universitetet.
+
+
+- What is the interpretation of the numbers in the `DeptB`-row?
+
+Med en p-værdi på $0.693$ er denne variabel heller ikke signifikant for modellen.
+
+
+We add the standardized residuals to `admission`:
+
+```{r }
+admission$stdRes <- round(rstandard(m0),2)
+admission
+```
+- Looking at the standardized residuals, which department deviates
+  heavily from the model?
+
+Department A afviger mest fra de forventede værdier under nulhypotesen.
+  
+  
+- What gender is discrimated in this department?
+
+Det standardiserede residual for mænd i Department A er negativ, hvorfor andelen af mænd, der bliver optaget på denne afdeling er væsentlig lavere end forventet under nulhypotesen. Derfor bliver der diskrimineret mod mænd i denne Department.
+
+  
+Next you should fit the model with the interaction `Gender*Dept` and
+use `anova` to compare this to `m0`.
+
+```{r}
+m1 <- glm(cbind(Admit, Reject) ~ Gender * Dept, family = binomial, data = admission)
+
+anova(m0, m1, test = "Chisq")
+```
+
+
+- Explain what interaction means in the current context.
+
+Det betyder, at der er en interaktion mellem afdeling og køn. Eksempelvis er der generelt flere mænd, der søger ind på STEM-uddannelser, og flere kvinder, der søger ind på sygeplejerske-uddannelsen, hvorfor uddannelsen må have en indflydelse på kønnet af ansøgeren.
+
+
+- Is there a significant interaction?
+
+Ja.
+
+
+- In the light of your analysis, explain the reason for your
+  answer to the previous question.
+
+p-værdien er lavere end signifikansniveauet, $\alpha = 0.05$. Altså har uddannelsen en indflydelse på kønnet af ansøgeren.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
