@@ -1,7 +1,7 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 ```{r, include=FALSE}
 library(mosaic)
@@ -46,7 +46,8 @@ admit_expected_fem <- ((557+1278)/100)*38.8
 reject_expected_fem <- ((557+1278)/100)*61.2
 
 # Opsætning af forventet tabel for at tjekke overensstemmelse mellem den og funktionens output.
-expected_admit <- matrix(c(admit_expected_male, reject_expected_male, admit_expected_fem, reject_expected_fem), 2, 2, byrow = TRUE)
+expected_admit <- matrix(c(admit_expected_male, reject_expected_male,
+                           admit_expected_fem, reject_expected_fem), 2, 2, byrow = TRUE)
 rownames(expected_admit) <- c("Male", "Female")
 colnames(expected_admit) <- c("Admitted", "Rejected")
 expected_admit <- as.table(expected_admit)
