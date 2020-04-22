@@ -174,6 +174,8 @@ Det fremgår at i ```r pctf```$\%$ af tilfældene ligger den observerede forskel
 
 ### Thomas 24/4
 
+GENNEMSNITSLIG PROCENTVIS AFVIGELSE
+
 ```{r}
 x <- 100
 
