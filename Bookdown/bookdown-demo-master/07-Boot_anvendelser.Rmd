@@ -132,59 +132,84 @@ KI_Normal
 __FIXME:__ (Eventuel sammenligning / Undersøgelse af dækningsgraden - Tænker det gøres i dataanalysen)
 
 ### Sammenligning af dækningsgraden
-```{r}
-population <- rnorm(100000)
-data <- rnorm(100, mean = 0, sd = 1) # Tilfældig stikprøve
 
-n <- length(data)
-B <- 10000 # Bootstrap-repetitioner
+<!-- ```{r} -->
+<!-- data <- rnorm(100, mean = 0, sd = 1) # Tilfældig stikprøve -->
 
-bootstrap_fordeling <- replicate(B, {
-  x <- mean(sample(data, size = n, replace = TRUE))
-}) # Bootstrap over middelværdien
+<!-- n <- length(data) -->
+<!-- B <- 10000 # Bootstrap-repetitioner -->
 
-SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
+<!-- bootstrap_fordeling <- replicate(B, { -->
+<!--   x <- mean(sample(data, size = n, replace = TRUE)) -->
+<!-- }) # Bootstrap over middelværdien -->
 
-KI_niveau <- 0.95 # Konfidensinterval
-alpha <- 1-KI_niveau # Benyttes til percentilerne
+<!-- SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret -->
 
-IndexLower <- round(B * alpha/2) # Nedre percentil
-IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil
+<!-- KI_niveau <- 0.95 # Konfidensinterval -->
+<!-- alpha <- 1-KI_niveau # Benyttes til percentilerne -->
 
-KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper])
-  # Konfidensinterval vha. percentiler
+<!-- IndexLower <- round(B * alpha/2) # Nedre percentil -->
+<!-- IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil -->
 
-KI_Percentil
-```
+<!-- KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper]) -->
+<!--   # Konfidensinterval vha. percentiler -->
+
+<!-- KI_Percentil -->
+<!-- ``` -->
+
+
 ```{r}
 
 bootstrapki <- function(KI_type, samplesize){
+  population <- rnorm(100000)
   if(toString(KI_type)=="KI_Normal"){
     return(
-      mads <- replicate(1000, {
+      mads <- replicate(100, {
       x1 <- sample(population, samplesize)
       middel<-mean(x1)
       KI_Normal[1] <= middel & KI_Normal[2] >= middel}))
   }else if(toString(KI_type)=="KI_Basic"){
     return(
-      mads <- replicate(1000, {
+      mads <- replicate(100, {
       x1 <- sample(population, samplesize)
       middel<-mean(x1)
-      KI_Basic[1] <= middel & KI_Basic[2] >= midde}))
+      KI_Basic[1] <= middel & KI_Basic[2] >= middel}))
   }else if(toString(KI_type)=="KI_Percentil"){
     return(
-      mads <- replicate(1000, {
+      mads <- replicate(100, {
       x1 <- sample(population, samplesize)
       middel<-mean(x1)
       KI_Percentil[1] <= middel & KI_Percentil[2] >= middel}))
   }
 }
 
-for(i in seq(from=10,to=10,by=10)){
-  return(table(bootstrapki("KI_Normal",i))[2])
+
+KI_Vektor_Normal <- c()
+KI_Vektor_Basic <- c()
+KI_Vektor_Percentil <- c()
+for(i in seq(10, 200, 5)){
+  KI_Vektor_Normal <- append(KI_Vektor_Normal, table(bootstrapki("KI_Normal", i))[2], after = length(KI_Vektor_Normal))
+  KI_Vektor_Basic <- append(KI_Vektor_Basic, table(bootstrapki("KI_Basic", i))[2], after = length(KI_Vektor_Basic))
+  KI_Vektor_Percentil <- append(KI_Vektor_Percentil, table(bootstrapki("KI_Percentil", i))[2], after = length(KI_Vektor_Percentil))
 }
 
+KI_Vektor_Basic <- unname(KI_Vektor_Basic)
+KI_Vektor_Normal <- unname(KI_Vektor_Normal)
+KI_Vektor_Percentil <- unname(KI_Vektor_Percentil)
 ```
+
+```{r}
+KI_Vektor_Percentil_andel <- KI_Vektor_Percentil/100
+KI_Vektor_Basic_andel <- KI_Vektor_Basic/100
+KI_Vektor_Normal_andel <- KI_Vektor_Normal/100
+
+plot(x = seq(10, 200, 5), ylim = c(0.3, 1), y = KI_Vektor_Percentil_andel, type="l", col="darkgreen")
+lines(x = seq(10, 200, 5), y = KI_Vektor_Basic_andel, col="black", lty = 2)
+lines(x = seq(10, 200, 5), y = KI_Vektor_Normal_andel, col="blue", lty = 3)
+legend(160, 0.5, legend=c("Percentil", "Basic", "T"),
+       col=c("darkgreen", "black", "blue"), lty=1:3, cex=0.8)
+```
+
 
 
 ## Bootstrap-hypotesetest
