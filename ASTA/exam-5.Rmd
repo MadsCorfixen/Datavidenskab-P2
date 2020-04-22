@@ -63,9 +63,9 @@ contain **arguments** that support:
 
 - Statement of hypotheses
 
-$H_0:$ De to grupper, mænd og kvinder, er statistisk uafhængige.
+$H_0: \pi_{male_{admit}} = \pi_{fem_{admit}}$ 
 
-$H_1:$ De to grupper, mænd og kvinder, er statistisk afhængige.
+$H_0: \pi_{male_{admit}} \neq \pi_{fem_{admit}}$ 
 
 - Calculation of expected frequencies
 
