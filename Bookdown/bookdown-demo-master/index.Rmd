@@ -14,3 +14,15 @@ github-repo: rstudio/bookdown-demo
 
 # Introduktion
 
+__FIXME__ Husk link til Github.
+
+Her vil vi gerne introducere rapporten
+
+## Forord
+
+## Abstract/Synopsis
+
+## Indledning
+
+## Anvendte pakker
+

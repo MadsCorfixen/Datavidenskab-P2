@@ -1,0 +1,125 @@
+```{r, include=FALSE}
+library(mosaic)
+```
+# 15.3 
+A sample of 54 elderly men take a psychiatric examination to determine whether symptoms of senility are present. A subtest of the Wechsler Adult Intelligence Scale (WAIS) is the explanatory variable. The WAIS scores range from 4 to 20, with a mean of 11.6. Higher values indicate more effective intellectual functioning. Software shows the following results:
+
+
+| Variable  | Coef.   | Std. Error | Wald Chi-square | (P)    |
+|-----------|---------|------------|-----------------|--------|
+| Intercept |  2.0429 | 1.0717     | 3.6338          | 0.0566 |
+|    WAIS   | -0.2821 | 0.1007     | 7.8487          | 0.0051 |
+
+(a) Show 
+
+* (i) $\hat P(y = 1) = 0.50$ at $x = 7.2$,
+
+Når $P = 0.5$, kan x findes ved $x = -\alpha/\beta$
+```{r}
+a <- 2.0429
+b <- -0.2821
+
+x <- -1*a/b
+x
+```
+
+* (ii) $\hat P(y = 1) < 0.50$ for $x > 7.2$.
+
+$logit(P)=\alpha+\beta\cdot x$, at fordi $\beta$ er negativ, så bliver $P$ mindre for et større $x$.
+
+(b) Estimate the probability of senility at $x = 20$.
+
+$logit(P)=\alpha+\beta\cdot x$
+
+$ilogit(logit(P))=ilogit(\alpha+\beta\cdot x) \Leftrightarrow P=ilogit(\alpha+\beta\cdot x)$$
+
+```{r}
+ilogit(a+b*20)
+```
+
+(c) The fit of the linear probability model is $\hat P(y = 1) = 0.847 − 0.051x$. Estimate the probability of senility at $x = 20$. Does this make sense?
+```{r}
+0.847 − 0.051*20
+```
+
+Nej, for det er ikke muligt at have en negativ sandsynlighed.
+
+(d) Test $H_0: \beta = 0$ against $H_1: \beta \neq 0$. Report and interpret the P-value.
+
+$P=0.0051$, derved kan $H_0$ forkastes!
+
+# 15.5
+For first-degree murder convictions in East Baton Rouge Parish, Louisiana, between 1990 and 2008, the death penalty was given in 3 out of 25 cases in which a white killed a white, in 0 out of 3 cases in which a white killed a black, in 9 out of 30 cases in which a black killed a white, and in 11 out of 132 cases in which a black killed a black. Table 15.20 shows software output for fitting a logistic regression model, where d = 1 (d = 0) for black (white) defendants and v = 1 (v = 0) for black (white) victims. Interpret the estimates and the inference results in this table.
+
+|                    | Estimate        | Std. Error | z value | Pr(>|z|) |
+|--------------------|-----------------|------------|---------|----------|
+| (Intercept)        |     -2.0232     |   0.6137   |  -0.297 | 0.000978 |
+| d                  |      1.1886     |   0.7236   |  1.643  | 0.100461 |
+| v                  |     -1.5713     |   0.5028   |  -3.125 | 0.001778 |
+| Residuals deviance 0.16676 on 1 DF 
+
+Gerningsmandens hudfarve har ikke signifikant indflydelse på om vedkommende får dødsstraf eller ej. Derimod har ofrets hudfarve signifikant indflydelse på om vedkommende får dødsstraf eller ej, da et hvidt offer ofte resulterer i dødsstraf. 
+
+Hældningenen for v er negativ og derfor vil $v = 1 = \text{sort offer}$, vil sænke sandsynligheden.
+
+# WAIS
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Exercise 15.WAIS.
+Referring to exercise 15.3 in Agresti, one of the WAIS subtests called *picture completion*, asks questions about 20 pictures that have one vital detail missing. It is considered a test of attention to fine detail.
+
+The observations for 20 subjects on (x,y), where x=picture completion score(0-20) and y=symptoms of senility(1=yes):
+```{r}
+pictSen <-
+read.table("https://asta.math.aau.dk/datasets?file=pictSen.csv",header=T)
+pictSen
+```
+
+- Assume a simple logistic model and estimate the logistic regression equation.
+
+$logit(P)=\alpha+\beta\cdot x$
+
+$logit(P)=1.20642-0.10092\cdot x$
+
+```{r}
+glm(senility ~ pictComplScore, data = pictSen) %>% summary() # rØrLæGnInG
+```
+
+- Why is there a significant effect of picture completion on symptoms? 
+
+Fordi p-værdien er mindre end signifikansniveauet.
+
+- Estimate the probability that symptoms are present when (i) x=0, (ii) x=20.
+
+```{r}
+ilogit(1.20642-0.10092*0)
+ilogit(1.20642-0.10092*20)
+```
+
+- Over what range of x-scores is the estimated probability of senility greater than 50%?
+
+```{r}
+-1*1.20642/-0.10092
+```
+Alle x-værdier mindre end $11.95422$ giver en sandsynlighed over $50\%$
+
+- Estimate the effect of a one-unit increase in picture completion on the odds of
+  senility symptoms.
+  
+```{r}
+(exp(-0.10092)-1)*100
+```
+
+Får man én højere score er der 10% højere ssh for ikke at få det.
+
+- Provide a 95% confidence interval of this effect.
+
+```{r}
+konf <- (-0.10092 + c(-1, 1) * 1.96 * 0.02662) * 100
+konf
+```
+
+Med 95% konfidens vil sandsynligheden for at være senil ved én højere score ligge i intervallet [```r konf```]

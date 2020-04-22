@@ -1,8 +1,10 @@
-### Bootstrap-konfidensintervaller
+## Bootstrap-konfidensintervaller
 
-__FIXME__ Bedre begrundelse for, hvorfor vi har flere forskellige metoder på konfidensintervaller med. Er der nogle, der er bedre end andre? 
+__FIXME:__ (Bedre begrundelse for, hvorfor vi har flere forskellige metoder på konfidensintervaller med. Er der nogle, der er bedre end andre?) 
 
-Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$. [@BootKI] Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
+I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøves beregnes ved hjælp af standardfejlen, percentiler, basic-metoden og t-metoden. 
+
+Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$, [@BootKI]. Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
 __Bootstrap-konfidensintervaller ved hjælp af percentiler__
 
@@ -57,7 +59,7 @@ Denne type konfidensinterval ud fra bootstrap er også kendt som _reversed perce
 
 $$\text{KI}_b = \left[2\hat\theta- \theta^{{\sim}}_{(1-\alpha/2)}, ~ 2\hat\theta- \theta^{{\sim}}_{(\alpha/2)}\right]$$
 
-Hvor $\theta^{\sim}_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven. [@BasicKI]
+Hvor $\theta^{\sim}_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven, [@BasicKI].
 
 __Eksempel__
 
@@ -80,7 +82,7 @@ Formlen for konfidensintervallet er:
 
 $$\text{KI}_t=\left[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}}(\theta),~\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}(\theta)\right]$$ 
 
-Hvor $\hat\theta$ er middelværdien af stikprøven, $\hat{\vartheta}$ er middelværdien for $\Theta^*$ og $t^{*}=\frac{\hat{\vartheta}-\hat\theta}{\hat{\text{se}}(\hat\vartheta)}$. [@TPKI]
+Hvor $\hat\theta$ er middelværdien af stikprøven, $\hat{\vartheta}$ er middelværdien for $\Theta^*$ og $t^{*}=\frac{\hat{\vartheta}-\hat\theta}{\hat{\text{se}}(\hat\vartheta)}$, [@TPKI].
 
 __Eksempel__
 
