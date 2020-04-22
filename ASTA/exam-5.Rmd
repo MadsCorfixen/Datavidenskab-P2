@@ -88,7 +88,7 @@ p
 
 $p = 2.2 \cdot 10^{-16} \approx 0$
 
-p-værdien er praktisk talt lig 0, hvorfor nulhypotesen forkastes, og det må konkluderes, at der er en signifikant statistisk afhængighed mellem de to grupper.
+p-værdien er praktisk talt lig 0, hvorfor nulhypotesen forkastes, og det må konkluderes, at der er en signifikant forskel på andelen af kvinder og andelen af mænd, der bliver optaget.
 
 
 
