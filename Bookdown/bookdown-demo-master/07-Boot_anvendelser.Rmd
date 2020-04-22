@@ -131,6 +131,62 @@ KI_Normal
 
 __FIXME:__ (Eventuel sammenligning / Undersøgelse af dækningsgraden - Tænker det gøres i dataanalysen)
 
+### Sammenligning af dækningsgraden
+```{r}
+population <- rnorm(100000)
+data <- rnorm(100, mean = 0, sd = 1) # Tilfældig stikprøve
+
+n <- length(data)
+B <- 10000 # Bootstrap-repetitioner
+
+bootstrap_fordeling <- replicate(B, {
+  x <- mean(sample(data, size = n, replace = TRUE))
+}) # Bootstrap over middelværdien
+
+SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
+
+KI_niveau <- 0.95 # Konfidensinterval
+alpha <- 1-KI_niveau # Benyttes til percentilerne
+
+IndexLower <- round(B * alpha/2) # Nedre percentil
+IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil
+
+KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper])
+  # Konfidensinterval vha. percentiler
+
+KI_Percentil
+```
+```{r}
+
+bootstrapki <- function(KI_type, samplesize){
+  if(toString(KI_type)=="KI_Normal"){
+    return(
+      mads <- replicate(1000, {
+      x1 <- sample(population, samplesize)
+      middel<-mean(x1)
+      KI_Normal[1] <= middel & KI_Normal[2] >= middel}))
+  }else if(toString(KI_type)=="KI_Basic"){
+    return(
+      mads <- replicate(1000, {
+      x1 <- sample(population, samplesize)
+      middel<-mean(x1)
+      KI_Basic[1] <= middel & KI_Basic[2] >= midde}))
+  }else if(toString(KI_type)=="KI_Percentil"){
+    return(
+      mads <- replicate(1000, {
+      x1 <- sample(population, samplesize)
+      middel<-mean(x1)
+      KI_Percentil[1] <= middel & KI_Percentil[2] >= middel}))
+  }
+}
+
+for(i in seq(from=10,to=10,by=10)){
+  return(table(bootstrapki("KI_Normal",i))[2])
+}
+
+```
+
+
 ## Bootstrap-hypotesetest
 
 Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test. 
