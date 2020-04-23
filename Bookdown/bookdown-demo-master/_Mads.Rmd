@@ -1,31 +1,43 @@
-# Funktioner til Bootstrap-KI
-## Funktion til bootstrap-kofidensinterval vha. percentilmetoden
+# Mulig fejl i beregning af percentiler
 ```{r}
-bootstrap_ki_perc_metode <- function(data, bootstrap_iterationer = 10000,
-                              konfidensniveau = 0.95){
-  n <- length(data)
-  B <- bootstrap_iterationer
-  
-  bootstrap_stik <- replicate(B, {
-    middel_boot <- mean(sample(data, size = n, replace = TRUE))
-  })
-  
-  sorted_boot <- sort(bootstrap_stik)
-  alpha <- 1-konfidensniveau
-  index_nedre <- round(B * alpha/2)
-  index_ovre <- round(B * (1-alpha/2))
-  
-  ki_percentil <- c(nedre = sorted_boot[index_nedre],
-                    oevre = sorted_boot[index_ovre])
-  
-  return(ki_percentil)
-}
+population <- rnorm(100000, mean = 10, sd = 2)
+sample_1 <- sample(population, 1000)
+konf_level <- 0.95
+
+bootstrap_stik <- replicate(10000,{
+  boot_mean <- mean(sample(sample_1, 1000, replace = TRUE))
+})
+
+sorted_boot <- sort(bootstrap_stik)
+
+# De rigtige tal
+print("Quantile")
+kvantil <- quantile(sorted_boot, probs = c((1-konf_level), konf_level))
+kvantil
+
+# De måske forkerte tal
+print("Index")
+index_nedre <- round(10000 * konf_level/2)
+index_ovre <- round(10000 * (1-konf_level/2))
+
+sorted_boot[index_nedre]
+sorted_boot[index_ovre]
+
+# Sammeligning af snæverhed
+print("Snæverhed ved Quantile")
+unname(kvantil[2]) - unname(kvantil[1])
+
+print("Snæverhed ved Indeks")
+sorted_boot[index_ovre] - sorted_boot[index_nedre]
 ```
 
-## Funktion til bootstrap-kofidensinterval vha. basic-metoden
+
+# Funktion til Bootstrap-KI
 ```{r}
-bootstrap_ki_basic_metode <- function(data, bootstrap_iterationer = 10000,
-                               konfidensniveau = 0.95){
+bootstrap_ki <- function(population, sample_size, boot_type, bootstrap_iterationer = 10000, 
+                                     konfidensniveau = 0.95){
+  
+  data <- sample(population, sample_size)
   n <- length(data)
   B <- bootstrap_iterationer
   middel_data <- mean(data)
@@ -39,60 +51,52 @@ bootstrap_ki_basic_metode <- function(data, bootstrap_iterationer = 10000,
   index_nedre <- round(B * alpha/2)
   index_ovre <- round(B * (1-alpha/2))
   
-  ki_basic <- c(nedre = 2*middel_data-sorteret_boot[index_ovre],
+  if(toString(boot_type) == "percentil"){
+    ki_percentil <- c(nedre = sorteret_boot[index_nedre],
+                    oevre = sorteret_boot[index_ovre])
+    
+    return(ki_percentil)
+  }
+  else if(toString(boot_type) == "basic"){
+    ki_basic <- c(nedre = 2*middel_data-sorteret_boot[index_ovre],
                 oevre = 2*middel_data-sorteret_boot[index_nedre])
-  
-  return(ki_basic)
-}
-```
-
-
-## Funktion til bootstrap-konfidensinterval vha. t-metoden
-```{r}
-bootstrap_ki_t_metode <- function(data, bootstrap_iterationer = 10000,
-                               konfidensniveau = 0.95){
-  n <- length(data)
-  B <- bootstrap_iterationer
-  middel_data <- mean(data)
-  
-  bootstrap_stik <- replicate(B, {
-    middel_boot <- mean(sample(data, size = n, replace = TRUE))
-  })
-  
-  sorteret_boot <- sort(bootstrap_stik)
-  alpha <- 1-konfidensniveau
-  index_nedre <- round(B * alpha/2)
-  index_ovre <- round(B * (1-alpha/2))
-  
-  t_nedre <- (sorteret_boot[index_ovre]-middel_data) /
-  (sd(bootstrap_stik))
-  t_ovre <- (sorteret_boot[index_nedre]-middel_data) /
-  (sd(bootstrap_stik))
-  
-  ki_t <- c(nedre = middel_data - t_nedre * (sd(data)/sqrt(n)),
+    
+    return(ki_basic)
+  }  
+  else if(toString(boot_type) == "t"){
+    t_nedre <- (sorteret_boot[index_ovre]-middel_data) /
+      (sd(bootstrap_stik))
+    
+    t_ovre <- (sorteret_boot[index_nedre]-middel_data) /
+      (sd(bootstrap_stik))
+    
+    ki_t <- c(nedre = middel_data - t_nedre * (sd(data)/sqrt(n)),
             oevre = middel_data - t_ovre * (sd(data)/sqrt(n)))
-  
-  return(ki_t)
+    
+    return(ki_t)
+  }
 }
 ```
+
+
 
 
 
 # Test af dækningsgrad
 ```{r}
-population <- rbeta(100000, 2, 8)
 test_perc <- c()
 test_basic <- c()
 test_t <- c()
 
+
 daekningsgrad <- replicate(100,{
-  perc_ki <- bootstrap_ki_perc_metode(data = sample(population, 100),
+  perc_ki <- bootstrap_ki(population = rbeta(100000, 2, 8), sample_size = 200, boot_type = "percentil",
                          bootstrap_iterationer = 1000)
 
-  basic_ki <- bootstrap_ki_basic_metode(data = sample(population, 100),
+  basic_ki <- bootstrap_ki(population = rbeta(100000, 2, 8), sample_size = 200, boot_type = "basic",
                           bootstrap_iterationer = 1000)
 
-  t_ki <- bootstrap_ki_t_metode(data = sample(population, 100),
+  t_ki <- bootstrap_ki(population = rbeta(100000, 2, 8), sample_size = 200, boot_type = "t",
                       bootstrap_iterationer = 1000)
   
   stik <- sample(population, 100)
