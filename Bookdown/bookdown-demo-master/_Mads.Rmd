@@ -1,0 +1,147 @@
+# Mulig fejl i beregning af percentiler
+```{r}
+population <- rnorm(100000, mean = 10, sd = 2)
+sample_1 <- sample(population, 1000)
+konf_level <- 0.95
+
+bootstrap_stik <- replicate(10000,{
+  boot_mean <- mean(sample(sample_1, 1000, replace = TRUE))
+})
+
+sorted_boot <- sort(bootstrap_stik)
+
+# De rigtige tal
+print("Quantile")
+kvantil <- quantile(sorted_boot, probs = c((1-konf_level), konf_level))
+kvantil
+
+# De måske forkerte tal
+print("Index")
+index_nedre <- round(10000 * konf_level/2)
+index_ovre <- round(10000 * (1-konf_level/2))
+
+sorted_boot[index_nedre]
+sorted_boot[index_ovre]
+
+# Sammeligning af snæverhed
+print("Snæverhed ved Quantile")
+unname(kvantil[2]) - unname(kvantil[1])
+
+print("Snæverhed ved Indeks")
+sorted_boot[index_ovre] - sorted_boot[index_nedre]
+```
+
+
+# Funktion til Bootstrap-KI
+```{r}
+bootstrap_ki <- function(population, sample_size, boot_type, bootstrap_iterationer = 10000, 
+                                     konfidensniveau = 0.95){
+  
+  data <- sample(population, sample_size)
+  n <- length(data)
+  B <- bootstrap_iterationer
+  middel_data <- mean(data)
+  
+  bootstrap_stik <- replicate(B, {
+    middel_boot <- mean(sample(data, size = n, replace = TRUE))
+  })
+  
+  sorteret_boot <- sort(bootstrap_stik)
+  alpha <- 1-konfidensniveau
+  index_nedre <- round(B * alpha/2)
+  index_ovre <- round(B * (1-alpha/2))
+  
+  if(toString(boot_type) == "percentil"){
+    ki_percentil <- c(nedre = sorteret_boot[index_nedre],
+                    oevre = sorteret_boot[index_ovre])
+    
+    return(ki_percentil)
+  }
+  else if(toString(boot_type) == "basic"){
+    ki_basic <- c(nedre = 2*middel_data-sorteret_boot[index_ovre],
+                oevre = 2*middel_data-sorteret_boot[index_nedre])
+    
+    return(ki_basic)
+  }  
+  else if(toString(boot_type) == "t"){
+    t_nedre <- (sorteret_boot[index_ovre]-middel_data) /
+      (sd(bootstrap_stik))
+    
+    t_ovre <- (sorteret_boot[index_nedre]-middel_data) /
+      (sd(bootstrap_stik))
+    
+    ki_t <- c(nedre = middel_data - t_nedre * (sd(data)/sqrt(n)),
+            oevre = middel_data - t_ovre * (sd(data)/sqrt(n)))
+    
+    return(ki_t)
+  }
+}
+```
+
+
+
+
+
+# Test af dækningsgrad
+```{r}
+test_perc <- c()
+test_basic <- c()
+test_t <- c()
+
+
+daekningsgrad <- replicate(100,{
+  perc_ki <- bootstrap_ki(population = rbeta(100000, 2, 8), sample_size = 200, boot_type = "percentil",
+                         bootstrap_iterationer = 1000)
+
+  basic_ki <- bootstrap_ki(population = rbeta(100000, 2, 8), sample_size = 200, boot_type = "basic",
+                          bootstrap_iterationer = 1000)
+
+  t_ki <- bootstrap_ki(population = rbeta(100000, 2, 8), sample_size = 200, boot_type = "t",
+                      bootstrap_iterationer = 1000)
+  
+  stik <- sample(population, 100)
+  stik_mean <- mean(stik)
+  
+  if(stik_mean >= perc_ki[1] & stik_mean<= perc_ki[2]){
+    test_perc <- append(test_perc, 1)
+  }else{
+    test_perc <- append(test_perc, 0)
+  }
+  
+  if(stik_mean >= basic_ki[1] & stik_mean <= basic_ki[2]){
+    test_basic <- append(test_basic, 1)
+  }else{
+    test_basic <- append(test_basic, 0)
+  }
+  
+  if(stik_mean >= t_ki[1] & stik_mean <= t_ki[2]){
+    test_t <- append(test_t, 1)
+  }else{
+    test_t <- append(test_t, 0)
+  }
+  
+  return(c(test_perc, test_basic, test_t))
+})
+
+daek_percentil <- sum(daekningsgrad[1,])
+daek_basic <- sum(daekningsgrad[2,])
+daek_t <- sum(daekningsgrad[3,])
+
+daek_percentil
+daek_basic
+daek_t
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
