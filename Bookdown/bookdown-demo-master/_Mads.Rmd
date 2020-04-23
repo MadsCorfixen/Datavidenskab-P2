@@ -1,9 +1,10 @@
-# Funktion til bootstrap-kofidensinterval vha. percentilmetoden
+# Funktioner til Bootstrap-KI
+## Funktion til bootstrap-kofidensinterval vha. percentilmetoden
 ```{r}
 bootstrap_ki_perc_metode <- function(data, bootstrap_iterationer = 10000,
                               konfidensniveau = 0.95){
   n <- length(data)
-  B <- 10000
+  B <- bootstrap_iterationer
   
   bootstrap_stik <- replicate(B, {
     middel_boot <- mean(sample(data, size = n, replace = TRUE))
@@ -15,19 +16,18 @@ bootstrap_ki_perc_metode <- function(data, bootstrap_iterationer = 10000,
   index_ovre <- round(B * (1-alpha/2))
   
   ki_percentil <- c(nedre = sorted_boot[index_nedre],
-                    øvre = sorted_boot[index_ovre])
+                    oevre = sorted_boot[index_ovre])
   
   return(ki_percentil)
 }
 ```
 
-
-# Funktion til bootstrap-kofidensinterval vha. basic-metoden
+## Funktion til bootstrap-kofidensinterval vha. basic-metoden
 ```{r}
 bootstrap_ki_basic_metode <- function(data, bootstrap_iterationer = 10000,
                                konfidensniveau = 0.95){
   n <- length(data)
-  B <- 10000
+  B <- bootstrap_iterationer
   middel_data <- mean(data)
   
   bootstrap_stik <- replicate(B, {
@@ -40,19 +40,19 @@ bootstrap_ki_basic_metode <- function(data, bootstrap_iterationer = 10000,
   index_ovre <- round(B * (1-alpha/2))
   
   ki_basic <- c(nedre = 2*middel_data-sorteret_boot[index_ovre],
-                øvre = 2*middel_data-sorteret_boot[index_nedre])
+                oevre = 2*middel_data-sorteret_boot[index_nedre])
   
   return(ki_basic)
 }
 ```
 
 
-# Funktion til bootstrap-konfidensinterval vha. t-metoden
+## Funktion til bootstrap-konfidensinterval vha. t-metoden
 ```{r}
 bootstrap_ki_t_metode <- function(data, bootstrap_iterationer = 10000,
                                konfidensniveau = 0.95){
   n <- length(data)
-  B <- 10000
+  B <- bootstrap_iterationer
   middel_data <- mean(data)
   
   bootstrap_stik <- replicate(B, {
@@ -70,19 +70,74 @@ bootstrap_ki_t_metode <- function(data, bootstrap_iterationer = 10000,
   (sd(bootstrap_stik))
   
   ki_t <- c(nedre = middel_data - t_nedre * (sd(data)/sqrt(n)),
-            øvre = middel_data - t_ovre * (sd(data)/sqrt(n)))
+            oevre = middel_data - t_ovre * (sd(data)/sqrt(n)))
   
   return(ki_t)
 }
 ```
 
 
-# Test af funktioner
+
+# Test af dækningsgrad
 ```{r}
-data <- rbeta(n = 10, shape1 = 2, shape2 = 8)
-mean(data)
-bootstrap_ki_perc_metode(data)
-bootstrap_ki_basic_metode(data)
-bootstrap_ki_t_metode(data)
+population <- rbeta(100000, 2, 8)
+test_perc <- c()
+test_basic <- c()
+test_t <- c()
+
+daekningsgrad <- replicate(100,{
+  perc_ki <- bootstrap_ki_perc_metode(data = sample(population, 100),
+                         bootstrap_iterationer = 1000)
+
+  basic_ki <- bootstrap_ki_basic_metode(data = sample(population, 100),
+                          bootstrap_iterationer = 1000)
+
+  t_ki <- bootstrap_ki_t_metode(data = sample(population, 100),
+                      bootstrap_iterationer = 1000)
+  
+  stik <- sample(population, 100)
+  stik_mean <- mean(stik)
+  
+  if(stik_mean >= perc_ki[1] & stik_mean<= perc_ki[2]){
+    test_perc <- append(test_perc, 1)
+  }else{
+    test_perc <- append(test_perc, 0)
+  }
+  
+  if(stik_mean >= basic_ki[1] & stik_mean <= basic_ki[2]){
+    test_basic <- append(test_basic, 1)
+  }else{
+    test_basic <- append(test_basic, 0)
+  }
+  
+  if(stik_mean >= t_ki[1] & stik_mean <= t_ki[2]){
+    test_t <- append(test_t, 1)
+  }else{
+    test_t <- append(test_t, 0)
+  }
+  
+  return(c(test_perc, test_basic, test_t))
+})
+
+daek_percentil <- sum(daekningsgrad[1,])
+daek_basic <- sum(daekningsgrad[2,])
+daek_t <- sum(daekningsgrad[3,])
+
+daek_percentil
+daek_basic
+daek_t
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
