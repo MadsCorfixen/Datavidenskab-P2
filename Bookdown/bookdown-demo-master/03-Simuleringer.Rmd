@@ -1,5 +1,7 @@
 # Simuleringer
 
+I dette kapitel, vil der redegøres for lidt baggrundsviden omkring datasimulering, og hvordan tilsyneladende tilfældige tal, kan genereres ved hjælp af algoritmer. Derefter vil der ses på hvordan programmeringssproget R, kan udnyttes til at udføre disse simuleringer hurtigt og simpelt. 
+
 Simuleringer er generering af estimater på mulige udfald, og på den måde en efterligning af virkeligheden. Formålet er derved at generere tilfældigt estimerede værdier ud fra en model, der simulerer virkeligheden, hvilket muliggør yderligere analyser.
 
 En definition på simulering er;

@@ -4,7 +4,7 @@ library(mosaic)
 
 # Hypotesetest
 
-I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at __FIXME__ (beskrive/drage konklusioner for) en population, ved at opstille to hyposeser. 
+I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at drage konklusioner for en population, ved at opstille to hypoteser. 
 
 En hypotesetest baserer sig på det videnskabelige princip om falsificering. Der opstilles en indledende formodning om en population, kaldet nulhypotesen $H_0$, og en alternativ, modsat hypotese $H_1$. Er den indledende formodning ikke korrekt, må den alternative hypotese være gældende.
 
@@ -34,7 +34,9 @@ Værdien af teststørrelsen påvirker _p_-værdien på den måde, at når testst
 
 Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være $10\%$ eller $1\%$. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper, [@ASTA-HYPO].
 
-## Hypotesetest for middelværdier (t-test){#t-test}
+## Hypotesetest for middelværdier {#t-test}
+
+__FIXME__ Mangler kilder
 
 I dette afsnit gennemgåes fremgangsmåden for, hvordan en hypotesetest kan bruges til at bestemme middelværdien for en population. En sådan hypotesetest kaldes en t-test.
 
@@ -54,7 +56,7 @@ Til slut findes _p_-værdien, og på baggrund af denne, bliver nulhypotesen ente
 
 __Eksempel__
 
-I dette afsnit gennemgåes et eksempel på en t-test.
+Der vil nu vises et eksempel på en t-test.
 
 ```{r include=FALSE}
 set.seed(1)
@@ -64,9 +66,9 @@ xdata <- rnorm(n, forventet_middelvaerdi, 1)
 x_middelvaerdi <- mean(xdata)
 ```
 
-Følgende histogram viser en stikprøve af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi```, udtaget fra en standardnormalfordelt population med en forventet middelværdi på $0$.
+Figur \@ref(fig:hist10) viser en stikprøve af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi```, udtaget fra en standardnormalfordelt population med en forventet middelværdi på $0$.
 
-```{r, echo=FALSE, fig.align='center', fig.cap = "Histogram over 10 simulerede standardnormalfordelte tal."}
+```{r hist10, echo=FALSE, fig.align='center', fig.cap = "Histogram over 10 simulerede standardnormalfordelte tal."}
 hist(xdata, main = NULL,
      ylab="Frekvens",
      xlab="Værdi")
@@ -117,9 +119,9 @@ knitr::include_graphics('images/Typefejl.png')
 
 FIXME: Skriv om 'styrken' (jævnfør arbejdsblad fra 26/3)
 
-## Uparret t-test for ikke-normalfordelt stikprøve
+## Uparret t-test for ikke-normalfordelt stikprøve {#t-test2}
 
-I nogle tilfælde er det ikke muligt at overholde alle de pågældende antagelser der hører til en t-test når der udføres statistisk inferens. Når dette sker, kan det ikke altid antages at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis ens stikprøve ikke er normalfordelt, når der arbejdes med en uparret t-test. 
+I nogle tilfælde er det ikke muligt at overholde alle de pågældende antagelser, som beskrevet i afsnit \@ref(t-test), der hører til en t-test når der udføres statistisk inferens. Når dette sker, kan det ikke altid antages at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis ens stikprøve ikke er normalfordelt, når der arbejdes med en uparret t-test. 
 
 Først udtrækkes to stikprøver på de skæve populationer i afsnit \@ref(pop-sim).
 
@@ -170,7 +172,7 @@ labels <- paste(labels, "%", sep = "")
 pie(x = tf, labels, main = "", col = c("brown3", "cornflowerblue"))
 ```
 
-Det fremgår at i ```r pctf```$\%$ af tilfældene ligger den observerede forskel i middelværdierne uden for konfidensintervallet. Dette stemmer ikke overens med antagelsen om at $5\%$ burde ligge udenfor. Konklusionen er derfor at en t-test udført på ikke-normalfordelte stikprøver ikke nødvendigvis giver et retvisende resultat.
+Det fremgår fra figur \@ref(piettest) at i ```r pctf```$\%$ af tilfældene ligger den observerede forskel i middelværdierne uden for konfidensintervallet. Dette stemmer ikke overens med antagelsen om at $5\%$ burde ligge udenfor. Konklusionen er derfor at en t-test udført på ikke-normalfordelte stikprøver ikke nødvendigvis giver et retvisende resultat.
 
 ### Thomas 24/4
 

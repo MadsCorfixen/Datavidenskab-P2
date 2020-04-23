@@ -210,17 +210,15 @@ legend(160, 0.5, legend=c("Percentil", "Basic", "T"),
        col=c("darkgreen", "black", "blue"), lty=1:3, cex=0.8)
 ```
 
-
-
 ## Bootstrap-hypotesetest
 
-Som nævnt i afsnit \@ref(t-test), skal følgende tre antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test. 
+Som nævnt i afsnit \@ref(t-test), skal visse antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test, og det efterfølgende resultatet af overtrædelsen af disse antagelser, blev vist i afsnit \@ref(t-test2).
 
-1. Variablen er kvantitativ.
-2. Stikprøveudtagning er udført med tilfældighed.
-3. Populationen er normalfordelt.
+<!-- 1. Variablen er kvantitativ. -->
+<!-- 2. Stikprøveudtagning er udført med tilfældighed. -->
+<!-- 3. Populationen er normalfordelt. -->
 
-Er antagelserne ikke opfyldt kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en parret bootstrap-test, og dernæst fremgangsmåden for en uparret bootstrap-test.
+Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en parret bootstrap-test, og dernæst fremgangsmåden for en uparret bootstrap-test.
 
 ### Parret bootstrap-test
 
