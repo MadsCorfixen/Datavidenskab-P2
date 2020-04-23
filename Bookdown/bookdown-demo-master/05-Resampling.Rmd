@@ -4,10 +4,7 @@ library(SimDesign)
 ```
 # Resampling-metoder
 
-FIXME: Bland med kapitel 3 (overvej)
-
-
-I de følgende to underafsnit beskrives to metoder, der er yderst relevante når der arbejdes med statistik. Først vil der ses på permutationstest, og hvordan, permutationer af data kan udnyttes i forskellige test. Derefter vil der blive redegjort for en _resampling_-metode kaldet bootstrap, hvis anvendelser, der vil undersøges nærmere senere i rapporten.
+I de følgende to underafsnit beskrives to metoder, der er yderst relevante når der arbejdes med statistik. Først vil der ses på permutationstest, og hvordan, permutationer af data kan udnyttes i forskellige test. Derefter vil der blive redegjort for en resampling-metode kaldet bootstrap, hvis anvendelser, der vil undersøges nærmere senere i rapporten.
 
 ## Permutationstest
 
