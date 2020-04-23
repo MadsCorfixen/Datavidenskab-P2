@@ -170,44 +170,12 @@ labels <- paste(labels, "%", sep = "")
 pie(x = tf, labels, main = "", col = c("brown3", "cornflowerblue"))
 ```
 
-Det fremgår at i ```r pctf```$\%$ af tilfældene ligger den observerede forskel i middelværdierne uden for konfidensintervallet. Dette stemmer ikke overens med antagelsen om at $5\%$ burde ligge udenfor. Konklusionen er derfor at en t-test udført på ikke-normalfordelte stikprøver ikke nødvendigvis giver et retvisende resultat.
+Det fremgår at i ```r pctf```$\%$ af tilfældene ligger den observerede forskel i middelværdierne uden for konfidensintervallet. Dette stemmer ikke overens med antagelsen om at $5\%$ burde ligge udenfor.
 
-### Thomas 24/4
+Derudover kan det antages, at stikprøverne påvirker resulatet i en stor grad, eftersom hvor repræsentative de er for populationen er altafgørende for t_testens dækningsgrad. Foretages t-testen på fire nye stikprøver, som ses i figur \@ref(fig:piettest_4), fremgår der store variationer. 
 
-GENNEMSNITSLIG PROCENTVIS AFVIGELSE
-
-```{r}
-x <- 100
-
-res_1 <- replicate(x, {
-  Stik_1 <- sample(pop_hs, size = 100)
-  Stik_2 <- sample(pop_vs, size = 100)
-  
-  t_1 <- t.test(Stik_1, Stik_2, alternative = "two.sided", mu = 0, conf.level = 0.95)
-  konfinterval <- t_1$conf.int
-  
-  res_2 <- replicate(1000, {
-    x_1 <- sample(pop_hs, size = 100)
-    x_2 <- sample(pop_vs, size = 100)
-  
-    mean_diff <- mean(x_1) - mean(x_2)
-  
-    konfinterval[1L] <= mean_diff & konfinterval[2L] >= mean_diff
-  })
-  
-  tf_t <- table(res_2)
-  # Gennemsnitslig procentvise afvigelse
-  pct_fiasko <- tf_t[1]/sum(tf_t)*100
-})
-
-gns_pct <- sum(res_1)/x
-gns_pct
-```
-
-VISER 4 PLOTS SAMMEN AF 4 FORSKELLIGE STIKPRØVER
-
-```{r echo=FALSE}
-set.seed(2)
+```{r piettest_4, fig.align="center", fig.cap= "Andel af succeser og fiaskoer ved fire stikprøver", echo=FALSE}
+set.seed(7)
 x <- 4
 PlotMatrix <- matrix(0, nrow = 0, ncol = 2)
 
@@ -267,4 +235,37 @@ labels4 <- paste(labels4, "%", sep = "")
 pie(x = PlotMatrixFinal[4,], labels4, main = "", radius = 1, col = c("brown3", "cornflowerblue"))
 ```
 
+Det fremgår altså at der er en stor variation, og det vil derfor være interessant at undersøge den gennemsnitslige afvigelse på de to skæve populationer.
 
+Dette gøres ved at replikere koden til figur \@ref(fig:piettest) $100$ gange, hvorefter den gennemsnitslige afvigelse regnes ud.
+
+```{r}
+x <- 100
+
+res_1 <- replicate(x, {
+  Stik_1 <- sample(pop_hs, size = 100)
+  Stik_2 <- sample(pop_vs, size = 100)
+  
+  t_1 <- t.test(Stik_1, Stik_2, alternative = "two.sided", mu = 0, conf.level = 0.95)
+  konfinterval <- t_1$conf.int
+  
+  res_2 <- replicate(1000, {
+    x_1 <- sample(pop_hs, size = 100)
+    x_2 <- sample(pop_vs, size = 100)
+  
+    mean_diff <- mean(x_1) - mean(x_2)
+  
+    konfinterval[1L] <= mean_diff & konfinterval[2L] >= mean_diff
+  })
+  
+  tf_t <- table(res_2)
+  # Gennemsnitslig procentvise afvigelse
+  pct_fiasko <- tf_t[1]/sum(tf_t)*100
+})
+
+gns_pct <- sum(res_1)/x
+gns_pct
+daekningsgrad <- 100 - gns_pct
+```
+
+Det fremgår altså, at t-testen kun har en sand dækningsgrad på ```r daekningsgrad```%, hor den antagede er $95\%$. Det fremgår at i ```r gns_pct```$\%$ af tilfældene ligger den observerede forskel i middelværdierne uden for konfidensintervallet. Dette stemmer stadig ikke overens med antagelsen om at $5\%$ burde ligge udenfor. Konklusionen er derfor at en t-test udført på ikke-normalfordelte stikprøver ikke nødvendigvis giver et retvisende resultat.
