@@ -1,0 +1,88 @@
+# Funktion til bootstrap-kofidensinterval vha. percentilmetoden
+```{r}
+bootstrap_ki_perc_metode <- function(data, bootstrap_iterationer = 10000,
+                              konfidensniveau = 0.95){
+  n <- length(data)
+  B <- 10000
+  
+  bootstrap_stik <- replicate(B, {
+    middel_boot <- mean(sample(data, size = n, replace = TRUE))
+  })
+  
+  sorted_boot <- sort(bootstrap_stik)
+  alpha <- 1-konfidensniveau
+  index_nedre <- round(B * alpha/2)
+  index_ovre <- round(B * (1-alpha/2))
+  
+  ki_percentil <- c(nedre = sorted_boot[index_nedre],
+                    øvre = sorted_boot[index_ovre])
+  
+  return(ki_percentil)
+}
+```
+
+
+# Funktion til bootstrap-kofidensinterval vha. basic-metoden
+```{r}
+bootstrap_ki_basic_metode <- function(data, bootstrap_iterationer = 10000,
+                               konfidensniveau = 0.95){
+  n <- length(data)
+  B <- 10000
+  middel_data <- mean(data)
+  
+  bootstrap_stik <- replicate(B, {
+    middel_boot <- mean(sample(data, size = n, replace = TRUE))
+  })
+  
+  sorteret_boot <- sort(bootstrap_stik)
+  alpha <- 1-konfidensniveau
+  index_nedre <- round(B * alpha/2)
+  index_ovre <- round(B * (1-alpha/2))
+  
+  ki_basic <- c(nedre = 2*middel_data-sorteret_boot[index_ovre],
+                øvre = 2*middel_data-sorteret_boot[index_nedre])
+  
+  return(ki_basic)
+}
+```
+
+
+# Funktion til bootstrap-konfidensinterval vha. t-metoden
+```{r}
+bootstrap_ki_t_metode <- function(data, bootstrap_iterationer = 10000,
+                               konfidensniveau = 0.95){
+  n <- length(data)
+  B <- 10000
+  middel_data <- mean(data)
+  
+  bootstrap_stik <- replicate(B, {
+    middel_boot <- mean(sample(data, size = n, replace = TRUE))
+  })
+  
+  sorteret_boot <- sort(bootstrap_stik)
+  alpha <- 1-konfidensniveau
+  index_nedre <- round(B * alpha/2)
+  index_ovre <- round(B * (1-alpha/2))
+  
+  t_nedre <- (sorteret_boot[index_ovre]-middel_data) /
+  (sd(bootstrap_stik))
+  t_ovre <- (sorteret_boot[index_nedre]-middel_data) /
+  (sd(bootstrap_stik))
+  
+  ki_t <- c(nedre = middel_data - t_nedre * (sd(data)/sqrt(n)),
+            øvre = middel_data - t_ovre * (sd(data)/sqrt(n)))
+  
+  return(ki_t)
+}
+```
+
+
+# Test af funktioner
+```{r}
+data <- rbeta(n = 10, shape1 = 2, shape2 = 8)
+mean(data)
+bootstrap_ki_perc_metode(data)
+bootstrap_ki_basic_metode(data)
+bootstrap_ki_t_metode(data)
+```
+
