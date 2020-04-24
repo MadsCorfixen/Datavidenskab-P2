@@ -56,7 +56,7 @@ diff_procent <- round(((abs(SE_sample - SE_boot))/SE_sample) * 100, 4)
 ```
 
 Det ses, at standardfejlen for bootstrap-stikprøven, ```r SE_boot```, approksimerer stikprøvens standardfejl, ```r SE_sample```, med en forskel i dette tilfælde på ```r diff_procent```$\%$.
-Hvis der opstår en situation hvor der ikke er en simpel måde hvorpå at udregne standardfejlen, kan bootstrap altså udnyttes, da en forskel på $0.3 \%$ er ubetydelig. 
+Hvis der opstår en situation hvor der ikke er en simpel måde hvorpå det er muligt at udregne standardfejlen, kan bootstrap altså udnyttes, da en forskel på $0.3 \%$ er ubetydelig. 
 
 __FIXME__ overgang til KI
 Anvendelse af standardfejl i forbindelse med bootstrap-stikprøver...
