@@ -27,7 +27,7 @@ Hvor $\hat{\theta}$ er stikprøvens estimat for den ønskede parameter, $B$ er a
 
 __Eksempel__ __FIXMEE__ 
 
-I kodetstykket nedenfor laves en tilfældig population med en standard normalfordeling. Ud fra populationen udtages en tilfældig stikprøve. Der udregnes standard fejlen for stikprøven. Derefter laves $10,000$ bootstrap-stikprøver, hvor standard fejlen for bootstrap-stikprøven udrenges.
+I kodetstykket nedenfor laves en tilfældig population med en standard normalfordeling. Ud fra populationen udtages en tilfældig stikprøve. Der udregnes standardfejlen for stikprøven. Derefter laves $10,000$ bootstrap-stikprøver, hvor standardfejlen for bootstrap-stikprøven udrenges.
 
 ```{r, include=FALSE}
 library(boot)
@@ -41,23 +41,22 @@ data <- rnorm(100000, mean = 0, sd = 1) # Tilfældig population
 n <- 1000
 
 sample_pop <- sample(data, n) # Stikprøve fra populationen
-SD_sample <- sd(sample_pop)
-SE_sample <- SD_sample/sqrt(length(sample_pop))
-SE_sample
+SD_sample <- sd(sample_pop) #Standardafvigelse
+SE_sample <- round(SD_sample/sqrt(length(sample_pop)), 4) #Standardfejl
 
 B <- 10000 # Bootstrap-repetitioner
 
-meanFunc <- function(sample_pop,i){mean(sample_pop[i])}
+meanFunc <- function(sample_pop,i){mean(sample_pop[i])} #Estimator
 
-SE_boot <- boot(data = sample_pop, statistic = meanFunc, R = B)
-sd(SE_boot$t)
+Boot_sample <- boot(data = sample_pop, statistic = meanFunc, R = B) #Bootstrap stikprøver
+SE_boot <- round(sd(Boot_sample$t), 4) #Standardfejlen for bootstrap-stikprøver
 
-diff_procent <- ((abs(SE_sample - sd(SE_boot$t)))/SE_sample) * 100
-diff_procent
+diff_procent <- round(((abs(SE_sample - SE_boot))/SE_sample) * 100, 4)
 
 ```
 
-Det ses at standard fejlen for bootstrap-stikprøven approximere stikprøven for populationen.  
+Det ses, at standardfejlen for bootstrap-stikprøven, ```r SE_boot```, approksimerer stikprøvens standardfejl, ```r SE_sample```, med en forskel i dette tilfælde på ```r diff_procent```$\%$.
+Hvis der opstår en situation hvor der ikke er en simpel måde hvorpå at udregne standardfejlen, kan bootstrap altså udnyttes, da en forskel på $0.3 \%$ er ubetydelig. 
 
 __FIXME__ overgang til KI
 Anvendelse af standardfejl i forbindelse med bootstrap-stikprøver...
