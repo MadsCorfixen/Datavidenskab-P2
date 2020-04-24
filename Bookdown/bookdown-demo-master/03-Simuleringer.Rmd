@@ -1,6 +1,6 @@
 # Simuleringer
 
-I dette kapitel, vil der redegøres for lidt baggrundsviden omkring datasimulering, og hvordan tilsyneladende tilfældige tal, kan genereres ved hjælp af algoritmer. Derefter vil der ses på hvordan programmeringssproget R, kan udnyttes til at udføre disse simuleringer hurtigt og simpelt. 
+I dette kapitel, vil der redegøres for lidt baggrundsviden omkring datasimulering, og hvordan tilsyneladende tilfældige tal kan genereres ved hjælp af algoritmer. Derefter vil der ses på hvordan programmeringssproget R, kan udnyttes til at udføre disse simuleringer hurtigt og simpelt. 
 
 Simuleringer er generering af estimater på mulige udfald, og på den måde en efterligning af virkeligheden. Formålet er derved at generere tilfældigt estimerede værdier ud fra en model, der simulerer virkeligheden, hvilket muliggør yderligere analyser.
 
@@ -35,7 +35,7 @@ En af de tidligste algortimer til PRNG, _middle-square method_, blev udvilket af
 
 ### Lineær kongruens generator
 
-Dette afsnit beskriver teoretisk hvorledes lineær kongruens generator på baggrund af en arbitrær parameter kan generere en sekvens af tilfældige tal, som kan være uniformt fordelte. Det følgende afsnit er primært baseret på kilden [@LCGinfo].
+Dette afsnit beskriver, hvorledes lineær kongruens generatorer, på baggrund af en arbitrær parameter, kan generere en sekvens af tilfældige tal, som kan være uniformt fordelte. Det følgende afsnit er primært baseret på kilden [@LCGinfo].
 
 Lineær kongruens generator, på engelsk _linear congruential generator_ (LCG), er en af de mange PRNG generatorer. Denne algoritme er en af de ældste og nemmeste at implementere. LCG danner en sekvens af tal ved iteration, og kræver kun få parametre. Helt specifikt er algoritmen angivet ved
 
@@ -251,6 +251,8 @@ Et resultat på afrundet $-0.00048$, hvilket næsten er 0, viser altså også at
 
 ## Simulering i R
 
+__FIXME__ Skriv dette afsnit sammen med "Simulering af populationer"
+
 I dette afsnit gives eksempler på, hvorledes der kan udføres simuleringer af forskellige fordelinger, således disse fordelinger kan anvendes til statistisk inferens. Afsnittet er primært baseret på kilden [@Rsimulation].
 
 Simuleringer i R udføres ved at estimere udfald fra en fordeling, hvor der bliver generet pseudo-tilfældige tal.
@@ -283,7 +285,7 @@ runif(10, min = 1, max = 2)
 
 Den uniforme fordelingen er derimod angivet med en minimum- og maksimumværdi, hvor der genereres værdier imellem.
 
-#### Sample og replicate
+### Sample og replicate
 
 Derudover kan der simuleres på baggrund af observeret data. Ved at benytte funktionerne ```sample``` og ```replicate``` kan der dannes nye simuleringer. ```sample``` tager en stikprøve af den observerede data, hvor ```replicate``` kan gentage forskellige stikprøver.
 ```{r}

@@ -26,3 +26,5 @@ Her vil vi gerne introducere rapporten
 
 ## Anvendte pakker
 
+Library boot skal citeres og beskrives.
+
