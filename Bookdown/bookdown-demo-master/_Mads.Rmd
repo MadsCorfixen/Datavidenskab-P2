@@ -12,7 +12,7 @@ sorted_boot <- sort(bootstrap_stik)
 
 # De rigtige tal
 print("Quantile")
-kvantil <- quantile(sorted_boot, probs = c((1-konf_level), konf_level))
+kvantil <- quantile(sorted_boot, probs = c(konf_level/2, (1-(konf_level/2))))
 kvantil
 
 # De måske forkerte tal
