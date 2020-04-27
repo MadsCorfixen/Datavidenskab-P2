@@ -1,12 +1,24 @@
 
 ```{r}
 stikfunc <- function(pop, n){
+  # Input
+  ##  pop:    Population, der skal tages en stikprøve fra.
+  ##  n:      Størrelse af stikprøven.
+  #
+  # Output:   En stikprøve fra populationen, pop, af størrelsen n.
   return(sample(pop, n))
 }
 ```
 
 ```{r}
 percentil_konf <- function(pop, n, B, alpha){
+  # Input
+  ##  pop:    Population, der skal tages en stikprøve fra.
+  ##  n:      Størrelse af stikprøven.
+  ##  B:      Antal bootstrap-stikprøver.
+  ##  alpha:  Konfidensniveau.
+  #
+  # Output:   Et alpha%-bootstrap-konfidensinterval lavet vha. percentil-metoden.
   data <- stikfunc(pop, n)
   
   bootstrap_fordeling <- replicate(B, {
@@ -27,37 +39,69 @@ percentil_konf <- function(pop, n, B, alpha){
 
 ```{r}
 daekningsgrad <- function(pop, n, r, KI){
-  sandhed <- 0
-  replicate(r, {
+  # Input
+  ##  pop:    Populationen, der skal tages en stikprøve fra.
+  ##  n:      Størrelse af stikprøven.
+  ##  r:      Antal undersøgelser af, om stikprøvemiddelværdi er indeholdt i konfidensintervallet.
+  ##  KI:     Konfidensintervallet.
+  #
+  # Output:   Dækningsgraden for konfidensintervallet KI.
+  result <- replicate(r, {
     data <- sample(pop, n)
     middel <- mean(data)
+    sandhed <- 0
     if(KI[1] <= middel & KI[2] >= middel){
       sandhed <- sandhed + 1
-      return(sandhed)
-    } 
+    }
+    return(sandhed)
   })
-  return(sandhed)
+  return(sum(result) / r * 100)
 }
-
-daekningsgrad(rbeta(10000, 8, 2), 100, 100, percentil_konf(rbeta(10000, 8, 2), 100, 10000, 0.05))
 ```
-
 
 ```{r}
 pop <- rbeta(10000, 8, 2)
-
-vektor <- c()
-for(n in seq(5, 100, 5)){
-  KI <- percentil_konf(pop, n, 10000, 0.05)
-  magnus <- daekningsgrad(pop, 100, 100, KI)
-  vektor <- append(vektor, magnus[1])
+vektordaek <- function(pop, B, alpha, r){
+  # Input
+  ##  pop:    Populationen, der skal tages en stikprøve fra.
+  ##  B:      Antal bootstrap-stikprøver.
+  ##  alpha:  Konfidensniveau.
+  ##  r:      Antal undersøgelser af, om stikprøvemiddelværdi er indeholdt i konfidensintervallet.
+  #
+  # Output:   Dækningsgraden for konfidenintervallet for forskellig stikprøvestørrelse.
+  vektor <- c()
+  for(n in round(exp(c(1:7)))){
+    KI <- percentil_konf(pop, n, B, alpha)
+    daek <- daekningsgrad(pop, n, r, KI)
+    vektor <- append(vektor, daek[1])
+  }
+  return(vektor)
 }
-vektor
+
+vektordaek(pop, 10000, 0.05, 10000)
 ```
 
-
-
-
+```{r}
+MeanDaek <- function(rep, pop, B, alpha, r){
+  # Input
+  ##  rep:    Antal gentagelser af vektordaek-funktionen.
+  ##  pop:    Populationen, der skal tages en stikprøve fra.
+  ##  B:      Antal bootstrap-stikprøver.
+  ##  alpha:  Konfidensniveau.
+  ##  r:      Antal undersøgelser af, om stikprøvemiddelværdi er indeholdt i konfidensintervallet.
+  #
+  # Output:   Middelværdien af rep-antal konfidensintervaller.
+  reps <- replicate(rep, {
+    MatrixDaek <- vektordaek(pop, B, alpha, r)
+  })
+  vek <- c()
+  for(i in 1:nrow(reps)){
+    vek <- append(vek, mean(reps[i,]))
+  }
+  return(vek)
+}
+MeanDaek(100, pop, 1000, 0.05, 1000)
+```
 
 
 
