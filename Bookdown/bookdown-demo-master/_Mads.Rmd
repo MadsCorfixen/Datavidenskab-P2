@@ -14,41 +14,42 @@ stikfunc <- function(pop, n){
 library(boot)
 konf <- function(pop, n, B, alpha, KI_type){
   # Input
-  ##  pop:    Population, der skal tages en stikprøve fra.
-  ##  n:      Størrelse af stikprøven.
-  ##  B:      Antal bootstrap-stikprøver.
-  ##  alpha:  Konfidensniveau.
+  ##  pop:     Population, der skal tages en stikprøve fra.
+  ##  n:       Størrelse af stikprøven.
+  ##  B:       Antal bootstrap-stikprøver.
+  ##  alpha:   Konfidensniveau.
+  ##  KI_type: Type af konfidensinterval. 
   #
-  # Output:   Et alpha%-bootstrap-konfidensinterval lavet vha. percentil-metoden.
+  # Output:    Et 1-alpha%-bootstrap-konfidensinterval lavet vha. KI_typen.
   data <- stikfunc(pop, n)
-  
-  # bootstrap_fordeling <- replicate(B, {
-  #   stik <- sample(data, size = n, replace = TRUE)
-  #   x <- mean(stik)
-  # })  
-  bootstrap_stik <-replicate(B, {stik <- sample(data, size = n, replace = TRUE)})
+  bootstrap_stik <-replicate(B, {stik <- sample(data, size = n, replace = TRUE)}) # Bootstrap-stikprøverne oprettes.
   bootstrap_fordeling <- c()
   bootstrap_se <- c()
   bootstrap_t <- c()
+  
   for(i in 1:ncol(bootstrap_stik)){
-    bootstrap_fordeling <- append(bootstrap_fordeling, mean(bootstrap_stik[,i]))
-    bootstrap_se <- append(bootstrap_se, sd(bootstrap_stik[,i]))
-    bootstrap_t <- append(bootstrap_t, (mean(bootstrap_stik[,i])-mean(data))/bootstrap_se[i])
+    bootstrap_fordeling <- append(bootstrap_fordeling, mean(bootstrap_stik[,i])) # Middelværdien for hver bootstrap-stikprøve udregnes.
+    bootstrap_se <- append(bootstrap_se, sd(bootstrap_stik[,i])) # Standardfejlen for hver bootstrap-stikprøve udregnes.
+    bootstrap_t <- append(bootstrap_t, (mean(bootstrap_stik[,i])-mean(data))/bootstrap_se[i]) # T-værdien for hver bootstrap-stikprøve udregnes.
   }
+  
   SortedData <- sort(bootstrap_fordeling)
   Sorted_t <- sort(bootstrap_t)
+ # I de følgnede 3 if-statements, udregnes nedre og øvre grænser for konfidensintervaller vha. hhv. percentil, basic og t-metoden. 
   if(toString(KI_type)=="KI_Percentil" | toString(KI_type)=="P"){
     KI_nedre <- quantile(SortedData, probs = alpha/2, names = FALSE)
     KI_oevre <- quantile(SortedData, probs = 1-alpha/2, names = FALSE)
     percentil_KI <- c(KI_nedre, KI_oevre)
     return(percentil_KI)
-  }else if(toString(KI_type)=="KI_Basic" | toString(KI_type)=="B"){
+  }
+  else if(toString(KI_type)=="KI_Basic" | toString(KI_type)=="B"){
     theta_hat <- mean(data)
     KI_nedre <- 2*theta_hat-quantile(SortedData, probs = 1-alpha/2, names = FALSE)
     KI_oevre <- 2*theta_hat-quantile(SortedData, probs = alpha/2, names = FALSE)
     basic_KI <- c(KI_nedre, KI_oevre)
     return(basic_KI)
-  }else if(toString(KI_type)=="KI_T" | toString(KI_type)=="T"){
+  }
+  else if(toString(KI_type)=="KI_T" | toString(KI_type)=="T"){
     theta_hat <- mean(data)
     KI_nedre <- theta_hat-(quantile(Sorted_t, probs = 1-alpha/2, names = FALSE) * (sd(data))) 
     KI_oevre <- theta_hat-(quantile(Sorted_t, probs = alpha/2, names = FALSE) * (sd(data))) 
@@ -84,51 +85,53 @@ daekningsgrad <- function(pop, n, r, KI){
 ```
 
 ```{r}
-vektordaek <- function(pop, B, alpha, r, KI_type){
+vektor_daek <- function(pop, B, alpha, r, KI_type){
   # Input
-  ##  pop:    Populationen, der skal tages en stikprøve fra.
-  ##  B:      Antal bootstrap-stikprøver.
-  ##  alpha:  Konfidensniveau.
-  ##  r:      Antal undersøgelser af, om stikprøvemiddelværdi er indeholdt i konfidensintervallet.
+  ##  pop:     Populationen, der skal tages en stikprøve fra.
+  ##  B:       Antal bootstrap-stikprøver.
+  ##  alpha:   Konfidensniveau.
+  ##  r:       Antal undersøgelser af, om stikprøvemiddelværdi er indeholdt i konfidensintervallet.
+  ##  KI_type: Type af konfidensinterval.
   #
-  # Output:   Dækningsgraden for konfidenintervallet for forskellig stikprøvestørrelse.
+  # Output:    Dækningsgraden for konfidenintervallet for forskellig stikprøvestørrelse.
   vektor <- c()
   for(n in seq(10,200,10)){
-    KI <- konf(pop, n, B, alpha, KI_type)
-    daek <- daekningsgrad(pop, n, r, KI)
-    vektor <- append(vektor, daek[1])
+    KI <- konf(pop, n, B, alpha, KI_type) # Der oprettes et konfidensinterval vha. konf-funktionen. 
+    daek <- daekningsgrad(pop, n, r, KI) # Dækningsgraden undersøge vha. daekningsgrads-funktionen. 
+    vektor <- append(vektor, daek)
   }
   return(vektor)
 }
 ```
 
 ```{r}
-MeanDaek <- function(rep, pop, B, alpha, r, KI_type){
+mean_daek <- function(rep, pop, B, alpha, r, KI_type){
   # Input
-  ##  rep:    Antal gentagelser af vektordaek-funktionen.
-  ##  pop:    Populationen, der skal tages en stikprøve fra.
-  ##  B:      Antal bootstrap-stikprøver.
-  ##  alpha:  Konfidensniveau.
-  ##  r:      Antal undersøgelser af, om stikprøvemiddelværdi er indeholdt i konfidensintervallet.
+  ##  rep:     Antal gentagelser af vektordaek-funktionen.
+  ##  pop:     Populationen, der skal tages en stikprøve fra.
+  ##  B:       Antal bootstrap-stikprøver.
+  ##  alpha:   Konfidensniveau.
+  ##  r:       Antal undersøgelser af, om stikprøvemiddelværdi er indeholdt i konfidensintervallet.
+  ##  KI_type: Type af konfidensinterval.
   #
-  # Output:   Middelværdien af rep-antal konfidensintervaller.
+  # Output:    Middelværdien af rep-antal konfidensintervaller.
   reps <- replicate(rep, {
-    MatrixDaek <- vektordaek(pop, B, alpha, r, KI_type)
-  })
+    matrix_daek <- vektor_daek(pop, B, alpha, r, KI_type)
+  }) # Gentager vektor_daek-funktionen rep antal gange, hvilket giver en matrix hvor hver søjle indholder dækningsgraden for rep antal konfidensintevaller ved stikprøvestørrelse 10, 20, ..., 200. 
   vek <- c()
-  for(i in 1:nrow(reps)){
-    vek <- append(vek, mean(reps[i,]))
-  }
+  for(i in 1:ncol(reps)){
+    vek <- append(vek, mean(reps[,i]))
+  } # Beregner middelværdien af hver søjle i matricen reps. 
   return(vek)
 }
 ```
 
 
 ```{r}
-pop <- rbeta(100000, 8, 2)
-MeanDaek(10, pop, 1000, 0.05, 1000, "P")
-MeanDaek(10, pop, 1000, 0.05, 1000, "B")
-MeanDaek(10, pop, 1000, 0.05, 1000, "T")
+pop <- rbeta(n = 10000, shape1 = 8, shape2 = 2)
+MeanDaek(rep = 10, pop, B = 1000, alpha = 0.05, r = 1000, KI_type = "P") 
+MeanDaek(rep = 10, pop, B = 1000, alpha = 0.05, r = 1000, KI_type = "B")
+MeanDaek(rep = 10, pop, B = 1000, alpha = 0.05, r = 1000, KI_type = "T")
 ```
 
 
