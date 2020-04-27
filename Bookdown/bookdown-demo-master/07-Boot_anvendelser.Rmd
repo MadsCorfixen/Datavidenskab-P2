@@ -36,26 +36,25 @@ library(boot)
 
 ```{r}
 set.seed(11)
-data <- rnorm(100000, mean = 0, sd = 1) # Tilfældig population
-
+data <- rnorm(100000, mean = 0, sd = 1) # Normalfordelt population
 n <- 1000
 
 sample_pop <- sample(data, n) # Stikprøve fra populationen
-SD_sample <- sd(sample_pop) #Standardafvigelse
-SE_sample <- round(SD_sample/sqrt(length(sample_pop)), 4) #Standardfejl
+SD_sample <- sd(sample_pop) #Stikprøve standardafvigelse 
+SE_sample <- round(SD_sample/sqrt(length(sample_pop)), 4) #Stikprøve standardfejl
 
-B <- 10000 # Bootstrap-repetitioner
+B <- 10000 # Antal bootstrap-repetitioner
 
 meanFunc <- function(sample_pop,i){mean(sample_pop[i])} #Estimator
 
-Boot_sample <- boot(data = sample_pop, statistic = meanFunc, R = B) #Bootstrap stikprøver
+Boot_sample <- boot(data = sample_pop, statistic = meanFunc, R = B) #Bootstrap-stikprøver
 SE_boot <- round(sd(Boot_sample$t), 4) #Standardfejlen for bootstrap-stikprøver
 
-diff_procent <- round(((abs(SE_sample - SE_boot))/SE_sample) * 100, 4)
+diff_procent <- round(((abs(SE_sample - SE_boot))/SE_sample) * 100, 4) #Procentvis afvigelse
 
 ```
 
-Det ses, at standardfejlen for bootstrap-stikprøven, ```r SE_boot```, approksimerer stikprøvens standardfejl, ```r SE_sample```, med en forskel i dette tilfælde på ```r diff_procent```$\%$.
+Fra eksemplet fås, at standardfejlen for bootstrap-stikprøven er $se(\hat{\theta})=$```r SE_boot```, hvilket approksimerer stikprøvens standardfejl på $\text{se}(\hat{\mu})=$```r SE_sample```, med en forskel i dette tilfælde på ```r diff_procent```$\%$.
 Hvis der opstår en situation hvor der ikke er en simpel måde hvorpå det er muligt at udregne standardfejlen, kan bootstrap altså udnyttes, da en forskel på $0.3 \%$ er ubetydelig. 
 
 __FIXME__ overgang til KI
