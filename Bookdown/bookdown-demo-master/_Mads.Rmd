@@ -1,12 +1,24 @@
 
 ```{r}
 stikfunc <- function(pop, n){
+  # Input
+  ##  pop:    Population, der skal tages en stikprøve fra
+  ##  n:      Størrelse af stikprøven
+  #
+  # Output:   En stikprøve fra populationen, pop, af størrelsen n
   return(sample(pop, n))
 }
 ```
 
 ```{r}
 percentil_konf <- function(pop, n, B, alpha){
+  # Input
+  ##  pop:    Population, der skal tages en stikprøve fra
+  ##  n:      Størrelse af stikprøven
+  ##  B:      Antal bootstrap-stikprøver
+  ##  alpha:  Konfidensniveau
+  #
+  # Output:   Et alpha%-bootstrap-konfidensinterval lavet vha. percentil-metoden
   data <- stikfunc(pop, n)
   
   bootstrap_fordeling <- replicate(B, {
@@ -27,6 +39,13 @@ percentil_konf <- function(pop, n, B, alpha){
 
 ```{r}
 daekningsgrad <- function(pop, n, r, KI){
+  # Input
+  ##  pop:    Populationen, der skal tages en stikprøve fra
+  ##  n:      Størrelse af stikprøven
+  ##  r:      Antal undersøgelser af, om stikprøvemiddelværdi er indeholdt i konfidensintervallet
+  ##  KI:     Konfidensintervallet
+  #
+  # Output:   Dækningsgraden for konfidensintervallet KI
   sandhed <- 0
   replicate(r, {
     data <- sample(pop, n)
