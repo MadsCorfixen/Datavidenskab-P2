@@ -11,7 +11,8 @@ stikfunc <- function(pop, n){
 ```
 
 ```{r}
-percentil_konf <- function(pop, n, B, alpha){
+library(boot)
+konf <- function(pop, n, B, alpha, KI_type){
   # Input
   ##  pop:    Population, der skal tages en stikprøve fra.
   ##  n:      Størrelse af stikprøven.
@@ -21,16 +22,39 @@ percentil_konf <- function(pop, n, B, alpha){
   # Output:   Et alpha%-bootstrap-konfidensinterval lavet vha. percentil-metoden.
   data <- stikfunc(pop, n)
   
-  bootstrap_fordeling <- replicate(B, {
-  x <- mean(sample(data, size = n, replace = TRUE))
-  })
-  
+  # bootstrap_fordeling <- replicate(B, {
+  #   stik <- sample(data, size = n, replace = TRUE)
+  #   x <- mean(stik)
+  # })  
+  bootstrap_stik <-replicate(B, {stik <- sample(data, size = n, replace = TRUE)})
+  bootstrap_fordeling <- c()
+  bootstrap_se <- c()
+  bootstrap_t <- c()
+  for(i in 1:ncol(bootstrap_stik)){
+    bootstrap_fordeling <- append(bootstrap_fordeling, mean(bootstrap_stik[,i]))
+    bootstrap_se <- append(bootstrap_se, sd(bootstrap_stik[,i]))
+    bootstrap_t <- append(bootstrap_t, (mean(bootstrap_stik[,i])-mean(data))/bootstrap_se[i])
+  }
   SortedData <- sort(bootstrap_fordeling)
-  
-  KI_nedre <- quantile(SortedData, probs = alpha/2)
-  KI_oevre <- quantile(SortedData, probs = 1-alpha/2)
-  percentil_KI <- c(KI_nedre, KI_oevre)
-  return(percentil_KI)
+  Sorted_t <- sort(bootstrap_t)
+  if(toString(KI_type)=="KI_Percentil" | toString(KI_type)=="P"){
+    KI_nedre <- quantile(SortedData, probs = alpha/2, names = FALSE)
+    KI_oevre <- quantile(SortedData, probs = 1-alpha/2, names = FALSE)
+    percentil_KI <- c(KI_nedre, KI_oevre)
+    return(percentil_KI)
+  }else if(toString(KI_type)=="KI_Basic" | toString(KI_type)=="B"){
+    theta_hat <- mean(data)
+    KI_nedre <- 2*theta_hat-quantile(SortedData, probs = 1-alpha/2, names = FALSE)
+    KI_oevre <- 2*theta_hat-quantile(SortedData, probs = alpha/2, names = FALSE)
+    basic_KI <- c(KI_nedre, KI_oevre)
+    return(basic_KI)
+  }else if(toString(KI_type)=="KI_T" | toString(KI_type)=="T"){
+    theta_hat <- mean(data)
+    KI_nedre <- theta_hat-(quantile(Sorted_t, probs = 1-alpha/2, names = FALSE) * (sd(data))) 
+    KI_oevre <- theta_hat-(quantile(Sorted_t, probs = alpha/2, names = FALSE) * (sd(data))) 
+    KI_t <- c(KI_nedre, KI_oevre)
+    return(KI_t)
+  }
 }
 ```
 
@@ -60,8 +84,7 @@ daekningsgrad <- function(pop, n, r, KI){
 ```
 
 ```{r}
-pop <- rbeta(10000, 8, 2)
-vektordaek <- function(pop, B, alpha, r){
+vektordaek <- function(pop, B, alpha, r, KI_type){
   # Input
   ##  pop:    Populationen, der skal tages en stikprøve fra.
   ##  B:      Antal bootstrap-stikprøver.
@@ -70,19 +93,17 @@ vektordaek <- function(pop, B, alpha, r){
   #
   # Output:   Dækningsgraden for konfidenintervallet for forskellig stikprøvestørrelse.
   vektor <- c()
-  for(n in round(exp(c(1:7)))){
-    KI <- percentil_konf(pop, n, B, alpha)
+  for(n in seq(10,200,10)){
+    KI <- konf(pop, n, B, alpha, KI_type)
     daek <- daekningsgrad(pop, n, r, KI)
     vektor <- append(vektor, daek[1])
   }
   return(vektor)
 }
-
-vektordaek(pop, 10000, 0.05, 10000)
 ```
 
 ```{r}
-MeanDaek <- function(rep, pop, B, alpha, r){
+MeanDaek <- function(rep, pop, B, alpha, r, KI_type){
   # Input
   ##  rep:    Antal gentagelser af vektordaek-funktionen.
   ##  pop:    Populationen, der skal tages en stikprøve fra.
@@ -92,7 +113,7 @@ MeanDaek <- function(rep, pop, B, alpha, r){
   #
   # Output:   Middelværdien af rep-antal konfidensintervaller.
   reps <- replicate(rep, {
-    MatrixDaek <- vektordaek(pop, B, alpha, r)
+    MatrixDaek <- vektordaek(pop, B, alpha, r, KI_type)
   })
   vek <- c()
   for(i in 1:nrow(reps)){
@@ -100,7 +121,14 @@ MeanDaek <- function(rep, pop, B, alpha, r){
   }
   return(vek)
 }
-MeanDaek(100, pop, 1000, 0.05, 1000)
+```
+
+
+```{r}
+pop <- rbeta(100000, 8, 2)
+MeanDaek(10, pop, 1000, 0.05, 1000, "P")
+MeanDaek(10, pop, 1000, 0.05, 1000, "B")
+MeanDaek(10, pop, 1000, 0.05, 1000, "T")
 ```
 
 

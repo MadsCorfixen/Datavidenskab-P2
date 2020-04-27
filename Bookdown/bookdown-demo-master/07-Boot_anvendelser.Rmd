@@ -151,15 +151,17 @@ __Eksempel__
 
 I kodestykket forneden beregnes $t^{*}$ for det nedre og øvre percentil. Dernæst beregnes konfidensintervallet ud fra formlen. 
 
+
+
 ```{r}
 tLower <- (SortedData[IndexUpper]-theta_hat) /
   (sd(bootstrap_fordeling)) # SD udregner standardfejl
 tUpper <- (SortedData[IndexLower]-theta_hat) /
   (sd(bootstrap_fordeling)) # SD udregner standardfejl
 
-KI_Normal <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)),
+KI_T <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)),
                Upper = theta_hat - tUpper * (sd(data)/sqrt(n)))
-KI_Normal
+KI_T
 ```
 
 __FIXME:__ (Eventuel sammenligning / Undersøgelse af dækningsgraden - Tænker det gøres i dataanalysen)
