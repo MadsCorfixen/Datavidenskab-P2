@@ -120,7 +120,7 @@ knitr::include_graphics('images/Typefejl.png')
 
 FIXME: Skriv om 'styrken' (jævnfør arbejdsblad fra 26/3)
 
-## Uparret t-test for ikke-normalfordelt stikprøve {#t-test2}
+## Uparret t-test for ikke-normalfordelte stikprøver {#t-test2}
 
 I nogle tilfælde er det ikke muligt at overholde alle de pågældende antagelser, som beskrevet i afsnit \@ref(t-test), der hører til en t-test når der udføres statistisk inferens. Når dette sker, kan det ikke altid antages, at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis stikprøverne ikke er normalfordelte, når der arbejdes med en uparret t-test. 
 
