@@ -13,7 +13,7 @@ Standardafvigelsen for en estimator beskrives som estimatorens standardfejl. Sta
 
 Som eksempel vil standardfejlen for estimatet af middelværdien, $\hat{\mu}$, være $\text{se}(\hat{\mu}) = \frac{\sigma}{\sqrt{n}}$.
 
-Når der arbejdes med data udover det teoretiske, vil standardafvigelsen for populationen, $\sigma$, altid være ukendt. Derfor bruges stikprøvens estimat for standardafvigelsen, $S$ til at beregne den estimerede standardfejl, $\hat{\text{se}}$. 
+Når der arbejdes med data udover det teoretiske, vil standardafvigelsen for populationen, $\sigma$, altid være ukendt. Derfor bruges stikprøvens estimat for standardafvigelsen, $S$, til at beregne den estimerede standardfejl, $\hat{\text{se}}$. 
 
 Som eksempel vil den estimerede standardfejl for estimatet af middelværdien, $\hat{\mu}$, være  $\hat{\text{se}}(\hat{\mu}) = \frac{S}{\sqrt{n}}$, hvor $S = \sum_{i=1}^{n} \frac{(x_i - \hat{\mu})^2}{n - 1}$ er stikprøvens standardafvigelse for middelværdien, og $n$ er størrelsen på stikprøven.
 
