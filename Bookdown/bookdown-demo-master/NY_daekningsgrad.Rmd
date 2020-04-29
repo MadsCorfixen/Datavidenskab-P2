@@ -2,19 +2,36 @@
 input: stikprøvestørrelse og parameter
 ```{r}
 meanFunc <- function(sample_pop,i){mean(sample_pop[i])}
+ res <- replicate(100,{
+    stik <- rbeta(n, 8, 2)
+    boot_stik <- boot(stik, statistic = meanFunc, 100)
+    interval_perc <- suppressWarnings(boot.ci(boot_stik)$percent[4:5])
+    tf <- interval_perc[1]<=sand_middel & interval_perc[2]>=sand_middel
+  })
+ res
 ```
 
 ```{r}
 library(boot)
 sand_middel <- 8/(8+2)
-reees <- replicate(100,{
-  stik <- rbeta(3, 8, 2)
-  boot_stik <- boot(stik, statistic = meanFunc, 100)
-  interval_perc <- suppressWarnings(boot.ci(boot_stik)$percent[4:5])
-  tf <- interval_perc[1]<=sand_middel & interval_perc[2]>=sand_middel
-})
-table(reees)
+matriks <- matrix(ncol = 25, nrow = 100)
+for(n in seq(4, 100, 4)){
+  res <- replicate(100,{
+    stik <- rbeta(n, 8, 2)
+    boot_stik <- boot(stik, statistic = meanFunc, 100)
+    interval_perc <- suppressWarnings(boot.ci(boot_stik)$percent[4:5])
+    tf <- interval_perc[1]<=sand_middel & interval_perc[2]>=sand_middel
+  })
+  matriks[,n/4] <- res
+}
 ```
+```{r}
+vector <- c()
+for(n in 1:25){
+  vector <- append(vector, mean(matriks[,n]))}
+plot(vector)
+```
+
 ```{r}
 stik <- rbeta(100, 8, 2)
 boot_stik <- boot(stik, statistic = meanFunc, 100)
