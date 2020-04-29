@@ -8,10 +8,12 @@ meanFunc <- function(sample_pop,i){mean(sample_pop[i])}
 library(boot)
 sand_middel <- 8/(8+2)
 reees <- replicate(100,{
-  stik <- rbeta(100, 8, 2)
+  stik <- rbeta(3, 8, 2)
   boot_stik <- boot(stik, statistic = meanFunc, 100)
-  boot_konf <- boot.ci(boot_stik)
+  interval_perc <- suppressWarnings(boot.ci(boot_stik)$percent[4:5])
+  tf <- interval_perc[1]<=sand_middel & interval_perc[2]>=sand_middel
 })
+table(reees)
 ```
 ```{r}
 stik <- rbeta(100, 8, 2)
