@@ -17,7 +17,7 @@ Når der arbejdes med data udover det teoretiske, vil standardafvigelsen for pop
 
 Som eksempel vil den estimerede standardfejl for estimatet af middelværdien, $\hat{\mu}$, være  $\hat{\text{se}}(\hat{\mu}) = \frac{S}{\sqrt{n}}$, hvor $S = \sum_{i=1}^{n} \frac{(x_i - \hat{\mu})^2}{n - 1}$ er stikprøvens standardafvigelse for middelværdien, og $n$ er størrelsen på stikprøven.
 
-Såfremt en estimator er normalfordelt eller tilnærmelsesvist er normalfordelt, kan det forventes, at et estimat vil være mindre end én standardfejl fra det forventede i $68\%$ af tilfældene og mindre end to standardfejl fra i $95\%$ af tilfældene. 
+Såfremt en estimator er normalfordelt eller tilnærmelsesvist normalfordelt, kan det forventes, at et estimat vil være mindre end én standardfejl fra det forventede i $68\%$ af tilfældene og mindre end to standardfejl fra i $95\%$ af tilfældene. 
 
 Dog er dette ikke altid ligetil i virkeligheden, oftest er der ikke tilstrækkelig informationer om populationen eller fordeligen af denne. Samtidig kræver det, at der er nogle specifikke krav som er opfyldt. Disse problemer kan undgås ved at benytte bootstrap til at estimere standardfejlen, givet ved nedstående formel.
 
