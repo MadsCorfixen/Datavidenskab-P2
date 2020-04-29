@@ -1,49 +1,70 @@
+```{r}
+library(boot)
+```
 
 input: stikprøvestørrelse og parameter
 ```{r}
-meanFunc <- function(sample_pop,i){mean(sample_pop[i])}
- res <- replicate(100,{
-    stik <- rbeta(n, 8, 2)
-    boot_stik <- boot(stik, statistic = meanFunc, 100)
-    interval_perc <- suppressWarnings(boot.ci(boot_stik)$percent[4:5])
-    tf <- interval_perc[1]<=sand_middel & interval_perc[2]>=sand_middel
-  })
- res
+meanFunc <- function(sample_pop,i){
+  mean(sample_pop[i])
+}
 ```
 
 ```{r}
 library(boot)
 sand_middel <- 8/(8+2)
-matriks <- matrix(ncol = 25, nrow = 100)
+```
+
+```{r}
+matriks_p <- matrix(ncol = 25, nrow = 100)
+vector_p <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(100,{
     stik <- rbeta(n, 8, 2)
     boot_stik <- boot(stik, statistic = meanFunc, 100)
-    interval_perc <- suppressWarnings(boot.ci(boot_stik)$percent[4:5])
+    interval_perc <- suppressWarnings(boot.ci(boot_stik, type = c("perc"))$percent[4:5])
     tf <- interval_perc[1]<=sand_middel & interval_perc[2]>=sand_middel
   })
-  matriks[,n/4] <- res
+  matriks_p[,n/4] <- res
+  vector_p <- append(vector_p, mean(matriks_p[,n/4]))
 }
 ```
+
 ```{r}
-vector <- c()
-for(n in 1:25){
-  vector <- append(vector, mean(matriks[,n]))}
-plot(vector)
+matriks_b <- matrix(ncol = 25, nrow = 100)
+vector_b <- c()
+for(n in seq(4, 100, 4)){
+  res <- replicate(100,{
+    stik <- rbeta(n, 8, 2)
+    boot_stik <- boot(stik, statistic = meanFunc, 100)
+    interval_basic <- suppressWarnings(boot.ci(boot_stik, type = c("basic"))$basic[4:5])
+    tf <- interval_basic[1]<=sand_middel & interval_basic[2]>=sand_middel
+  })
+  matriks_b[,n/4] <- res
+  vector_b <- append(vector_b, mean(matriks_b[,n/4]))
+}
 ```
 
 ```{r}
-stik <- rbeta(100, 8, 2)
-boot_stik <- boot(stik, statistic = meanFunc, 100)
-interval_perc <- boot.ci(boot_stik)$percent[4:5]
-interval_perc[1]<=sand_middel & interval_perc[2]>=sand_middel
+matriks_n <- matrix(ncol = 25, nrow = 100)
+vector_n <- c()
+for(n in seq(4, 100, 4)){
+  res <- replicate(100,{
+    stik <- rbeta(n, 8, 2)
+    boot_stik <- boot(stik, statistic = meanFunc, 100)
+    interval_normal <- suppressWarnings(boot.ci(boot_stik, type = c("norm"))$normal[2:3])
+    tf <- interval_normal[1]<=sand_middel & interval_normal[2]>=sand_middel
+  })
+  matriks_n[,n/4] <- res
+  vector_n <- append(vector_n, mean(matriks_n[,n/4]))
+}
 ```
+
 ```{r}
-
-interval_basic <- boot.ci(boot_stik)$basic[4:5]
-interval_basic[1]<=sand_middel & interval_basic[2]>=sand_middel
-interval_normal <- boot.ci(boot_stik)$normal[2:3]
-interval_normal[1]<=sand_middel & interval_normal[2]>=sand_middel
+x <- seq(4, 100, 4)
+plot(x, vector_p, type="l", col="red")
+lines(x, vector_b, type="l", col="blue")
+lines(x, vector_n, type="l", col="green")
+abline(h=0.95, lty=5, col="black")
 ```
 
-output: dækningsgraden
+
