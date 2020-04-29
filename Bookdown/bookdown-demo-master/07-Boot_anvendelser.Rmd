@@ -13,11 +13,11 @@ Standardafvigelsen for en estimator beskrives som estimatorens standardfejl. Sta
 
 Som eksempel vil standardfejlen for estimatet af middelværdien, $\hat{\mu}$, være $\text{se}(\hat{\mu}) = \frac{\sigma}{\sqrt{n}}$.
 
-Når der arbejdes med data udover det teoretiske, vil standardafvigelsen for populationen, $\sigma$, altid være ukendt. Derfor bruges stikprøvens estimat for standardafvigelsen, $S$, til at beregne den estimerede standardfejl, $\hat{\text{se}}$. 
+Når der arbejdes med data udover det teoretiske, vil standardafvigelsen for populationen, $\sigma$, altid være ukendt. Derfor bruges stikprøvens estimat for standardafvigelsen, $S$ til at beregne den estimerede standardfejl, $\hat{\text{se}}$. 
 
 Som eksempel vil den estimerede standardfejl for estimatet af middelværdien, $\hat{\mu}$, være  $\hat{\text{se}}(\hat{\mu}) = \frac{S}{\sqrt{n}}$, hvor $S = \sum_{i=1}^{n} \frac{(x_i - \hat{\mu})^2}{n - 1}$ er stikprøvens standardafvigelse for middelværdien, og $n$ er størrelsen på stikprøven.
 
-Såfremt en estimator er normalfordelt eller tilnærmelsesvis normalfordelt, kan det forventes, at et estimat vil være mindre end én standardfejl fra det forventede i $68\%$ af tilfældene og mindre end to standardfejl fra i $95\%$ af tilfældene. 
+Såfremt en estimator er normalfordelt eller tilnærmelsesvist er normalfordelt, kan det forventes, at et estimat vil være mindre end én standardfejl fra det forventede i $68\%$ af tilfældene og mindre end to standardfejl fra i $95\%$ af tilfældene. 
 
 Dog er dette ikke altid ligetil i virkeligheden, oftest er der ikke tilstrækkelig informationer om populationen eller fordeligen af denne. Samtidig kræver det, at der er nogle specifikke krav som er opfyldt. Disse problemer kan undgås ved at benytte bootstrap til at estimere standardfejlen, givet ved nedstående formel.
 
@@ -266,7 +266,7 @@ Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og
 
 Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$, [@BootHypo].
 
-Fremgangsmåden i ovenstående afsnit gentages $B$ gange, hvilket giver $B$ nye teststørrelser.   
+Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. 
 
 Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$, [@Hypo_test].
 

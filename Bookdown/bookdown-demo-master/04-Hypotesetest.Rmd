@@ -236,7 +236,7 @@ labels4 <- paste(labels4, "%", sep = "")
 pie(x = PlotMatrixFinal[4,], labels4, main = "", radius = 1, col = c("brown3", "cornflowerblue"))
 ```
 
-På grund af den uventet store variation i dækningsgraden, vil det være interessant at undersøge den gennemsnitslige dækningsgrad for konfidensintervallet. Dette gøres i nedenstående kodestykke, ved at beregne den gennemsnitlige dækningsgrad af $100$ forskellige konfidensintervaller. 
+Det fremgår, at der er en stor variation i dækningsgraden, og det vil derfor være interessant at undersøge den gennemsnitslige dækningsgrad for konfidensintervallet. Dette gøres i nedenstående kodestykke, ved at beregne den gennemsnitlige dækningsgrad af $100$ forskellige konfidensintervaller. 
 
 ```{r}
 x <- 100
