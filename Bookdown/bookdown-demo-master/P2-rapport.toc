@@ -16,7 +16,7 @@
 \contentsline {chapter}{\numberline {4}Hypotesetest}{27}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Hypotesetest for middelværdier}{29}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Fejltyper}{31}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Uparret t-test for ikke-normalfordelt stikprøve}{31}{section.4.3}%
+\contentsline {section}{\numberline {4.3}Uparret t-test for ikke-normalfordelte stikprøver}{31}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Undersøgelse af variation i dækningsgraden}{33}{subsection.4.3.1}%
 \contentsline {chapter}{\numberline {5}Bootstrap}{37}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Ikke-parametrisk bootstrap}{37}{section.5.1}%
