@@ -20,7 +20,7 @@ vector_p <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(100,{
     stik <- rbeta(n, 8, 2)
-    boot_stik <- boot(stik, statistic = meanFunc, 100)
+    boot_stik <- boot(stik, statistic = meanFunc, 10000)
     interval_perc <- suppressWarnings(boot.ci(boot_stik, type = c("perc"))$percent[4:5])
     tf <- interval_perc[1]<=sand_middel & interval_perc[2]>=sand_middel
   })
@@ -35,7 +35,7 @@ vector_b <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(100,{
     stik <- rbeta(n, 8, 2)
-    boot_stik <- boot(stik, statistic = meanFunc, 100)
+    boot_stik <- boot(stik, statistic = meanFunc, 10000)
     interval_basic <- suppressWarnings(boot.ci(boot_stik, type = c("basic"))$basic[4:5])
     tf <- interval_basic[1]<=sand_middel & interval_basic[2]>=sand_middel
   })
@@ -50,7 +50,7 @@ vector_n <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(100,{
     stik <- rbeta(n, 8, 2)
-    boot_stik <- boot(stik, statistic = meanFunc, 100)
+    boot_stik <- boot(stik, statistic = meanFunc, 10000)
     interval_normal <- suppressWarnings(boot.ci(boot_stik, type = c("norm"))$normal[2:3])
     tf <- interval_normal[1]<=sand_middel & interval_normal[2]>=sand_middel
   })
@@ -61,10 +61,12 @@ for(n in seq(4, 100, 4)){
 
 ```{r}
 x <- seq(4, 100, 4)
-plot(x, vector_p, type="l", col="red")
+plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad", xlab = "Stikprøvestørrelse")
 lines(x, vector_b, type="l", col="blue")
 lines(x, vector_n, type="l", col="green")
 abline(h=0.95, lty=5, col="black")
+legend(85, 0.8, legend=c("Percentil", "Basic", "Normal"),
+       col=c("red", "blue", "green"), lty=c(1,1,1), cex=0.8)
 ```
 
 
