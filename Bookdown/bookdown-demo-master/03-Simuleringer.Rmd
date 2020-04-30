@@ -251,7 +251,7 @@ Et resultat på afrundet $-0.00048$, hvilket næsten er 0, viser altså også at
 
 ## Simulering i R
 
-__FIXME__ Skriv dette afsnit sammen med "Simulering af populationer"
+__FIXME__ (Afsnittet skal revurderes)
 
 I dette afsnit gives eksempler på, hvorledes der kan udføres simuleringer af forskellige fordelinger, således disse fordelinger kan anvendes til statistisk inferens. Afsnittet er primært baseret på kilden [@Rsimulation].
 
