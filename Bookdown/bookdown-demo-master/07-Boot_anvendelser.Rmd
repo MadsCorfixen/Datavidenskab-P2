@@ -25,7 +25,7 @@ $$se(\hat{\theta}) = \sqrt{\frac{1}{B-1}\sum_{b=1}^{B}(\hat{\theta_b^*} - \bar{\
 
 Hvor $\hat{\theta}$ er stikprøvens estimat for den ønskede parameter, $B$ er antal bootstrap-stikprøver, $\hat\theta_b^*$ er estimatet for den $b$'te bootstrap-stikprøve og $\bar{\theta} = (\frac{1}{B}) \sum_{b=1}^{B}\hat{\theta_b^*}$, [@BootMiracle].
 
-__Eksempel__ __FIXMEE__ 
+__Eksempel__ __FIXME__ 
 
 I kodetstykket nedenfor laves en tilfældig population med en standard normalfordeling. Ud fra populationen udtages en tilfældig stikprøve. Der udregnes standardfejlen for stikprøven. Derefter laves $10,000$ bootstrap-stikprøver, hvor standardfejlen for bootstrap-stikprøven udrenges.
 
@@ -36,25 +36,23 @@ library(boot)
 
 ```{r}
 set.seed(11)
-data <- rnorm(100000, mean = 0, sd = 1) # Normalfordelt population
 n <- 1000
 
-sample_pop <- sample(data, n) # Stikprøve fra populationen
+sample_pop <- rnorm(n, mean = 0, sd = 1) # Stikprøve fra populationen
 SD_sample <- sd(sample_pop) #Stikprøve standardafvigelse 
-SE_sample <- round(SD_sample/sqrt(length(sample_pop)), 4) #Stikprøve standardfejl
+SE_sample <- SD_sample/sqrt(n) #Stikprøve standardfejl
 
 B <- 10000 # Antal bootstrap-repetitioner
 
 meanFunc <- function(sample_pop,i){mean(sample_pop[i])} #Estimator
 
-Boot_sample <- boot(data = sample_pop, statistic = meanFunc, R = B) #Bootstrap-stikprøver
-SE_boot <- round(sd(Boot_sample$t), 4) #Standardfejlen for bootstrap-stikprøver
+Boot_sample <- boot::boot(data = sample_pop, statistic = meanFunc, R = B) #Bootstrap-stikprøver
+SE_boot <- sd(Boot_sample$t) #Standardfejlen for bootstrap-stikprøver
 
-diff_procent <- round(((abs(SE_sample - SE_boot))/SE_sample) * 100, 4) #Procentvis afvigelse
-
+diff_procent <- ((abs(SE_sample - SE_boot))/SE_sample) * 100 #Procentvis afvigelse
 ```
 
-Fra eksemplet fås, at standardfejlen for bootstrap-stikprøven er $se(\hat{\theta})=$```r SE_boot```, hvilket approksimerer stikprøvens standardfejl på $\text{se}(\hat{\mu})=$```r SE_sample```, med en forskel i dette tilfælde på ```r diff_procent```$\%$.
+Fra eksemplet fås, at standardfejlen for bootstrap-stikprøven er $se(\hat{\theta})=$```r SE_boot```, hvilket approksimerer stikprøvens standardfejl på $\text{se}(\hat{\mu})=$```r SE_sample```, med en forskel i dette tilfælde på ```r round(diff_procent, 3)```$\%$.
 Hvis der opstår en situation hvor der ikke er en simpel måde hvorpå det er muligt at udregne standardfejlen, kan bootstrap altså udnyttes, da en forskel på $0.3 \%$ er ubetydelig. 
 
 __FIXME__ overgang til KI
@@ -66,15 +64,15 @@ __FIXME:__ (Bedre begrundelse for, hvorfor vi har flere forskellige metoder på 
 
 I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøves beregnes ved hjælp af standardfejlen, percentiler, basic-metoden og t-metoden. 
 
-Et $95\%$ konfidensinterval på en normalfordelt stikprøve kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$, [@BootKI]. Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
+Et $95\%$ konfidensinterval på en normalfordelt estimator, $\Theta$, kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$, [@BootKI]. Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
 ### Percentilmetoden
 
-En intuitiv fremgangsmåde til at bestemme et konfidensinterval ved percentiler, er at bruge det $(B(\frac{\alpha}{2}))$'te og $(B(1-\frac{\alpha}{2}))$'te percentil, hvor $B$ er antallet af bootstrap-repetitioner. Lad $\Theta^* = [\vartheta_1,~ \ldots,~\vartheta_B]$ være en sorteret liste af bootstrap-estimater. Derved er formlen for et konfidensinterval på baggrund af percentiler: 
+En intuitiv fremgangsmåde til at bestemme et $(1-\alpha)100\%$ konfidensinterval ved percentiler, er at bruge det $(B(\frac{\alpha}{2}))$'te og $(B(1-\frac{\alpha}{2}))$'te percentil, hvor $B$ er antallet af bootstrap-repetitioner. Lad $\Theta^* = [\vartheta_1,~ \ldots,~\vartheta_B]$ være en sorteret liste af bootstrap-estimater. Derved er formlen for et konfidensinterval på baggrund af percentiler: 
 
-$$\text{KI}_p = \left[\theta^{{\sim}}_{(\alpha/2)},~\theta^{{\sim}}_{(1-\alpha/2)}\right]$$
+$$\text{KI}_p = \left[q_{(\alpha/2)},~q_{(1-\alpha/2)}\right]$$
 
-Hvor $\theta^{\sim}_i$ er det $i$'te percentil i $\Theta^*$. [@TPKI]  
+Hvor $q_i$ er det $i$'te percentil i $\Theta^*$. [@TPKI]  
 
 
 __Eksempel__
@@ -119,9 +117,9 @@ Ulempen ved brug af percentiler er, at konfidensintervallet ofte er ukorrekt hvi
 
 Denne type konfidensinterval ud fra bootstrap er også kendt som _reversed percentile interval_. Denne metode benytter formlen:
 
-$$\text{KI}_b = \left[2\hat\theta- \theta^{{\sim}}_{(1-\alpha/2)}, ~ 2\hat\theta- \theta^{{\sim}}_{(\alpha/2)}\right]$$
+$$\text{KI}_b = \left[2\hat\theta- q_{(1-\alpha/2)}, ~ 2\hat\theta- q_{(\alpha/2)}\right]$$
 
-Hvor $\theta^{\sim}_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven, [@BasicKI].
+Hvor $q_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven, [@BasicKI].
 
 __Eksempel__
 
@@ -194,7 +192,7 @@ Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre t-t
 ### Parret bootstrap-test
 
 Lad to parrede stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{n}]$.
-Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne teststørrelsen, $t_{obs}=\hat{Z}$.
+Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne teststørrelsen, $\bar{Z}$.
 
 Så opstilles der en nulhypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande middelværdi for differencerne for $X$ og $Y$, og en alternativ hypotese, $H_1:~\mu\neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
 
@@ -256,11 +254,13 @@ p_tosidet
 
 Der ses altså at p-værdien er lig ```r p_tosidet```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
 
+__FIXME:__(Replicate 100 gange)
+
 ### Uparret bootstrap-test
 
 Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$, med ens varians, være givet.
 
-På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs}=\hat{X}-\hat{Y}$.
+På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $\bar{X}-\bar{Y}$.
 
 Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} \neq \mu_{_Y}$, samt et signifikansniveau, $\alpha = 0.05$. 
 
@@ -316,5 +316,7 @@ p_mindre2 <- (length(andel_mindre2)-(sum(andel_mindre2))) / length(andel_mindre2
 p_tosidet2 <- 2*min(p_mindre2, p_stoerre2)
 p_tosidet2
 ```
+
+__FIXME:__(Replicate 100 gange)
 
 Der ses altså at p-værdien er lig ```r p_tosidet2```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
