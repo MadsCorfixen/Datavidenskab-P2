@@ -17,18 +17,18 @@
 \contentsline {section}{\numberline {4.1}Hypotesetest for middelværdier}{29}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Fejltyper}{31}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Uparret t-test for ikke-normalfordelte stikprøver}{31}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Undersøgelse af variation i dækningsgraden}{33}{subsection.4.3.1}%
-\contentsline {chapter}{\numberline {5}Bootstrap}{37}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Ikke-parametrisk bootstrap}{37}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Bootstrap-standardfejl}{40}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Bootstrap-konfidensintervaller}{41}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Percentilmetoden}{42}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Basic-metoden}{43}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}T-metoden}{43}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}Sammenligning af dækningsgraden}{44}{subsection.5.3.4}%
-\contentsline {section}{\numberline {5.4}Bootstrap-hypotesetest}{44}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Parret bootstrap-test}{44}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Uparret bootstrap-test}{46}{subsection.5.4.2}%
-\contentsline {chapter}{\numberline {6}Diskussion}{49}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Konklusion}{51}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Perspektivering}{53}{chapter.8}%
+\contentsline {chapter}{\numberline {5}Bootstrap}{35}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Ikke-parametrisk bootstrap}{35}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Bootstrap-standardfejl}{38}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Bootstrap-konfidensintervaller}{39}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Percentilmetoden}{39}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Basic-metoden}{40}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}T-metoden}{41}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Sammenligning af dækningsgraden}{42}{subsection.5.3.4}%
+\contentsline {section}{\numberline {5.4}Bootstrap-hypotesetest}{42}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Parret bootstrap-test}{42}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Uparret bootstrap-test}{44}{subsection.5.4.2}%
+\contentsline {chapter}{\numberline {6}Udregning af dækningsgrad}{47}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Diskussion}{51}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Konklusion}{53}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Perspektivering}{55}{chapter.9}%
