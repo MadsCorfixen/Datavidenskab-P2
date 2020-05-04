@@ -192,12 +192,18 @@ På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ 
 Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$, [@Hypo_test].
 
 \begin{align}
-p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<t_{obs}\}}{B} \\
-p_{_{større}} &= \frac{\text{antal gange }\{t^*>t_{obs}\}}{B} \\
+p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<\bar{Z}\}}{B} \\
+p_{_{større}} &= \frac{\text{antal gange }\{t^*>\bar{Z}\}}{B} \\
 p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
 \end{align}
 
 Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
+
+_P_-værdien ligger i intervallet $[0 ; 1]$, $p_{tosidet} \in [0 ; 1]$, hvor $p_{mindre} + p_{større} = 1$ . Eftersom den største værdi $min (p_{mindre}, p_{større)$ kan give er $0.5$ multipliceres det med $2$.
+
+$p_{mindre}$ er lav i de tilfælde, hvor $t^* < \bar Z$ ofte er tilfældet. Ligeledes gør det sig gældende, at $p_{større}$ er lav i de tilfælde, hvor $t^* > \bar Z$ ofte er tilfældet. $min$ bliver benytter eftersom, der undersøges, hvor ofte mere ekstreme tilfælde optræder end den observerede teststørrelse. 
+
+Hvis $p_{mindre}$ eller $p_{større}$ er mindre end $\frac{\alpha}{2}$ forkastes $H_0$, da der er en signifikant forskel i middelværdierne. 
 
 __Eksempel__
 
@@ -254,8 +260,8 @@ Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ tests
 Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$, [@Hypo_test].
 
 \begin{align}
-p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<t_{obs}\}}{B} \\
-p_{_{større}} &= \frac{\text{antal gange }\{t^*>t_{obs}\}}{B} \\
+p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<\bar{Z}\}}{B} \\
+p_{_{større}} &= \frac{\text{antal gange }\{t^*>\bar{Z}\}}{B} \\
 p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
 \end{align}
 
