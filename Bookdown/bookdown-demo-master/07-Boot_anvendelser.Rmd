@@ -204,46 +204,40 @@ __Eksempel__
 I nedenstående kode, vises et eksempel på en parret bootstrap-test.
 
 ```{r}
-# Opretter stikprøver
-n <- 15
-stik1 <- rbeta(n, 8, 2)
-stik2 <- rbeta(n, 2, 8)
+res <- replicate(100, {
+  n <- 15
+  stik1 <- rbeta(n, 8, 2)
+  stik2 <- rbeta(n, 2, 8)
 
-# Beregner t_obs
-stikdiff <- NULL
-for(i in 1:n){
-  stikdiff[i] <- abs(stik1[i] - stik2[i])
-}
-t_obs <- mean(stikdiff)
+  t_obs <- mean(abs(stik1-stik2))
 
-# Opretter bootstrap-stikprøver
-B <- 10000
-boot <- replicate(B, sample(x = c(stik1, stik2), size = 2*n, replace = TRUE))
+  B <- 10000
+  boot <- replicate(B, {
+    sample(x = c(stik1, stik2), size = 2*n, replace = TRUE)
+  })
 
-boot1 <- boot[1:15,]
-boot2 <- boot[16:30,]
+  boot1 <- boot[1:15,]
+  boot2 <- boot[16:30,]
 
-bootdiff <- matrix(data = boot1, nrow = n, ncol = B/2)
-bootmeans <- NULL
-for(i in 1:B/2){
-  bootdiff[1:15, i] <- abs(boot1[1:15, i] - boot2[1:15, i])
-  bootmeans[i] <- mean(bootdiff[1:15, i])
-}
+  bootdiff <- matrix(data = boot1, nrow = n, ncol = B/2)
+  bootmeans <- NULL
+  for(i in 1:B/2){
+    bootdiff[1:15, i] <- abs(boot1[1:15, i] - boot2[1:15, i])
+    bootmeans[i] <- mean(bootdiff[1:15, i])
+  }
 
-andel_mindre <- bootmeans < t_obs
+  andel_mindre <- bootmeans < t_obs
 
-p_stoerre <- (sum(andel_mindre)) / length(andel_mindre)
-p_mindre <- (length(andel_mindre)-(sum(andel_mindre))) / length(andel_mindre)
+  p_stoerre <- (sum(andel_mindre)) / length(andel_mindre)
+  p_mindre <- (length(andel_mindre)-(sum(andel_mindre))) / length(andel_mindre)
 
-# P-værdien for en tosidet bootstrap-test
-p_tosidet <- 2*min(p_mindre, p_stoerre)
-p_tosidet
+  p_tosidet <- 2*min(p_mindre, p_stoerre)
+})
 
+p_vaerdi_parret <- mean(res)
 ```
 
-Der ses altså at p-værdien er lig ```r p_tosidet```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
-
-__FIXME:__(Replicate 100 gange)
+Der ses altså at p-værdien er lig ```r round(p_vaerdi_parret, 4)```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
 
 ### Uparret bootstrap-test
 
@@ -272,40 +266,35 @@ __Eksempel__
 Nu vil der vises et eksempel på en uparret bootstrap t-test.
 
 ```{r}
-# Opretter to stikprøver
-n2 = 15
-m2 = 30
-stik3 <- rbeta(n2, 8, 2)
-stik4 <- rbeta(m2, 2, 8)
+res <- replicate(100, {
+  n2 = 15
+  m2 = 30
+  stik3 <- rbeta(n2, 8, 2)
+  stik4 <- rbeta(m2, 2, 8)
 
-# Beregner t_obs
-t_obs2 <- mean(stik3) - mean(stik4)
+  t_obs2 <- mean(stik3) - mean(stik4)
 
-#Opretter bootstrap-stikprøver og returnerer difference i middelværdi
-B2 <- 10000
+  B2 <- 10000
 
-res <- replicate(B2, {
+  res <- replicate(B2, {
   
-  boot <- sample(c(stik3, stik4), replace = TRUE)
+    boot <- sample(c(stik3, stik4), replace = TRUE)
   
-  bootx <- boot[1 : n2]
-  booty <- boot[(n2+1) : (n2+m2)]
+    bootx <- boot[1 : n2]
+    booty <- boot[(n2+1) : (n2+m2)]
   
-  diffmean <- (mean(bootx) - mean(booty))
-  diffmean
-  
+    diffmean <- (mean(bootx) - mean(booty))
+  })
+
+  andel_mindre2 <- res < t_obs2
+
+  p_stoerre2 <- (sum(andel_mindre2)) / length(andel_mindre2)
+  p_mindre2 <- (length(andel_mindre2)-(sum(andel_mindre2))) / length(andel_mindre2)
+
+  p_tosidet2 <- 2*min(p_mindre2, p_stoerre2)
 })
 
-andel_mindre2 <- res < t_obs2
-
-p_stoerre2 <- (sum(andel_mindre2)) / length(andel_mindre2)
-p_mindre2 <- (length(andel_mindre2)-(sum(andel_mindre2))) / length(andel_mindre2)
-
-# P-værdien for en tosidet bootstrap-test
-p_tosidet2 <- 2*min(p_mindre2, p_stoerre2)
-p_tosidet2
+p_vaerdi_uparret <- mean(res)
 ```
 
-__FIXME:__(Replicate 100 gange)
-
-Der ses altså at p-værdien er lig ```r p_tosidet2```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
+Der ses altså at p-værdien er lig ```r round(p_vaerdi_uparret, 4)```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.

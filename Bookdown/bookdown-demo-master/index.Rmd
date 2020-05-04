@@ -16,8 +16,6 @@ github-repo: rstudio/bookdown-demo
 
 __FIXME__ Husk link til Github.
 
-Her vil vi gerne introducere rapporten
-
 ## Forord
 
 ## Abstract/Synopsis
@@ -26,5 +24,17 @@ Her vil vi gerne introducere rapporten
 
 ## Anvendte pakker
 
-Library boot skal citeres og beskrives.
+bookdown
+
+mosaic
+
+boot
+
+SimDesign
+
+e1071
+
+
+
+
 
