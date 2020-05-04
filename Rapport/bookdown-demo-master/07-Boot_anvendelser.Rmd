@@ -206,8 +206,8 @@ I nedenstående kode, vises et eksempel på en parret bootstrap-test.
 ```{r}
 # Opretter stikprøver
 n <- 15
-stik1 <- rbeta(n, 8, 2)
-stik2 <- rbeta(n, 2, 8)
+stik1 <- sample(pop_vs, size = n)
+stik2 <- sample(pop_hs, size = n)
 
 # Beregner t_obs
 stikdiff <- NULL
@@ -271,14 +271,12 @@ __Eksempel__
 
 Nu vil der vises et eksempel på en uparret bootstrap t-test.
 
-__FIXME:__ (Dette eksempel returnerer altid 0 - kan det være rigtigt?)
-
 ```{r}
 # Opretter to stikprøver
 n2 = 15
 m2 = 30
-stik3 <- rbeta(n2, 8, 2)
-stik4 <- rbeta(m2, 2, 8)
+stik3 <- sample(pop_vs, size = n2)
+stik4 <- sample(pop_hs, size = m2)
 
 # Beregner t_obs
 t_obs2 <- mean(stik3) - mean(stik4)
