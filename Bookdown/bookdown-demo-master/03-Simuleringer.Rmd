@@ -273,14 +273,15 @@ Først sættes et _seed_ så det er muligt, at rekonstruere samme simulering ige
 Ligeledes er det muligt at simulere binomialfordelinger og uniforme fordelinger:
 ```{r}
 set.seed(1)
-rbinom(10, size = 2, prob = 0.5)
+rbinom(10, size = 1, prob = 0.5)
 ```
 
 Som før sættes et _seed_, og der skrives "r" før fordelingen der simuleres. Ligeledes er første værdi antallet af værdier der skal genereres. I binomialfordelingen er der angivet _size_, som er antallet repetationer af succes/fejl _(1/0)_, hvorimod _prob_ er sandsynligheden for succes.
 
 ```{r}
 set.seed(1)
-runif(10, min = 1, max = 2)
+runif(1000, min = 1, max = 2)
+hist(runif(1000, min = 1, max = 2))
 ```
 
 Den uniforme fordelingen er derimod angivet med en minimum- og maksimumværdi, hvor der genereres værdier imellem.
@@ -349,3 +350,99 @@ lines(density(pop_vs), col="red", lwd=2)
 hist(pop_hs, main = "Højreskæv population", ylab = "", xlab = "", xlim = c(0,1), ylim = c(0,3.5), prob = TRUE)
 lines(density(pop_hs), col="red", lwd=2)
 ```
+
+## Ny simulering
+
+__FIXME__ I figurer: Antal observationer eller frekvens?
+
+I dette afsnit gives eksempler på, hvorledes der kan udføres simuleringer af forskellige fordelinger, således disse fordelinger kan anvendes til statistisk inferens. Afsnittet er primært baseret på kilden [@Rsimulation].
+
+Simuleringer i R udføres ved at estimere udfald fra en fordeling, hvor der bliver generet pseudo-tilfældige tal. Disse generede tal forekommer at være tilfældige, men er det reelt set ikke, [@PRNG]. Tallene er genereret ud fra et _seed_, som i R bestemmes ved ```set.seed("værdi")```. Dette _seed_ vil nu angives, så de følgende genereret tal vil være ens, ved nye gennemkørsler.
+
+__FIXME__ Virker ikke?
+```{r}
+set.seed(29)
+```
+
+I dataanalysen vil de forskellige fordelinger, bruges som stikprøver, og ikke som de bagliggende populationer. Ideén med denne fremgangsmåde er, at man derved udtrækker stikprøver, ud fra den teoretiske uendelige fordeling. __FIXME__ Fordel ved dette?
+
+Nogle af de fordelinger der kan simuleres i R, er blandt andet, en normalfordeling, binomialfordeling, uniformfordeling eller en skæv fordeling, såsom en betafordeling. Alle disse fordelinger har forskellige karateristika, som påvirker "udseendet" af dem. Et _input_ som alle fordelingerne kræver er en størrelse, som angives med $n$. Der vil nu vises eksempler på hvordan disse fordelinger simuleres i R, og hvordan resultatet vil se ud. 
+
+
+
+__Normalfordeling__
+
+I R simuleres en normalfordeling ved funktionen ```rnorm```, hvor "r" står for tilfældigt genererede tal, __FIXMEE random?__
+og "norm" for en normalfordeling. Fordelingen på figur \@ref(fig:normal) bliver genereret ud fra en middelværdi på $0$ og en standardafvigelse på $1$. Eftersom middelværdien er $0$ og standardafvigelsen er $1$, kaldes denne normalfordeling for en standard normalfordeling eller Z-fordeling.
+
+```{r normal, echo = FALSE, fig.cap = "En normalfordeling med størrelsen n = 1000, en middelværdi på 0 og en stnadardafvigelse på 1. Med disse værdier kaldes den også for en standard normalfordeling eller Z-fordeling"}
+normalfordeling <- rnorm(n = 1000, mean = 0, sd = 1)
+hist(normalfordeling, main = "", ylab = "Antal observationer", xlab = "")
+```
+
+__Binomial- og uniformfordelinger__
+
+Både en binomialfordeling og en uniformfordeling bliver genereret ud fra sandsynligheder.
+
+I den binomialefordeling gives en _size_, som er antallet af succes/fejl (Angivet med 1 for succes og 0 for fejl) inden for den given størrelse, samt en sandsynlighed for succes, angivet med _prob_. __FIXME__ Er forklaring på size rigtigt?
+
+```{r fig.cap = "En binomialfordeling med størrelsen n = 100, udfaldsstørrelse på size = 1 og en sandsynlighed for succes på prob = 50 %."}
+Binomialfordeling <- rbinom(100, size = 1, prob = 0.5)
+hist(Binomialfordeling, xaxt = 'n', xlab = "", ylab = "Antal observationer", main = "")
+axis(side=1, at=c(0,1), labels=c("Fiasko = 0","Succes = 1"))
+
+```
+
+En interressant egenskab ved binomialfordelinger er at jo højere $n$ er, des tættere vil middelværdien af fordelinger være på sandsynligheden for succes. I dette tilfælde med en størrelse på $n = 100$ er middelværdien ```r mean(Binomialfordeling)```. __FIXMEE__
+
+En uniform fordeling er derimod genereret ud fra en maksimum og minimumværdi, som der inden for skal genereres et givent antal tal. Alle disse tal har lige stor sandsynlighed for at blive genereret. Jo større $n$ er, des "fladere" bliver histogrammet også. __FIXMEE__
+
+```{r fig.cap = "En uniformfordeling med størrelsen 100.000, hvor alle tal har lige stor sandsynlighed for at optræde, i intervallet [0 : 1]."}
+uniformfordeling <- runif(100000, min = 1, max = 2)
+hist(uniformfordeling, main = "", xlab = "", ylab = "Antal observationer")
+```
+
+__Skæve fordelinger__
+
+En skæv fordeling er kendetegnet ved at størstedelen af observationerne er samlet omkring visse værdier, mens de resterende observationer fordeler sig ud, enten til højre eller venstre af denne samling. De resterende observationer kaldes for "halen" af fordelinger, og alt efter retningen af dem, kaldes den skæve fordeling for "venstreskæv" elller "højreskæv". 
+
+En skæv fordeling, kan være en betafordeling, $\text{Beta}(\alpha, \beta)$, hvor $\alpha-1$ angiver antallet af succeser og $\beta-1$ angiver antallet af fiaskoer. Betafordelingen er tilnærmelsesvis normaltfordelt, hvis $\alpha$ og $\beta$ begge er store eller omtrent ens, [@TDSBeta].
+
+En venstreskæv og en højreskæv betafordeling vil nu simuleres, hvor $\alpha = 8$ og $\beta = 2$ for den venstreskæve, mens $\alpha = 2$ og $\beta = 8$ for den højreskæve. 
+
+```{r fig.cap = "To betafordelinger"}
+venstre <- rbeta(n =1000, shape1 = 8, shape2 = 2) 
+hoejre <- rbeta(n = 1000, shape1 = 2, shape2 = 8) 
+par(mfrow=c(1,2))
+hist(venstre, main = "Venstreskæv fordeling", ylab = "", xlab = "", xlim = c(0,1), ylim = c(0,4), prob = TRUE)
+#lines(density(venstre), col="red", lwd=2)
+hist(hoejre, main = "Højreskæv fordeling", ylab = "", xlab = "", xlim = c(0,1), ylim = c(0,4), prob = TRUE)
+#lines(density(hoejre), col="red", lwd=2)
+```
+
+__Replicate__
+
+I nogle metoder til statistisk inferens, er det nødvendigt at arbejde med flere stikprøver end kun én enkelt. Med funktionen ```replicate``` i R, kan der genereres adskillige nye stikprøver ud fra den oprindelige. Dette er især smart, da man i praksis, oftest kun har en eller få stikprøver tilgængeligt, og udfra de få, kan simulere flere repræsentative stikprøver.
+
+Processen med at _replicate_ vil nu vises. Først ser vi en stikprøve med 3 observationer.
+
+```{r echo = FALSE}
+stik <- rnorm(3, 0 ,1) #Den oprindelige stikprøve
+stik_matrix <- matrix(stik, nrow = 3)
+colnames(stik_matrix) <- c("Oprindelig stikprøve")
+rownames(stik_matrix) <- c("Observation 1", "Observation 2", "Observation 3")
+stik_matrix
+```
+
+_Replicate_ funktionen vil nu bruges. I alt replikeres der 5 gange, hvilket vil betyde der vil blive oprettet 5 nye stikprøver. I forbindelse med denne process, udnyttes funktionen ```sample```, som er den funktion der opretter hver enkelt stikprøve. Fra den oprindelige stikprøve udtrækkes der en observation, som indsættes i den nye stikprøve. Observationer bliver derefter lagt tilbage i den oprindelige stikprøve, hvilket betyder der er sandsynlighed for at se den samme observation flere gange. Grunden til dette, er at hver observation i stikprøven anses for at være repræsentativ for population, og to af den samme observation derfor ikke er utænkeligt at observere i populationen. 
+
+```{r echo = FALSE}
+rep <- replicate(5, {
+  sample(stik, size = 3, replace = TRUE)
+})
+rep
+```
+
+Nu er der altså oprettet fem helt nye repræsentative stikprøver udfra den oprindelige. Denne metode og dens anvendelser vil der kigges nærmere på i dataanalysen. 
+
+__FIXME__ Skal vi skrive om sample? Denne bruger vi vel ikke mere
