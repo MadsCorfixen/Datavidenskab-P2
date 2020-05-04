@@ -1,9 +1,11 @@
 # Udregning af dækningsgrad
+I dette afsnit vil der undersøges om metoderne for at udregne konfidensintervallerne er effektive. Dette gøres ved at udregne dækningsgraden af middelværdien for populationen og undersøge om middelværdien er i de konfidensintervaller, som de forskellige metoder har produceret.
 
 ```{r}
 library(boot)
 ```
 
+Som det første udregnes middelværdien for population. For at udregningen af middelværdien for populationen gerne skal kunne kaldes senere, laves der en function. Funktionen tager en stikprøve og et index som input.
 ```{r}
 meanFunc <- function(sample_pop, i){
   mean(sample_pop[i])
@@ -11,6 +13,9 @@ meanFunc <- function(sample_pop, i){
 sand_middel <- 0
 ```
 
+Det næste der udføres er et konfidensinterval. Konfidensintervallet beregnes ved hjælp af r's indbyggede funktion "boot.ci". Der bliver lavet 100 konfidensintervaller på baggrund af en normalfordelt stikprøve. Så undersøges der om middelværdien af stikprøven er i intervallet, hvis den er vil outputtet være TRUE, hvis ikke vil det være FALSE. Herefter sættes disse outputs ind i en matrix. Til sidst beregnes dækningsgraden af de intervaller som indeholder den beregnede middelværdi. Denne proces udføres for de tre konfidensintervalmetoder, percentil, normal og basic.
+
+Her udføres processen for for dækningsgraden på percentilmetoden.
 ```{r}
 matriks_p <- matrix(ncol = 25, nrow = 100)
 vector_p <- c()
@@ -28,6 +33,7 @@ for(n in seq(4, 100, 4)){
 }
 ```
 
+Her udføres processen for for dækningsgraden på basicmetoden.
 ```{r}
 matriks_b <- matrix(ncol = 25, nrow = 100)
 vector_b <- c()
@@ -45,6 +51,7 @@ for(n in seq(4, 100, 4)){
 }
 ```
 
+???
 ```{r}
 bootstrap_t <- function(n, alpha){
   stik <- rnorm(n)
@@ -80,7 +87,8 @@ for(n in seq(4, 100, 4)){
 }
 ```
 
-```{r}
+Til sidst illustreres dækningsgraden for de tre metoder i diagrammet på figur \ref{fig:figur_deakning}. Her ses at...(percentil-metoden performer bedre?), da den rammer dækningsgraden på $95\%$ først ved en stikprøvestørrelse på omkring $15$.
+```{r, figur_deakning, echo=FALSE, fig.cap="Illustration af udviklingen af dækningsgraden når stikprøvestørrelsen bliver større"}
 x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
      xlab = "Stikprøvestørrelse", ylim = c(0.75, 1))
