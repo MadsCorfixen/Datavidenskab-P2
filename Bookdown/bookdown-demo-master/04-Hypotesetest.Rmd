@@ -124,34 +124,30 @@ FIXME: Skriv om 'styrken' (jævnfør arbejdsblad fra 26/3)
 
 I nogle tilfælde er det ikke muligt at overholde alle de pågældende antagelser, som beskrevet i afsnit \@ref(t-test), der hører til en t-test når der udføres statistisk inferens. Når dette sker, kan det ikke altid antages, at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis stikprøverne ikke er normalfordelte, når der arbejdes med en uparret t-test.
 
-Først laves to stikprøver med skæve fordelinger, ved hjlæp af `rbeta` og `rgamma`.
+I dette eksempel benyttes betafordelingen, se figur \@ref(fig:figurpop1), og gammafordelingen, se figur \@ref(fig:figurpop2), til at udføre en uparret t-test. 
 
-```{r}
-#To stikprøver trukket fra populationerne
-Stik1 <- rbeta(100, 8, 2)
-Stik2 <- rgamma(100, 1, 2)
-
-middel1 <- 8/(8+2)
-middel2 <- 1*(1/2)
-sand_dif <- abs(middel2 - middel1)
+```{r figurpop1, fig.align="center", echo=FALSE, fig.cap= "Tæthedskurve for venstreskæv betafordeling, hvor alfa = 8 og beta = 2"}
+x <- seq(0, 1, length.out = 100)
+y <- dbeta(x, shape1 = 8, shape2 = 2)
+plot(x, y, type = "l", main = "", ylab = "", xlab = "")
 ```
 
-```{r figurpop1, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra venstreskæv betafordeling hvor n = 100, alpha = 2, beta = 8"}
-hist(Stik1, main = "", ylab = "", xlab = "")
+```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Tæthedskurve for højreskæv gammafordeling, hvor k = 1 og beta = 2."}
+x <- seq(0, 1, length.out = 100)
+y <- dgamma(x, shape = 1,  rate = 2)
+plot(x, y, type = "l", main = "", ylab = "", xlab = "")
 ```
 
-```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Stikprøve fra højreskæv gammafordeling hvor n = 100, k = 1, beta = 2."}
-hist(Stik2, main = "", ylab = "", xlab = "")
-```
-
-Nulhypotesen er at $H_0: \mu_1 - \mu_2 = 0$ og den alternative hypotese er $H_1 : \mu_1 - \mu_2 \neq 0$. Denne nulhypotese undersøges ved hjælp af en uparret t-test. Udfra stikprøverne udføres der to-sidet uparret t-test, ved hjælp af den indbyggede funktion `t.test`.
+Nulhypotesen er $H_0: \mu_1 - \mu_2 = 0$ og den alternative hypotese er $H_1 : \mu_1 - \mu_2 \neq 0$. Denne nulhypotese undersøges ved hjælp af en uparret t-test. Der udtages en stikprøve fra hver af de viste fordelinger, som der udføres to-sidet uparret t-test på, ved hjælp af den indbyggede funktion `t.test`.
 
 ```{r, tidy=TRUE}
 #t.test ud fra de to stikprøver
+Stik1 <- rbeta(100, 8, 2)
+Stik2 <- rgamma(100, 1, 2)
 t1 <- t.test(Stik1, Stik2, alternative = "two.sided", mu = 0, conf.level = 0.95)
 ```
 
-Udfra t-testen fåes et konfidensinterval på [```r t1$conf.int```]. Den observerede forskel mellem populations middelværdier vil ligge i dette interval i $95\%$ af tilfældene, ifølge t-testen. Dækningsgraden af dette konfidensinterval kan undersøges ved at trække nye stikprøver fra populationerne, i alt $10,000$ gange. Hvis den sande forskel i middelværdier er indeholdt i konfidensintervallet er det en succes, ellers er det en fiasko.
+Udfra t-testen fåes et konfidensinterval på [```r round(t1$conf.int, 4)```]. Forskellen mellem populationernes middelværdier vil ligge i dette interval med $95\%$ sikkerhed, ifølge t-testen. Dækningsgraden af et konfidensinterval udarbejdet fra en uparret t-test kan undersøges ved at trække nye stikprøver fra populationerne, i alt $10,000$ gange, og hver gang oprette et nyt konfidensinterval. Den sande dækningsgrad er andelen af gangene, forskellen mellem populationernes middelværdier er indeholdt i konfidensintervallerne.
 
 ```{r ronni, fig.cap= "Kode test"}
 #Undersøg dækningsgraden af konfidensintervallet ved udtræk af nye stikprøver.
@@ -160,7 +156,7 @@ set.seed(31415)
 middel1 <- 8/(8+2)
 middel2 <- 1*(1/2)
 
-sand_dif <- middel1 - middel2
+sand_dif <- abs(middel1 - middel2)
 
 res <- replicate(10000, {
   x1 <- rbeta(20, 8, 2)
@@ -178,6 +174,3 @@ tf
 ```
 
 Det fremgår fra tabellen, at dækningsgraden af konfidensintervallerne er ```r tf[2]/100```$\%$. Dette stemmer ikke overens med antagelsen om, at $5\%$ burde ligge udenfor konfidensintervallet.
-
-
-

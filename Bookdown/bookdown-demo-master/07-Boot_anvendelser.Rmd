@@ -189,7 +189,9 @@ Først forenes de to stikprøver til en samlet stikprøve med størrelsen $2n$ o
 
 På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$, [@Paired_test].
 
-Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$, [@Hypo_test].
+_P_-værdien ligger i intervallet $[0,1]$, $p_{tosidet} \in [0,1]$, hvor $p_{mindre} + p_{større} = 1$ . Vælges $\min (p_{mindre}, ~p_{større})$ fås en ensidet _p_-værdien. Derfor multipliceres der med $2$, for at opnå den tosidede _p_-værdi. Se figur __FIXME__ INDSÆT PÆN FIGUR THOMAS.
+
+$p_{mindre}$ er lav i de tilfælde, hvor $t^*$ ofte er mindre end $\bar Z$. Ligeledes gør det sig gældende, at $p_{større}$ er lav i de tilfælde, hvor $t^*$ ofte er større end $\bar Z$. $min$ bliver benyttet eftersom der undersøges, hvor ofte mere ekstreme tilfælde optræder end den observerede teststørrelse, [@Hypo_test].
 
 \begin{align}
 p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<\bar{Z}\}}{B} \\
@@ -198,12 +200,6 @@ p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
 \end{align}
 
 Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
-
-_P_-værdien ligger i intervallet $[0 ; 1]$, $p_{tosidet} \in [0 ; 1]$, hvor $p_{mindre} + p_{større} = 1$ . Eftersom den største værdi $min (p_{mindre}, p_{større)$ kan give er $0.5$ multipliceres det med $2$.
-
-$p_{mindre}$ er lav i de tilfælde, hvor $t^* < \bar Z$ ofte er tilfældet. Ligeledes gør det sig gældende, at $p_{større}$ er lav i de tilfælde, hvor $t^* > \bar Z$ ofte er tilfældet. $min$ bliver benytter eftersom, der undersøges, hvor ofte mere ekstreme tilfælde optræder end den observerede teststørrelse. 
-
-Hvis $p_{mindre}$ eller $p_{større}$ er mindre end $\frac{\alpha}{2}$ forkastes $H_0$, da der er en signifikant forskel i middelværdierne. 
 
 __Eksempel__
 
@@ -217,7 +213,7 @@ res <- replicate(100, {
 
   t_obs <- mean(abs(stik1-stik2))
 
-  B <- 10000
+  B <- 1000
   boot <- replicate(B, {
     sample(x = c(stik1, stik2), size = 2*n, replace = TRUE)
   })
@@ -280,7 +276,7 @@ res <- replicate(100, {
 
   t_obs2 <- mean(stik3) - mean(stik4)
 
-  B2 <- 10000
+  B2 <- 1000
 
   res <- replicate(B2, {
   
