@@ -1,0 +1,148 @@
+## Bootstrap-hypotesetest
+
+Som nævnt i afsnit \@ref(t-test), skal visse antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test, og det efterfølgende resultatet af overtrædelsen af disse antagelser, blev vist i afsnit \@ref(t-test2).
+
+<!-- 1. Variablen er kvantitativ. -->
+<!-- 2. Stikprøveudtagning er udført med tilfældighed. -->
+<!-- 3. Populationen er normalfordelt. -->
+
+Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en parret bootstrap-test, og dernæst fremgangsmåden for en uparret bootstrap-test.
+
+### Parret bootstrap-test
+
+Lad to parrede stikprøver være givet, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{n}]$.
+Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ og $y_i$, $Z = [x_1-y_1,~ x_2-y_2,~...,~x_n-y_n]$. Ved hjælp af det nye datasæt er det muligt at udregne teststørrelsen, $\bar{Z}$.
+
+Så opstilles der en nulhypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande middelværdi for differencerne for $X$ og $Y$, og en alternativ hypotese, $H_1:~\mu\neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
+
+Først forenes de to stikprøver til en samlet stikprøve med størrelsen $2n$ observationer. Derefter laves en bootstrap-stikprøve af $2n$ observationer med tilbagelægning fra den samlede stikprøve. Herefter trækkes den første halvdel af indgangene i bootstrap-stikprøven, som betegnes $X^*$, og den sidste halvdel, der betegnes $Y^*$. Lad $X^*_i = [x^*_{1,i},~x^*_{2,i},~...,~x^*_{n,i}]$ betegne den $i$'te bootstrap-stikprøve for $X$ og tilsvarende for $Y$, [@Paired_test, slide 2].
+
+På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$, [@Paired_test].
+
+_P_-værdien ligger i intervallet $[0,1]$, $p_{tosidet} \in [0,1]$, hvor $p_{mindre} + p_{større} = 1$ . Vælges $\min (p_{mindre}, ~p_{større})$ fås en ensidet _p_-værdien. Derfor multipliceres der med $2$, for at opnå den tosidede _p_-værdi. Se figur \@ref(fig:fig-p-bootstrap) for illustration.
+
+```{r, include=FALSE}
+library(mosaic)
+library(cowplot)
+```
+
+```{r fig-p-bootstrap, fig.align='center', fig.cap="(A) Fordelingen viser 40% observationer større end teststørrelsen og 60% observationer mindre. (B) Fordelingen viser 98% observationer større end teststørrelsen og 2% observationer mindre.", echo=FALSE}
+plot1 <- qdist("norm", p = 0.60, mean = 0, sd = 1, ylab="", xlim = c(-4, 4),  return = c("plot"))
+plot1 <- plot1 + theme(legend.position = "none")
+plot2 <- qdist("norm", p = 0.02, mean = 0, sd = 1, ylab="", xlim = c(-4, 4), return = c("plot"))
+plot2 <- plot2 + theme(legend.position = "none")
+plot_grid(plot1, plot2, labels = "AUTO")
+```
+
+$p_{mindre}$ er lav i de tilfælde, hvor $t^*$ ofte er mindre end $\bar Z$. Ligeledes gør det sig gældende, at $p_{større}$ er lav i de tilfælde, hvor $t^*$ ofte er større end $\bar Z$. Funktionen $\min$ bliver benyttet eftersom der undersøges, hvor ofte mere ekstreme tilfælde optræder end den observerede teststørrelse, [@Hypo_test].
+
+\begin{align}
+p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<\bar{Z}\}}{B} \\
+p_{_{større}} &= \frac{\text{antal gange }\{t^*>\bar{Z}\}}{B} \\
+p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
+\end{align}
+
+Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
+
+__Eksempel__
+
+I nedenstående kode, vises et eksempel på en parret bootstrap-test.
+
+```{r}
+
+res <- replicate(100, {
+  
+  n <- 100
+  stik1 <- rbeta(n, 8, 2)
+  stik2 <- rbeta(n, 2, 8)
+  
+  t_obs <- mean(abs(stik1-stik2))
+
+  B <- 1000
+  boot <- replicate(B, {
+    sample(x = c(stik1, stik2), size = 2*n, replace = TRUE)
+  })
+
+  boot1 <- boot[1:15,]
+  boot2 <- boot[16:30,]
+
+  bootdiff <- matrix(data = boot1, nrow = n, ncol = B/2)
+  bootmeans <- NULL
+  for(i in 1:B/2){
+    bootdiff[1:15, i] <- abs(boot1[1:15, i] - boot2[1:15, i])
+    bootmeans[i] <- mean(bootdiff[1:15, i])
+  }
+
+  andel_mindre <- bootmeans < t_obs
+
+  p_stoerre <- (sum(andel_mindre)) / length(andel_mindre)
+  p_mindre <- (length(andel_mindre)-(sum(andel_mindre))) / length(andel_mindre)
+
+  p_tosidet <- 2*min(p_mindre, p_stoerre)
+})
+
+p_vaerdi_parret <- mean(res)
+res
+```
+
+Der ses altså at p-værdien er lig ```r round(p_vaerdi_parret, 4)```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
+
+### Uparret bootstrap-test
+
+Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$, med ens varians, være givet.
+
+På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $\bar{X}-\bar{Y}$.
+
+Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} \neq \mu_{_Y}$, samt et signifikansniveau, $\alpha = 0.05$. 
+
+Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n+m$ observationer. Derefter laves en bootstrap-stikprøve af $n+m$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*_1$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*_1$. Til sidst udregnes bootstrap-teststørrelsen $t^*_1=\hat{X}^*_1-\hat{Y}^*_1$, [@BootHypo].
+
+Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. 
+
+Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$, [@Hypo_test].
+
+\begin{align}
+p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<\bar{Z}\}}{B} \\
+p_{_{større}} &= \frac{\text{antal gange }\{t^*>\bar{Z}\}}{B} \\
+p_{_{tosidet}} &= 2 \cdot \text{min}(p_{_{mindre}},~p_{_{større}})
+\end{align}
+
+Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
+
+__Eksempel__
+
+Nu vil der vises et eksempel på en uparret bootstrap t-test.
+
+```{r}
+res <- replicate(100, {
+  n2 = 15
+  m2 = 30
+  stik3 <- rbeta(n2, 8, 2)
+  stik4 <- rbeta(m2, 2, 8)
+
+  t_obs2 <- mean(stik3) - mean(stik4)
+
+  B2 <- 1000
+
+  res <- replicate(B2, {
+  
+    boot <- sample(c(stik3, stik4), replace = TRUE)
+  
+    bootx <- boot[1 : n2]
+    booty <- boot[(n2+1) : (n2+m2)]
+  
+    diffmean <- (mean(bootx) - mean(booty))
+  })
+
+  andel_mindre2 <- res < t_obs2
+
+  p_stoerre2 <- (sum(andel_mindre2)) / length(andel_mindre2)
+  p_mindre2 <- (length(andel_mindre2)-(sum(andel_mindre2))) / length(andel_mindre2)
+
+  p_tosidet2 <- 2*min(p_mindre2, p_stoerre2)
+})
+
+p_vaerdi_uparret <- mean(res)
+```
+
+Der ses altså at p-værdien er lig ```r round(p_vaerdi_uparret, 4)```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
