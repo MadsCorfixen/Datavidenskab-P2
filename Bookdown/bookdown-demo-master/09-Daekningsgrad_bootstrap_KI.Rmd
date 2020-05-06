@@ -75,9 +75,9 @@ for(n in seq(4, 100, 4)){
 ```
 
 
-Til sidst illustreres dækningsgraden for de tre metoder i diagrammet på figur \@ref{fig:figur_deakning}. 
+Til sidst illustreres dækningsgraden for de tre metoder i diagrammet på figur \@ref{fig:figur-deakning}. 
 
-```{r, figur_deakning, echo=FALSE, fig.cap="Illustration af udviklingen af dækningsgraden når stikprøvestørrelsen bliver større"}
+```{r, figur-deakning, echo=FALSE, fig.cap="Illustration af udviklingen af dækningsgraden når stikprøvestørrelsen bliver større"}
 x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
      xlab = "Stikprøvestørrelse", ylim = c(0.75, 1))

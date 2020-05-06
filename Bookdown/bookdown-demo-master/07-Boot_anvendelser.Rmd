@@ -204,7 +204,7 @@ plot2 <- plot2 + theme(legend.position = "none")
 plot_grid(plot1, plot2, labels = "AUTO")
 ```
 
-$p_{mindre}$ er lav i de tilfælde, hvor $t^*$ ofte er mindre end $\bar Z$. Ligeledes gør det sig gældende, at $p_{større}$ er lav i de tilfælde, hvor $t^*$ ofte er større end $\bar Z$. $min$ bliver benyttet eftersom der undersøges, hvor ofte mere ekstreme tilfælde optræder end den observerede teststørrelse, [@Hypo_test].
+$p_{mindre}$ er lav i de tilfælde, hvor $t^*$ ofte er mindre end $\bar Z$. Ligeledes gør det sig gældende, at $p_{større}$ er lav i de tilfælde, hvor $t^*$ ofte er større end $\bar Z$. Funktionen $\min$ bliver benyttet eftersom der undersøges, hvor ofte mere ekstreme tilfælde optræder end den observerede teststørrelse, [@Hypo_test].
 
 \begin{align}
 p_{_{mindre}} &= \frac{\text{antal gange }\{t^*<\bar{Z}\}}{B} \\
@@ -219,11 +219,13 @@ __Eksempel__
 I nedenstående kode, vises et eksempel på en parret bootstrap-test.
 
 ```{r}
+
 res <- replicate(100, {
-  n <- 15
+  
+  n <- 100
   stik1 <- rbeta(n, 8, 2)
   stik2 <- rbeta(n, 2, 8)
-
+  
   t_obs <- mean(abs(stik1-stik2))
 
   B <- 1000
@@ -250,6 +252,7 @@ res <- replicate(100, {
 })
 
 p_vaerdi_parret <- mean(res)
+res
 ```
 
 Der ses altså at p-værdien er lig ```r round(p_vaerdi_parret, 4)```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
