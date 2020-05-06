@@ -9,8 +9,11 @@ I dette afsnit vil der undersøges om metoderne for at udregne konfidensinterval
 Som det første oprettes en funktion, der udregner middelværdien for stikprøven, og tager en stikprøve og et indeks som _input_.
 
 ```{r}
-meanFunc <- function(sample_pop, i){
-  mean(sample_pop[i])
+meanFunc <- function(d, i) 
+{    m <- mean(d$data[i])
+     n <- length(i)
+     v <- (n-1)*var(d$data[i])/n^2
+     c(m, v)
 }
 sand_middel <- 0 #Sand middelværdi
 ```
@@ -23,7 +26,7 @@ matriks_p <- matrix(ncol = 25, nrow = 100)
 vector_p <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(100,{
-    stik <- rnorm(n)
+    stik <- data.frame(data = rnorm(n))
     boot_stik <- boot(stik, statistic = meanFunc, 100)
     interval_perc <- suppressWarnings(boot.ci(boot_stik,
                                       type = c("perc"))$percent[4:5])
@@ -41,7 +44,7 @@ matriks_b <- matrix(ncol = 25, nrow = 100)
 vector_b <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(100,{
-    stik <- rnorm(n)
+    stik <- data.frame(data = rnorm(n))
     boot_stik <- boot(stik, statistic = meanFunc, 100)
     interval_basic <- suppressWarnings(boot.ci(boot_stik,
                                        type = c("basic"))$basic[4:5])
@@ -54,40 +57,23 @@ for(n in seq(4, 100, 4)){
 ```
 
 Her udføres processen for dækningsgraden på T-metoden.
-```{r}
-bootstrap_t <- function(n, alpha){
-  stik <- rnorm(n)
-  middel_stik <- mean(stik)
-  se_stik <- sd(stik)
-  boot_stik <- replicate(100, {
-    sample(stik, n, replace = TRUE)
-  })
-  t_stjerne <- c()
-  for(i in 1:nrow(boot_stik)){
-    t_stjerne <- append(t_stjerne, 
-                        (mean(boot_stik[,i])-middel_stik)/
-                          (sd(boot_stik[,i])))
-  }
-  
-  KI <- c(middel_stik - (quantile(t_stjerne,
-                                  probs = 1-alpha/2) * se_stik),
-          middel_stik - (quantile(t_stjerne,
-                                  probs = alpha/2) * se_stik))
-  
-  return(KI)
-}
 
-matriks_n <- matrix(ncol = 25, nrow = 100)
-vector_n <- c()
+```{r}
+matriks_t <- matrix(ncol = 25, nrow = 100)
+vector_t <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(100,{
-    interval_t <- unname(bootstrap_t(n, 0.05))
-    tf <- interval_t[1]<=sand_middel & interval_t[2]>=sand_middel
+    stik <- data.frame(data = rnorm(n))
+    boot_stik <- boot(stik, statistic = meanFunc, 100)
+    interval_t <- boot.ci(boot_stik, type = c("stud"))$student[4:5]
+    tf <- interval_t[1]<=sand_middel &
+      interval_t[2]>=sand_middel
   })
-  matriks_n[,n/4] <- res
-  vector_n <- append(vector_n, mean(matriks_n[,n/4]))
+  matriks_t[,n/4] <- res
+  vector_t <- append(vector_t, mean(matriks_t[,n/4]))
 }
 ```
+
 
 Til sidst illustreres dækningsgraden for de tre metoder i diagrammet på figur \@ref{fig:figur_deakning}. 
 
@@ -96,38 +82,11 @@ x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
      xlab = "Stikprøvestørrelse", ylim = c(0.75, 1))
 lines(x, vector_b, type="l", col="blue")
-lines(x, vector_n, type="l", col="green")
+lines(x, vector_t, type="l", col="green")
 abline(h=0.95, lty=5, col="black")
 legend(83, 0.835, legend=c("Percentil", "Basic", "t"),
        col=c("red", "blue", "green"), lty=c(1,1,1), cex=0.8)
 ```
 
 Her ses at
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
