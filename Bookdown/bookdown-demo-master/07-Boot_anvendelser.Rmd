@@ -189,7 +189,20 @@ Først forenes de to stikprøver til en samlet stikprøve med størrelsen $2n$ o
 
 På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$, [@Paired_test].
 
-_P_-værdien ligger i intervallet $[0,1]$, $p_{tosidet} \in [0,1]$, hvor $p_{mindre} + p_{større} = 1$ . Vælges $\min (p_{mindre}, ~p_{større})$ fås en ensidet _p_-værdien. Derfor multipliceres der med $2$, for at opnå den tosidede _p_-værdi. Se figur __FIXME__ INDSÆT PÆN FIGUR THOMAS.
+_P_-værdien ligger i intervallet $[0,1]$, $p_{tosidet} \in [0,1]$, hvor $p_{mindre} + p_{større} = 1$ . Vælges $\min (p_{mindre}, ~p_{større})$ fås en ensidet _p_-værdien. Derfor multipliceres der med $2$, for at opnå den tosidede _p_-værdi. Se figur \@ref(fig:fig-p-bootstrap) for illustration.
+
+```{r, include=FALSE}
+library(mosaic)
+library(cowplot)
+```
+
+```{r fig-p-bootstrap, fig.align='center', fig.cap="(A) Fordelingen viser 40% observationer større end teststørrelsen og 60% observationer mindre. (B) Fordelingen viser 98% observationer større end teststørrelsen og 2% observationer mindre.", echo=FALSE}
+plot1 <- qdist("norm", p = 0.60, mean = 0, sd = 1, ylab="", xlim = c(-4, 4),  return = c("plot"))
+plot1 <- plot1 + theme(legend.position = "none")
+plot2 <- qdist("norm", p = 0.02, mean = 0, sd = 1, ylab="", xlim = c(-4, 4), return = c("plot"))
+plot2 <- plot2 + theme(legend.position = "none")
+plot_grid(plot1, plot2, labels = "AUTO")
+```
 
 $p_{mindre}$ er lav i de tilfælde, hvor $t^*$ ofte er mindre end $\bar Z$. Ligeledes gør det sig gældende, at $p_{større}$ er lav i de tilfælde, hvor $t^*$ ofte er større end $\bar Z$. $min$ bliver benyttet eftersom der undersøges, hvor ofte mere ekstreme tilfælde optræder end den observerede teststørrelse, [@Hypo_test].
 
