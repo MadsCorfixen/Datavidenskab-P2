@@ -128,10 +128,13 @@ for(n in seq(4, 100, 4)){ #Stikprøve størrelse sekvens
   matriks_p[,n/4] <- res
   vector_p <- append(vector_p, mean(matriks_p[,n/4]))
 }
-res
-matriks_p[,n/4]
+```
+
+```{r}
 vector_p
 ```
+
+I _vector_p_ ses middelværdierne for dækningsgraden af 100 konfidensintervaller genereret ud fra percentilmetoden. Den første middelværdi er for stikprøvestørrelse fire, hvorefter der springes i et interval på fire indtil der nåes ind stikprøvestørrelse på 100.
 
 Her udføres processen for dækningsgraden på basic-metoden.
 ```{r}
@@ -149,7 +152,7 @@ for(n in seq(4, 100, 4)){
 }
 ```
 
-Her udføres processen for dækningsgraden på T-metoden.
+Til sidst udføres processen for dækningsgraden på T-metoden.
 ```{r}
 matriks_t <- matrix(ncol = 25, nrow = 100)
 vector_t <- c()
@@ -165,8 +168,7 @@ for(n in seq(4, 100, 4)){
 }
 ```
 
-Til sidst illustreres dækningsgraden for de tre metoder i diagrammet på figur \@ref{fig:figur-deakning}. 
-
+Nu kan dækningsgraderne for de tre metoder illustreres i diagrammet på figur \@ref{fig:figur-deakning}.
 ```{r figur-daekning, fig.cap = "Dækningsgraden for de tre konfidensintervaller udarbejdet ved hjælp af bootstraps. På x-aksen ses stikprøve størrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøve størrelse. 0.95 er det ønsket konfidenslevel."}
 x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
