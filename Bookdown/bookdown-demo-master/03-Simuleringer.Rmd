@@ -269,7 +269,8 @@ I R simuleres en normalfordeling ved funktionen ```rnorm```, hvor "r" står for 
 
 ```{r normal, echo = FALSE, fig.cap = "En normalfordeling med størrelsen n = 1000, en middelværdi på 0 og en standardafvigelse på 1. Med disse værdier kaldes den også for en standard normalfordeling eller Z-fordeling"}
 normalfordeling <- rnorm(n = 1000, mean = 0, sd = 1)
-hist(normalfordeling, main = "", ylab = "Antal observationer", xlab = "")
+hist(normalfordeling, main = "", ylab = "Antal observationer", xlab = "", prob = TRUE)
+lines(density(normalfordeling))
 ```
 
 ### Uniform fordeling
@@ -281,7 +282,8 @@ uniformfordeling <- runif(n = 100000, min = 1, max = 2)
 ```
 
 ```{r echo = FALSE, fig.cap = "En uniform fordeling med størrelsen n = 100.000, hvor alle tal har lige stor sandsynlighed for at optræde i intervallet [0 , 1]."}
-hist(uniformfordeling, main = "", xlab = "", ylab = "Antal observationer")
+hist(uniformfordeling, main = "", xlab = "", ylab = "Antal observationer", prob = TRUE)
+lines(density(uniformfordeling))
 ```
 
 ### Skæv fordeling
@@ -299,7 +301,6 @@ Binomialfordeling <- rbinom(n = 100, size = 1, prob = 0.5)
 ```{r echo = FALSE, fig.cap = "En binomialfordeling med størrelsen n = 100, size = 1 og en sandsynlighed for succes på prob = 0.5."}
 hist(Binomialfordeling, xaxt = 'n', xlab = "", ylab = "Antal observationer", main = "")
 axis(side=1, at=c(0,1), labels=c("Fiasko = 0","Succes = 1"))
-
 ```
 
 
@@ -319,7 +320,9 @@ hoejre <- rbeta(n = 1000, shape1 = 2, shape2 = 8)
 ```{r echo = FALSE, fig.cap = "To betafordelinger hvor stikprøvestørrelse n = 1000, hvor (a) alpha = 8 og beta = 2, og (b) har alpha = 2 og beta = 8."}
 par(mfrow=c(1,2))
 hist(venstre, main = "(a) Venstreskæv fordeling", ylab = "", xlab = "", xlim = c(0,1), ylim = c(0,4), prob = TRUE)
+lines(density(venstre))
 hist(hoejre, main = "(b) Højreskæv fordeling", ylab = "", xlab = "", xlim = c(0,1), ylim = c(0,4), prob = TRUE)
+lines(density(hoejre))
 ```
 
 ### Replicate
