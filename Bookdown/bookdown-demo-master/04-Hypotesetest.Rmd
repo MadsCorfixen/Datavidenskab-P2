@@ -132,7 +132,7 @@ y <- dbeta(x, shape1 = 8, shape2 = 2)
 plot(x, y, type = "l", main = "", ylab = "", xlab = "")
 ```
 
-```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Tæthedskurve for højreskæv gammafordeling, hvor k = 1 og beta = 2."}
+```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Tæthedskurve for højreskæv gammafordeling, hvor alfa = 1 og beta = 2."}
 x <- seq(0, 1, length.out = 100)
 y <- dgamma(x, shape = 1,  rate = 2)
 plot(x, y, type = "l", main = "", ylab = "", xlab = "")
