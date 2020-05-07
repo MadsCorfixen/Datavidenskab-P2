@@ -328,7 +328,7 @@ lines(density(hoejre))
 
 ### Gammafordeling
 
-Er også en skæv fordeling, som betafordelingen er det. Funktionalitet af gammafordelingen er at forudsige ventetiden til det $\alpha\text{-}th$ __FIXME__ (eller skal det skrive $\alpha'th$) begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter bliver anvendt  parameterne $(\alpha,~\beta)$, med tilhørende tæthedsfunktion. $\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er "shape", $\beta > 0$ er "rate" og $x \in ( 0, \infty)$. Påtrods af forskellige tæthedsfunktioner for de to parametersæt, generere de den samme fordeling. 
+Er også en skæv fordeling, som betafordelingen er det. Funktionalitet af gammafordelingen er at forudsige ventetiden til det $\alpha\text{-}th$ __FIXME__ (eller skal det skrive $\alpha'th$) begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter bliver anvendt  parameterne $(\alpha,~\beta)$, med tilhørende tæthedsfunktion. $\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er "shape", $\beta > 0$ er "rate" og $x \in ( 0, \infty)$. Påtrods af forskellige tæthedsfunktioner for de to parametersæt, generere de den samme fordeling [@Gammadist].
 
 
 ```{r echo = FALSE, fig.cap = "Tre gammafordelinger hvor stikprøvestørrelse n = 100,000, alfa på hhv. 1, 5 og 10 og beta = 1"} 
