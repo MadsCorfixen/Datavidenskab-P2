@@ -134,7 +134,7 @@ for(n in seq(4, 100, 4)){ #Stikprøve størrelse sekvens
 vector_p
 ```
 
-I _vector_p_ ses middelværdierne for dækningsgraden af 100 konfidensintervaller genereret ud fra percentilmetoden. Den første middelværdi er for stikprøvestørrelse fire, hvorefter der springes i et interval på fire indtil der nåes ind stikprøvestørrelse på 100.
+I _vector_p_ ses middelværdierne for dækningsgraden af 100 konfidensintervaller genereret ud fra percentilmetoden. Den første middelværdi er for stikprøvestørrelsen $n = 4$, den næste er for stikprøvestørrelsen $n = 8$ osv. 
 
 Her udføres processen for dækningsgraden på basic-metoden.
 ```{r}
