@@ -1,3 +1,23 @@
 # Perspektivering
 
-Perspektivér 
+Perspektivér! 
+
+1. __T-testens robusthed__
+  a. For pæne resultater
+2. __Faldgruber__
+  a. Antagelser ikke opfyldt
+3. __Relevans af simulering__
+  a. Simulering af reel data
+4. __Permutationstest til hypotesetest__
+  a. Sammenligning med bootstrap
+  b. Alternativ til boostrap
+5. __Permutationstest til konfidensintervaller__
+  a. Er det muligt?
+6. __Type-I og type-II fejl__
+  a. Undersøg om de er i dataen
+7. __Bootstraps begrænsinger__
+8. __Bedre computerkraft__
+  a. Vil det forbedre resultaterne?
+9. __Parametrisk bootstrap__
+
+Done.

@@ -287,10 +287,6 @@ plot(x = NA, type = "n", xlim = c(0, 1), ylim = c(0, 1.5), ylab = "Densitet", xl
 abline(h = 1)
 ```
 
-### Skæv fordeling
-
-En skæv fordeling er kendetegnet ved, at størstedelen af observationerne er samlet omkring visse værdier, mens de resterende observationer fordeler sig ud til kun én af siderne. De resterende observationer kaldes for "halen" af fordelingen, og alt efter retningen af dem, kaldes den skæve fordeling for "venstreskæv" elller "højreskæv". 
-
 ### Binomialfordeling
 
 En binomialfordeling bliver genreret ud for sandsynligheder. I den binomiale fordeling gives en _size_ som er antallet af eksperimenter, samt en sandsynlighed for succes, angivet med _prob_.
@@ -308,6 +304,10 @@ segments(x0 = 0, y0 = 0, x1 = 1, y1 = 0)
 
 
 En egenskab ved binomialfordelinger er, at jo højere $n$ er, des tættere vil middelværdien af stikprøven være på sandsynligheden for succes. I dette tilfælde med en størrelse på $n = 100$, er middelværdien ```r mean(Binomialfordeling)```. 
+
+### Skæv fordeling
+
+En skæv fordeling er kendetegnet ved, at størstedelen af observationerne er samlet omkring visse værdier, mens de resterende observationer fordeler sig ud til kun én af siderne. De resterende observationer kaldes for "halen" af fordelingen, og alt efter retningen af dem, kaldes den skæve fordeling for "venstreskæv" elller "højreskæv". 
 
 ### Betafordeling
 
@@ -371,7 +371,7 @@ _Replicate_-funktionen vil nu bruges. I alt replikeres der fem gange, hvilket be
 ny_stik <- replicate(5, { #Der replikeres 5 gange
   sample(stik, size = 3, replace = TRUE)
 })
-rep
+ny_stik
 ```
 
 Nu er der oprettet fem helt nye repræsentative stikprøver udfra den oprindelige. Denne metode og dens anvendelser vil der kigges nærmere på kapitel \@ref(boot-afsnit). 
