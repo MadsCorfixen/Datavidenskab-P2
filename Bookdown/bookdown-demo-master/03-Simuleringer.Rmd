@@ -268,9 +268,9 @@ Nogle af de fordelinger, der kan simuleres i R, er blandt andet en normalfordeli
 I R simuleres en normalfordeling ved funktionen ```rnorm```, hvor "r" står for tilfældigt genererede tal, og "norm" for en normalfordeling. Fordelingen på figur \@ref(fig:normal) bliver genereret ud fra en middelværdi på $0$ og en standardafvigelse på $1$. Sådan en normalfordeling kaldes for en standard normalfordeling eller Z-fordeling.
 
 ```{r normal, echo = FALSE, fig.cap = "En normalfordeling med størrelsen n = 1000, en middelværdi på 0 og en standardafvigelse på 1. Med disse værdier kaldes den også for en standard normalfordeling eller Z-fordeling"}
-normalfordeling <- rnorm(n = 1000, mean = 0, sd = 1)
-hist(normalfordeling, main = "", ylab = "Antal observationer", xlab = "", prob = TRUE)
-lines(density(normalfordeling))
+x <- seq(-4, 4, length.out = 100)
+y <- dnorm(x, mean = 0, sd = 1)
+plot(x, y, type = "l", main = "", ylab = "Densitet", xlab = "x")
 ```
 
 ### Uniform fordeling
@@ -281,9 +281,10 @@ En uniform fordeling er genereret ud fra en maksimum- og minimumværdi, som der 
 uniformfordeling <- runif(n = 100000, min = 1, max = 2)
 ```
 
-```{r echo = FALSE, fig.cap = "En uniform fordeling med størrelsen n = 100.000, hvor alle tal har lige stor sandsynlighed for at optræde i intervallet [0 , 1]."}
-hist(uniformfordeling, main = "", xlab = "", ylab = "Antal observationer", prob = TRUE)
-lines(density(uniformfordeling))
+```{r echo = FALSE, fig.cap = "En uniform fordeling, hvor alle tal har lige stor sandsynlighed for at optræde i intervallet [0 , 1]."}
+x <- seq(1, 2, length.out = 100)
+plot(x = NA, type = "n", xlim = c(0, 1), ylim = c(0, 1.5), ylab = "Densitet", xlab = "x")
+abline(h = 1)
 ```
 
 ### Skæv fordeling
@@ -298,9 +299,11 @@ En binomialfordeling bliver genreret ud for sandsynligheder. I den binomiale for
 Binomialfordeling <- rbinom(n = 100, size = 1, prob = 0.5)
 ```
 
-```{r echo = FALSE, fig.cap = "En binomialfordeling med størrelsen n = 100, size = 1 og en sandsynlighed for succes på prob = 0.5."}
-hist(Binomialfordeling, xaxt = 'n', xlab = "", ylab = "Antal observationer", main = "")
-axis(side=1, at=c(0,1), labels=c("Fiasko = 0","Succes = 1"))
+```{r echo = FALSE, fig.cap = "En binomialfordeling med size = 1 og en sandsynlighed for succes på prob = 0.5."}
+plot(x = NA, xlim = c(0,1), ylim = c(0, 0.6), main = "", ylab = "Densitet", xlab = "x")
+segments(x0 = 0, y0 = 0, x1 = 0, y1 = 0.5)
+segments(x0 = 1, y0 = 0, x1 = 1, y1 = 0.5)
+segments(x0 = 0, y0 = 0, x1 = 1, y1 = 0)
 ```
 
 
@@ -317,34 +320,37 @@ venstre <- rbeta(n = 1000, shape1 = 8, shape2 = 2)
 hoejre <- rbeta(n = 1000, shape1 = 2, shape2 = 8) 
 ```
 
-```{r echo = FALSE, fig.cap = "To betafordelinger hvor stikprøvestørrelse n = 1000, hvor (a) alpha = 8 og beta = 2, og (b) har alpha = 2 og beta = 8."}
-par(mfrow=c(1,2))
-hist(venstre, main = "(a) Venstreskæv fordeling", ylab = "", xlab = "", xlim = c(0,1), ylim = c(0,4), prob = TRUE)
-lines(density(venstre))
-hist(hoejre, main = "(b) Højreskæv fordeling", ylab = "", xlab = "", xlim = c(0,1), ylim = c(0,4), prob = TRUE)
-lines(density(hoejre))
+```{r echo = FALSE, fig.cap = "To betafordelinger med henholdsvis alfa = 8 og beta = 2, og alfa = 2 og beta = 8."}
+x <- seq(0, 1, length.out = 100)
+y1 <- dbeta(x, shape1 = 2, shape2 = 8)
+y2 <- dbeta(x, shape1 = 8, shape2 = 2)
+
+plot(x, y1, type = "l", main = "", ylab = "Densitet", xlab = "x", col = "blue")
+lines(x, y2, col = "red")
+legend(0.35, 3, legend=c("alfa = 2, beta = 8 ", "alfa = 8, beta = 2"),
+       col=c("blue", "red"), lty=c(1,1,1), cex=0.8)
 ```
 
 
 ### Gammafordeling
 
-Er også en skæv fordeling, som betafordelingen er det. Funktionalitet af gammafordelingen er at forudsige ventetiden til det $\alpha\text{-}th$ __FIXME__ (eller skal det skrive $\alpha'th$) begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter bliver anvendt  parameterne $(\alpha,~\beta)$, med tilhørende tæthedsfunktion. $\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er "shape", $\beta > 0$ er "rate" og $x \in ( 0, \infty)$. Påtrods af forskellige tæthedsfunktioner for de to parametersæt, generere de den samme fordeling [@Gammadist].
+Gammafordelingen er også en skæv fordeling, som betafordelingen er det. Funktionalitet af gammafordelingen er at forudsige ventetiden til den $\alpha$'te begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter blive anvendt  parameterne $(\alpha,~\beta)$. Tæthedsfuktionen er givet ved $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er "shape", $\beta > 0$ er "rate" og $x \in ( 0, \infty)$. På trods af forskellige tæthedsfunktioner for de to parametersæt, genererer de den samme fordeling [@Gammadist]. På figur \@ref(fig:Gammafordeling) er vist tre forskellige højreskæve gammafordelinger.
+  
+```{r}
+Gammafordeling <- rgamma(n = 100000, shape = 5, rate = 1)
+```
 
 
-```{r echo = FALSE, fig.cap = "Tre gammafordelinger hvor stikprøvestørrelse n = 100,000, alfa på hhv. 1, 5 og 10 og beta = 1"} 
-library(ggplot2)
-library(dplyr)
-
-dfGamma = data.frame(alfa_1 = rgamma(n = 100000, 1, 1),
-          alfa_5 = rgamma(n = 100000, 5, 1),
-          alfa_10 = rgamma(n = 100000, 10, 1))
-
-dfGamma = stack(dfGamma)
-
-p <- ggplot(dfGamma, aes(x = values)) +
-  stat_density(aes(group = ind, color = ind),position="identity",geom="line")
-
-plot(p)
+```{r Gammafordeling, echo = FALSE, fig.cap = "Tre gammafordelinger hvor beta = 1 og alfa på henholdsvis 1, 5 og 10."}
+x <- seq(0, 25, length.out = 100)
+y1 <- dgamma(x, shape = 1, rate = 1)
+y2 <- dgamma(x, shape = 5, rate = 1)
+y3 <- dgamma(x, shape = 10, rate = 1)
+plot(x, y1, type = "l", main = "", ylab = "Densitet", xlab = "x", col = "blue")
+lines(x, y2, col = "red")
+lines(x, y3, col = "green")
+legend(20, 0.8, legend=c("alfa = 1", "alfa = 5", "alfa = 10"),
+       col=c("blue", "red", "green"), lty=c(1,1,1), cex=0.8)
 ```
 
 ### Replicate

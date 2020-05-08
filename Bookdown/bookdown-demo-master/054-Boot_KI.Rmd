@@ -112,7 +112,7 @@ meanFunc <- function(d, i)
 sand_middel <- 0 #Sand middelværdi
 ```
 
-Det næste der udregnes er et konfidensinterval. Konfidensintervallet beregnes ved hjælp af funktionen ```boot.ci```, der kommer fra pakken ```boot```. Der bliver først lavet 100 konfidensintervaller på baggrund af normalfordelte stikprøver. Så undersøges der om middelværdien af populationen er i konfidensintervallet. Hvis det er tilfældet, vil _outputtet_ være ```TRUE```, hvis ikke vil det være ```FALSE```. Herefter indsættes disse _output_ i en matrix. Til sidst beregnes dækningsgraden som andelen af de intervaller, der indeholder den sande middelværdi. Der laves 100 konfidensintervaller for hver stikprøve størrelse. Stikprøvestørrelsen er angivet i en sekvens fra 4-100 med spring på 4. Denne proces udføres for de tre konfidensintervalmetoder, percentil, T og basic.
+Det næste der udregnes er et konfidensinterval. Konfidensintervallet beregnes ved hjælp af funktionen ```boot.ci```, der kommer fra pakken ```boot```. Der bliver først lavet 100 konfidensintervaller på baggrund af normalfordelte stikprøver. Så undersøges der om middelværdien af populationen er i konfidensintervallet. Hvis det er tilfældet, vil _outputtet_ være ```TRUE```, hvis ikke vil det være ```FALSE```. Herefter indsættes disse _output_ i en matrix. Til sidst beregnes dækningsgraden som andelen af de intervaller, der indeholder den sande middelværdi. Der laves 100 konfidensintervaller for hver stikprøvestørrelse. Stikprøvestørrelsen er angivet i en sekvens fra 4 til 100 med spring på 4. Denne proces udføres for de tre konfidensintervalmetoder, percentil, T og basic.
 
 Her udføres processen for dækningsgraden på percentilmetoden.
 ```{r}
