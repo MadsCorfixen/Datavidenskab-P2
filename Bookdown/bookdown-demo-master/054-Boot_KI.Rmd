@@ -168,8 +168,8 @@ for(n in seq(4, 100, 4)){
 }
 ```
 
-Nu kan dækningsgraderne for de tre metoder illustreres i diagrammet på figur \@ref{fig:figur-deakning}.
-```{r figur-daekning, fig.cap = "Dækningsgraden for de tre konfidensintervaller udarbejdet ved hjælp af bootstraps. På x-aksen ses stikprøve størrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøve størrelse. 0.95 er det ønsket konfidenslevel."}
+Nu kan dækningsgraderne for de tre metoder illustreres i diagrammet på figur \@ref(fig:deakning).
+```{r daekning, fig.cap = "Dækningsgraden for de tre konfidensintervaller udarbejdet ved hjælp af bootstraps. På x-aksen ses stikprøve størrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøve størrelse. 0.95 er det ønsket konfidenslevel."}
 x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
      xlab = "Stikprøvestørrelse", ylim = c(0.75, 1))
@@ -180,4 +180,4 @@ legend(83, 0.835, legend=c("Percentil", "Basic", "t"),
        col=c("red", "blue", "green"), lty=c(1,1,1), cex=0.8)
 ```
 
-Her tyder det på, at T-metoden præsterer bedre ved mindre stikprøver end både percentilmetoden og basic-metoden. Ved omkring $n=15$ når percentil- og basic-metodens konfidensinterval begge den samme dækningsgrad som T-metoden, og generelt kan der ses, at percentil- og basic-metoden har cirka den samme dækningsgrad. 
+Her tyder det på, at T-metoden præsterer bedre ved mindre stikprøver end både percentilmetoden og basic-metoden. Ved omkring $n=15$ når percentil- og basic-metodens konfidensinterval begge den samme dækningsgrad som T-metoden, og generelt kan der ses, at percentil- og basic-metoden har cirka den samme dækningsgrad. Både percentil- og basic-metoden ser ud til at have større udsvingninger end t-metoden. Desuden ser alle tre metoders dækningsgrader ud til at stabilisere sig omkring $95\%$, når stikprøvestørrelsen bliver tilstrækkelig stor. 
