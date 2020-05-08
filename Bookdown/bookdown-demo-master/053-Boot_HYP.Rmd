@@ -26,7 +26,7 @@ library(mosaic)
 library(cowplot)
 ```
 
-```{r fig-p-bootstrap, fig.align='center', fig.cap="(A) Fordelingen viser 40% observationer større end teststørrelsen og 60% observationer mindre. (B) Fordelingen viser 98% observationer større end teststørrelsen og 2% observationer mindre.", echo=FALSE}
+```{r fig-p-bootstrap, fig.cap="(A) Fordelingen viser 40% observationer større end teststørrelsen og 60% observationer mindre. (B) Fordelingen viser 98% observationer større end teststørrelsen og 2% observationer mindre.", echo=FALSE}
 plot1 <- qdist("norm", p = 0.60, mean = 0, sd = 1, ylab="", xlim = c(-4, 4),  return = c("plot"))
 plot1 <- plot1 + theme(legend.position = "none")
 plot2 <- qdist("norm", p = 0.02, mean = 0, sd = 1, ylab="", xlim = c(-4, 4), return = c("plot"))

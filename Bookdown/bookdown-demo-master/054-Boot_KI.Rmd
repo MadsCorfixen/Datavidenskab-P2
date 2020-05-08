@@ -169,7 +169,7 @@ for(n in seq(4, 100, 4)){
 ```
 
 Dækningsgraderne for de tre metoder illustreres på figur \@ref(fig:fig-daekning).
-```{r fig-daekning, fig.cap = "Dækningsgraden for de tre konfidensintervaller udarbejdet ved hjælp af bootstraps. På x-aksen ses stikprøve størrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøve størrelse. 0.95 er det ønsket konfidenslevel.", echo=FALSE}
+```{r fig-daekning, fig.align='center', fig.cap = "Dækningsgraden for de tre konfidensintervaller udarbejdet ved hjælp af bootstraps. På x-aksen ses stikprøve størrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøve størrelse. 0.95 er det ønsket konfidenslevel.", echo=FALSE}
 x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
      xlab = "Stikprøvestørrelse", ylim = c(0.75, 1))
