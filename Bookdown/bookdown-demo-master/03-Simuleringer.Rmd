@@ -9,7 +9,7 @@ En definition på simulering er;
 >A situation or event that seems real but is not real, used especially in order to help people deal with such situations or events. - Cambridge Dictonary, [@CambridgeSimulation].
 
 Ud fra definitionen, er formålet altså ved simuleringer at efterligne virkeligheden, så de analyser der gøres på baggrund af simuleringerne, kan bruges i virkeligheden når lignende situationer opstår.
-Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producere dem i virkeligheden for at spare penge. Derved kan de analysere, hvilke forskellige dele der producerer mest _down-force_, uden at skulle teste dem i virkelig, [@MercedesF1].
+Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producere dem i virkeligheden for at spare ressourcer. Derved kan de analysere, hvilke forskellige dele der producerer mest _down-force_, uden at skulle teste dem i virkelig, [@MercedesF1].
 
 ## Pseudorandom number generator
 
@@ -17,7 +17,7 @@ __FIXME__ Mangler kilde
 
 I dette afsnit introduceres begrebet _pseudorandom number generator_ (PRNG) og hvorledes den kan bringes i anvendelse i forbindelse med simuleringer. I de tilhørende underafsnit beskrives først en type af PRNG kaldet lineær kongruens generator, og dernæst en metode til at omdanne uniformt fordelte talt til standard normalfordelte tal kaldet Box-Muller-transformation. 
 
-En computer fungerer ved, at den modtager et input, der bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at generere faktisk tilfældige tal. Grunden til dette er, hvis der gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere, fordi en computer fungerer på baggrund af matematik og derfor er deterministisk. Det er dog muligt ved hjælp af en beregningsmodel at skabe en illusion af ægte tilfældighed. Denne model kaldes _pseudorandom number generator_ (PRNG).
+En computer fungerer ved, at den modtager et input, der bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at generere faktisk tilfældige tal. Grunden til dette er, hvis der gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere, fordi en computer fungerer på baggrund af matematik og derfor er deterministisk. Det er dog muligt ved hjælp af en beregningsmodel at skabe en illusion af ægte tilfældighed. Denne model kaldes PRNG.
 
 En PRNGs funktionalitet beskrives ved nedenstående karakteristika. 
 
@@ -25,9 +25,9 @@ En PRNGs funktionalitet beskrives ved nedenstående karakteristika.
 
 2. Perioden, som beskriver hvor mange repetitioner algortimen gennemløber, før outputtet begynder at gentage sig selv. Jo kortere perioden er, des mere gennemskuelig vil algoritmen fremstå.
 
-3. Fordeling af de tal værdier der generes. Som det ses på figuren nedenunder, kan fordelingen af de genererede tal være jævn, hvilket viser en ligelig fordeling af tallene. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og alvendeligheden formindskes.  
+3. Fordeling af de tal værdier der generes. Som det ses på figur \@ref(fig:PRNG-fordelinger), kan fordelingen af de genererede tal være jævn, hvilket viser en ligelig fordeling af tallene. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og alvendeligheden formindskes.  
 
-```{r, out.width='75%', fig.align='center', fig.cap="PRNG fordelinger", echo = FALSE}
+```{r PRNG-fordelinger, out.width='75%', fig.align='center', fig.cap="PRNG fordelinger", echo = FALSE}
  knitr::include_graphics("images/prngfordelingerDK.jpeg")
 ```
 
@@ -53,11 +53,11 @@ I figuren nedenfor kan ses tre eksempler på LCG i aktion. De to første eksempl
  knitr::include_graphics("images/LCG_eksempel.PNG")
 ```
 
-I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal iterationer vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette vil vises om lidt.
+I teorien er parameterne arbitrære, men i praksis bruges nogle værdier oftere end andre. Begrundelsen for dette er, at der findes "dårlige" værdier for parameterne, der vil returnere en tilsyneladende ikke-tilfældig sekvens af værdier. Et eksempel på dette er ved parameterne: $m = 64, a = 33$ og $c = 12$. Efter et antal iterationer vil der ses et mønster i værdierne, og det blotte øje vil altså kunne se at denne sekvens i virkeligheden ikke er helt tilfældig. Dette eftervises i det følgende eksempel.
 
 __Eksempel__
 
-De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden med hvordan, der undersøges om ens parametre genererer tilsyneladende tilfældige værdier.
+De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden med hvordan, der undersøges om de givne parametre genererer tilsyneladende tilfældige værdier.
 
 Først defineres en funktion for LCG algoritmen, som tager de nødvendige argumenter for algoritmen. Disse blev der redegjort for tidligere i afsnittet. Derudover angives også et argument, $n$, der fortæller hvor mange iterationer algoritmen skal foretage.
 
@@ -85,7 +85,7 @@ lcg1 <- lcg(64, 33, 12, 57, 17)
 lcg1
 ```
 
-Plottes denne sekvens, vil det sse at værdierne ikke er tilfældige, da det er tydeligt se perioderne. Selv hvis antallet af gange LCG køres igennem ændrers, vil det tydelige mønster ikke ændre sig.
+Plottes denne sekvens, vil det ses at værdierne ikke er tilfældige, da perioderne danner et synligt mønster. Selv hvis antallet af gange LCG køres igennem ændrers, vil det tydelige mønster ikke ændre sig.
 
 ```{r}
 lcg1_plot <- lcg(64, 33, 12, 57, 100)
@@ -93,7 +93,7 @@ plot(lcg1_plot, main = "Eksempel på en ikke tilfældig LCG sekvens",
      xlab = "Indeks", ylab = "Sekvens værdier", type = "l")
 ```
 
-Nedenfor vises et eksempel på hvordan LCG algortimen kan bruges til at lave en uniform fordeling i intervallet [0, 1].
+Nedenfor vises et eksempel på hvordan LCG algoritmen kan bruges til at lave en uniform fordeling i intervallet [0, 1].
 
 ```{r}
 lcg2 <- lcg(86436, 1093, 0, 12, 1000)
@@ -115,7 +115,7 @@ Afslutningsvist vil der vises et eksempel, hvor der returneres en sekvens der se
 ```{r}
 lcg3 <- lcg(86436, 1093, 18257, 12, 100)
 
-plot(lcg3, main = "'Tilfældig' LCG Sekvens", xlab = "Indeks", 
+plot(lcg3, main = "'Tilfældig' LCG sekvens", xlab = "Indeks", 
      ylab = "Sekvens værdier", type = "l")
 ```
 
@@ -261,7 +261,7 @@ set.seed(29)
 
 I dataanalysen vil de viste fordelinger, bruges som populationer, og stikprøver udtages så ved hjælp af forskellige funktioner. Ideén med denne fremgangsmåde er, at man derved udtrækker stikprøver, ud fra den teoretiske uendelige fordeling. 
 
-Nogle af de fordelinger, der kan simuleres i R, er blandt andet en normalfordeling, binomialfordeling, uniform fordeling eller en betafordeling. Alle disse fordelinger har forskellige karateristika, som påvirker hvilke værdier de kan antage. Der vil nu vises eksempler på, hvordan disse fordelinger simuleres i R, og hvordan resultatet vil se ud. 
+Nogle af de fordelinger, der kan simuleres i R, er blandt andet en normalfordeling, binomialfordeling, uniform fordeling, betafordeling eller en gammafordeling. Alle disse fordelinger har forskellige karateristika, som påvirker hvilke værdier de kan antage. Der vil nu vises eksempler på, hvordan disse fordelinger simuleres i R, og hvordan resultatet vil se ud. 
 
 ### Normalfordeling
 
@@ -289,7 +289,7 @@ abline(h = 1)
 
 ### Binomialfordeling
 
-En binomialfordeling bliver genreret ud for sandsynligheder. I den binomiale fordeling gives en _size_ som er antallet af eksperimenter, samt en sandsynlighed for succes, angivet med _prob_.
+En binomialfordeling bliver genreret ud fra sandsynligheder. I den binomiale fordeling gives en _size_ som er antallet af eksperimenter, samt en sandsynlighed for succes, angivet med _prob_.
 
 ```{r}
 Binomialfordeling <- rbinom(n = 100, size = 1, prob = 0.5)
@@ -334,7 +334,7 @@ legend(0.35, 3, legend=c("alfa = 2, beta = 8 ", "alfa = 8, beta = 2"),
 
 ### Gammafordeling
 
-Gammafordelingen er også en skæv fordeling, som betafordelingen er det. Funktionalitet af gammafordelingen er at forudsige ventetiden til den $\alpha$'te begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter blive anvendt  parameterne $(\alpha,~\beta)$. Tæthedsfuktionen er givet ved $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er "shape", $\beta > 0$ er "rate" og $x \in ( 0, \infty)$. På trods af forskellige tæthedsfunktioner for de to parametersæt, genererer de den samme fordeling [@Gammadist]. På figur \@ref(fig:Gammafordeling) er vist tre forskellige højreskæve gammafordelinger.
+Gammafordelingen er ligeledes en skæv fordeling, som betafordelingen er det. Funktionalitet af gammafordelingen er at forudsige ventetiden til den $\alpha$'te begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter blive anvendt  parameterne $(\alpha,~\beta)$. Tæthedsfuktionen er givet ved $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er "shape", $\beta > 0$ er "rate" og $x \in ( 0, \infty)$. På trods af forskellige tæthedsfunktioner for de to parametersæt, genererer de den samme fordeling [@Gammadist]. På figur \@ref(fig:Gammafordeling) er vist tre forskellige højreskæve gammafordelinger.
   
 ```{r}
 Gammafordeling <- rgamma(n = 100000, shape = 5, rate = 1)
@@ -355,7 +355,7 @@ legend(20, 0.8, legend=c("alfa = 1", "alfa = 5", "alfa = 10"),
 
 ### Replicate
 
-I nogle statistike metoder er det nødvendigt at arbejde med flere stikprøver end kun én enkelt. Med funktionen ```replicate``` i R, kan der genereres adskillige nye stikprøver ud fra den oprindelige. Processen med _replicate_ vil nu vises. Først ses en stikprøve med tre observationer.
+I nogle statistiske metoder er det nødvendigt at arbejde med flere stikprøver end kun én enkelt. Med funktionen ```replicate``` i R, kan der genereres adskillige nye stikprøver ud fra den oprindelige. Processen med _replicate_ vil nu vises. Først ses en stikprøve med tre observationer.
 
 ```{r echo = FALSE}
 stik <- rnorm(3, 0 ,1) #Den oprindelige stikprøve
@@ -365,7 +365,7 @@ rownames(stik_matrix) <- c("Observation 1", "Observation 2", "Observation 3")
 stik_matrix
 ```
 
-_Replicate_-funktionen vil nu bruges. I alt replikeres der fem gange, hvilket betyder, at der bliver oprettet fem nye stikprøver. I forbindelse med denne process udnyttes funktionen ```sample```, som er den funktion der _resampler_, enten med eller uden tilbagelægning fra stikprøven. I dette eksempel bliver der brugt tilbagelægning. Fra den oprindelige stikprøve udtrækkes der en observation, som indsættes i den nye stikprøve. Observationer bliver derefter lagt tilbage i den oprindelige stikprøve, hvilket betyder, at der er en sandsynlighed for at se den samme observation flere gange. Grunden til dette er, at stikprøven anses for at være repræsentativ for population, og to af den samme observation derfor ikke er utænkelig at observere.
+_Replicate_-funktionen vil nu bruges. I alt replikeres der fem gange, hvilket betyder, at der bliver oprettet fem nye stikprøver. I forbindelse med denne process anvendes funktionen ```sample```, som er funktionen der _resampler_, enten med eller uden tilbagelægning fra stikprøven. I dette eksempel bruges funktionen med tilbagelægning. Fra den oprindelige stikprøve udtrækkes en observation, som indsættes i en ny stikprøve. Observationeren bliver derefter lagt tilbage i den oprindelige stikprøve, dette medfører at den samme observation kan udtages flere gange. Grunden til dette er, at stikprøven anses for at være repræsentativ for population, og to af den samme observation derfor ikke er en utænkelig observation.
 
 ```{r}
 ny_stik <- replicate(5, { #Der replikeres 5 gange
@@ -374,4 +374,4 @@ ny_stik <- replicate(5, { #Der replikeres 5 gange
 ny_stik
 ```
 
-Nu er der oprettet fem helt nye repræsentative stikprøver udfra den oprindelige. Denne metode og dens anvendelser vil der kigges nærmere på kapitel \@ref(boot-afsnit). 
+Funktionen har nu resamplet fem nye repræsentative stikprøver udfra den oprindelige. Denne metode og dens anvendelser vil der kigges nærmere på kapitel \@ref(boot-afsnit). 
