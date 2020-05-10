@@ -1,6 +1,6 @@
 ## Bootstrap-konfidensintervaller
 
-I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøves beregnes ved hjælp af percentilmetoden, basic-metoden og t-metoden. Til sidst sammenlignes de tre metoders dækningsgrader ved forskellige stikprøvestørrelser.
+I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøve beregnes ved hjælp af percentilmetoden, basic-metoden og t-metoden. Til sidst sammenlignes de tre metoders dækningsgrader ved forskellige stikprøvestørrelser.
 
 Et $95\%$ konfidensinterval på en normalfordelt estimator, $\Theta$, kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$, [@BootKI]. Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
@@ -180,4 +180,4 @@ legend(83, 0.835, legend=c("Percentil", "Basic", "t"),
        col=c("red", "blue", "green"), lty=c(1,1,1), cex=0.8)
 ```
 
-Her tyder det på, at T-metoden præsterer bedre ved mindre stikprøver end både percentilmetoden og basic-metoden. Ved omkring $n=15$ når percentil- og basic-metodens konfidensinterval begge den samme dækningsgrad som T-metoden, og generelt kan der ses, at percentil- og basic-metoden har cirka den samme dækningsgrad. Både percentil- og basic-metoden ser ud til at have større udsvingninger end t-metoden. Desuden ser alle tre metoders dækningsgrader ud til at stabilisere sig omkring $95\%$, når stikprøvestørrelsen bliver tilstrækkelig stor. 
+Her tyder det på, at T-metoden præsterer bedre ved mindre stikprøver end både percentilmetoden og basic-metoden. Omkring $n=15$ opnår percentil- og basic-metodens konfidensinterval begge den samme dækningsgrad som T-metoden, og generelt kan der ses, at percentil- og basic-metoden har cirka den samme dækningsgrad. Både percentil- og basic-metoden ser ud til at have større udsvingninger end t-metoden. Desuden ser alle tre metoders dækningsgrader ud til at stabilisere sig omkring $95\%$, når stikprøvestørrelsen bliver tilstrækkelig stor. 
