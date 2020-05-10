@@ -13,7 +13,7 @@ Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Fo
 
 ## Pseudorandom number generator
 
-__FIXME__ Mangler kilde (Måske denne? http://www.anomaly.org/ThinAir/charactr.html)
+__FIXME__ Mangler kilde (Måske denne? http://www.anomaly.org/ThinAir/charactr.html _ELLER_ denne? https://www.nag.co.uk/numeric/mb/nagdoc_mb/manual_25_1/html/g05/g05intro.html)
 
 I dette afsnit introduceres begrebet _pseudorandom number generator_ (PRNG) og hvorledes den kan bringes i anvendelse i forbindelse med simuleringer. I de tilhørende underafsnit beskrives først en type af PRNG kaldet lineær kongruens generator, og dernæst en metode til at omdanne uniformt fordelte talt til standard normalfordelte tal kaldet Box-Muller-transformation. 
 
