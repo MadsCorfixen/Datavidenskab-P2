@@ -112,7 +112,7 @@ Der er risiko for to primære fejl når der foretages en hypotesetest. Den førs
 
 En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
 
-Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau - i de fleste tilfælde $5\%$. Sandsynligheden for type-II fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen og lille, hvis den er langt fra. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved mindre data, [@Fejltyper].
+Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau - i de fleste tilfælde $5\%$. Sandsynligheden for type-II fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen og lille, hvis den er langt fra. __FIXME__ (Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen, er den derimod langt fra, vil sandsynligheden for type-II fejl være (tilsvarende) lille.) Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved mindre data, __FIXME__ (Er det korrekt at skrive mindre data? Ellers kunne der stå "ved en mindre mængde data") [@Fejltyper].
 
 ```{r, figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
 knitr::include_graphics('images/Typefejl.png')
