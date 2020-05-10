@@ -36,9 +36,7 @@ Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er d
 
 ## Hypotesetest for middelværdier {#t-test}
 
-__FIXME__ Mangler kilder
-
-I dette afsnit gennemgåes fremgangsmåden for, hvordan en hypotesetest kan bruges til at bestemme middelværdien for en population. En sådan hypotesetest kaldes en t-test.
+I dette afsnit gennemgåes fremgangsmåden for, hvordan en hypotesetest kan bruges til at bestemme middelværdien for en population. En sådan hypotesetest kaldes en t-test. Afsnittet er skrevet på baggrund af [@ASTAKursus4].
 
 Først er der nogle antagelser, der skal være opfyldt, for at t-testen ikke giver misvisende resultater.
 
