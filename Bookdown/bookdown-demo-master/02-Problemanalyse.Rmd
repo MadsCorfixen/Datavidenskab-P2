@@ -279,7 +279,7 @@ lcg1
 
 Forneden i figur \@ref(fig:ikke-tilfaeldig-LCG) plottes denne cyklus. Det er åbenlyst at cyklussen ikke er tilfældig, da den danner et synligt mønster. Selv hvis antallet af gange, LCG køres igennem, ændres, vil mønstret ikke ændres.
 
-```{r ikke-tilfaeldig-LCG, fig.cap= "Et eksempel på en ikke-tilfældig LCG-cyklus."}
+```{r ikke-tilfaeldig-LCG, fig.align='center', fig.cap= "Et eksempel på en ikke-tilfældig LCG-cyklus."}
 lcg1_plot <- lcg(64, 33, 12, 57, 100)
 plot(lcg1_plot, main = "",
      xlab = "Indeks", ylab = "Værdier", type = "l")
@@ -287,7 +287,7 @@ plot(lcg1_plot, main = "",
 
 Nedenfor i figur \@ref(fig:uniform-LCG) vises et eksempel på, hvordan LCG-algoritmen kan bruges til at lave en uniform fordeling i intervallet [0, 1].
 
-```{r uniform-LCG, fig.cap= "Et eksempel på en LCG-cyklus, der er uniformt fordelt."}
+```{r uniform-LCG, fig.align='center', fig.cap= "Et eksempel på en LCG-cyklus, der er uniformt fordelt."}
 lcg2 <- lcg(86436, 1093, 0, 12, 1000)
 
 hist((lcg2 + 0.05)/ 86436, main = "",
@@ -296,14 +296,14 @@ hist((lcg2 + 0.05)/ 86436, main = "",
 
 Her kan det også nævnes, at hvis den cyklus algoritmen returnerer plottes i et 2d-punktplot, som i figur \@ref(fig:plot-LCG-cyklus), vil der fremgå en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
 
-```{r plot-LCG-cyklus, fig.cap= "En 2d-graf af en 'tilfældig' LCG-cyklus."}
+```{r plot-LCG-cyklus, fig.align='center', fig.cap= "En 2d-graf af en 'tilfældig' LCG-cyklus."}
 plot(lcg2, main = "", xlab = "Indeks",
      ylab = "Værdier")
 ```
 
 Afslutningsvist vil der vises et eksempel, hvor der returneres en cyklus, der ser tilfældig ud. Denne cyklus kan ses i figur \@ref(fig:tilfaeldig-LCG).
 
-```{r tilfaeldig-LCG, fig.cap= "Et eksempel på en tilsyneladende tilfældig LCG-cyklus."}
+```{r tilfaeldig-LCG, fig.align='center', fig.cap= "Et eksempel på en tilsyneladende tilfældig LCG-cyklus."}
 lcg3 <- lcg(86436, 1093, 18257, 12, 100)
 
 plot(lcg3, main = "", xlab = "Indeks",
@@ -350,7 +350,7 @@ I det følgende afsnit efterprøves de forventede karakteristika af de to stokas
 
 Først undersøges deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har, ved at oprette et boksplot af de to stokastiske variabler, som ses i figur \@ref(fig:boksplotz1z2).
 
-```{r boksplotz1z2, fig.cap= "Et boksplot over Z1 og Z2"}
+```{r boksplotz1z2, fig.align='center', fig.cap= "Et boksplot over Z1 og Z2"}
 boxplot(Z1, Z2, main = "", xlab= c("Z1","Z2"))
 ```
 
@@ -400,7 +400,7 @@ Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være norm
 Hernest kigges der på histogrammerne for ```Z1``` og ```Z2```. På figur \@ref(fig:bmhist) sammenlignes histogrammerne for henholdsvis ```Z1``` og ```Z2``` med densiteten for standard normalfordeling.
 
 __FIXME__ (Lav plot om til figur, figuren skal have ref. i tekseten, samt forklaring i brødtekst.) __FIXME__ (Sammenlign med Z-fordelings densitet)
-```{r bmhist, fig.cap= "Sammenligning af histogrammerne for henholdsvis Z1 (a) og Z2 (b) med densiteten for standard normalfordeling."}
+```{r bmhist, fig.align='center', fig.cap= "Sammenligning af histogrammerne for henholdsvis Z1 (a) og Z2 (b) med densiteten for standard normalfordeling."}
 x <- seq(-4, 4, length.out = 100)
 y <- dnorm(x, mean = 0, sd = 1)
 
@@ -457,7 +457,7 @@ Nogle af de fordelinger, der kan simuleres i R, er normal-, binomial-, uniforme-
 I R simuleres en normalfordeling ved funktionen ```rnorm```. Fordelingen på figur \@ref(fig:normal) bliver genereret ud fra en middelværdi på $0$ og en standardafvigelse på $1$.
 
 
-```{r normal, echo = FALSE, fig.cap = "En normalfordeling med størrelsen n = 1000, en middelværdi på 0 og en standardafvigelse på 1. Med disse værdier kaldes den også for en standard normalfordeling eller Z-fordeling"}
+```{r normal, echo = FALSE, fig.align='center', fig.cap = "En normalfordeling med størrelsen n = 1000, en middelværdi på 0 og en standardafvigelse på 1. Med disse værdier kaldes den også for en standard normalfordeling eller Z-fordeling"}
 set.seed(29)
 x <- seq(-4, 4, length.out = 100)
 y <- dnorm(x, mean = 0, sd = 1)
@@ -474,7 +474,7 @@ uniformfordeling <- runif(n = 100000, min = 1, max = 2)
 
 __FIXME__ (ref og forklaring af figuren i teksten)
 
-```{r echo = FALSE, fig.cap = "En uniform fordeling, hvor alle tal har lige stor sandsynlighed for at optræde i intervallet [0 , 1]."}
+```{r echo = FALSE, fig.align='center', fig.cap = "En uniform fordeling, hvor alle tal har lige stor sandsynlighed for at optræde i intervallet [0 , 1]."}
 x <- seq(1, 2, length.out = 100)
 plot(x = NA, type = "n", xlim = c(0, 1), ylim = c(0, 1.5), ylab = "Densitet", xlab = "x")
 abline(h = 1)
@@ -492,7 +492,7 @@ Binomialfordeling <- rbinom(n = 100, size = 1, prob = 0.5)
 
 __FIXME__ (ref og forklaring af figuren i teksten)
 
-```{r echo = FALSE, fig.cap = "En binomialfordeling med size = 1 og en sandsynlighed for succes på prob = 0.5."}
+```{r echo = FALSE, fig.align='center', fig.cap = "En binomialfordeling med size = 1 og en sandsynlighed for succes på prob = 0.5."}
 plot(x = NA, xlim = c(0,1), ylim = c(0, 0.6), main = "", ylab = "Densitet", xlab = "x")
 segments(x0 = 0, y0 = 0, x1 = 0, y1 = 0.5)
 segments(x0 = 1, y0 = 0, x1 = 1, y1 = 0.5)
@@ -519,7 +519,7 @@ hoejre <- rbeta(n = 1000, shape1 = 2, shape2 = 8)
 
 __FIXME__ (ref og forklaring af figuren i teksten)
 
-```{r echo = FALSE, fig.cap = "To betafordelinger med henholdsvis alfa = 8 og beta = 2, og alfa = 2 og beta = 8."}
+```{r echo = FALSE, fig.align='center', fig.cap = "To betafordelinger med henholdsvis alfa = 8 og beta = 2, og alfa = 2 og beta = 8."}
 x <- seq(0, 1, length.out = 100)
 y1 <- dbeta(x, shape1 = 2, shape2 = 8)
 y2 <- dbeta(x, shape1 = 8, shape2 = 2)
@@ -540,7 +540,7 @@ Gammafordeling <- rgamma(n = 100000, shape = 5, rate = 1)
 ```
 
 
-```{r Gammafordeling, echo = FALSE, fig.cap = "Tre gammafordelinger hvor beta = 1 og alfa på henholdsvis 1, 5 og 10."}
+```{r Gammafordeling, echo = FALSE, fig.align='center', fig.cap = "Tre gammafordelinger hvor beta = 1 og alfa på henholdsvis 1, 5 og 10."}
 x <- seq(0, 25, length.out = 100)
 y1 <- dgamma(x, shape = 1, rate = 1)
 y2 <- dgamma(x, shape = 5, rate = 1)
