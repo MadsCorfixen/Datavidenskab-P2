@@ -25,7 +25,7 @@ En PRNG beskrives ved nedenstående karakteristika, [@PRGNfunc].
 
 3. Perioden, som beskriver hvor mange repetitioner algoritmen gennemløber, før cyklussen gentages. Jo kortere perioden er, des mere gennemskuelig vil algoritmen fremstå.
 
-4. Fordelingen af cyklussen. Som det ses på figur \@ref(fig:PRNG-fordelinger), kan fordelingen af cyklussen være jævn, hvilket viser en ligelig fordeling af cyklussen. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og alvendeligheden formindskes.  
+4. Fordelingen af cyklussen. Som det ses på figur \@ref(fig:PRNG-fordelinger), kan fordelingen af cyklussen være jævn, hvilket viser en ligelig fordeling af cyklussen. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og anvendeligheden formindskes.  
 
 ```{r PRNG-fordelinger, out.width='75%', fig.align='center', fig.cap="PRNG fordelinger", echo = FALSE}
  knitr::include_graphics("images/prngfordelingerDK.jpeg")
@@ -83,39 +83,38 @@ lcg1 <- lcg(64, 33, 12, 57, 17)
 lcg1
 ```
 
-Plottes denne cyklus, vil det være åbenlyst at den ikke er tilfældig, da der dannes et synligt mønster. Selv hvis antallet af gange, LCG køres igennem ændres, vil mønstret ikke ændres.
+Forneden i figur \@ref(fig:ikke-tilfaeldig-LCG) plottes denne cyklus. Det er åbenlyst at cyklussen ikke er tilfældig, da den danner et synligt mønster. Selv hvis antallet af gange, LCG køres igennem, ændres, vil mønstret ikke ændres.
 
-__FIXME__ (Lav plot om til figur, figuren skal have ref. i tekseten, samt forklaring i brødtekst.)
-```{r}
+```{r ikke-tilfaeldig-LCG, fig.cap= "Et eksempel på en ikke-tilfældig LCG-cyklus."}
 lcg1_plot <- lcg(64, 33, 12, 57, 100)
-plot(lcg1_plot, main = "Eksempel på en ikke tilfældig LCG sekvens", 
-     xlab = "Indeks", ylab = "Sekvens værdier", type = "l")
+plot(lcg1_plot, main = "", 
+     xlab = "Indeks", ylab = "Værdier", type = "l")
 ```
 
-Nedenfor vises et eksempel på, hvordan LCG-algoritmen kan bruges til at lave en uniform fordeling i intervallet [0, 1].
+Nedenfor i figur \@ref(fig:uniform-LCG) vises et eksempel på, hvordan LCG-algoritmen kan bruges til at lave en uniform fordeling i intervallet [0, 1].
 
-```{r}
+```{r uniform-LCG, fig.cap= "Et eksempel på en LCG-cyklus, der er uniformt fordelt."}
 lcg2 <- lcg(86436, 1093, 0, 12, 1000)
 
-hist((lcg2 + 0.05)/ 86436, main = "LCG Uniform fordeling", 
-     xlab = "Sekvens værdier", ylab = "Frekvens")
+hist((lcg2 + 0.05)/ 86436, main = "", 
+     xlab = "Værdier", ylab = "Frekvens")
 ```
 
-Her kan det også nævnes, at hvis den cyklus algoritmen returnerer plottes i et 2d-punktplot, vil der fremgå en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
+Her kan det også nævnes, at hvis den cyklus algoritmen returnerer plottes i et 2d-punktplot, som i figur \@ref(fig:plot-LCG-cyklus), vil der fremgå en tydeligere "tilfældig" fordeling, dog vil der stadig kunne ses et mønster.
 
-```{r}
-plot(lcg2, main = "2d plot af LCG sekvens", xlab = "Indeks", 
-     ylab = "Sekvens værdier")
+```{r plot-LCG-cyklus, fig.cap= "En 2d-graf af en 'tilfældig' LCG-cyklus."}
+plot(lcg2, main = "", xlab = "Indeks", 
+     ylab = "Værdier")
 ```
 
 
-Afslutningsvist vil der vises et eksempel, hvor der returneres en cyklus, der ser tilfældig ud.
+Afslutningsvist vil der vises et eksempel, hvor der returneres en cyklus, der ser tilfældig ud. Denne cyklus kan ses i figur \@ref(fig:tilfaeldig-LCG).
 
-```{r}
+```{r tilfaeldig-LCG, fig.cap= "Et eksempel på en tilsyneladende tilfældig LCG-cyklus."}
 lcg3 <- lcg(86436, 1093, 18257, 12, 100)
 
-plot(lcg3, main = "'Tilfældig' LCG sekvens", xlab = "Indeks", 
-     ylab = "Sekvens værdier", type = "l")
+plot(lcg3, main = "", xlab = "Indeks", 
+     ylab = "Værdier", type = "l")
 ```
 
 ### Box-Muller-transformation
@@ -156,11 +155,10 @@ __Efterprøvning i R__
 
 I det følgende afsnit efterprøves de forventede karakteristika af de to stokastiske variabler $Z_1$ og $Z_2$, der blev oprettet ved hjælp af Box-Muller-transformationen.
 
-Første undersøges deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har, ved at oprette et boksplot af de to stokastiske variabler.
+Først undersøges deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har, ved at oprette et boksplot af de to stokastiske variabler, som ses i figur \@ref(fig:boksplotz1z2).
 
-__FIXME__ (Lav plot om til figur, figuren skal have ref. i tekseten, samt forklaring i brødtekst.)
-```{r}
-boxplot(Z1, Z2, main = "Boksplot af Z1 og Z2")
+```{r boksplotz1z2, fig.cap= "Et boksplot over Z1 og Z2"}
+boxplot(Z1, Z2, main = "", xlab= c("Z1","Z2"))
 ```
 
 Det ses på boksplottet, at der er en indikation på normalfordeling med henvisning til de fire krav et boksplot af en normalfordeling opfylder. De fire krav er: __FIXME__ (Kilde?)
@@ -206,17 +204,20 @@ Dette giver en andel af outliers i ```Z1``` på ```r outliers_andel_Z1``` og i `
 
 Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være normalfordelt. Tværtimod underbygger beregningen af deres middelværdi, at de er _standard_ normalfordelte.
 
-Hernest kigges der på histogrammerne for ```Z1``` og ```Z2```.
+Hernest kigges der på histogrammerne for ```Z1``` og ```Z2```. På figur \@ref(fig:bmhist) sammenlignes histogrammerne for henholdsvis ```Z1``` og ```Z2``` med densiteten for standard normalfordeling.
 
 __FIXME__ (Lav plot om til figur, figuren skal have ref. i tekseten, samt forklaring i brødtekst.) __FIXME__ (Sammenlign med Z-fordelings densitet)
-```{r}
+```{r bmhist, fig.cap= "Sammenligning af histogrammerne for henholdsvis Z1 (a) og Z2 (b) med densiteten for standard normalfordeling."}
+x <- seq(-4, 4, length.out = 100)
+y <- dnorm(x, mean = 0, sd = 1)
 
 par(mfrow = c(1,2))
-hist(Z1, main = "Histogram for Z1", ylab = "Frekvens", prob = TRUE)
-lines(density(Z1), col = "blue")
 
-hist(Z2, main = "Histogram for Z2", ylab = "Frekvens", prob = TRUE)
-lines(density(Z2), col = "blue")
+hist(Z1, main = "(a)", ylab = "Frekvens", prob = TRUE)
+lines(x, y, col = "blue")
+
+hist(Z2, main = "(b)", ylab = "Frekvens", prob = TRUE)
+lines(x, y, col = "blue")
 
 ```
 
@@ -225,12 +226,12 @@ Det ses på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at d
 Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges ved hjælp af nedenstående graf.
 
 __FIXME:__ (Husk at indsætte figuren inden aflevering! :-))
-<!--```{r}
+```{r}
 plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2", 
-     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25), 
-     pch = 1, cex = 0.5)
+    col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25), 
+    pch = 1, cex = 0.5)
 
-```-->
+```
 
 Udover at eftervise uafhængigheden af ```Z1``` og ```Z2``` grafisk, kan det også undersøges ved hjælp af funktionen ```cor``` i R, som giver en værdi for korrelationen af de to talsekvenser.
 Korrelationen af to variabler udregnes ved formlen 
