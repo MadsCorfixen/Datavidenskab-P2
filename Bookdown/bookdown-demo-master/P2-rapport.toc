@@ -5,19 +5,19 @@
 \contentsline {section}{\numberline {1.4}Anvendte pakker}{5}{section.1.4}%
 \contentsline {chapter}{\numberline {2}Problemanalyse}{7}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Statistisk inferens}{8}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Problemformulering}{9}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Simuleringer}{11}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Pseudorandom number generator}{11}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Lineær kongruens generator}{13}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Box-Muller-transformation}{18}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Simulering i R}{22}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Normalfordeling}{22}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Uniform fordeling}{22}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Binomialfordeling}{22}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Skæv fordeling}{25}{subsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.2.5}Betafordeling}{25}{subsection.3.2.5}%
-\contentsline {subsection}{\numberline {3.2.6}Gammafordeling}{26}{subsection.3.2.6}%
-\contentsline {subsection}{\numberline {3.2.7}Replicate}{27}{subsection.3.2.7}%
+\contentsline {section}{\numberline {2.2}Problemformulering}{8}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Simuleringer}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Pseudorandom number generator}{9}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Lineær kongruens generator}{11}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Box-Muller-transformation}{16}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Simulering i R}{20}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Normalfordeling}{20}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Uniform fordeling}{20}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Binomialfordeling}{20}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Skæve fordelinger}{24}{subsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.4.1}Betafordeling}{24}{subsubsection.3.2.4.1}%
+\contentsline {subsubsection}{\numberline {3.2.4.2}Gammafordeling}{24}{subsubsection.3.2.4.2}%
+\contentsline {subsection}{\numberline {3.2.5}Replicate}{24}{subsection.3.2.5}%
 \contentsline {chapter}{\numberline {4}Hypotesetest}{29}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Hypotesetest for middelværdier}{31}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Fejltyper}{33}{section.4.2}%

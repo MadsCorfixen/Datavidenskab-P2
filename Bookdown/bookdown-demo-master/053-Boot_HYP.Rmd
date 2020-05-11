@@ -17,9 +17,9 @@ Så opstilles der en nulhypotese, $H_0:~\mu = 0$, hvor $\mu$ angiver den sande m
 
 Først forenes de to stikprøver til en samlet stikprøve med størrelsen $2n$ observationer. Derefter laves en bootstrap-stikprøve af $2n$ observationer med tilbagelægning fra den samlede stikprøve. Herefter trækkes den første halvdel af indgangene i bootstrap-stikprøven, som betegnes $X^*$, og den sidste halvdel, der betegnes $Y^*$. Lad $X^*_i = [x^*_{1,i},~x^*_{2,i},~...,~x^*_{n,i}]$ betegne den $i$'te bootstrap-stikprøve for $X$ og tilsvarende for $Y$, [@Paired_test, slide 2].
 
-På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \hat{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$, [@Paired_test].
+På baggrund af bootstrap-stikprøverne for $X$ og $Y$, kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \bar{Z^*_i}$, hvor $Z^*_i = [x^*_{1,i}-y^*_{1,i},~x^*_{2,i}-y^*_{2,i},~...,~x^*_{n,i}-y^*_{n,i}]$, [@Paired_test].
 
-_P_-værdien ligger i intervallet $[0,1]$, $p_{tosidet} \in [0,1]$, hvor $p_{mindre} + p_{større} = 1$ . Vælges $\min (p_{mindre}, ~p_{større})$ fås en ensidet _p_-værdien. Derfor multipliceres der med $2$, for at opnå den tosidede _p_-værdi. Se figur \@ref(fig:fig-p-bootstrap) for illustration.
+_P_-værdien ligger i intervallet $[0,1]$, $p_{tosidet} \in [0,1]$, hvor $p_{mindre} + p_{større} = 1$ . Vælges $\min (p_{mindre}, ~p_{større})$ fås en ensidet _p_-værdien. For at opnå den tosidede _p_-værdi multipliceres der med $2$. Se figur \@ref(fig:fig-p-bootstrap) for illustration.
 
 ```{r, include=FALSE}
 library(mosaic)
@@ -82,7 +82,6 @@ res <- replicate(100, {
 })
 
 p_vaerdi_parret <- mean(res)
-res
 ```
 
 Der ses altså at p-værdien er lig ```r round(p_vaerdi_parret, 4)```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.

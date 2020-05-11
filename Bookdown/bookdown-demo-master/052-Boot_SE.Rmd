@@ -52,5 +52,4 @@ SE_boot <- sd(Boot_sample$t) #Standardfejlen for bootstrap-stikprøver
 diff_procent <- ((abs(SE_sample - SE_boot))/SE_sample) * 100 #Procentvis afvigelse
 ```
 
-Fra eksemplet fås, at standardfejlen for bootstrap-stikprøven er $se(\hat{\theta})=$```r SE_boot```, hvilket approksimerer stikprøvens standardfejl på $\text{se}(\hat{\mu})=$```r SE_sample```, med en forskel i dette tilfælde på ```r round(diff_procent, 3)```$\%$.
-Hvis der opstår en situation hvor der ikke er en simpel måde hvorpå det er muligt at udregne standardfejlen, kan bootstrap altså udnyttes, da en forskel på $0.3 \%$ er ubetydelig. 
+Fra eksemplet fås, at standardfejlen for bootstrap-stikprøven er $se(\hat{\theta})=$```r round(SE_boot, 3)```, hvilket approksimerer stikprøvens standardfejl på $\text{se}(\hat{\mu})=$```r round(SE_sample, 3)```, med en forskel i dette tilfælde på ```r round(diff_procent, 3)```$\%$. Hvis der opstår en situation hvor der ikke er en simpel måde hvorpå det er muligt at udregne standardfejlen, kan bootstrap altså udnyttes, da en forskel på ```r round(diff_procent, 3)```$\%$ ikke er signifikant. 

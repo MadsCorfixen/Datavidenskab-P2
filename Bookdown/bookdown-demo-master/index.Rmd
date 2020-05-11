@@ -13,6 +13,9 @@ github-repo: rstudio/bookdown-demo
 ---
 
 # Introduktion
+```{r, include=FALSE}
+knitr::opts_chunk$set(tidy=TRUE)
+```
 
 __FIXME__ Husk link til Github.
 
@@ -33,8 +36,3 @@ boot
 SimDesign
 
 e1071
-
-
-
-
-

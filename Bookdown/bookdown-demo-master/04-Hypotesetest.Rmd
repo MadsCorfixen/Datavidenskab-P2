@@ -2,6 +2,10 @@
 library(mosaic)
 ```
 
+__FIXME__ (Afsnittet skal kigges igennem, mhp. ILT! Noget af indledening til afsnittet minder om problemanalysen) 
+
+__FIXME__ (RAPPORTEN generelt. Ordet teststørrelsen anvendes til at beskrive forskellige ting.)
+
 # Hypotesetest
 
 I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at drage konklusioner for en population, ved at opstille to hypoteser.
@@ -36,7 +40,9 @@ Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er d
 
 ## Hypotesetest for middelværdier {#t-test}
 
-I dette afsnit gennemgåes fremgangsmåden for, hvordan en hypotesetest kan bruges til at bestemme middelværdien for en population. En sådan hypotesetest kaldes en t-test. Afsnittet er skrevet på baggrund af [@ASTAKursus4].
+__FIXME__ (Afsnittet kunne bruge lidt mere forklarende teskt. Mindre punkt form)
+
+I dette afsnit gennemgås fremgangsmåden for, hvordan en hypotesetest kan bruges til at bestemme middelværdien for en population. I dette afsnit kaldes en sådan hypotesetest for en t-test. Afsnittet er skrevet på baggrund af [@ASTAkursus4].
 
 Først er der nogle antagelser, der skal være opfyldt, for at t-testen ikke giver misvisende resultater.
 
@@ -65,9 +71,9 @@ xdata <- rnorm(n, forventet_middelvaerdi, 1)
 x_middelvaerdi <- mean(xdata)
 ```
 
-Figur \@ref(fig:hist10) viser en stikprøve af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi```, udtaget fra en standardnormalfordelt population med en forventet middelværdi på $0$.
+Figur \@ref(fig:hist10) viser en stikprøve af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi```, udtaget fra en standard normalfordelt population med en forventet middelværdi på $0$.
 
-```{r hist10, echo=FALSE, fig.align='center', fig.cap = "Histogram over 10 simulerede standardnormalfordelte tal."}
+```{r hist10, echo=FALSE, fig.align='center', fig.cap = "Histogram over 10 simulerede standard normalfordelte tal."}
 hist(xdata, main = NULL,
      ylab="Frekvens",
      xlab="Værdi")
@@ -77,11 +83,9 @@ I kodestykket nedenfor gennemgås den beskrevede fremgangsmåde for en t-test.
 
 ```{r}
 n <- 10
-
 forventet_middelvaerdi <- 0 # Forventet middelværdi
-
+xdata <- rnorm(n, forventet_middelvaerdi, 1)
 middelvaerdi <- mean(xdata) # Middelværdi
-
 standardafvigelse <- sd(xdata) # Standardafvigelsen
 
 estimeret_standardfejl <- standardafvigelse/sqrt(n) # Estimeret standardfejl
@@ -90,7 +94,6 @@ t_obs <- (abs(middelvaerdi-forventet_middelvaerdi))/estimeret_standardfejl
   # Observeret teststørrelse
 
 alpha_halve <-  1 - pdist("t", q = t_obs, df = n-1, plot = FALSE)
-
 p <- 2 * alpha_halve
 ```
 
@@ -106,13 +109,13 @@ Eftersom *p*-værdien er ```r p``` $> \alpha=0.05$, forkastes $H_0$ ikke. Havde 
 
 ## Fejltyper {#fejltyper-afsnit}
 
-Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-I fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-II fejl, er hvor $H_0$ accepteres, men i realiteten er falsk.
+Der er risiko for to primære fejl når der foretages en hypotesetest, som illustreret på figur \@ref(fig:figur-typefejl). Den første, type-I fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-II fejl, er hvor $H_0$ accepteres, men i realiteten er falsk.
 
 En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
 
-Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau - i de fleste tilfælde $5\%$. Sandsynligheden for type-II fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen og lille, hvis den er langt fra. __FIXME__ (Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen, er den derimod langt fra, vil sandsynligheden for type-II fejl være (tilsvarende) lille.) Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved mindre data, __FIXME__ (Er det korrekt at skrive mindre data? Ellers kunne der stå "ved en mindre mængde data") [@Fejltyper].
+Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau. Sandsynligheden for type-II fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen. Er den virkelige sandhed derimod langt fra nulhypotesen, vil sandsynligheden for type-II fejl være tilsvarende lille. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved en mindre mængde data, [@Fejltyper].
 
-```{r, figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
+```{r figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
 knitr::include_graphics('images/Typefejl.png')
 ```
 
@@ -171,4 +174,4 @@ tf <- table(res)
 tf
 ```
 
-Det fremgår fra tabellen, at dækningsgraden af konfidensintervallerne er ```r tf[2]/100```$\%$. Dette stemmer ikke overens med antagelsen om, at $5\%$ burde ligge udenfor konfidensintervallet.
+Det fremgår fra tabellen, at dækningsgraden af konfidensintervallerne er ```r tf[2]/100```$\%$. Dette stemmer ikke overens med antagelsen om, at konfidensintervallet har en dækningsgrad på $95\%$. Det kan derfor ikke antages, at en t-test på en ikke-normalfordelt stikprøve altid giver retvisende resultater. 

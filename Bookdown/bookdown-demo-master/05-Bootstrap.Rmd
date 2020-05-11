@@ -3,7 +3,7 @@ library(mosaic)
 ```
 # Bootstrap {#boot-afsnit}
 
-I dette kapitel, vil den teoretiske del af bootstrap blive beskrevet, heriblandt hvilke tendenser der findes når der bootstrappes, samt hvordan der udtages bootstrap-stikprøver. Herefter vil der blive undersøgt hvordan bootstrap kan anvendes i praksis, til at udregne standardfejl for en estimator, til at angive konfidensintervaller, og hvordan hypotesetest udføres ved hjælp af bootstrap. Til hver anvendelse vil der også blive givet et eksempel på metoden.
+I dette kapitel vil den teoretiske del af bootstrap blive beskrevet og hvordan der udtages bootstrap-stikprøver. Herefter vil der blive undersøgt, hvordan bootstrap kan anvendes i praksis til at udregne standardfejl for en estimator, hvordan hypotesetest udføres ved hjælp af bootstrap og til at angive konfidensintervaller. Til hver anvendelse vil der også blive givet et eksempel på metoden.
 
 ## Ikke-parametrisk bootstrap
 
