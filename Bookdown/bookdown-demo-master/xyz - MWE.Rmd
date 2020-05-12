@@ -8,7 +8,7 @@ alpha <- 8
 beta <- 2
 ```
 
-# T-test
+# T-test uparret
 
 ```{r}
 type_1_fejl_t <- replicate(100, {
@@ -21,7 +21,7 @@ type_1_fejl_t <- replicate(100, {
 table(type_1_fejl_t)
 ```
 
-# Permutationstest (Kilde MSRR s. 54)
+# Permutationstest uparret (Kilde MSRR s. 54)
 
 ```{r}
 type_1_fejl_perm <- replicate(100, {
@@ -56,9 +56,11 @@ type_1_fejl_perm <- replicate(100, {
 table(type_1_fejl_perm)
 ```
 
-# Bootstrap
+# Bootstrap uparret
 
 ```{r}
+B <- 1000 # Antal bootstrap-resamples
+
 type_1_fejl_boot <- replicate(100, {
   stik1 <- rbeta(n, alpha, beta)
   stik2 <- rbeta(n, alpha, beta)
@@ -68,20 +70,28 @@ type_1_fejl_boot <- replicate(100, {
   
   mean_list <- c()
   
-  for(i in 1:1000){
+  for(i in 1:B){
     boot1 <- sample(samlet_stik, n, replace = TRUE)
     boot2 <- sample(samlet_stik, n, replace = TRUE)
     
     mean_list[i] <- abs(mean(boot1) - mean(boot2))
   }
   
-  ekstreme_vaerdier <- 0
+  stoerre_vaerdier <- 0
   for(i in 1:length(mean_list)){
     if(mean_list[i] >= mean_difference){
-     ekstreme_vaerdier <- ekstreme_vaerdier + 1
+     stoerre_vaerdier <- stoerre_vaerdier + 1
    }
   }
-  p_value <- ekstreme_vaerdier/length(mean_list)
+  
+  mindre_vaerdier <- 0
+  for(i in 1:length(mean_list)){
+    if(mean_list[i] >= mean_difference){
+     mindre_vaerdier <- mindre_vaerdier + 1
+   }
+  }
+  
+  p_value <- 2*(min(mindre_vaerdier, stoerre_vaerdier))/B
   
   type1fejl <- p_value > 0.05
   return(type1fejl)
