@@ -1,6 +1,8 @@
 # Stikprøver
 
 ```{r}
+library(gtools) # Benyttes til permutationstest
+
 n <- 20
 alpha <- 8
 beta <- 2
@@ -22,9 +24,7 @@ table(type_1_fejl_t)
 # Permutationstest
 
 ```{r}
-library(gtools)
-
-res <- replicate(1000, {
+type_1_fejl_perm <- replicate(100, {
   
   stik1 <- rbeta(n, alpha, beta)
   stik2 <- rbeta(n, alpha, beta)
@@ -34,9 +34,9 @@ res <- replicate(1000, {
   mean_list <- c()
   
   for(i in 1:(n*2)){
-    permuteret_samlet_stik <- permute(samlet_stik) #Gtools bruges til at permutere den samlet stikprøve
-    permuteret_stik1 <- head(permuteret_samlet_stik, n) #Den første halvdel er permuteret stik1
-    permuteret_stik2 <- tail(permuteret_samlet_stik, n) #Den sidste halvdel er permuteret stik2
+    permuteret_samlet_stik <- gtools::permute(samlet_stik) # Den samlede stikprøve permuteres
+    permuteret_stik1 <- head(permuteret_samlet_stik, n) # Den første halvdel af den samlede, permuterede stikprøve
+    permuteret_stik2 <- tail(permuteret_samlet_stik, n) # Den sidste halvdel af den samlede, permuterede stikprøve
   
     mean_list[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
   }
@@ -52,7 +52,8 @@ res <- replicate(1000, {
   type1fejl <- p_value > 0.05
   return(type1fejl)
 })
-table(res)
+
+table(type_1_fejl_perm)
 ```
 
 # Bootstrap
