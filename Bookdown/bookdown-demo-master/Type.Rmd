@@ -84,7 +84,7 @@ Eksemplet vil tage udgangspunkt i to normalfordelinger med konstant varians på 
 ```{r}
 type_2_vector <- c()
 reps <- 1000
-for(stik in c(5, 10, 20, 50, 100, 1000, 10000)){ # Stik størrelse
+for(stik in c(5, 10, 25, 50, 200, 1000, 10000)){ # Stik størrelse
   for(mdiff in c(0.001, 0.1, 1, 2, 5)){ # Mu difference
     middel1 <- 1 + mdiff
     middel2 <- 1
@@ -111,8 +111,8 @@ type_2_vector[is.na(type_2_vector)] <- 0
 type_2_vector <- type_2_vector / reps
 
 type_2 <- matrix(type_2_vector, nrow = 5, ncol = 7)
-temp <- type_2
-colnames(type_2) <- c("n = 5", "10", "20", "50", "100", "1000", "10000")
+# Dimnames?
+colnames(type_2) <- c("n = 5", "10", "25", "50", "200", "1000", "10000")
 rownames(type_2) <- c("diff = 0.001", "0.1", "1", "2", "5")
 type_2
 ```
