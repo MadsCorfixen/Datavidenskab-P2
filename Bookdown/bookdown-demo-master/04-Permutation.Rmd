@@ -82,6 +82,12 @@ head(mean_list, 3)
 ```
 
 I outputtet _head(mean_list, 3)_ ses et eksempel på tre af middelværdierne, som der er i alt 100 af.
+På figur \@ref(fig:permmeanhist) illusteres fordelingen af alle permutationernes teststørrelse.
+
+```{r permmeanhist, fig.cap = "Permutationsfordelingen af alle teststørrelserne. Den blå linje viser den originale observeret forskel i middelværdierne."}
+hist(mean_list, main = "", ylab = "Antal observationer", xlab = "Forskel i middelværdier")
+abline(v = mean_difference, col = "blue")
+```
 
 Nu kan p-værdien beregnes, ved at udregne hvor mange gange den observeret forskel mellem middelværdierne på hver permutationstest er større end den originale obserevet forskel. Denne værdi divideres derefter med antallet af permutationer der er udført i alt. Dette gøres i nedenstående kodestykke. 
 ```{r}
@@ -100,13 +106,9 @@ Med en p-værdi på ```r p_value```, er der ikke noget belæg for at forkaste nu
 
 __Antal type-I fejl__
 
-#type 1 fejl - Simulere stikprøver hvor nulhypoteses passer. Undersøg hvor mange gange jeg forekaster (Burde gerne være 5 % af gangene)
-
 Antallet af type-I fejl der opstår i en permutationstest kan undersøges ved at se hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. I virkeligheden burde antallet af type-I fejl svare til det valgte signifikansniveau, [@ASTAbog, s. 156-157].
 
-Processen for at finde antallet af type-1 fejl er den samme som i det forrige eksempel. Der udt
-Den opsatte nulhypotese vil være 
-Først vil der trækkes to stikprøver fra den samme betafordeling, hvor n
+Processen for at finde antallet af type-1 fejl er den samme som i det forrige eksempel. Forskellen er __FIXME__
 
 ```{r}
 res <- replicate(1000, {
@@ -145,6 +147,7 @@ res <- replicate(1000, {
 table(res)
 ```
 
+I alt forkastes __FIXME__
 
 
 
