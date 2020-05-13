@@ -129,7 +129,7 @@ Der er risiko for to primære fejl når der foretages en hypotesetest, som illus
 
 En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
 
-Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau. Sandsynligheden for type-II fejl er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen. Er den virkelige sandhed derimod langt fra nulhypotesen, vil sandsynligheden for type-II fejl være tilsvarende lille. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved en mindre mængde data, [@Fejltyper].
+Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau, $\alpha$. Sandsynligheden for type-II fejl, $\beta$, er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen. Er den virkelige sandhed derimod langt fra nulhypotesen, vil sandsynligheden for type-II fejl være tilsvarende lille. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved en mindre mængde data. Andelen af type-II fejl benyttes til at udregne hypotesetestens styrke, $1-\beta$. Styrken annotere andelen af gange, hvor $H_1$ korrekt bliver forkastet, [@Fejltyper].
 
 ```{r figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
 knitr::include_graphics('images/Typefejl.png')
@@ -487,8 +487,7 @@ Nogle af de fordelinger, der kan simuleres i R, er normal-, binomial-, uniforme-
 
 #### Normalfordeling
 
-I R simuleres en normalfordeling ved funktionen ```rnorm```. Fordelingen på figur \@ref(fig:normal) bliver genereret ud fra en middelværdi på $0$ og en standardafvigelse på $1$.
-
+I R simuleres en normalfordeling ved funktionen ```rnorm```. Fordelingen på figur \@ref(fig:normal) bliver genereret ud fra en middelværdi på $0$ og en standardafvigelse på $1$. 
 
 ```{r normal, echo = FALSE, fig.align='center', fig.cap = "En normalfordeling med størrelsen n = 1000, en middelværdi på 0 og en standardafvigelse på 1. Med disse værdier kaldes den også for en standard normalfordeling eller Z-fordeling"}
 set.seed(29)
@@ -509,9 +508,9 @@ abline(h = 1)
 
 #### Binomialfordeling
 
-__FIXME__ (udbyd beskrivelsen af fordelingen)
+En binomialfordeling bliver genereret ud fra sandsynligheder med to udfald, success og fiasko. I den binomiale fordeling gives en _size_ som er antallet af eksperimenter, samt en sandsynlighed for succes, angivet med _prob_. Det vil altså sige, at der foretages et eksperiment af en given størrelse samt en sandsynlighed for succes. For hver gentagelse af eksperimentet optælles andelen af successer, som minimalt kan være $0$ og maksimalt eksperimentstørrelsen. Andelen af successer fra hvert eksperiment illustreres herefter i et histogram.
 
-En binomialfordeling bliver genereret ud fra sandsynligheder. I den binomiale fordeling gives en _size_ som er antallet af eksperimenter, samt en sandsynlighed for succes, angivet med _prob_. På figur \@ref(fig:binomfordeling) vises densitetskurven af en binomialfordeling.
+På figur \@ref(fig:binomfordeling) vises densitetskurven af en binomialfordeling.
 
 ```{r binomfordeling, fig.align='center', fig.cap = "En binomialfordeling med size = 6 og en sandsynlighed for succes på prob = 1/3."}
 x <- c(0,1,2,3,4,5,6)
