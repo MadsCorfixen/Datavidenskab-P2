@@ -120,9 +120,9 @@ type_2
 
 
 
+Det vil påvises, hvilken betydning små differencer i middelværdien samt stikprøvestørrelsen har for andelen af type-II fejl.
 
-
-```{r}
+```{r, echo=FALSE}
 type_2_vector <- c()
 reps <- 1000
 for(stik in c(5, 10, 25, 50, 200, 1000, 10000)){ # Stik størrelse
@@ -150,5 +150,5 @@ type_2 <- matrix(type_2_vector, nrow = 5, ncol = 7, dimnames = list("Differencen
 type_2
 ```
 
-Tabellen viser, at både stikprøvestørrelsen samt differencen i middelværdien, har stor betydning for sandsynligheden for andelen aftype-II fejl. Er differencen i middelværdierne $0.001$ fremgår det, at stikprøvestørrelsen mellem $5$ og $10,000$ ikke giver signifikante forskelle, hvilket medfører, at stikprøvestørrelsen skal være meget større for at mindste andelen af type-II fejl. Derudover mindskes andelen af type-II fejl som stikprøvestørrelsen øges, hvilket også er gældende hvis differencen i middelværdierne vokser.
+Tabellen viser, at både stikprøvestørrelsen samt differencen i middelværdien, har stor betydning for sandsynligheden for andelen aftype-II fejl. Er differencen i middelværdierne $0.001$ fremgår det, at stikprøvestørrelsen mellem $5$ og $10,000$ ikke giver signifikante forskelle, hvilket medfører, at stikprøvestørrelsen skal være meget større for at mindste andelen af type-II fejl. Derudover mindskes risikoen for type-II fejl som stikprøvestørrelsen øges, hvilket også er gældende hvis differencen i middelværdierne forøges.
 
