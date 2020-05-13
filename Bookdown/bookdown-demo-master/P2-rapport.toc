@@ -1,38 +1,42 @@
-\contentsline {chapter}{\numberline {1}Introduktion}{5}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Forord}{5}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Abstract/Synopsis}{5}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Indledning}{5}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Anvendte pakker}{5}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Problemanalyse}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Statistisk inferens}{8}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Problemformulering}{8}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Simuleringer}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Pseudorandom number generator}{9}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Lineær kongruens generator}{11}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Box-Muller-transformation}{16}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Simulering i R}{20}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Normalfordeling}{20}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Uniform fordeling}{20}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Binomialfordeling}{20}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Skæve fordelinger}{24}{subsection.3.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.4.1}Betafordeling}{24}{subsubsection.3.2.4.1}%
-\contentsline {subsubsection}{\numberline {3.2.4.2}Gammafordeling}{24}{subsubsection.3.2.4.2}%
-\contentsline {subsection}{\numberline {3.2.5}Replicate}{24}{subsection.3.2.5}%
-\contentsline {chapter}{\numberline {4}Hypotesetest}{29}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Hypotesetest for middelværdier}{31}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Fejltyper}{33}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Uparret t-test for ikke-normalfordelte stikprøver}{33}{section.4.3}%
-\contentsline {chapter}{\numberline {5}Bootstrap}{37}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Ikke-parametrisk bootstrap}{37}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Bootstrap-standardfejl}{40}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Bootstrap-hypotesetest}{41}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Parret bootstrap-test}{41}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Uparret bootstrap-test}{44}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Bootstrap-konfidensintervaller}{45}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Percentilmetoden}{46}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Basic-metoden}{47}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}T-metoden}{47}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}Dækningsgrader}{48}{subsection.5.4.4}%
-\contentsline {chapter}{\numberline {6}Diskussion}{53}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Konklusion}{55}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Perspektivering}{57}{chapter.8}%
+\contentsline {chapter}{\numberline {1}Introduktion}{5}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Forord}{5}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Abstract/Synopsis}{5}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}Indledning}{5}{section.1.3}% 
+\contentsline {section}{\numberline {1.4}Anvendte pakker}{5}{section.1.4}% 
+\contentsline {chapter}{\numberline {2}Problemanalyse}{7}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Statistikkens udvikling}{7}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Statistiksk inferens}{8}{section.2.2}% 
+\contentsline {section}{\numberline {2.3}Hypotesetest}{8}{section.2.3}% 
+\contentsline {section}{\numberline {2.4}Hypotesetest for middelværdier}{10}{section.2.4}% 
+\contentsline {subsection}{\numberline {2.4.1}Fejltyper}{11}{subsection.2.4.1}% 
+\contentsline {subsection}{\numberline {2.4.2}Uparret t-test for ikke-normalfordelte stikprøver}{13}{subsection.2.4.2}% 
+\contentsline {section}{\numberline {2.5}Simulering}{15}{section.2.5}% 
+\contentsline {subsection}{\numberline {2.5.1}Pseudorandom number generator}{15}{subsection.2.5.1}% 
+\contentsline {subsection}{\numberline {2.5.2}Lineær kongruens generator}{16}{subsection.2.5.2}% 
+\contentsline {subsection}{\numberline {2.5.3}Box-Muller-transformation}{19}{subsection.2.5.3}% 
+\contentsline {subsection}{\numberline {2.5.4}Simulering i R}{25}{subsection.2.5.4}% 
+\contentsline {subsubsection}{\numberline {2.5.4.1}Normalfordeling}{25}{subsubsection.2.5.4.1}% 
+\contentsline {subsubsection}{\numberline {2.5.4.2}Uniform fordeling}{26}{subsubsection.2.5.4.2}% 
+\contentsline {subsubsection}{\numberline {2.5.4.3}Binomialfordeling}{26}{subsubsection.2.5.4.3}% 
+\contentsline {subsubsection}{\numberline {2.5.4.4}Skæve fordelinger}{27}{subsubsection.2.5.4.4}% 
+\contentsline {paragraph}{\numberline {2.5.4.4.1}Betafordeling}{27}{paragraph.2.5.4.4.1}% 
+\contentsline {paragraph}{\numberline {2.5.4.4.2}Gammafordeling}{28}{paragraph.2.5.4.4.2}% 
+\contentsline {subsection}{\numberline {2.5.5}Repetitioner}{29}{subsection.2.5.5}% 
+\contentsline {section}{\numberline {2.6}Problemformulering}{30}{section.2.6}% 
+\contentsline {chapter}{\numberline {3}Permutationstest}{31}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Permutationer}{31}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Test ved hjælp af permutationer}{31}{section.3.2}% 
+\contentsline {chapter}{\numberline {4}Bootstrap}{37}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Ikke-parametrisk bootstrap}{37}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Bootstrap-standardfejl}{39}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Bootstrap-hypotesetest}{41}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Parret bootstrap-test}{41}{subsection.4.3.1}% 
+\contentsline {subsection}{\numberline {4.3.2}Uparret bootstrap-test}{43}{subsection.4.3.2}% 
+\contentsline {section}{\numberline {4.4}Bootstrap-konfidensintervaller}{45}{section.4.4}% 
+\contentsline {subsection}{\numberline {4.4.1}Percentilmetoden}{45}{subsection.4.4.1}% 
+\contentsline {subsection}{\numberline {4.4.2}Basic-metoden}{46}{subsection.4.4.2}% 
+\contentsline {subsection}{\numberline {4.4.3}T-metoden}{47}{subsection.4.4.3}% 
+\contentsline {subsection}{\numberline {4.4.4}Dækningsgrader}{47}{subsection.4.4.4}% 
+\contentsline {chapter}{\numberline {5}Diskussion}{51}{chapter.5}% 
+\contentsline {chapter}{\numberline {6}Konklusion}{53}{chapter.6}% 
+\contentsline {chapter}{\numberline {7}Perspektivering}{55}{chapter.7}% 

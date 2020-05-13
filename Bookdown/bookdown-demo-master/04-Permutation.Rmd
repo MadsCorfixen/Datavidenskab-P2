@@ -108,6 +108,45 @@ p_tosidet
 
 Med en tosidet p-værdi på ```r p_tosidet```, er der ikke noget belæg for at forkaste nulhypotesen.
 
+### Parret permutationstest
+
+I nedenstående kode, vises et eksempel på en parret permutations-test.
+
+```{r}
+reps <- 100
+n <- 100
+alfa1 <- 10
+beta1 <- 2
+alfa2 <- 4
+beta2 <- 13
+B <- 1000
+
+p_reps <- replicate(reps, {
+  stik1 <- rgamma(n, alfa1, beta1)
+  stik2 <- rgamma(n, alfa2, beta2)
+  stik_diff <- stik1 - stik2
+  obs_t <- (mean(stik_diff)-0)/(sd(stik_diff)/sqrt(n))
+
+  perm_t <- c()
+  for(i in seq(1, B)){
+    perm <- permute(stik_diff)
+    perm_t[i] <- (mean(perm)-mean(stik_diff))/(sd(perm)/sqrt(n))
+  }
+
+  antal_mindre <- perm_t <= obs_t
+  antal_stoerre <- perm_t >= obs_t
+
+  p_1 <- sum(antal_mindre)/B
+  p_2 <- sum(antal_stoerre)/B
+
+  p_vaerdi <- min(2*p_1, 2*p_2)
+})
+
+p_vaerdi_parret <- mean(p_reps)
+p_vaerdi_parret
+```
+
+
 __Antal type-I fejl__
 
 Antallet af type-I fejl, der opstår i en permutationstest kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. Antallet af type-I fejl bør svare til det valgte signifikansniveau, [@ASTAbog, s. 156-157].
