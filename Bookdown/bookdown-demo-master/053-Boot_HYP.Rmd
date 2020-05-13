@@ -83,36 +83,36 @@ p_vaerdi_parret <- mean(res)
 p_vaerdi_parret
 ```
 
-# ```{r}
-# set.seed(2)
-# 
-# meanFunc <- function(sample_pop,i){mean(sample_pop[i])} #Estimator
-# 
-# res <- replicate(100, {
-#   
-#   n <- 100
-#   stik1 <- rbeta(n, 8, 2)
-#   stik2 <- rbeta(n, 2, 8)
-#   
-#   t_obs <- abs(stik1-stik2)
-#   t_obs_mean <- mean(t_obs)
-# 
-#   B <- 1000
-#   bootmeans <- boot::boot(data = t_obs, statistic = meanFunc, R = B)
-#   for(i in 1:B){
-#     andel_mindre <- bootmeans$t0[i] < t_obs_mean
-#   }
-#   
-#   # andel_mindre <- bootmeans$t0 < t_obs_mean
-#   p_stoerre <- (sum(andel_mindre)) / B
-#   p_mindre <- (B-(sum(andel_mindre))) / B
-# 
-#   p_tosidet <- 2*min(p_mindre, p_stoerre)
-# })
-# 
-# p_vaerdi_parret <- mean(res)
-# p_vaerdi_parret
-# ```
+```{r}
+set.seed(2)
+
+meanFunc <- function(sample_pop,i){mean(sample_pop[i])} #Estimator
+
+res <- replicate(100, {
+ 
+ n <- 100
+ stik1 <- rbeta(n, 8, 2)
+ stik2 <- rbeta(n, 2, 8)
+ 
+ t_obs <- abs(stik1-stik2)
+ t_obs_mean <- mean(t_obs)
+
+ B <- 1000
+   bootmeans <- boot::boot(data = t_obs, statistic = meanFunc, R = B)
+ for(i in 1:B){
+   andel_mindre <- bootmeans$t0[i] < t_obs_mean
+ }
+ 
+ # andel_mindre <- bootmeans$t0 < t_obs_mean
+ p_stoerre <- (sum(andel_mindre)) / B
+ p_mindre <- (B-(sum(andel_mindre))) / B
+
+ p_tosidet <- 2*min(p_mindre, p_stoerre)
+})
+
+p_vaerdi_parret <- mean(res)
+p_vaerdi_parret
+```
 
 Der ses altså at p-værdien er lig ```r round(p_vaerdi_parret, 4)```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
 
