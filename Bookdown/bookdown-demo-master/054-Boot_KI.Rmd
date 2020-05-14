@@ -1,6 +1,6 @@
 ## Bootstrap-konfidensintervaller
 
-I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøve beregnes ved hjælp af percentilmetoden, basic-metoden og T-metoden. Til sidst sammenlignes de tre metoders dækningsgrader ved forskellige stikprøvestørrelser.
+I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøve beregnes ved hjælp af percentil-, basic- og T-metoden. Til sidst sammenlignes de tre metoders dækningsgrader ved forskellige stikprøvestørrelser.
 
 Et $95\%$ konfidensinterval på en normalfordelt estimator, $\Theta$, kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$, [@BootKI]. Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
@@ -48,11 +48,39 @@ KI_Percentil
 
 ### Basic-metoden
 
-Denne type konfidensinterval ud fra bootstrap er også kendt som _reversed percentile interval_. Denne metode benytter formlen:
+Denne type konfidensinterval ud fra bootstrap er også kendt som _reversed percentile interval_. 
+Pivot(Jeg har ingen ide om hvad det betyder?!) konfidensintervallet giver at forholdet mellem $\theta - \hat\theta$ er tilnærmelsesvis det samme som forholdet mellem $\hat\theta - \hat\theta^*$, derfor gælder følgende:
+
+
+
+$$
+\begin{aligned}
+0.95 &\approx P[\hat\theta_{(\alpha/2)} \leq \hat\theta^* \leq \hat\theta^*_{(1-\alpha/2)}] \\
+&= P[\hat\theta^*_{(\alpha/2)} - \hat\theta \leq \hat\theta^* - \hat\theta \leq \hat\theta^*_{1-\alpha/2} - \hat\theta] \\
+&= P[\hat\theta - \hat\theta^*_{(\alpha/2)} \geq \hat\theta - \hat\theta^* \geq \hat\theta - \hat\theta^*_{1-\alpha/2}] \\
+&\approx P[\hat\theta - \hat\theta^*_{(\alpha/2)} \geq \theta - \hat\theta \geq \hat\theta - \hat\theta^*_{1-\alpha/2}] \\
+&= P[2\hat\theta - \hat\theta^*_{(\alpha/2)} \geq \theta \geq 2\hat\theta - \hat\theta^*_{1-\alpha/2}] \\
+\blacksquare
+\end{aligned}
+$$
+$
+\begin{aligned}
+0.95 &\approx P[q_{(\alpha/2)} \leq q \leq q_{(1-\alpha/2)}] \\
+&= P[q_{(\alpha/2)} - \hat\theta \leq q - \hat\theta \leq q_{1-\alpha/2} - \hat\theta] \\
+&= P[\hat\theta - q_{(\alpha/2)} \geq \hat\theta - q \geq \hat\theta - q_{1-\alpha/2}] \\
+&\approx P[\hat\theta - q_{(\alpha/2)} \geq \theta - \hat\theta \geq \hat\theta - q_{1-\alpha/2}] \\
+&= P[2\hat\theta - q_{(\alpha/2)} \geq \theta \geq 2\hat\theta - q_{1-\alpha/2}] \\
+\blacksquare
+\end{aligned}
+$
+Dette giver den nedre kvartil $= 2\hat\theta - q_{(\alpha/2)}$ og øvre kvartil $=\theta \geq 2\hat\theta - q_{1-\alpha/2}$
+Basic metoden benytter nedenstående formel til udregning af konfidensintervaller.
 
 $$\text{KI}_b = \left[2\hat\theta- q_{(1-\alpha/2)}, ~ 2\hat\theta- q_{(\alpha/2)}\right]$$
 
-Hvor $q_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven, [@BasicKI].
+Hvor $q_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven, [@BasicKI]
+
+
 
 __Eksempel__
 
@@ -70,7 +98,7 @@ KI_Basic
 ### T-metoden
 
 Konfidensintervaller kan også findes ved hjælp af standardfejl fra stikprøven, hvis stikprøven er tilnærmelsesvist t-fordelt.
-
+Beviset for formlen til konfidensintervalelt for T-metoden, følger samme metode som i afsnittet for basic-metoden. 
 Formlen for konfidensintervallet er: 
 
 $$\text{KI}_t=\left[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}}(\theta),~\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}(\theta)\right]$$ 

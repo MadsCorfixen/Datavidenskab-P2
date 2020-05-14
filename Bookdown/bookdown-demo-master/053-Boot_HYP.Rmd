@@ -69,14 +69,14 @@ p_reps <- replicate(reps, {
   p_1 <- sum(antal_mindre)/B
   p_2 <- sum(antal_stoerre)/B
 
-  p_vaerdi <- min(2*p_1, 2*p_2)
+  p_vaerdi <- 2*min(p_1, p_2)
 })
 
 p_vaerdi_parret <- mean(p_reps)
 p_vaerdi_parret
 ```
 
-Der ses altså at p-værdien er lig ```r round(p_vaerdi_parret, 4)```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
+Der ses altså at p-værdien er lig ```r p_vaerdi_parret```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
 
 ### Uparret bootstrap-test
 
