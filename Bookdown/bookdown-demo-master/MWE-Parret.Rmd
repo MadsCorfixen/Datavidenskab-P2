@@ -9,8 +9,8 @@ beta <- 2
 konf_niveau <- 0.95
 sand_middel <- 0
 reps <- 100
-bootstraps <- 1000
-permuteringer <- 1000
+bootstraps <- 5000
+permuteringer <- 5000
 ```
 
 # T-test
@@ -18,7 +18,7 @@ permuteringer <- 1000
 type_1_fejl_t <- replicate(reps, {
   Stik1 <- rbeta(n, alfa, beta)
   Stik2 <- rbeta(n, alfa, beta)
-  test <- t.test(Stik1, Stik2, paired = TRUE, alternative = "two.sided", conf.level = konf_niveau)
+  test <- t.test(Stik1, Stik2, paired = TRUE, alternative = "two.sided", mu = sand_middel, conf.level = konf_niveau)
   andel <- test$p.value > 1-konf_niveau
 })
 
