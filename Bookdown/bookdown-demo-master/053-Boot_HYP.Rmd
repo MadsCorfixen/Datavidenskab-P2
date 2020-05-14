@@ -85,23 +85,26 @@ __FIXME__ Her har vi blandet eksempel med teori for at se hvordan det ser ud.
 I kodestykket nedenunder er angivet de forskellige parametre der vil bruges under den uparret bootstrap-test.
 
 ```{r}
-reps <- 100
 n1 <- 15
 n2 <- 30
 alfa1 <- 8
 beta1 <- 2
 alfa2 <- 2
 beta2 <- 8
+reps <- 100
 B <- 1000
+
+middel_forskel_pop <- alfa1/(alfa1+beta1) - alfa2/(alfa2-beta2)
+middel_forskel_pop
 ```
 
-Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n_1}]$ og $Y=[y_{1},~y_{2},~...,~y_{n_2}]$, med ens varians, være givet. 
+Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n_1}]$ og $Y=[y_{1},~y_{2},~...,~y_{n_2}]$, med ens varians være givet på figur \@ref(fig:histhypuparret).
 
 ```{r}
 stik1 <- rbeta(n1, alfa1, beta1)
 stik2 <- rbeta(n2, alfa2, beta2)
 ```
-```{r fig.cap = "To uafhængige uparrede stikprøver", echo = FALSE}
+```{r histhypuparret, fig.cap = "To uafhængige uparrede stikprøver", echo = FALSE}
 par(mfrow = c(1,2))
 hist(stik1, main = "", xlab = "Venstreskræv stikprøve", ylab = "Antal observationer")
 hist(stik2, main = "", xlab = "Højreskæv stikprøve", ylab = "Antal observationer")
@@ -133,12 +136,14 @@ boot_t <- replicate(B, {
 
 Trin to til fem i ovenstående gentages i alt $B$ gange, hvilket giver $B$ teststørrelser. Bootstrap-teststørrelserne ses på figur \@ref(fig:boothypuparret), hvor den observerede teststørrelse også er markeret med en blå linje.
 
-```{r boothypuparret, fig.cap = "Bootstrap teststørrelse fordelingen, hvor den blå linje markerer den observeret teststørrelse."}
+```{r boothypuparret, fig.cap = "Bootstrap teststørrelse fordelingen, hvor den blå linje markerer den observeret teststørrelse, og den grønne linje markerer bootstrap fordelingens middelværdi."}
 hist(boot_t, main = "", ylab = "Antal observationer", xlab = "Bootstrap teststørrelse", xlim = c(-0.3, 1))
+t_boot <- mean(boot_t)
 abline(v = t_obs, col = "blue")
+abline(v = t_boot, col = "green")
 ```
 
-Herefter kan p-værdien udregnes, på tilsvarende måde som i det forrige eksempel.
+Herefter kan p-værdien udregnes, Her er opsummeres antalllet af observationer fra bootstrap-test fordelingen, som er placeret på begge sider af den observeret middelværdi i figur \@ref(fig:boothypuparret), og andelen udregnes. Den mindste af disse to værdier, vælges som den en-sidet p-værdi, og resultatet multipliceres med to, for at få den to-sidet p-værdi.
 
 ```{r}
 antal_mindre <- boot_t <= t_obs
@@ -150,7 +155,7 @@ p_vaerdi <- min(2*p_1, 2*p_2)
 p_vaerdi
 ```
 
-Med en p-værdi på ```r p_vaerdi```, kan $H_0$ forkastes, da der ikke er evidens for at middelværdierne for de to populationer er ens. 
+Med en p-værdi på ```r p_vaerdi```, kan $H_0$ forkastes, da der ikke er evidens for at middelværdierne for de to populationer er ens. Dette resultat er også det forventet, da der udfra figur \@ref(fig:boothypuparret) kan antages er der er tæt på 0 observationer på den højre side af den observeret middelværdi.
 
 <!-- Herefter kan p-værdien udregnes, som antal gange bootstrap-teststørrelsen er mere ekstrem end den observerede teststørrelse. Dette gøres ved at finde den mindste af de to ensidede p-værdier og gange den med $2$, [@Hypo_test]. -->
 
@@ -168,13 +173,13 @@ __Eksempel__
 Den udførte test kan ved hjælp af R's funktion ```replicate```, gentages mange gange, for at undersøge om resultatet vil blive det samme, ved mange stikprøve udtagninger. Fremgangsmåden for den uparret bootstrap-test er den samme. Den bliver blot lavet i alt $100$ gange, og middelværdien for de $100$ p-værdier findes. Denne p-værdi bruges så til, om nulhypotesen skal forkastes eller ej.
 
 ```{r}
-# reps <- 100
 # n1 <- 15
 # n2 <- 30
 # alfa1 <- 8
 # beta1 <- 2
 # alfa2 <- 2
 # beta2 <- 8
+#reps <- 100
 # B <- 1000
 
 res <- replicate(reps, {

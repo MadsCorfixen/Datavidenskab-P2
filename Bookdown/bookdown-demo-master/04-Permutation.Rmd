@@ -32,7 +32,7 @@ Netop på grund af ombytteligheden af stikprøven, fungerer permutationstests. H
 
 Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
 
-__Eksempel__
+### Uparret permutationstest
 
 __FIXME__ Tror koden skal omskrives i forhold til at finde tosidet p-værdi. 
 
