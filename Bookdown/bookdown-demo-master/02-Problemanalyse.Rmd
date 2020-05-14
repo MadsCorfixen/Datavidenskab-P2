@@ -135,8 +135,6 @@ Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau, $\alpha
 knitr::include_graphics('images/Typefejl.png')
 ```
 
-FIXME: Skriv om 'styrken' (jævnfør arbejdsblad fra 26/3)
-
 Det vil påvises, hvilken betydning små differencer i middelværdien samt stikprøvestørrelsen har for andelen af type-II fejl.
 
 ```{r, echo=FALSE}
