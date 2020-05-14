@@ -36,7 +36,7 @@ p_{_{større}} &= \frac{\text{antal gange }\{t^*>\bar{Z}\}}{B} \\
 p_{_{tosidet}} &= \text{min}(2 \cdot p_{_{mindre}},~ 2 \cdot p_{_{større}})
 \end{align}
 
-Forkast $H_0$, hvis $\text{p}_{_{tosidet}}<\alpha$.
+Hvis $\text{p}_{_{tosidet}}<\alpha$ forkastes $H_0$.
 
 __Eksempel__
 
@@ -85,8 +85,8 @@ __FIXME__ Her har vi blandet eksempel med teori for at se hvordan det ser ud.
 I kodestykket nedenunder er angivet de forskellige parametre der vil bruges under den uparret bootstrap-test.
 
 ```{r}
-n1 <- 15
-n2 <- 30
+n1 <- 20
+n2 <- 50
 alfa1 <- 8
 beta1 <- 2
 alfa2 <- 2
@@ -106,8 +106,11 @@ stik2 <- rbeta(n2, alfa2, beta2)
 ```
 ```{r histhypuparret, fig.cap = "To uafhængige uparrede stikprøver", echo = FALSE}
 par(mfrow = c(1,2))
-hist(stik1, main = "", xlab = "Venstreskræv stikprøve", ylab = "Antal observationer")
-hist(stik2, main = "", xlab = "Højreskæv stikprøve", ylab = "Antal observationer")
+hist(stik1, main = "", xlab = "Stikprøve 1", ylab = "Antal observationer")
+hist(stik2, main = "", xlab = "Stikprøve 2", ylab = "Antal observationer")
+
+boxplot(stik1)
+boxplot(stik2)
 ```
 
 På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs} = \bar{X}-\bar{Y}$.

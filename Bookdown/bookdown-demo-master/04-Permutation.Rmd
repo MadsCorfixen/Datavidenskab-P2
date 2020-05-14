@@ -18,7 +18,9 @@ Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_
 
 ## Test ved hjælp af permutationer
 
-I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af [@Permutationstest]. __FIXME__ Omskriv teorien i forhold til MSRR som kilde. Husk at fremgangsmåden skal være specifik. 
+I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af [@Permutationstest]. 
+
+__FIXME__ Omskriv teorien i forhold til MSRR som kilde. Husk at fremgangsmåden skal være specifik. 
 
 Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at teste validiteten af $H_0$. Værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
 
