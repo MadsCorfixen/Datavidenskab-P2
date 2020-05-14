@@ -1,0 +1,113 @@
+# Parametre
+```{r}
+library(gtools)
+library(wPerm)
+set.seed(31415)
+n <- 20
+alfa <- 8
+beta <- 2
+konf_niveau <- 0.95
+sand_middel <- 0
+reps <- 100
+bootstraps <- 1000
+permuteringer <- 1000
+```
+
+# T-test
+```{r}
+type_1_fejl_t <- replicate(reps, {
+  Stik1 <- rbeta(n, alfa, beta)
+  Stik2 <- rbeta(n, alfa, beta)
+  test <- t.test(Stik1, Stik2, paired = TRUE, alternative = "two.sided", conf.level = konf_niveau)
+  andel <- test$p.value > 1-konf_niveau
+})
+
+table(type_1_fejl_t)
+```
+
+# Permutationstest (MNWE)
+```{r}
+type_1_fejl_perm <- replicate(reps, {
+  stik1 <- rgamma(n, alfa, beta)
+  stik2 <- rgamma(n, alfa, beta)
+  stik_diff <- stik1 - stik2
+
+  obs_t <- mean(stik_diff)/(sd(stik_diff)/sqrt(n))
+
+  perm_stik <- c()
+  for(i in seq(1, n)){
+    perm_stik <- append(perm_stik, permute(c(stik1[i], stik2[i])))
+  }
+
+  perm_stik1 <- c()
+  for(i in seq(1, (2*n), 2)){
+    perm_stik1 <- append(perm_stik1, perm_stik[i])
+  }
+
+  perm_stik2 <- c()
+  for(i in seq(2, (2*n), 2)){
+    perm_stik2 <- append(perm_stik2, perm_stik[i])
+  }
+
+  perm_diff <- perm_stik1 - perm_stik2
+  perm_t <- mean(perm_diff)/(sd(perm_diff)/sqrt(n))
+
+
+  antal_mindre <- perm_t <= obs_t
+  antal_stoerre <- perm_t >= obs_t
+
+  p_1 <- sum(antal_mindre)/n
+  p_2 <- sum(antal_stoerre)/n
+
+  p_vaerdi <- min(2*p_1, 2*p_2)
+  andel <- p_vaerdi > 1 - konf_niveau
+})
+
+table(type_1_fejl_perm)
+```
+
+
+```{r}
+type_1_fejl_perm_funk <- replicate(reps, {
+  stik1 <- rgamma(n, alfa, beta)
+  stik2 <- rgamma(n, alfa, beta)
+  
+  test <- wPerm::perm.paired.loc(x = stik1, y = stik2, parameter = mean, alternative = "two.sided", R = permuteringer)
+  
+  p_vaerdi <- test$p.value
+  andel <- p_vaerdi > 1 - konf_niveau
+})
+
+table(type_1_fejl_perm_funk)
+```
+
+
+# Bootstrap
+```{r}
+type_1_fejl_boot <- replicate(reps, {
+  stik1 <- rgamma(n, alfa, beta)
+  stik2 <- rgamma(n, alfa, beta)
+  stik_diff <- stik1 - stik2
+  obs_t <- (mean(stik_diff)-0)/(sd(stik_diff)/sqrt(n))
+
+  boot_t <- c()
+  for(i in seq(1, bootstraps)){
+    boot <- sample(stik_diff, n, replace = TRUE)
+    boot_t[i] <- (mean(boot)-mean(stik_diff))/(sd(boot)/sqrt(n))
+  }
+
+  antal_mindre <- boot_t <= obs_t
+  antal_stoerre <- boot_t >= obs_t
+
+  p_1 <- sum(antal_mindre)/bootstraps
+  p_2 <- sum(antal_stoerre)/bootstraps
+
+  p_vaerdi <- 2*min(p_1, p_2)
+  andel <- p_vaerdi > 1 - konf_niveau
+})
+
+table(type_1_fejl_boot)
+```
+
+
+

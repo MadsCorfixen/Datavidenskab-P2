@@ -4,7 +4,7 @@
 library(gtools) # Benyttes til permutationstest
 set.seed(31415)
 n <- 20
-alpha <- 8
+alfa <- 8
 beta <- 2
 konf_niveau <- 0.95
 sand_middel <- 0
@@ -16,8 +16,8 @@ B <- 1000 # Antal bootstrap-resamples
 
 ```{r}
 type_1_fejl_t <- replicate(reps, {
-  Stik1 <- rbeta(n, alpha, beta)
-  Stik2 <- rbeta(n, alpha, beta)
+  Stik1 <- rbeta(n, alfa, beta)
+  Stik2 <- rbeta(n, alfa, beta)
   test <- t.test(Stik1, Stik2, alternative = "two.sided", mu = sand_middel, conf.level = konf_niveau)
   andel <- test$p.value > 1-konf_niveau
 })
@@ -30,8 +30,8 @@ table(type_1_fejl_t)
 ```{r}
 type_1_fejl_perm <- replicate(reps, {
   
-  stik1 <- rbeta(n, alpha, beta)
-  stik2 <- rbeta(n, alpha, beta)
+  stik1 <- rbeta(n, alfa, beta)
+  stik2 <- rbeta(n, alfa, beta)
   samlet_stik <- c(stik1, stik2) 
   
   mean_difference <- abs(mean(stik1) - mean(stik2))
@@ -72,8 +72,8 @@ table(type_1_fejl_perm)
 
 ```{r}
 type_1_fejl_boot <- replicate(reps, {
-  stik1 <- rbeta(n, alpha, beta)
-  stik2 <- rbeta(n, alpha, beta)
+  stik1 <- rbeta(n, alfa, beta)
+  stik2 <- rbeta(n, alfa, beta)
   samlet_stik <- c(stik1, stik2)
   
   mean_difference <- abs(mean(stik1) - mean(stik2))
