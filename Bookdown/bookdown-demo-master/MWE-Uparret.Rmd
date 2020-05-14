@@ -3,7 +3,7 @@
 ```{r}
 library(gtools) # Benyttes til permutationstest
 set.seed(31415)
-n <- 20
+n <- 5
 alfa <- 8
 beta <- 2
 konf_niveau <- 0.95
@@ -16,9 +16,9 @@ B <- 1000 # Antal bootstrap-resamples
 
 ```{r}
 type_1_fejl_t <- replicate(reps, {
-  Stik1 <- rbeta(n, alfa, beta)
-  Stik2 <- rbeta(n, alfa, beta)
-  test <- t.test(Stik1, Stik2, alternative = "two.sided", mu = sand_middel, conf.level = konf_niveau)
+  Stik1 <- rbeta(n, 80, 20)
+  Stik2 <- rbeta(n, 8, 2)
+  test <- t.test(Stik1, Stik2, alternative = "two.sided", mu = sand_middel, conf.level = konf_niveau, var.equal = FALSE)
   andel <- test$p.value > 1-konf_niveau
 })
 

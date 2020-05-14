@@ -1,3 +1,4 @@
 # Diskussion
 
 Diskutér
+T-testens robusthed (CLT)

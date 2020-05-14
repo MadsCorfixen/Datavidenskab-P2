@@ -482,7 +482,7 @@ Nogle af de fordelinger, der kan simuleres i R, er normal-, binomial-, uniforme-
 
 I R simuleres en normalfordeling ved funktionen ```rnorm```. Fordelingen på figur \@ref(fig:normal) bliver genereret ud fra en middelværdi på $0$ og en standardafvigelse på $1$. 
 
-```{r normal, echo = FALSE, fig.align='center', fig.cap = "En normalfordeling med størrelsen n = 1000, en middelværdi på 0 og en standardafvigelse på 1. Med disse værdier kaldes den også for en standard normalfordeling eller Z-fordeling"}
+```{r normal, echo = FALSE, fig.align='center', fig.cap = "Densitetskurven af en standard normalfordeling."}
 set.seed(29)
 x <- seq(-4, 4, length.out = 100)
 y <- dnorm(x, mean = 0, sd = 1)
@@ -501,17 +501,15 @@ abline(h = 1)
 
 #### Binomialfordeling
 
-En binomialfordeling bliver genereret ud fra sandsynligheder med to udfald, success og fiasko. I den binomiale fordeling gives en _size_ som er antallet af eksperimenter, samt en sandsynlighed for succes, angivet med _prob_. Det vil altså sige, at der foretages et eksperiment af en given størrelse samt en sandsynlighed for succes. For hver gentagelse af eksperimentet optælles andelen af successer, som minimalt kan være $0$ og maksimalt eksperimentstørrelsen. Andelen af successer fra hvert eksperiment illustreres herefter i et histogram.
+En binomialfordeling bliver genereret ud fra sandsynligheder med to udfald, succes eller fiasko. I den binomiale fordeling gives en _size_ som er størrelsen af et eksperiment, samt en sandsynlighed for succes, angivet med _prob_. For hver gentagelse af eksperimentet optælles andelen af successer, som minimalt kan være $0$ og maksimalt $1$. Andelen af successer fra hvert eksperiment illustreres herefter i et histogram.
 
 På figur \@ref(fig:binomfordeling) vises densitetskurven af en binomialfordeling.
 
-```{r binomfordeling, fig.align='center', fig.cap = "En binomialfordeling med size = 6 og en sandsynlighed for succes på prob = 1/3."}
+```{r binomfordeling, echo = FALSE, fig.align='center', fig.cap = "En binomialfordeling med size = 6 og en sandsynlighed for succes på prob = 1/3."}
 x <- c(0,1,2,3,4,5,6)
 y <- dbinom(x, size = 6, prob = 1/3)
 plot(x, y, xlim = c(0,6), ylim = c(0.023, 0.6), main = "", ylab = "Densitet", xlab = "x", type = "h")
 ```
-
-En egenskab ved binomialfordelinger er, at jo højere $n$ er, des tættere vil middelværdien af stikprøven være på sandsynligheden for succes.
 
 #### Skæve fordelinger
 
@@ -519,7 +517,7 @@ En skæv fordeling er kendetegnet ved, at størstedelen af observationerne er sa
 
 ##### Betafordeling
 
-En skæv fordeling kan være en betafordeling, $\text{Beta}(\alpha, \beta)$, hvor $\alpha-1$ angiver andelen af succeser og $\beta-1$ angiver andelen af fiaskoer. Betafordelingen er tilnærmelsesvis normaltfordelt, hvis $\alpha$ og $\beta$ begge er tilpas store og omtrent ens, [@TDSBeta].
+En skæv fordeling kan være en betafordeling, $\text{Beta}(\alpha, \beta)$, hvor $\alpha-1$ angiver andelen af succeser og $\beta-1$ angiver andelen af fiaskoer, [@TDSBeta].
 
 En venstreskæv og en højreskæv betafordeling vil nu simuleres og vises på figur \@ref(fig:betafordeling), hvor $\alpha = 8$ og $\beta = 2$ for den venstreskæve, mens $\alpha = 2$ og $\beta = 8$ for den højreskæve.
 

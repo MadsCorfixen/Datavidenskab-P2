@@ -3,40 +3,44 @@ library(mosaic)
 library(SimDesign)
 library(gtools)
 ```
-# Permutationstest
+# Permutationer
 
-I afsnit \@ref(t-test) blev der redegjort for visse antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. 
-I dette afsnit vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test ikke kan anvendes, kan der udnyttes en permutationstest. Først vil der gives en kort introduktion til permutationer, herefter en forklaring af, hvad en permutationstest er, og til sidst et praktisk eksempel.
+I afsnit \@ref(t-test) blev der redegjort for visse antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test ikke kan anvendes, kan der udnyttes permutationer.
 
-## Permutationer
-
-I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer].
+I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer]. Senere vil der gives en forklaring af, hvad en permutationstest er, og et eksempel på henholdsvis en parret og en uparret permutationstest vil gives.
 
 Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2)}, \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $X$, af længde $n$, er givet ved $n!$.
 
 Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_{\pi_1} = [2, 1, 3]$, og der er i alt $|A| = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permutationer af listen.
 
-## Test ved hjælp af permutationer
+## Permutationstest {#permutationstest}
 
-I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af [@Permutationstest]. 
-
-__FIXME__ Omskriv teorien i forhold til MSRR som kilde. Husk at fremgangsmåden skal være specifik. 
+I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af [@MathStat, side 54].
 
 Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at teste validiteten af $H_0$. Værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
 
 En permutationstest går ud på at forsøge at måle evidens imod $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststørrelsen for samtlige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi(1)}, X_{\pi(2)}, \ldots X_{\pi(m)} \}$, hvor $m$ er antallet af mulige permutationer af $X$. Teststørrelsen for den $i$'te permutation benævnes $S_{\pi_i}$.
 
-Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der har en mere ekstrem værdi end $S_{obs}$, findes en _p_-værdi for testen. Dette kan skrives som $p = \frac{\# S_{\pi_i}~ \text{mere ekstrem end}~ S_{obs}}{m}$.
+Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der har en mindre eller større værdi end $S_{obs}$, findes en en-sidet _p_-værdi for testen. Dette kan skrives som $p_{mindre} = \frac{\# S_{\pi_i} \leq  S_{obs}}{m}$, eller tilsvarende for værdier af $S_{\pi_i}$, der er større end $S_{obs}$. For at få den to-sidede _p_-værdi ganges den mindste af de en-sidede p-værdier med $2$.
+$p_{mindre}$ er stor i de tilfælde, hvor $S_{\pi_i}$ ofte er mindre end $S_{obs}$. Ligeledes gør det sig gældende, at $p_{større}$ er stor i de tilfælde, hvor $S_{\pi_i}$ ofte er større end $S_{obs}$.
 
-Denne form for test har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er ombyttelig. For det andet er det ikke alle teststørrelser, der kan testes ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger - hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven.
+En begrundelse for, hvorfor p-værdien udregnes på denne måde er, at p-værdien er symmetrisk, og derfor må den mindste af de to en-sidede p-værdier ganget med $2$, angive mængden af evidens imod $H_0$, se figur \@ref(fig:fig-p-bootstrap) for illustration.
 
-Netop på grund af ombytteligheden af stikprøven, fungerer permutationstests. Hvis stikprøven er ombyttelig, vil hver eneste permutation af stikprøven, inklusiv stikprøven selv, være lige sandsynlige. Dette medfører, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ være lille og tilfældig. Hvis værdien for $S_{obs}$ på den måde konkluderes at være væsentlig anderledes, tyder det på, at $H_0$ skal forkastes.
+```{r fig-p-bootstrap, fig.cap="(A) Fordelingen viser 40% observationer større end teststørrelsen og 60% observationer mindre. (B) Fordelingen viser 98% observationer større end teststørrelsen og 2% observationer mindre.", echo=FALSE}
+plot1 <- qdist("norm", p = 0.60, mean = 0, sd = 1, ylab="", xlim = c(-4, 4),  return = c("plot"))
+plot1 <- plot1 + theme(legend.position = "none")
+plot2 <- qdist("norm", p = 0.02, mean = 0, sd = 1, ylab="", xlim = c(-4, 4), return = c("plot"))
+plot2 <- plot2 + theme(legend.position = "none")
+plot_grid(plot1, plot2, labels = "AUTO")
+```
+
+Permutationstest har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er ombyttelig. For det andet er det ikke alle teststørrelser, der kan undersøges ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger. Hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven.
+
+Netop på grund af ombytteligheden af stikprøven fungerer permutationstests. Hvis stikprøven er ombyttelig, vil hver eneste permutation af stikprøven, inklusiv stikprøven selv, være lige sandsynlige. Dette medfører, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ være lille og tilfældig. Hvis værdien for $S_{\pi_i}$ på den måde konkluderes at være væsentlig anderledes end $S_{obs}$, tyder det på, at $H_0$ skal forkastes.
 
 Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for et passende antal, tilfældigt udvalgte, permutationer af stikprøven, og et acceptabelt resultat vil stadig blive opnået.
 
-### Uparret permutationstest
-
-__FIXME__ Tror koden skal omskrives i forhold til at finde tosidet p-værdi. 
+## Uparret permutationstest
 
 Der vil nu vises et eksempel på, hvordan permutationstest kan anvendes som en hypotesetest. Antag, at det ønskes undersøgt, om middelværdien af to stikprøver er signifikant forskellige. Den opstillede nulhypotese bliver $H_0 : \mu_1 = \mu_2$, og den alternative hypotese bliver $H_1 : \mu_1 \neq \mu_2$.
 
@@ -104,13 +108,13 @@ for(i in 1:length(mean_list)){
 
 p_lavere <- lavere_vaerdier/length(mean_list)
 
-p_tosidet <- 2*min(p_stoerre, p_lavere)
+p_tosidet <- min(2*p_stoerre, 2*p_lavere)
 p_tosidet
 ```
 
 Med en tosidet p-værdi på ```r p_tosidet```, er der ikke noget belæg for at forkaste nulhypotesen.
 
-### Parret permutationstest
+## Parret permutationstest
 
 I nedenstående kode, vises et eksempel på en parret permutations-test.
 
@@ -121,32 +125,55 @@ alfa1 <- 10
 beta1 <- 2
 alfa2 <- 4
 beta2 <- 13
-B <- 1000
+permuteringer <- 1000
 
 p_reps <- replicate(reps, {
   stik1 <- rgamma(n, alfa1, beta1)
   stik2 <- rgamma(n, alfa2, beta2)
-  stik_diff <- stik1 - stik2
-  obs_t <- (mean(stik_diff)-0)/(sd(stik_diff)/sqrt(n))
-
-  perm_t <- c()
-  for(i in seq(1, B)){
-    perm <- permute(stik_diff)
-    perm_t[i] <- (mean(perm)-mean(stik_diff))/(sd(perm)/sqrt(n))
-  }
-
-  antal_mindre <- perm_t <= obs_t
-  antal_stoerre <- perm_t >= obs_t
-
-  p_1 <- sum(antal_mindre)/B
-  p_2 <- sum(antal_stoerre)/B
-
-  p_vaerdi <- min(2*p_1, 2*p_2)
+  
+  test <- wPerm::perm.paired.loc(x = stik1, y = stik2, parameter = mean, alternative = "two.sided", R = permuteringer)
+  
+  p_vaerdi <- test$p.value
 })
 
 p_vaerdi_parret <- mean(p_reps)
 p_vaerdi_parret
 ```
+
+<!-- ```{r}
+# reps <- 100
+# n <- 100
+# alfa1 <- 10
+# beta1 <- 2
+# alfa2 <- 4
+# beta2 <- 13
+# B <- 1000
+# 
+# p_reps <- replicate(reps, {
+#   stik1 <- rgamma(n, alfa1, beta1)
+#   stik2 <- rgamma(n, alfa2, beta2)
+  #stik_diff <- stik1 - stik2
+  #obs_t <- (mean(stik_diff)-0)/(sd(stik_diff)/sqrt(n))
+  
+  # p_vaerdi <- test$p.value
+  # perm_t <- c()
+  # for(i in seq(1, B)){
+  #   perm <- permute(stik_diff)
+  #   perm_t[i] <- (mean(perm))/(sd(perm)/sqrt(n))
+  # }
+
+  # antal_mindre <- perm_t <= obs_t
+  # antal_stoerre <- perm_t >= obs_t
+  # 
+  # p_1 <- sum(antal_mindre)/B
+  # p_2 <- sum(antal_stoerre)/B
+
+#   p_vaerdi <- test$p.value
+# })
+# 
+# p_vaerdi_parret <- mean(p_reps)
+# p_vaerdi_parret
+```-->
 
 
 __Antal type-I fejl__
