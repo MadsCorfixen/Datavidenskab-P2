@@ -2,6 +2,7 @@
 library(mosaic)
 library(SimDesign)
 library(gtools)
+library(cowplot)
 ```
 # Permutationer
 
@@ -49,9 +50,11 @@ Der vil blive udtrukket to stikprøver fra den samme betafordeling, der vises p�
 ```{r}
 set.seed(29)
 
-n = 100
-stik1 <- rbeta(n, 8, 2)
-stik2 <- rbeta(n, 8, 2)
+n <- 100
+alfa1 <- 8
+beta1 <- 2
+stik1 <- rbeta(n, alfa1, beta1)
+stik2 <- rbeta(n, alfa1, beta1)
 
 mean_difference <- abs(mean(stik1) - mean(stik2))
 ```
@@ -114,6 +117,62 @@ p_tosidet
 
 Med en tosidet p-værdi på ```r p_tosidet```, er der ikke noget belæg for at forkaste nulhypotesen.
 
+__Type-I fejl__
+
+Antallet af type-I fejl, der opstår i en uparret permutationstest kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. Antallet af type-I fejl bør svare til det valgte signifikansniveau, [@ASTAbog, s. 156-157].
+
+I koden nedenfor bestemmes antallet af type-I fejl for en uparret permutationstest.
+
+```{r}
+konf_niveau <- 0.95
+
+type_1_fejl <- replicate(reps, {
+  
+  stik1 <- rbeta(n, alfa1, beta1)
+  stik2 <- rbeta(n, alfa1, beta1)
+  samlet_stik <- c(stik1, stik2) 
+  
+  mean_difference <- abs(mean(stik1) - mean(stik2))
+  mean_list <- c()
+  
+  for(i in 1:(n*2)){
+    permuteret_samlet_stik <- gtools::permute(samlet_stik)
+    permuteret_stik1 <- head(permuteret_samlet_stik, n)
+    permuteret_stik2 <- tail(permuteret_samlet_stik, n)
+  
+    mean_list[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
+  }
+  
+  stoerre_vaerdier <- 0
+  for(i in 1:length(mean_list)){
+    if(mean_list[i] >= mean_difference){
+     stoerre_vaerdier <- stoerre_vaerdier + 1
+   }
+  }
+  
+  p_stoerre <- stoerre_vaerdier/length(mean_list)
+  
+  mindre_vaerdier <- 0
+  for(i in 1:length(mean_list)){
+    if(mean_list[i] >= mean_difference){
+     mindre_vaerdier <- mindre_vaerdier + 1
+   }
+  }
+
+  p_lavere <- lavere_vaerdier/length(mean_list)
+
+  p_tosidet <- min(2*p_stoerre, 2*p_lavere)
+  
+  type1fejl <- p_tosidet > 1 - konf_niveau
+  return(type1fejl)
+})
+
+fejltable <- table(type_1_fejl)
+fejltable
+```
+
+I alt forkastes $H_0$ fejlagtigt i ```r unname(fejltable[1])```$\%$ af tilfældene, hvilket stemmer overens med det valgte signifikansniveau. 
+
 ## Parret permutationstest
 
 I nedenstående kode, vises et eksempel på en parret permutations-test.
@@ -139,96 +198,3 @@ p_reps <- replicate(reps, {
 p_vaerdi_parret <- mean(p_reps)
 p_vaerdi_parret
 ```
-
-<!-- ```{r}
-# reps <- 100
-# n <- 100
-# alfa1 <- 10
-# beta1 <- 2
-# alfa2 <- 4
-# beta2 <- 13
-# B <- 1000
-# 
-# p_reps <- replicate(reps, {
-#   stik1 <- rgamma(n, alfa1, beta1)
-#   stik2 <- rgamma(n, alfa2, beta2)
-  #stik_diff <- stik1 - stik2
-  #obs_t <- (mean(stik_diff)-0)/(sd(stik_diff)/sqrt(n))
-  
-  # p_vaerdi <- test$p.value
-  # perm_t <- c()
-  # for(i in seq(1, B)){
-  #   perm <- permute(stik_diff)
-  #   perm_t[i] <- (mean(perm))/(sd(perm)/sqrt(n))
-  # }
-
-  # antal_mindre <- perm_t <= obs_t
-  # antal_stoerre <- perm_t >= obs_t
-  # 
-  # p_1 <- sum(antal_mindre)/B
-  # p_2 <- sum(antal_stoerre)/B
-
-#   p_vaerdi <- test$p.value
-# })
-# 
-# p_vaerdi_parret <- mean(p_reps)
-# p_vaerdi_parret
-```-->
-
-
-__Antal type-I fejl__
-
-Antallet af type-I fejl, der opstår i en permutationstest kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. Antallet af type-I fejl bør svare til det valgte signifikansniveau, [@ASTAbog, s. 156-157].
-
-Processen for at finde antallet af type-1 fejl er den samme som i det forrige eksempel. Forskellen er __FIXME__
-
-```{r}
-res <- replicate(1000, {
-  
-  n = 10
-  stik3 <- rbeta(n, 8, 2)
-  stik4 <- rbeta(n, 8, 2)
-  samlet_stik <- c(stik3, stik4)
-  
-  mean_difference <- abs(mean(stik3) - mean(stik4))
-  mean_list <- c()
-  
-  for(i in 1:(n*2)){
-    permuteret_samlet_stik <- gtools::permute(samlet_stik)
-    permuteret_stik1 <- head(permuteret_samlet_stik, n)
-    permuteret_stik2 <- tail(permuteret_samlet_stik, n)
-  
-    mean_list[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
-  }
-  
-  stoerre_vaerdier <- 0
-  lavere_vaerdier <- 0
-
-  for(i in 1:length(mean_list)){
-    if(mean_list[i] >= mean_difference){
-      stoerre_vaerdier <- stoerre_vaerdier + 1
-    }
-  }
-
-  p_stoerre <- stoerre_vaerdier/length(mean_list)
-
-  for(i in 1:length(mean_list)){
-    if(mean_list[i] <= mean_difference){
-      lavere_vaerdier <- lavere_vaerdier + 1
-    }
-  }
-
-  p_lavere <- lavere_vaerdier/length(mean_list)
-
-  p_tosidet <- 2*min(p_stoerre, p_lavere)
-  
-  type1fejl <- p_tosidet > 0.05
-  return(type1fejl)
-})
-table(res)
-```
-
-I alt forkastes __FIXME__
-
-
-

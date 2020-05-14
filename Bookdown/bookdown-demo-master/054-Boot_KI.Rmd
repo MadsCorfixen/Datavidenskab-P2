@@ -52,29 +52,28 @@ Denne type konfidensinterval ud fra bootstrap er også kendt som _reversed perce
 
 $$\text{KI}_b = \left[2\hat\theta- q_{(1-\alpha/2)}, ~ 2\hat\theta- q_{(\alpha/2)}\right]$$
 
-Hvor $q_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven, [@BasicKI]
-
-__FIXME__ Gerne forklaring mellem hver linje. $\hat{\theta}$ - Værs'go Ronni. 
-
-I udledningen anvendes at differencen $\theta - \hat\theta$ er tilnærmelsevist den samme som $\hat\theta - \hat\theta^*$. Derfor gælder følgende:
+Hvor $q_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdien af stikprøven, [@BasicKI]. Hermed følger udledningen af basic-metoden:
 
 >```{proof}
->Hej
->Med
->Dig
+>
+>Fra percentilmetoden kendes følgende konfidensinterval
+>
+>$0.95 \approx P[q_{(\alpha/2)} \leq \hat{\theta}^* \leq q_{(1-\alpha/2)}]$
+>
+>Der trækkes $\hat{\theta}$ fra på alle sider af uligheden og uligheden vendes om
+>
+>$0.95 = P[q_{(\alpha/2)} - \hat\theta \leq \hat{\theta}^* - \hat\theta \leq q_{(1-\alpha/2)} - \hat\theta]$
+>
+>$0.95 = P[\hat\theta - q_{(\alpha/2)} \geq \hat\theta - \hat{\theta}^* \geq \hat\theta - q_{(1-\alpha/2)}]$
+>
+>Differencen $\theta - \hat\theta$ er tilnærmelsevist den samme som $\hat\theta - \hat\theta^*$, hvilket nu indsættes i uligheden
+>
+>$0.95 \approx P[\hat\theta - q_{(\alpha/2)} \geq \theta - \hat\theta \geq \hat\theta - q_{(1-\alpha/2)}]$
+>
+>Dernæst lægges $\hat{\theta}$ til på alle sider af uligheden, og dermed fås konfidensintervallet
+>
+>$0.95 = P[2\hat\theta - q_{(\alpha/2)} \geq \theta \geq 2\hat\theta - q_{(1-\alpha/2)}]$
 >``` 
-
-$$
-\begin{aligned}
-0.95 &\approx P[q_{(\alpha/2)} \leq \hat{\theta}^* \leq q_{(1-\alpha/2)}] \\
-&= P[q_{(\alpha/2)} - \hat\theta \leq \hat{\theta}^* - \hat\theta \leq q_{(1-\alpha/2)} - \hat\theta] \\
-&= P[\hat\theta - q_{(\alpha/2)} \geq \hat\theta - \hat{\theta}^* \geq \hat\theta - q_{(1-\alpha/2)}] \\
-&\approx P[\hat\theta - q_{(\alpha/2)} \geq \theta - \hat\theta \geq \hat\theta - q_{(1-\alpha/2)}] \\
-&= P[2\hat\theta - q_{(\alpha/2)} \geq \theta \geq 2\hat\theta - q_{(1-\alpha/2)}] \\
-\blacksquare
-\end{aligned}
-$$
-Dette giver den nedre grænse $2\hat\theta - q_{(\alpha/2)}$ og den øvre grænse $\theta \geq 2\hat\theta - q_{(1-\alpha/2)}$.
 
 __Eksempel__
 

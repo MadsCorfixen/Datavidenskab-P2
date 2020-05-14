@@ -2,7 +2,6 @@
 
 ```{r, include=FALSE}
 library(mosaic)
-library(cowplot)
 set.seed(29)
 ```
 
@@ -40,7 +39,7 @@ t_obs
 
 Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} \neq \mu_{_Y}$, samt et signifikansniveau, $\alpha = 0.05$. 
 
-Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n_1 + n_2$ observationer. Derefter laves en bootstrap-stikprøve af $n_1 + n_2$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n_1$ observationer, som kaldes $\hat{X}^*$. Desuden udregnes middelværdien af de resterende $n_2$ observationer, der kaldes $\hat{Y}^*$. Til sidst udregnes bootstrap-teststørrelsen $t^*=\frac{\hat{X}^*-\hat{Y}^*}{\hat{SE}(X^*)+\hat{SE}(Y^*)}$, [@BootHypo]. I alt beregnes der $B$ bootstrap-teststørrelser.
+Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n_1 + n_2$ observationer. Derefter laves en bootstrap-stikprøve af $n_1 + n_2$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n_1$ observationer, som kaldes $\hat{X}^*$. Desuden udregnes middelværdien af de resterende $n_2$ observationer, der kaldes $\hat{Y}^*$. Til sidst udregnes bootstrap-teststørrelsen $t^*=\frac{\hat{X}^*-\hat{Y}^*}{\hat{SE}(X^*)+\hat{SE}(Y^*)}$. I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo].
 
 ```{r}
 B <- 1000
