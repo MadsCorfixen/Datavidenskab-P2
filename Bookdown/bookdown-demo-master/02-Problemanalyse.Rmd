@@ -426,7 +426,6 @@ Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være norm
 
 Hernest kigges der på histogrammerne for ```Z1``` og ```Z2```. På figur \@ref(fig:bmhist) sammenlignes histogrammerne for henholdsvis ```Z1``` og ```Z2``` med densiteten for standard normalfordeling.
 
-__FIXME__ (Lav plot om til figur, figuren skal have ref. i tekseten, samt forklaring i brødtekst.) __FIXME__ (Sammenlign med Z-fordelings densitet)
 ```{r bmhist, fig.align='center', fig.cap= "Sammenligning af histogrammerne for henholdsvis Z1 (a) og Z2 (b) med densiteten for standard normalfordeling."}
 x <- seq(-4, 4, length.out = 100)
 y <- dnorm(x, mean = 0, sd = 1)
