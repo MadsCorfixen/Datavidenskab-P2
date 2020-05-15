@@ -1,0 +1,121 @@
+---
+output: html_document
+---
+
+# Exam exercise: Houseprices
+
+You may use the combined lecture notes for this module available at
+<https://asta.math.aau.dk> to guide you to the relevant methods and R commands
+for this exam.
+
+Remember to load the `mosaic` package first:
+```{r message=FALSE}
+library(mosaic)
+```
+
+In this exercise you will study the data described in Agresti EXAMPLE 9.10. 
+
+You are studying house sales in Gainesville, Florida, where among other things the data contain the selling price (`Price`), property taxes (`Taxes`) and house size (`Size`).
+
+Read in the data:
+```{r}
+HousePrices <- read.delim("https://asta.math.aau.dk/datasets?file=HousePrice.txt")
+head(HousePrices)
+```
+
+- Make a relevant plot of the variables and discuss how they are related.
+
+```{r}
+splom(HousePrices)
+```
+
+- Explain the concept of correlation and determine whether there is significant positive correlation between `Taxes` and `Size`. 
+
+Hvis man vil undersøge hvordan to variabler påvirker eller afhænger af hinanden, kan man undersøge kovarians for disse. Problemet med kovarians er, at den ikke er uafhængig over for skalering eller størrelseforhold, og for at undgå dette problem, kan man se på korrelation i stedet for, som er et statistisk mål den lineære sammenhæng mellem to varaibler
+
+```{r}
+cor.test(Taxes ~ Size, data = HousePrices)
+```
+
+Der kan ses på p-value at den er meget mindre end 5%. Derfor forekastes vores nulhypotese, $Corr = 0$, og vi kan altså se at der er en hvis korrelation. Helt specifikt en korrelation på 0.82 jf. cor.test, hvilket er højt da korrelation ligger i intervallet [-1, 1]. Dette giver mening jf. splom.
+
+
+
+
+Fit a multiple regression model with Price as the response variable and `Taxes` and `Size` as predictors.
+
+```{r}
+lm(Price ~ Taxes + Size, data = HousePrices)
+```
+
+- What are the parameters of the model and what is the interpretation of these parameters?
+Intercept er der hvor grafen skærer y-aksen ved X = 0. Taxes er er ændringen i Price pr. tax stigning. Size er ændringen i Price pr size stigning.
+
+- What is the prediction equation?
+
+$$
+\widehat y = \alpha + \beta_1 \cdot x_1 + \beta_2 + x_2 = -28608.74 + 39.60 \cdot x_1 + 66.51 \cdot x_2
+$$
+
+Explain the output of
+```{r eval=FALSE}
+summary(lm(Price ~ Taxes + Size, data = HousePrices))
+```
+where `model` is the fitted multiple regression model.
+This explanation should as a minimum include
+
+- Calculation of `t value` and determination and interpretation of p-value.
+
+P-value:
+Sandsynligheden for at få en t-værdi der lige så stor eller mere ekstrem end den vi har nu, i tilfælde af at nulhypotesen er sand. Hvis p-værdien er under 5% forkastes H_0. 
+Evt. indsæt billede
+
+- Interpretation of `Multiple R-squared`.
+
+Computeren laver en regressions linje ved at finde det sted hvor R^2 er højest, altså den linje som er tættest på punkterne. R^2 fortæller forklaringsgraden, altså hvor stor en del af afvigelserne vi kan forklare. 
+
+????
+
+
+
+
+- How the table of output can be used to construct confidence intervals for parameters. This should be supplemented by actual calculation for the current data using `confint`.
+
+
+```{r}
+confint(lm(Price ~ Taxes + Size, data = HousePrices), level = 0.95)
+```
+
+Konfinterval = $\hat x \pm t_{crit} \cdot se $
+`
+```{r}
+Taxes_coef <- 39.601 + c(-1,1) * qt((0.95+1)/2, df = 100 - 1) * 6.917
+Taxes_coef
+Size_coef <- 66.512 + c(-1,1) * qt((0.95+1)/2, df = 100 - 1) * 12.817
+Size_coef
+```
+
+Finally, you have to investigate whether or not there is an interaction between the effect of `Taxes` and the effect of `Size` as predictors of `Price`.
+
+```{r}
+lm(Price ~ Taxes * Size, data = HousePrices)
+```
+```{r}
+model_size <- lm(Price ~ Size, data = HousePrices)
+model_tax <- lm(Price ~ Taxes, data = HousePrices)
+```
+
+```{r}
+plot(HousePrices$Taxes, HousePrices$Price,
+type= "p",
+col="blue")
+points(HousePrices$Size, HousePrices$Price, type= "p", col = "red")
+
+abline(coef(model_size), lwd = 2, col = "red")
+abline(coef(model_tax), lwd = 2, col = "blue")
+     
+
+```
+
+
+NOTE: Se https://asta.math.aau.dk/course/asta/2020-1/std/lecture/1-1?file=A/lecture-A-1.pdf nederst for to plots oveni hinanden.

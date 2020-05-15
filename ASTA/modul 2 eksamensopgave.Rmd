@@ -1,0 +1,145 @@
+---
+output: html_document
+---
+
+# Exam exercise: Reading scores and sample size calculation
+
+It is highly recommended that you answer the exam using Rmarkdown
+(you can simply use the exam Rmarkdown file as a starting point).
+
+Remember to load the `mosaic` package first:
+```{r message=FALSE}
+library(mosaic)
+```
+
+## Part I: Directed reading activities
+
+An educator conducted an experiment to test whether new directed reading
+activities in the classroom will help elementary school pupils improve
+some aspects of their reading ability.
+
+She arranged for a third grade class of 21 students
+to follow these activities for an 8-week period. A control classroom of
+23 third graders followed the same curriculum without the activities. At
+the end of the 8 weeks, all students took a Degree of Reading Power
+(DRP) test, which measures the aspects of reading ability that the
+treatment is designed to improve.
+
+
+Read in the data:
+```{r}
+reading <- read.delim("https://asta.math.aau.dk/datasets?file=reading.txt")
+head(reading)
+```
+
+Histogram
+```{r}
+split_reading <- split(reading, reading$Group)
+reading_control <- split_reading$Control
+reading_treated <- split_reading$Treated
+hist(reading_control $ Score)
+hist(reading_treated $ Score)
+```
+
+
+Use a boxplot to compare the of measurements of `Score` (the student's DRP score) 
+for `Treated`(direct reading activities) and `Control` visually.
+```{r}
+boxplot(reading $ Score ~ reading $ Group, horizontal = TRUE)
+```
+Konklusion: 
+
+
+Use `favstats` to make a numerical summary of the measurements for `Treated` and `Control`.
+
+```{r}
+favstats(reading $ Score ~ reading $ Group)
+```
+
+-   Write down a point estimate of the mean of the DRP score for students
+    following the new *directed reading activities* and explain how this
+    is calculated.
+Et punktestimat af middelværdien for den "treated" gruppe kan aflæses i favstats til at være 51.48. Det udregnes ved formlen $\sum y_i / n_T$
+
+-   Write down a point estimate of the standard deviation of the DRP score for
+    this group and explain how this is calculated.
+Sd er i følge favstats 11.01 for "treated" og er udregnet på følgende måde: $S_T = \sqrt{\sum(y_i - \bar y )^2 / n_T - 1} $
+
+-   Write down a 95% confidence interval for the mean of the DRP score for this
+    group and explain how this is calculated.
+```{r}
+mean(reading_treated$Score) + c(-1, 1) * 2.086 * sd(reading_treated$Score)/sqrt(21)
+```
+
+
+Use the command `t.test` to compare the mean of the DRP score of the two groups.
+
+```{r}
+t.test(reading $ Score ~ reading $ Group)
+```
+
+Go through the details of the output from `t.test`. Your analysis must
+include an account of
+
+-   What the relevant null hypothesis and the corresponding alternative
+    hypothesis is.
+Den relevante nulhypotese er at $H_0 : \mu_T = \mu_C  $ samt den alternative hypotese er at $H_1 : \mu_T \ne \mu_C $
+
+-   Choice and calculation of test statistic.
+$ t = \bar y_1 - \bar y_2 / \sqrt{s_1^2 / n_1 + s_2^2 / n_2} $ og ifølge t test er den -2.31. T crit er 2.021 ifølge bogen, fordi df = 40, konfidens interval = 95%. t test er altså mindre end t crit og derfor forkastes vores nulhypotese. Ifølge Qdist er t crit 2.025.
+
+```{r}
+qdist("t", p = 1 - 0.05/2, df = 37.885)
+```
+
+
+
+
+-   Calculation of $p$-value and its interpretation in connection to a
+    conclusion of the analysis.
+Ifølge t test er p value lig med 0.026. 
+```{r}
+p_value <- 2 * pdist("t", df = 37.885, q = -2.3109)
+p_value
+```
+
+-   Calculation and interpretation of a relevant confidence interval.
+$\mathrm{KI} = \bar{y_1} - \bar{y_2} \pm t^{test} \cdot \sqrt{(s_1^2/n_1) + (s_2^2/n^2)}$
+Det vil altså sige at konfidens intervallet fortæller $\mu_C - \mu_T = [-18, -2] $, og her kan man altså se at 0 ikke er en del af konfidensinterval. Derfor forkaster vi H0.
+
+## Part II: Determining sample size
+
+_In this part there is no dataset to load into R and analyze. You are only supposed to
+use R as a calculator when you apply the relevant formulas (which you find towards
+the end of the lecture notes for Module 1)._
+
+
+A study is being planned to estimate the proportion of the Danish population who smokes regularly. How large a sample size is needed to obtain an estimate which is at most
+0.05 away from the true proportion with
+a confidence of 0.90? A similar study from 2015 found the estimate of the proportion of smokers to be 22.5%.
+
+Vi skal finde sample size altså n
+$ \bar \pi +- Z \cdot \sqrt{\bar \pi  \cdot (1 - \bar \pi) / n} $ Hvor vi ved at 
+$  Z \cdot \sqrt{\bar \pi  \cdot (1 - \bar \pi) / n}  = 0.05 $, 0.05 da konfidensinterval er 90% altså 10 % i alt og 5 % i hver "side" af grafen. Hvis vi isolerer n i forrige formel fås 
+$ n = Z^2 \cdot \bar \pi \cdot (1- \bar \pi) / 0.05^2 $ 
+
+Løsning 1 : Benyt gammel pi altså 0.225
+Løsning 2 : Benyt worstcase pi = 0.5 (tegn grafen, parabel, i Excel)
+
+```{r}
+Z <- qdist("norm", p = 1 - 0.1/2, plot = FALSE  )
+Z
+```
+
+Ved gammel $ \bar \pi $
+```{r}
+n1 = Z^2 * 0.225 * (1 - 0.225) / 0.05^2
+n1
+```
+
+Ved worstcase
+```{r}
+n2 = Z^2 * 0.5 * (1 - 0.5) / 0.05^2
+n2
+```
+
