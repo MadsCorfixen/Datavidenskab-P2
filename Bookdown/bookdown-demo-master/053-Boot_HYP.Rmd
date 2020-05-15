@@ -11,8 +11,6 @@ Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre t-t
 
 ### Uparret bootstrap-test
 
-__FIXME__ Her har vi blandet eksempel med teori for at se hvordan det ser ud.
-
 Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n_1}]$ og $Y=[y_{1},~y_{2},~...,~y_{n_2}]$, med ens varians være givet på figur \@ref(fig:histhypuparret).
 
 ```{r}
@@ -97,7 +95,7 @@ reps <- 100
 
 res <- replicate(reps, {
   stik1 <- rbeta(n1, alfa1, beta1)
-  stik2 <- rbeta(n2, alfa2, beta2)
+  stik2 <- rbeta(n2, alfa1, beta1)
 
   t_obs <- mean(stik1) - mean(stik2)
 
