@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 ```{r, include = FALSE}
 library(mosaic)
 library(SimDesign)
@@ -115,7 +120,7 @@ p_tosidet <- min(2*p_stoerre, 2*p_lavere)
 p_tosidet
 ```
 
-Med en tosidet p-værdi på ```r p_tosidet```, er der ikke noget belæg for at forkaste nulhypotesen.
+Med en tosidet _p_-værdi på ```r p_tosidet```, er der ikke noget belæg for at forkaste nulhypotesen.
 
 __Type-I fejl__
 
@@ -175,22 +180,24 @@ I alt forkastes $H_0$ fejlagtigt i ```r unname(fejltable[1])```$\%$ af tilfælde
 
 ## Parret permutationstest
 
-I nedenstående kode, vises et eksempel på en parret permutations-test.
+Ligesom permutationstest kan bruges til at lave en uparret hypotesetest, kan den også bruges til en parret. Fremgangsmåden er det samme, bortset fra, at det er hvert koordinatpar $(x_i, y_i)$ i stikprøven $Z = ((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n))$, der permuteres.
 
-```{r}
+I nedenstående kode, vises et eksempel på en parret permutations-test for forskel i middelværdi, der gør brug af pakken ```wPerm```.
+
+```{r, tidy=FALSE}
+library(wPerm)
 reps <- 100
 n <- 100
-alfa1 <- 10
-beta1 <- 2
-alfa2 <- 4
-beta2 <- 13
 permuteringer <- 1000
 
 p_reps <- replicate(reps, {
-  stik1 <- rgamma(n, alfa1, beta1)
-  stik2 <- rgamma(n, alfa2, beta2)
+  stik1 <- rgamma(n, shape = 10, rate = 2)
+  stik2 <- rgamma(n, shape = 4, rate = 13)
   
-  test <- wPerm::perm.paired.loc(x = stik1, y = stik2, parameter = mean, alternative = "two.sided", R = permuteringer)
+  test <- wPerm::perm.paired.loc(x = stik1, y = stik2,
+                                  parameter = mean,
+                                  alternative = "two.sided",
+                                  R = permuteringer)
   
   p_vaerdi <- test$p.value
 })
@@ -198,3 +205,8 @@ p_reps <- replicate(reps, {
 p_vaerdi_parret <- mean(p_reps)
 p_vaerdi_parret
 ```
+
+Med en _p_-værdi på ```r p_vaerdi_parret``` kan nulhypotesen forkastes, da der er evidens for, at den ikke er korrekt.
+
+
+

@@ -221,10 +221,20 @@ Det fremgår fra tabellen, at dækningsgraden af konfidensintervallerne er ```r 
 
 ## Problemformulering
 
-_Kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyser, og i så fald, hvordan?_
+<!-- _Kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyser, og i så fald, hvordan?_ -->
 
-_??_
+<!-- _??_ -->
 
-_Hvilke alternativer er der til t-testen når dens antagelser ikke er overholdt, og hvor robuste er de?_
+_Hvilke alternativer er der til t-testen, når dens antagelser ikke er overholdt, og hvor robuste er de?_
 
-__FIXME:__ arbejdsspørgsmål i samme rækkefølge som i rapporten. Ret løbende.
+
+
+
+
+
+
+
+
+
+
+
