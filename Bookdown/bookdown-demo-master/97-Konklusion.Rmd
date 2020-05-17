@@ -2,9 +2,11 @@
 
 I dette afsnit vil der konkluderes på den viden der er opnået gennem rapporten.
 
-Dækningsgraden af t-metoden er den mest effektive når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruger, fordi de alle stort set den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). 
+Der er gennem rapporten fundet frem til to altenative metoder til t-testen som kunne lave konfidensintervaller og en p-værdi. De to var henholdsvis bootstrapmetoden og permutationsmetoden. Det kan konkluderes at Bootstrap- og Permutationstest er gode til at estimerer en p-værdi, men hvis det er det eneste man skal bruge, er t-test lige så effektiv at bruge.
 
-Bootstrap- og Permutationstest er også gode, og kan yderligere give et konfidensinterval og en standard fejl at analyser på baggrund af. Det kan konkluderes at Bootstrap- og Permutationstest er gode til at estimerer en p-værdi, men hvis det er det eneste man skal bruge, er t-test lige så effektiv at bruge. Det kan siges at bootstrap 
+Dækningsgraden af t-metoden er den mest effektive metode når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruger, fordi de alle stort set den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). 
+
+
 
 
 
