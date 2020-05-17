@@ -16,16 +16,27 @@ Karl Pearson var interesseret i at udvikle matematiske metoder til at studere bi
 Ronald Fisher introducerede princippet om randomisering. Det siger, at et eksperiment skal gentages på et antal kontrolgrupper, og de elementer der bruges i eksperimentet skal tilfældigt udvælges fra hele populationen. Dette gjorde data forventningsret, som mindsker variationen i et eksperiment. Udover det har Fisher introduceret analyse af varians, også kaldet ANOVA (fra engelsk analysis of variance). Denne model bruges til at analysere forskellen mellem gruppemiddelværdier i en stikprøve, [@RonaldFisher].
 
 Yderligere har udviklingen af computeren været med til at gøre anvendelsen af komplicerede statistiske beregninger hurtigere, mere præcise og mere tilgængelige. Anvendelsesområderne for statistik har ligeledes udviklet sig, fra i begyndelsen at være noget staten anvendte til styring af økonomi og befolkningsindblik, til stort set at være repræsenteret i alle større hverv i dag. Den moderne definition af statistik kan beskrives som evnen til at drage konklusioner om generelle tilfælde, _populationer_, på baggrund af enkelte tilfælde, _stikprøver_, [@ASTAbog, s. 1].
+  
+## Statistik
+Statistik opdeles overordnet i to kategorier, deskriptiv statistisk og statistisk inferens. 
 
-## Statistiksk inferens
+__Deskriptiv statistik__
 
-Det følgende afsnit er baseret på [@ASTAkursus1], [@ASTAkursus2] og [@ASTAkursus3].
+Det følgende afsnit er baseret på [@ASTAkursus1] og [@ASTAbog, s.16-17] __FIXME__ (ASTAbog er 4. udgave, så ved ikke hvordan det stemmer med side tal.)
 
-I statistisk inferens differentieres der mellem to metoder, _estimering_ og _hypotesetest_. Når der estimeres på baggrund af en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan for eksempel være gennemsnitsindkomst af danskere, $\mu$, for hvilken der findes et estimat $\hat{\mu}$, som bruges til at beskrive $\mu$. Dette betegnes som et punktestimat, og vil oftest suppleres med et intervalestimat. Årsagen til dette er, at punktestimater er tilfældige, og derfor ændrer sig fra stikprøve til stikprøve. Da punktestimaters sandsynlighed for at være korrekt derfor er lig $0$, tilstræbes det at anvende et intervalestimat, hvor det kan siges at $\mu$ med $95\%$ sikkerhed ligger, fremfor et punktestimat. Dette kaldes for et konfidensinterval.
+Deskriptiv statistik drejer sig om at opsumere, således at informationerne anskueliggøres og styrker forståelsen af data, uden at  fordreje eller miste den oprindelige information. Dette kan eksempelvis gøre ved at beregne middelværdien og spredningen, da det giver et bedre overblik, end at skulle overskue samtlige datapunkter. I nogle tilfælde kan det være tilstrækkeligt at lave en grafisk fremstilling af data, eller i kombination med middelværdi og spredning. 
 
-Den anden form for statistisk infernes er hypotesetest. I hypotesetest opstilles først en nulhypotese, $H_0$, og en alternativ hypotese, $H_1 = \neg H_0$. Formålet med en hypotesetest er at indsamle nok evidens imod $H_0$, så den kan forkastes, hvilket giver ny viden omkring populationen. En nulhypotese kunne være, at danskere tjener det samme i gennemsnit som folk fra Sverige. Der vil ved hjælp af forskellige statistike metoder, ses om der er en signifikant forskel i gennemsnittet. Hvis dette er tilfældet, vil nulhypotesen forkastes og den alternative hypotese vil antages at være sand.
+__Statistisk inferens__
 
-## Hypotesetest
+Det følgende afsnit er baseret på [@ASTAkursus2], [@ASTAkursus3] og [@ASTAbog, s.16-17]. __FIXME__ (ASTAbog er 4. udgave, så ved ikke hvordan det stemmer med side tal.)
+
+På baggrund af den information som udtrykkes af deskriptiv statistik, er det således muligt ved hjælp af statistisk inferens at kommme med antagelser og drage konklusioner.  
+
+I statistisk inferens differentieres der mellem to metoder, estimering og hypotesetest. Når der estimeres på baggrund af en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan eksempelvis være gennemsnitsindkomst hos en befolkning, $\mu$, for hvilken der findes et estimat $\hat{\mu}$, som bruges til at beskrive $\mu$. Dette betegnes som et punktestimat, og vil oftest suppleres med et intervalestimat. Årsagen til dette er, at punktestimater er tilfældige, og derfor ændrer sig fra stikprøve til stikprøve. Da punktestimaters sandsynlighed for at være korrekt derfor er lig $0$, tilstræbes det at anvende et intervalestimat, hvor det kan siges at $\mu$ med $95\%$ sikkerhed ligger, fremfor et punktestimat. Dette kaldes for et konfidensinterval.
+
+Den anden form for statistisk infernes er hypotesetest, som beskrives i det efterfølgende afsnit. 
+
+## Hypotesetest {#hypotesetest}
 
 I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at drage konklusioner for en population, ved at opstille to hypoteser.
 
@@ -59,20 +70,16 @@ Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er d
 
 ### Hypotesetest for middelværdier {#t-test}
 
-__FIXME__ (Afsnittet kunne bruge lidt mere forklarende teskt) (Stadig nødvendigt? Det er vel beskrevet ret godt i afsnittet før?)
-
 I dette afsnit gennemgås fremgangsmåden for, hvordan en hypotesetest kan bruges til at bestemme middelværdien for en population. I dette afsnit kaldes en sådan hypotesetest for en t-test. Afsnittet er skrevet på baggrund af [@ASTAkursus4].
 
-Først er der nogle antagelser, der skal være opfyldt, for at t-testen ikke giver misvisende resultater.
+Forud for gennemførelsen af en t-test, er der nogle antagelser, som skal være opfyldt, for at t-testen ikke giver misvisende resultater.
 
 1. Stikprøven er repræsentativ for populationen.
 2. Variablen er kvantitativ.
 3. Stikprøveudtagning er udført med tilfældighed.
 4. Populationen er normalfordelt.
 
-Herefter opstilles hypoteserne. Nulhypotesen, $H_0: \mu = \mu_0$ og den alternative hypotese $H_1: \mu \neq \mu_0$. Ligeledes sættes et signifikansniveau, $\alpha$, der vurderer med hvilken sikkerhed $H_0$ forkastes.
-
-Derefter beregnes den observerede teststørrelse, $t_{obs} = \frac{|\bar y - \mu_o|}{\text{se}}$, hvor $\text{se} = \frac{s}{\sqrt{n}}$. Slutvist findes _p_-værdien, og på baggrund af denne, bliver nulhypotesen enten forkastet eller ej.
+Herefter er fremgangsmetoden som beskrevet i afsnitet \@ref(hypotesetest).
 
 __Eksempel__
 
@@ -166,7 +173,7 @@ Tabellen viser, at både stikprøvestørrelsen samt differencen i middelværdien
 
 ### Uparret t-test for ikke-normalfordelte stikprøver {#t-test2}
 
-I nogle tilfælde er det ikke muligt at overholde alle de pågældende antagelser, som beskrevet i afsnit \@ref(t-test), der hører til en t-test når der udføres statistisk inferens. Når dette sker, kan det ikke altid antages, at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis stikprøverne ikke er normalfordelte, når der arbejdes med en uparret t-test.
+I de tilfælde hvor det ikke er muligt at overholde alle de pågældende antagelser, som beskrevet i afsnit \@ref(t-test), kan det ikke med sikkerhed antages, at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis stikprøverne ikke er normalfordelte, når der arbejdes med en uparret t-test.
 
 I dette eksempel benyttes betafordelingen, se figur \@ref(fig:figurpop1), og gammafordelingen, se figur \@ref(fig:figurpop2), til at udføre en uparret t-test.
 
