@@ -57,7 +57,7 @@ Værdien af teststørrelsen påvirker _p_-værdien på den måde, at når testst
 
 Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være $10\%$ eller $1\%$. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper, [@ASTA-HYPO].
 
-## Hypotesetest for middelværdier {#t-test}
+### Hypotesetest for middelværdier {#t-test}
 
 __FIXME__ (Afsnittet kunne bruge lidt mere forklarende teskt) (Stadig nødvendigt? Det er vel beskrevet ret godt i afsnittet før?)
 
