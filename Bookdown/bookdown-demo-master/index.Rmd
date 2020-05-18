@@ -17,24 +17,34 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 # Introduktion
 
+- Hvem har skrevet projektet
+- Hvor lang tid har projektperioden forløbet
+- Hvem har vejledt os
+- Hvad er projektets overordnede tema
+- Link til GitHub
+
 [Link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master)
 
-For at sikre reproducerbarheden af resultaterne i rapporten, er der anvendt det samme seed, ```set.seed(29)``` i alle afsnit.
+For at sikre reproducerbarheden af resultaterne i rapporten, er der anvendt det samme seed, ```29``` i alle rapportens afsnit.
 
 ## Forord
 
+- Formålet med projektet
+- Indhold, kort opsummeret, i rækkefølge
+- Konklusion, kort opsummeret
+
 ## Abstract/Synopsis
 
-## Indledning
+Forord oversat til engelsk
 
 ## Anvendte pakker
 
 I dette projekt er følgende pakker blevet anvendt.
 
-1) ```bookdown```, [@R-bookdown]. Denne pakke muliggør at skrive hele rapporter i R ved hjælp af Markdown, og er derfor brugt til udarbejdelsen af rapporten.
+1) ```bookdown```, [@R-bookdown]. Denne pakke muliggør at skrive hele rapporter i R ved hjælp af Markdown, og er derfor brugt til udarbejdelsen af hele rapporten.
 
 2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser. Pakken anvendes i samtlige afsnit i rapporten.
 
 3) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i afsnit \@ref(perm-pvaerdi)
 
-4) ```boot```, [@R-boot]. Denne pakke indeholder funktionaliteter, som benyttes til bootstrap. Pakken anvendes i afsnit \@ref(boot-standardfejl) og \@ref(boot-daekningsgrader).
+4) ```boot```, [@R-boot]. Denne pakke indeholder funktioner, der benyttes til at oprette bootstrap-stikprøver og til at udarbejde bootstrap-konfidensintervaller. Pakken anvendes i afsnit \@ref(boot-standardfejl) og \@ref(boot-daekningsgrader).
