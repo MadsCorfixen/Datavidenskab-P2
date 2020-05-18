@@ -22,13 +22,13 @@ Statistik opdeles overordnet i to kategorier, deskriptiv statistisk og statistis
 
 __Deskriptiv statistik__
 
-Det følgende afsnit er baseret på [@ASTAkursus1] og [@ASTAbog, s.16-17] __FIXME__ (ASTAbog er 4. udgave, så ved ikke hvordan det stemmer med side tal.)
+Det følgende afsnit er baseret på [@ASTAkursus1] og [@ASTAbog, s. 4-5]
 
 Deskriptiv statistik drejer sig om at opsumere, således at informationerne anskueliggøres og styrker forståelsen af data, uden at  fordreje eller miste den oprindelige information. Dette kan eksempelvis gøre ved at beregne middelværdien og spredningen, da det giver et bedre overblik, end at skulle overskue samtlige datapunkter. I nogle tilfælde kan det være tilstrækkeligt at lave en grafisk fremstilling af data, eller i kombination med middelværdi og spredning. 
 
 __Statistisk inferens__
 
-Det følgende afsnit er baseret på [@ASTAkursus2], [@ASTAkursus3] og [@ASTAbog, s.16-17]. __FIXME__ (ASTAbog er 4. udgave, så ved ikke hvordan det stemmer med side tal.)
+Det følgende afsnit er baseret på [@ASTAkursus2], [@ASTAkursus3] og [@ASTAbog, s. 4-5].
 
 På baggrund af den information som udtrykkes af deskriptiv statistik, er det således muligt ved hjælp af statistisk inferens at kommme med antagelser og drage konklusioner.  
 
