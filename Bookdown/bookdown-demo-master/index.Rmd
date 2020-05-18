@@ -17,6 +17,8 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 # Introduktion
 
+## Forord
+
 - Hvem har skrevet projektet
 - Hvor lang tid har projektperioden forløbet
 - Hvem har vejledt os
@@ -25,17 +27,11 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 [Link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master)
 
-For at sikre reproducerbarheden af resultaterne i rapporten, er der anvendt det samme seed, ```29``` i alle rapportens afsnit.
-
-## Forord
+## Abstract/Synopsis
 
 - Formålet med projektet
 - Indhold, kort opsummeret, i rækkefølge
 - Konklusion, kort opsummeret
-
-## Abstract/Synopsis
-
-Forord oversat til engelsk
 
 ## Anvendte pakker
 
@@ -48,3 +44,19 @@ I dette projekt er følgende pakker blevet anvendt.
 3) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i afsnit \@ref(perm-pvaerdi).
 
 4) ```boot```, [@R-boot]. Denne pakke indeholder funktioner, der benyttes til at oprette bootstrap-stikprøver og til at udarbejde bootstrap-konfidensintervaller. Pakken anvendes i afsnit \@ref(boot-standardfejl) og \@ref(boot-daekningsgrader).
+
+## Læsevejledning
+
+__FIXME:__ (Der er gået noget galt med de rettelser, vi lavede til problemanalysen og simulering)
+
+__FIXME:__ (Identificér funktioner, der stammer fra pakker og skriv dem på den korrekte måde (```pakke::funktion```))
+
+__FIXME:__ (Skriv ud, i hver funktion, hvad de forskellige parametre betyder (```rnorm(n = 100, mean = 1, sd = 0)```))
+
+__FIXME:__ (Find eventuelle udtryk, som vi kalder noget, de egentlig ikke er)
+
+- ```pakke::funktion```.
+- Ikke-parametrisk bootstrap.
+- Samme seed, ```29```, i alle rapportens afsnit.
+- Engelsk version af decimal- og tusindtalsseperator
+
