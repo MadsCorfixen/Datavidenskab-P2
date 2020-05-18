@@ -1,10 +1,24 @@
 # Konklusion
 
 I dette afsnit vil der konkluderes på den viden der er opnået gennem rapporten.
+I afsnittet der omhandlet "t-test for skæve stikprøver" blev det konkluderet, på baggrund a tallene i tabellen \@ref(fig:ronni), at det ikke kan antages at en t-test på en ikke-normalfordelt stikprøve altid giver retvisende resultater. Der blev herefter fundet frem til to altenative metoder til t-testen som kunne lave konfidensintervaller og hypotesetests, hvis antagelserne ikke var overholdt. De to var henholdsvis bootstrapmetoden og permutationsmetoden. Permutationstesten løste problemet med at stikprøverne ikke var normal-fordelte, og at man så kunne udføre en retvisende hypotesetest. Bootstrapmetoden løste det samme problem og det viste sig at kunne lave konfidensintervaller ved hjælp af percentilmetoden, basicmetoden og t-metoden. Disse metoder viste det sig at dækningsgraden af t-metoden er den mest effektive metode når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruges, fordi de alle stort set den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). Det kan konkluderes at bootstrapmetoden kan give retvisende resultater når antagelserne ikke er overholdt.Det kan derfor siges at simuleringsmetoderne bootstrap og permutation, kan afhjælpe problemer der opstår ved t-tests, med ikke-normalfordelte stikprøver. 
+<!-- Første del af problemanalysen lød således:  -->
+<!-- "1) Hvorledes kan simuleringsstudier bidrage til at afdække problemer med klassiske inferensmetoder, når deres antagelser ikke er overholdt?" -->
+<!-- "Det fremgår fra tabellen, at dækningsgraden af konfidensintervallerne er ```r tf[2]/100```$\%$. Dette stemmer ikke overens med antagelsen om, at konfidensintervallet har en dækningsgrad på $95\%$. Det kan derfor ikke antages, at en t-test på en ikke-normalfordelt stikprøve altid giver retvisende resultater." -->
+<!-- - delkonklusion af t-test -->
 
-Der er gennem rapporten fundet frem til to altenative metoder til t-testen som kunne lave konfidensintervaller og en p-værdi. De to var henholdsvis bootstrapmetoden og permutationsmetoden. Det kan konkluderes at Bootstrap- og Permutationstest er gode til at estimerer en p-værdi, men hvis det er det eneste man skal bruge, er t-test lige så effektiv at bruge.
+<!-- 2) Hvilke alternativer er der til klassiske inferensmetoder, såsom t-tests og konfidensintervaller, når deres antagelser ikke er overholdt, og hvor robuste er alternativerne? -->
+<!-- "Her tyder det på, at T-metoden præsterer bedre ved mindre stikprøver end både percentilmetoden og basic-metoden. Omkring n=15 opnår percentil- og basic-metodens konfidensinterval begge den samme dækningsgrad som T-metoden, og generelt kan der ses, at percentil- og basic-metoden har cirka den samme dækningsgrad. Både percentil- og basic-metoden ser ud til at have større udsvingninger end T-metoden. Desuden ser alle tre metoders dækningsgrader ud til at stabilisere sig omkring   -->
+<!-- 95%, når stikprøvestørrelsen bliver tilstrækkelig stor." -->
+<!-- - delkonklusion af dækningsgrad -->
 
-Dækningsgraden af t-metoden er den mest effektive metode når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruger, fordi de alle stort set den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). 
+
+
+
+
+
+
+
 
 
 
