@@ -7,7 +7,7 @@ set.seed(29)
 
 Som nævnt i afsnit \@ref(t-test), skal visse antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test, og det efterfølgende resultatet af overtrædelsen af disse antagelser, blev vist i afsnit \@ref(t-test2).
 
-Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en parret bootstrap-test, og dernæst fremgangsmåden for en uparret bootstrap-test.
+Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en uparret bootstrap-test, og dernæst fremgangsmåden for en parret bootstrap-test.
 
 ### Uparret bootstrap-test
 
@@ -69,15 +69,8 @@ abline(v = t_boot, col = "green")
 
 Herefter kan p-værdien udregnes som ved permutationstest i afsnit \@ref(permutationstest). 
 
-```{r}
-# antal_mindre <- boot_t <= t_obs
-# antal_stoerre <- boot_t >= t_obs
-# 
-# p_1 <- sum(antal_mindre)/B
-# p_2 <- sum(antal_stoerre)/B
-# p_vaerdi <- min(2*p_1, 2*p_2)
-# p_vaerdi
 
+```{r}
 antal_ekstreme <- abs(boot_t) >= t_obs
 table(antal_ekstreme)
 
@@ -164,14 +157,6 @@ p_reps <- replicate(reps, {
   }
   
   antal_ekstreme <- abs(boot_t) >= obs_t
-  
-  # antal_mindre <- boot_t <= obs_t
-  # antal_stoerre <- boot_t >= obs_t
-
-  # p_1 <- sum(antal_mindre)/B
-  # p_2 <- sum(antal_stoerre)/B
-  # 
-  # p_vaerdi <- 2*min(p_1, p_2)
   
   p_vaerdi <- (sum(antal_ekstreme) + 1) / (B + 1)
 })

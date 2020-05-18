@@ -5,9 +5,9 @@ set.seed(29)
 ```
 # Permutationer
 
-I afsnit \@ref(t-test) blev der redegjort for, hvilke antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test ikke kan anvendes, kan der udnyttes permutationer.
+I afsnit \@ref(t-test) blev der redegjort for, hvilke antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test derfor ikke kan anvendes, er det muligt at anvende permutationer.
 
-I dette afsnit defineres permutationer, og der gives etT kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer]. Senere vil der gives en forklaring af, hvad en permutationstest er, og et eksempel på henholdsvis en parret og en uparret permutationstest vil gives.
+I dette afsnit defineres permutationer, og der gives et eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer]. Senere vil der gives en forklaring af, hvad en permutationstest er, og et eksempel på henholdsvis en parret og en uparret permutationstest vil gives.
 
 Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2)}, \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $X$, af længde $n$, er givet ved $n!$.
 
@@ -24,8 +24,9 @@ En permutationstest går ud på at forsøge at måle evidens imod $H_0$, som i e
 Selve beregningen af teststørrelsen afhænger af de specifikke hypoteser, men det er et krav, at store værdier for $S_{\pi_i}$ indikerer evidens imod $H_0$.
 
 _P_-værdien for en tosidet test beregnes som antal gange, den numeriske værdi af permutationsteststørrelsen, $|S_{\pi_i}|$, er større end den observerede teststørrelse, $S_{obs}$, divideret med antallet af mulige permuationer, $M$. _P_-værdien beregnes på tilsvarende vis for en ensidet test, hvor $|S_{\pi_i}|$ erstattes med $S_{\pi_i}$, og uligheden erstattes med det tilsvarende passende.
-
+__FIXME__ (Skulle vi ikke have en kilde på den formel og fremgangsmåde?)
 $$p = \frac{\#(|S_{\pi_i}| \geq S_{obs}) + 1}{M + 1}$$
+
 
 Permutationstest har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Desuden er permutationstest især smart, når fordelingen af teststørrelsen er ukendt.
 
@@ -40,6 +41,7 @@ Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for e
 Der vil nu vises et eksempel på, hvordan permutationstest kan anvendes som en hypotesetest. Antag, at det ønskes undersøgt, om middelværdien af to stikprøver er signifikant forskellige. Den opstillede nulhypotese bliver $H_0 : \mu_1 - \mu_2 = 0$, og den alternative hypotese bliver $H_1 : \mu_1 - \mu_2 \neq 0$.
 
 Der vil blive udtrukket to stikprøver fra den samme betafordeling, der vises på figur \@ref(fig:permhist).
+__FIXME__ (Er det nødvendigt med dette kode? Og skal vi ikke lave ylim, på hist, således de er sammenlignelige?)
 
 ```{r}
 n <- 100
@@ -77,8 +79,9 @@ head(mean_list, 3)
 
 I outputtet _head(mean_list, 3)_ ses et eksempel på tre af middelværdierne. På figur \@ref(fig:permmeanhist) illusteres fordelingen af alle permutationernes teststørrelser.
 
-```{r permmeanhist, fig.cap = "Permutationsfordelingen af teststørrelserne. Den blå linje viser den originale observerede forskel i middelværdierne, og den grønne viser middelværdien for samtlige permutationssæt."}
-hist(mean_list, main = "", ylab = "Antal observationer", xlab = "Forskel i middelværdier")
+```{r permmeanhist, fig.cap = "Permutationsfordelingen af teststørrelserne. Den blå linje viser den observerede forskel i middelværdierne, og den grønne viser middelværdien for samtlige permutationssæt."}
+hist(mean_list, main = "", ylab = "Antal observationer", 
+                            xlab = "Forskel i middelværdier")
 abline(v = mean(mean_list), col = "green")
 abline(v = S_obs, col = "blue")
 ```
