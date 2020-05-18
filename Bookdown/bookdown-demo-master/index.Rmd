@@ -17,6 +17,8 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 # Introduktion
 
+## Forord
+
 - Hvem har skrevet projektet
 - Hvor lang tid har projektperioden forløbet
 - Hvem har vejledt os
@@ -27,15 +29,11 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 For at sikre reproducerbarheden af resultaterne i rapporten, er der anvendt det samme seed, ```29``` i alle rapportens afsnit.
 
-## Forord
+## Abstract/Synopsis
 
 - Formålet med projektet
 - Indhold, kort opsummeret, i rækkefølge
 - Konklusion, kort opsummeret
-
-## Abstract/Synopsis
-
-Forord oversat til engelsk
 
 ## Anvendte pakker
 
@@ -48,3 +46,9 @@ I dette projekt er følgende pakker blevet anvendt.
 3) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i afsnit \@ref(perm-pvaerdi).
 
 4) ```boot```, [@R-boot]. Denne pakke indeholder funktioner, der benyttes til at oprette bootstrap-stikprøver og til at udarbejde bootstrap-konfidensintervaller. Pakken anvendes i afsnit \@ref(boot-standardfejl) og \@ref(boot-daekningsgrader).
+
+## Læsevejledning
+
+- ```pakke::funktion```.
+- Ikke-parametrisk bootstrap.
+
