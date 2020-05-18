@@ -14,10 +14,8 @@ github-repo: rstudio/bookdown-demo
 
 # Introduktion
 ```{r, include=FALSE}
-knitr::opts_chunk$set(tidy=TRUE)
+knitr::opts_chunk$set(tidy=FALSE)
 ```
-
-__FIXME__ Husk link til Github.
 
 [Link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master)
 
@@ -33,14 +31,14 @@ I dette projekt er følgende pakker blevet anvendt.
 
 1) ```bookdown```, [@R-bookdown]. Denne pakke muliggør at skrive hele rapporter i R ved hjælp af Markdown.
 
-2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser.
+2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser. Pakken anvendes i følgende afsnit...
 
-3) ```boot```, [@R-boot]. Denne pakke indeholder funktionaliteter, som benyttes til bootstrap.
+3) ```boot```, [@R-boot]. Denne pakke indeholder funktionaliteter, som benyttes til bootstrap. Pakken anvendes i følgende afsnit...
 
-4) ```SimDesign```, [@R-SimDesign]. Denne pakke...
+4) ```SimDesign```, [@R-SimDesign]. Denne pakke... Pakken anvendes i følgende afsnit...
 
-5) ```e1071```, [@R-e1071]. Denne pakke...
+5) ```e1071```, [@R-e1071]. Denne pakke... Pakken anvendes i følgende afsnit...
 
-6) ```gtools```, [@R-gtools]. Denne pakke indeholder funktionaliteter, der benyttes til permutationstests.
+6) ```gtools```, [@R-gtools]. Denne pakke indeholder funktionaliteter, der benyttes til permutationstests. Pakken anvendes i følgende afsnit...
 
-7) ```cowplot```, [@R-cowplot]. Denne pakke...
+7) ```cowplot```, [@R-cowplot]. Denne pakke... Pakken anvendes i følgende afsnit...
