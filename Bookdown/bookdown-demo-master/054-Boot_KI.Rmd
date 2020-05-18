@@ -60,7 +60,7 @@ Hvor $q_i$ er det $i$'te percentil i $\Theta^*$ og $\hat\theta$ er middelværdie
 >
 >$0.95 \approx P[q_{(\alpha/2)} \leq \hat{\theta}^* \leq q_{(1-\alpha/2)}]$
 >
->Der trækkes $\hat{\theta}$ fra på alle sider af uligheden og uligheden vendes om
+>Der trækkes $\hat{\theta}$ fra på alle sider af uligheden og der ganges igennem med $-1$, så uligheden vendes om
 >
 >$0.95 = P[q_{(\alpha/2)} - \hat\theta \leq \hat{\theta}^* - \hat\theta \leq q_{(1-\alpha/2)} - \hat\theta]$
 >
