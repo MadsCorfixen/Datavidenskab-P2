@@ -13,7 +13,7 @@ Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Fo
 
 ## Pseudorandom number generator
 
-I dette afsnit introduceres pseudo-tilfældige tal, PRNG (fra engelsk _pseudorandom number generator_), og hvorledes disse kan bringes i anvendelse i forbindelse med simuleringer. I de tilhørende underafsnit beskrives først en type af PRNG kaldet lineær kongruens generator, og dernæst en metode til at omdanne uniformt fordelte talt til standard normalfordelte tal kaldet Box-Muller-transformation.
+I dette afsnit introduceres pseudo-tilfældige talgeneratorer, PRNG'er (fra engelsk _pseudorandom number generators_), og hvorledes disse kan bringes i anvendelse i forbindelse med simuleringer. I de tilhørende underafsnit beskrives først en type af PRNG kaldet lineær kongruens generator, og dernæst en metode til at omdanne uniformt fordelte talt til standard normalfordelte tal kaldet Box-Muller-transformation.
 
 En computer fungerer ved, at den modtager et input, der bearbejdes af en algoritme, som derefter returnerer et output. Der findes ingen algoritmer, som er i stand til at generere faktisk tilfældige tal. Grunden til dette er, hvis der gives det samme input, til den samme algoritme, vil resultatet være det samme output som tidligere, fordi en computer fungerer på baggrund af matematik og derfor er deterministisk. Det er dog muligt ved hjælp af en beregningsmodel at skabe en illusion af ægte tilfældighed. En sådan model kaldes for en PRNG.
 
@@ -160,15 +160,15 @@ Først undersøges deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har, ved 
 boxplot(Z1, Z2, main = "", xlab= c("Z1","Z2"))
 ```
 
-Det ses på boksplottet, at der er en indikation på normalfordeling med henvisning til de fire krav et boksplot af en normalfordeling opfylder. De fire krav er: __FIXME__ (Kilde?)
+Det ses på boksplottet, at der er en indikation på normalfordeling med henvisning til de fire krav et boksplot af en normalfordeling opfylder. De fire krav er:
 
-1) Median og middelværdi er lig hinanden.
+1) Idet en normalfordeling er symmetrisk fordelt omkring dens middelværdi, er medianen og middelværdien lig hinanden.
 
-2) Øvre og nedre kvartil er lige langt fra midten.
+2) Grundet normalfordelingens symmetri, er øvre og nedre kvartil lige langt fra medianen.
 
-3) Der er lige mange outliers over øvre kvartil som under nedre kvartil.
+3) På grund af symmetrien i en normalfordeling, er der lige mange outliers over øvre kvartil som under nedre kvartil.
 
-4) $0.7\%$ af observationerne ligger som outliers.
+4) Da en outlier i et boksplot identificeres som data, der ligger mere end $1.5 \cdot \text{IQR}$ udover nedre og øvre kvartil, medfører det, at data, der ligge mere end $2.68$ standardafvigelser fra middelværdien er outliers. Dermed følger, at $0.7\%$ af observationerne ligger som outliers.
 
 Punkterne 2 og 3 tjekkes ved at betragte boksplottet, hvor der ikke umiddelbart synes at være noget, der modbeviser en normalfordeling af ```Z1``` og ```Z2```.
 
@@ -180,8 +180,6 @@ median_Z1 <- median(Z1)
 
 mean_Z2 <- mean(Z2)
 median_Z2 <- median(Z2)
-
-
 ```
 
 Dette giver henholdsvis en middelværdi og median for ```Z1``` på $`r mean_Z1`$ og $`r median_Z1`$, samt for ```Z2```  på $`r mean_Z2`$ og $`r median_Z2`$. Disse resultater ligger meget tæt på hinanden, og den meget lave værdi stemmer overens med forventningen om, at ```Z1``` og ```Z2``` er standard normalfordelte.

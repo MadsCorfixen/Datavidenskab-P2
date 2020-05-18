@@ -19,6 +19,8 @@ knitr::opts_chunk$set(tidy=TRUE)
 
 __FIXME__ Husk link til Github.
 
+[Link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master)
+
 ## Forord
 
 ## Abstract/Synopsis
@@ -27,12 +29,18 @@ __FIXME__ Husk link til Github.
 
 ## Anvendte pakker
 
-bookdown
+I dette projekt er følgende pakker blevet anvendt.
 
-mosaic
+1) ```bookdown```, [@R-bookdown]. Denne pakke muliggør at skrive hele rapporter i R ved hjælp af Markdown.
 
-boot
+2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser.
 
-SimDesign
+3) ```boot```, [@R-boot]. Denne pakke indeholder funktionaliteter, som benyttes til bootstrap.
 
-e1071
+4) ```SimDesign```, [@R-SimDesign]. Denne pakke...
+
+5) ```e1071```, [@R-e1071]. Denne pakke...
+
+6) ```gtools```, [@R-gtools]. Denne pakke indeholder funktionaliteter, der benyttes til permutationstests.
+
+7) ```cowplot```, [@R-cowplot]. Denne pakke...

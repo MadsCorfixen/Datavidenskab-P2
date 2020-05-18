@@ -2,9 +2,9 @@
 library(mosaic)
 ```
 
-__FIXME__ (Afsnittet skal kigges igennem, mhp. ILT! Noget af indledening til afsnittet minder om problemanalysen)
-
 # Problemanalyse
+
+__FIXME__ (Afsnittet skal kigges igennem, mhp. ILT! Noget af indledening til afsnittet minder om problemanalysen)
 
 ## Statistikkens udvikling
 
