@@ -1,14 +1,13 @@
 ```{r, include = FALSE}
 library(mosaic)
-library(SimDesign)
-library(gtools)
 library(wPerm)
+set.seed(29)
 ```
 # Permutationer
 
 I afsnit \@ref(t-test) blev der redegjort for, hvilke antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test ikke kan anvendes, kan der udnyttes permutationer.
 
-I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer]. Senere vil der gives en forklaring af, hvad en permutationstest er, og et eksempel på henholdsvis en parret og en uparret permutationstest vil gives.
+I dette afsnit defineres permutationer, og der gives etT kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer]. Senere vil der gives en forklaring af, hvad en permutationstest er, og et eksempel på henholdsvis en parret og en uparret permutationstest vil gives.
 
 Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2)}, \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $X$, af længde $n$, er givet ved $n!$.
 
@@ -43,8 +42,6 @@ Der vil nu vises et eksempel på, hvordan permutationstest kan anvendes som en h
 Der vil blive udtrukket to stikprøver fra den samme betafordeling, der vises på figur \@ref(fig:permhist).
 
 ```{r}
-set.seed(29)
-
 n <- 100
 alfa1 <- 8
 beta1 <- 2
@@ -80,8 +77,9 @@ head(mean_list, 3)
 
 I outputtet _head(mean_list, 3)_ ses et eksempel på tre af middelværdierne. På figur \@ref(fig:permmeanhist) illusteres fordelingen af alle permutationernes teststørrelser.
 
-```{r permmeanhist, fig.cap = "Permutationsfordelingen af teststørrelserne. Den blå linje viser den originale observerede forskel i middelværdierne."}
+```{r permmeanhist, fig.cap = "Permutationsfordelingen af teststørrelserne. Den blå linje viser den originale observerede forskel i middelværdierne, og den grønne viser middelværdien for samtlige permutationssæt."}
 hist(mean_list, main = "", ylab = "Antal observationer", xlab = "Forskel i middelværdier")
+abline(v = mean(mean_list), col = "green")
 abline(v = S_obs, col = "blue")
 ```
 
@@ -104,12 +102,9 @@ Antallet af type-I fejl, der opstår i en uparret permutationstest kan undersøg
 I koden nedenfor bestemmes antallet af type-I fejl for en uparret permutationstest.
 
 ```{r}
-set.seed(1)
 konf_niveau <- 0.95
 reps <- 100
-
 type_1_fejl <- replicate(reps, {
-  
   stik1 <- rbeta(n, alfa1, beta1)
   stik2 <- rbeta(n, alfa1, beta1)
   samlet_stik <- c(stik1, stik2) 
@@ -139,9 +134,11 @@ fejltable <- table(type_1_fejl)
 fejltable
 ```
 
-I alt forkastes $H_0$ fejlagtigt i ```r unname(fejltable[1])```$\%$ af tilfældene, hvilket stemmer overens med det valgte signifikansniveau. 
+__FIXME:__ (What...? Ud af 100 gange, er den falsk i 8 af tilfældene og sand i 89, men 89+8=97. Hvor er de sidste 3? Fejlen sker kun ved nogle seeds...)
 
-## Parret permutationstest
+I alt forkastes $H_0$ fejlagtigt i ```r unname(fejltable[1])```$\%$ af tilfældene, hvilket stemmer overens med det valgte signifikansniveau.
+
+## Parret permutationstest {#perm-pvaerdi}
 
 Ligesom permutationstest kan bruges til at lave en uparret hypotesetest, kan den også bruges til en parret. Fremgangsmåden er det samme, bortset fra, at det er hvert koordinatpar $(x_i, y_i)$ i stikprøven $Z = ((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n))$, der permuteres.
 

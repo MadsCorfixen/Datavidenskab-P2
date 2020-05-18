@@ -1,4 +1,11 @@
+```{r include=FALSE, MESSAGE = FALSE}
+library(mosaic)
+set.seed(29)
+```
+
 # T-test for skæve stikprøver {#t-test2}
+
+__FIXME:__(Kilder!)
 
 I de tilfælde hvor det ikke er muligt at overholde alle de pågældende antagelser, som beskrevet i afsnit \@ref(t-test), kan det ikke med sikkerhed antages, at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis stikprøverne ikke er normalfordelte, når der arbejdes med en uparret t-test.
 
@@ -29,8 +36,6 @@ Udfra t-testen fås et konfidensinterval på [```r round(t1$conf.int, 4)```]. Fo
 
 ```{r ronni, fig.cap= "Kode test"}
 #Undersøg dækningsgraden af konfidensintervallet ved udtræk af nye stikprøver.
-set.seed(31415)
-
 middel1 <- 8/(8+2)
 middel2 <- 1*(1/2)
 

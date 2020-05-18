@@ -1,3 +1,8 @@
+```{r echo = FALSE, include = FALSE}
+library(boot)
+set.seed(29)
+```
+
 ## Bootstrap-konfidensintervaller
 
 I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøve beregnes ved hjælp af percentil-, basic- og T-metoden. Til sidst sammenlignes de tre metoders dækningsgrader ved forskellige stikprøvestørrelser.
@@ -111,11 +116,7 @@ KI_T <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)),
 KI_T
 ```
 
-### Dækningsgrader
-
-```{r echo = FALSE, include = FALSE}
-library(boot)
-```
+### Dækningsgrader {#boot-daekningsgrader}
 
 I dette afsnit vil der undersøges om metoderne for at udregne konfidensintervallerne med bootstrap er præcise. Dette gøres ved at udregne dækningsgraden af konfidensintervallerne som de forskellige metoder har produceret. Processen er den samme som i afsnit \@ref(t-test2). 
 
@@ -145,8 +146,8 @@ vector_t <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(100,{
     stik <- data.frame(data = rnorm(n))
-    boot_stik <- boot(stik, statistic = meanFunc, 100)
-    interval <- boot.ci(boot_stik, type = c("perc", "basic", "stud"))
+    boot_stik <- boot::boot(stik, statistic = meanFunc, 100)
+    interval <- boot::boot.ci(boot_stik, type = c("perc", "basic", "stud"))
     interval_p <- interval$percent[4:5]
     interval_b <- interval$basic[4:5]
     interval_t <- interval$student[4:5]

@@ -11,13 +11,15 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 #description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
-
-# Introduktion
 ```{r, include=FALSE}
 knitr::opts_chunk$set(tidy=FALSE)
 ```
 
+# Introduktion
+
 [Link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master)
+
+For at sikre reproducerbarheden af resultaterne i rapporten, er der anvendt det samme seed, ```set.seed(29)``` i alle afsnit.
 
 ## Forord
 
@@ -29,19 +31,10 @@ knitr::opts_chunk$set(tidy=FALSE)
 
 I dette projekt er følgende pakker blevet anvendt.
 
-1) ```bookdown```, [@R-bookdown]. Denne pakke muliggør at skrive hele rapporter i R ved hjælp af Markdown.
+1) ```bookdown```, [@R-bookdown]. Denne pakke muliggør at skrive hele rapporter i R ved hjælp af Markdown, og er derfor brugt til udarbejdelsen af rapporten.
 
-2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser. Pakken anvendes i følgende afsnit...
+2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser. Pakken anvendes i samtlige afsnit i rapporten.
 
-3) ```boot```, [@R-boot]. Denne pakke indeholder funktionaliteter, som benyttes til bootstrap. Pakken anvendes i følgende afsnit...
+3) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i afsnit \@ref(perm-pvaerdi)
 
-4) ```SimDesign```, [@R-SimDesign]. Denne pakke... Pakken anvendes i følgende afsnit...
-
-5) ```e1071```, [@R-e1071]. Denne pakke... Pakken anvendes i følgende afsnit...
-
-6) ```gtools```, [@R-gtools]. Denne pakke indeholder funktionaliteter, der benyttes til permutationstests. Pakken anvendes i følgende afsnit...
-
-7) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i følgende afsnit...
-
-
-
+4) ```boot```, [@R-boot]. Denne pakke indeholder funktionaliteter, som benyttes til bootstrap. Pakken anvendes i afsnit \@ref(boot-standardfejl) og \@ref(boot-daekningsgrader).
