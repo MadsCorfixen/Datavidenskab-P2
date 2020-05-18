@@ -1,46 +1,36 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 ```{r, include = FALSE}
 library(mosaic)
 library(SimDesign)
 library(gtools)
-library(cowplot)
+library(wPerm)
 ```
 # Permutationer
 
-I afsnit \@ref(t-test) blev der redegjort for visse antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test ikke kan anvendes, kan der udnyttes permutationer.
+I afsnit \@ref(t-test) blev der redegjort for, hvilke antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test ikke kan anvendes, kan der udnyttes permutationer.
 
 I dette afsnit defineres permutationer, og der gives et kort eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer]. Senere vil der gives en forklaring af, hvad en permutationstest er, og et eksempel på henholdsvis en parret og en uparret permutationstest vil gives.
 
 Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2)}, \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $X$, af længde $n$, er givet ved $n!$.
 
-Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_{\pi_1} = [2, 1, 3]$, og der er i alt $|A| = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permutationer af listen.
+Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_{\pi_1} = [2, 1, 3]$, og der er i alt $|A|! = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permutationer af listen.
 
 ## Permutationstest {#permutationstest}
 
 I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er skrevet på baggrund af [@MathStat, side 54].
 
-Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at teste validiteten af $H_0$. Værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
+Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at måle evidensen imod $H_0$. Værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
 
-En permutationstest går ud på at forsøge at måle evidens imod $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststørrelsen for samtlige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi(1)}, X_{\pi(2)}, \ldots X_{\pi(m)} \}$, hvor $m$ er antallet af mulige permutationer af $X$. Teststørrelsen for den $i$'te permutation benævnes $S_{\pi_i}$.
+En permutationstest går ud på at forsøge at måle evidens imod $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststørrelsen for samtlige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi(1)}, X_{\pi(2)}, \ldots X_{\pi(M)} \}$, hvor $M$ er antallet af mulige permutationer af $X$. Teststørrelsen for den $i$'te permutation benævnes $S_{\pi_i}$.
 
-Ved nu at undersøge, hvor stor en andel af $S_{\pi_i}$, der har en mindre eller større værdi end $S_{obs}$, findes en en-sidet _p_-værdi for testen. Dette kan skrives som $p_{mindre} = \frac{\# S_{\pi_i} \leq  S_{obs}}{m}$, eller tilsvarende for værdier af $S_{\pi_i}$, der er større end $S_{obs}$. For at få den to-sidede _p_-værdi ganges den mindste af de en-sidede p-værdier med $2$.
-$p_{mindre}$ er stor i de tilfælde, hvor $S_{\pi_i}$ ofte er mindre end $S_{obs}$. Ligeledes gør det sig gældende, at $p_{større}$ er stor i de tilfælde, hvor $S_{\pi_i}$ ofte er større end $S_{obs}$.
+Selve beregningen af teststørrelsen afhænger af de specifikke hypoteser, men det er et krav, at store værdier for $S_{\pi_i}$ indikerer evidens imod $H_0$.
 
-En begrundelse for, hvorfor p-værdien udregnes på denne måde er, at p-værdien er symmetrisk, og derfor må den mindste af de to en-sidede p-værdier ganget med $2$, angive mængden af evidens imod $H_0$, se figur \@ref(fig:fig-p-bootstrap) for illustration.
+_P_-værdien for en tosidet test beregnes som antal gange, den numeriske værdi af permutationsteststørrelsen, $|S_{\pi_i}|$, er større end den observerede teststørrelse, $S_{obs}$, divideret med antallet af mulige permuationer, $M$. _P_-værdien beregnes på tilsvarende vis for en ensidet test, hvor $|S_{\pi_i}|$ erstattes med $S_{\pi_i}$, og uligheden erstattes med det tilsvarende passende.
 
-```{r fig-p-bootstrap, fig.cap="(A) Fordelingen viser 40% observationer større end teststørrelsen og 60% observationer mindre. (B) Fordelingen viser 98% observationer større end teststørrelsen og 2% observationer mindre.", echo=FALSE}
-plot1 <- qdist("norm", p = 0.60, mean = 0, sd = 1, ylab="", xlim = c(-4, 4),  return = c("plot"))
-plot1 <- plot1 + theme(legend.position = "none")
-plot2 <- qdist("norm", p = 0.02, mean = 0, sd = 1, ylab="", xlim = c(-4, 4), return = c("plot"))
-plot2 <- plot2 + theme(legend.position = "none")
-plot_grid(plot1, plot2, labels = "AUTO")
-```
+$$p = \frac{\#(|S_{\pi_i}| \geq S_{obs}) + 1}{M + 1}$$
 
-Permutationstest har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er ombyttelig. For det andet er det ikke alle teststørrelser, der kan undersøges ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger. Hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven.
+Permutationstest har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Desuden er permutationstest især smart, når fordelingen af teststørrelsen er ukendt.
+
+Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er ombyttelig. For det andet er det ikke alle teststørrelser, der kan undersøges ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden for en test for en enkelt stikprøve. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger. Hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven. For det fjerde, er det kun nulhypoteser om ingen forskel, der kan testes ved hjælp af permutationer - eksempelvis kan evidensen imod $H_0: \mu_1 \neq \mu_2$ ikke beregnes, [@BootvsJack, s. 48].
 
 Netop på grund af ombytteligheden af stikprøven fungerer permutationstests. Hvis stikprøven er ombyttelig, vil hver eneste permutation af stikprøven, inklusiv stikprøven selv, være lige sandsynlige. Dette medfører, at hvis $H_0$ er sand, vil enhver difference imellem $S_{obs}$ og $S_{\pi_i}$ være lille og tilfældig. Hvis værdien for $S_{\pi_i}$ på den måde konkluderes at være væsentlig anderledes end $S_{obs}$, tyder det på, at $H_0$ skal forkastes.
 
@@ -48,7 +38,7 @@ Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for e
 
 ## Uparret permutationstest
 
-Der vil nu vises et eksempel på, hvordan permutationstest kan anvendes som en hypotesetest. Antag, at det ønskes undersøgt, om middelværdien af to stikprøver er signifikant forskellige. Den opstillede nulhypotese bliver $H_0 : \mu_1 = \mu_2$, og den alternative hypotese bliver $H_1 : \mu_1 \neq \mu_2$.
+Der vil nu vises et eksempel på, hvordan permutationstest kan anvendes som en hypotesetest. Antag, at det ønskes undersøgt, om middelværdien af to stikprøver er signifikant forskellige. Den opstillede nulhypotese bliver $H_0 : \mu_1 - \mu_2 = 0$, og den alternative hypotese bliver $H_1 : \mu_1 - \mu_2 \neq 0$.
 
 Der vil blive udtrukket to stikprøver fra den samme betafordeling, der vises på figur \@ref(fig:permhist).
 
@@ -61,16 +51,16 @@ beta1 <- 2
 stik1 <- rbeta(n, alfa1, beta1)
 stik2 <- rbeta(n, alfa1, beta1)
 
-mean_difference <- abs(mean(stik1) - mean(stik2))
+S_obs <- abs(mean(stik1) - mean(stik2))
 ```
 
-```{r permhist, echo = FALSE, fig.cap = "To stikprøver udtrukket fra den samme betafordeling med parameterne alpha = 8 og beta = 2."}
+```{r permhist, echo = FALSE, fig.cap = "To stikprøver udtrukket fra den samme betafordeling med parameterne alfa = 8 og beta = 2."}
 par(mfrow = c(1,2))
 hist(stik1, main = "", xlab = "", ylab = "Antal observationer")
 hist(stik2, main = "", xlab = "", ylab = "Antal observationer")
 ```
 
-Teststørrelsen vil i dette tilfælde være forskellen mellem stikprøvernes middelværdi, $S_{obs} = |\hat{\mu}_1 - \hat{\mu}_2|$. Den observerede teststørrelse ses at være ```r mean_difference```.  Hvorvidt denne forskel er signifikant, kan nu undersøges ved at beregne forskellen i middelværdi for samtlige permutationer af stikprøverne. Observationerne fra hver stikprøve vil blive forenet i en enkelt stikprøve, som der vil permuteres udfra.
+Teststørrelsen vil i dette tilfælde være forskellen mellem stikprøvernes middelværdi, $S_{obs} = |\hat{\mu}_1 - \hat{\mu}_2|$. Den observerede teststørrelse ses at være ```r S_obs```.  Hvorvidt denne forskel er signifikant, kan nu undersøges ved at beregne forskellen i middelværdi for samtlige permutationer af stikprøverne. Observationerne fra hver stikprøve vil blive forenet i en enkelt stikprøve, som der vil permuteres udfra.
 
 I nedenstående kode udføres der $100$ permutationer på den forenede stikprøve. Den forenede stikprøve har en størrelse på $N = 200$. I hver permutation udtrækkes de første $100$ observationer til at være den permuterede stikprøve ```permuteret_stik1``` , mens de sidste $100$ observationer bliver til den permuterede stikprøve ```permuteret_stik2```. Derefter udregnes den absolutte forskel i middelværdien mellem de nye permuterede stikprøver, i alt $100$ gange, en for hver permutation. 
 
@@ -79,7 +69,7 @@ mean_list <- c()
 forenet_stik <- c(stik1, stik2)
 
 for(i in 1:100){
-  permuteret_forenet_stik <- gtools::permute(forenet_stik)
+  permuteret_forenet_stik <- sample(forenet_stik, size = (2 * n))
   permuteret_stik1 <- head(permuteret_forenet_stik, 100)
   permuteret_stik2 <- tail(permuteret_forenet_stik, 100)
   
@@ -92,35 +82,20 @@ I outputtet _head(mean_list, 3)_ ses et eksempel på tre af middelværdierne. P�
 
 ```{r permmeanhist, fig.cap = "Permutationsfordelingen af teststørrelserne. Den blå linje viser den originale observerede forskel i middelværdierne."}
 hist(mean_list, main = "", ylab = "Antal observationer", xlab = "Forskel i middelværdier")
-abline(v = mean_difference, col = "blue")
+abline(v = S_obs, col = "blue")
 ```
 
 Nu kan p-værdien beregnes, ved at udregne hvor mange gange den observerede forskel mellem middelværdierne på hver permutationstest er større end den originale observerede forskel. Denne værdi divideres derefter med antallet af permutationer. Dette gøres i nedenstående kodestykke. 
 ```{r}
-stoerre_vaerdier <- 0
-lavere_vaerdier <- 0
+S_pi <- mean_list
 
-for(i in 1:length(mean_list)){
-  if(mean_list[i] >= mean_difference){
-    stoerre_vaerdier <- stoerre_vaerdier + 1
-  }
-}
+ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[2]
 
-p_stoerre <- stoerre_vaerdier/length(mean_list)
-
-for(i in 1:length(mean_list)){
-  if(mean_list[i] <= mean_difference){
-    lavere_vaerdier <- lavere_vaerdier + 1
-  }
-}
-
-p_lavere <- lavere_vaerdier/length(mean_list)
-
-p_tosidet <- min(2*p_stoerre, 2*p_lavere)
-p_tosidet
+p_vaerdi <- unname(ekstreme_vaerdier+1)/(length(S_pi)+1)
+p_vaerdi
 ```
 
-Med en tosidet _p_-værdi på ```r p_tosidet```, er der ikke noget belæg for at forkaste nulhypotesen.
+Med en _p_-værdi på ```r p_vaerdi```, er der ikke noget belæg for at forkaste nulhypotesen.
 
 __Type-I fejl__
 
@@ -129,7 +104,9 @@ Antallet af type-I fejl, der opstår i en uparret permutationstest kan undersøg
 I koden nedenfor bestemmes antallet af type-I fejl for en uparret permutationstest.
 
 ```{r}
+set.seed(1)
 konf_niveau <- 0.95
+reps <- 100
 
 type_1_fejl <- replicate(reps, {
   
@@ -137,38 +114,24 @@ type_1_fejl <- replicate(reps, {
   stik2 <- rbeta(n, alfa1, beta1)
   samlet_stik <- c(stik1, stik2) 
   
-  mean_difference <- abs(mean(stik1) - mean(stik2))
+  S_obs <- abs(mean(stik1) - mean(stik2))
   mean_list <- c()
   
   for(i in 1:(n*2)){
-    permuteret_samlet_stik <- gtools::permute(samlet_stik)
+    permuteret_samlet_stik <- sample(samlet_stik, size = (2 * n))
     permuteret_stik1 <- head(permuteret_samlet_stik, n)
     permuteret_stik2 <- tail(permuteret_samlet_stik, n)
   
     mean_list[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
   }
   
-  stoerre_vaerdier <- 0
-  for(i in 1:length(mean_list)){
-    if(mean_list[i] >= mean_difference){
-     stoerre_vaerdier <- stoerre_vaerdier + 1
-   }
-  }
-  
-  p_stoerre <- stoerre_vaerdier/length(mean_list)
-  
-  mindre_vaerdier <- 0
-  for(i in 1:length(mean_list)){
-    if(mean_list[i] >= mean_difference){
-     mindre_vaerdier <- mindre_vaerdier + 1
-   }
-  }
+  S_pi <- mean_list
 
-  p_lavere <- lavere_vaerdier/length(mean_list)
-
-  p_tosidet <- min(2*p_stoerre, 2*p_lavere)
+  ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[2]
   
-  type1fejl <- p_tosidet > 1 - konf_niveau
+  p_vaerdi <- (ekstreme_vaerdier+1)/(length(mean_list)+1)
+  
+  type1fejl <- p_vaerdi > 1 - konf_niveau
   return(type1fejl)
 })
 
@@ -185,7 +148,6 @@ Ligesom permutationstest kan bruges til at lave en uparret hypotesetest, kan den
 I nedenstående kode, vises et eksempel på en parret permutations-test for forskel i middelværdi, der gør brug af pakken ```wPerm```.
 
 ```{r, tidy=FALSE}
-library(wPerm)
 reps <- 100
 n <- 100
 permuteringer <- 1000

@@ -4,8 +4,6 @@ library(mosaic)
 
 # Problemanalyse
 
-__FIXME__ (Afsnittet skal kigges igennem, mhp. ILT! Noget af indledening til afsnittet minder om problemanalysen)
-
 ## Statistikkens udvikling
 
 Ordet _statistik_ stammer tilbage fra det latinske _statisticum collegium_ ("statsrådgiver") og det italienske _statista_ ("statsmand" eller "politiker"), [@Orddef]. At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statistik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrere befolkningen og dennes tilhørselsforhold. Derfor anvendte statsrådgivere og statsmænd statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik.
@@ -228,11 +226,9 @@ Det fremgår fra tabellen, at dækningsgraden af konfidensintervallerne er ```r 
 
 ## Problemformulering
 
-<!-- _Kan simuleringsstudier bidrage til at højne kvaliteten af dataanalyser, og i så fald, hvordan?_ -->
+1) Hvorledes kan simuleringsstudier bidrage til at afdække problemer med klassiske inferensmetoder, når deres antagelser ikke er overholdt?
 
-<!-- _??_ -->
-
-_Hvilke alternativer er der til t-testen, når dens antagelser ikke er overholdt, og hvor robuste er de?_
+2) Hvilke alternativer er der til klassiske inferensmetoder, såsom t-tests og konfidensintervaller, når deres antagelser ikke er overholdt, og hvor robuste er alternativerne?
 
 
 
