@@ -45,6 +45,6 @@ I dette projekt er følgende pakker blevet anvendt.
 
 2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser. Pakken anvendes i samtlige afsnit i rapporten.
 
-3) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i afsnit \@ref(perm-pvaerdi)
+3) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i afsnit \@ref(perm-pvaerdi).
 
 4) ```boot```, [@R-boot]. Denne pakke indeholder funktioner, der benyttes til at oprette bootstrap-stikprøver og til at udarbejde bootstrap-konfidensintervaller. Pakken anvendes i afsnit \@ref(boot-standardfejl) og \@ref(boot-daekningsgrader).
