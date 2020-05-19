@@ -40,11 +40,11 @@ t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
 t_obs
 ```
 
-For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikprøve med størrelsen $n + m$ observationer. Derefter laves en bootstrap-stikprøve af $n + m$ observationer fra den samlede stikprøve. De første $n$ indgange i den samlede stikprøve er bootstrap-stikprøven for $X$, og kaldes $X^*$. De resterende $m$ indgange er bootstrap-stikprøven for $Y$, og kaldes $Y^*$. Til sidst udregnes bootstrap-teststørrelsen $t^*_{obs} = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}$. I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo]. Et eksempel på dette udregnes i nedenstående kodestykke.
+For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikprøve med størrelsen $n + m$ observationer. Derefter laves en bootstrap-stikprøve af $n + m$ observationer fra den samlede stikprøve. De første $n$ indgange i den samlede stikprøve er bootstrap-stikprøven for $X$, og kaldes $X^*$. De resterende $m$ indgange er bootstrap-stikprøven for $Y$, og kaldes $Y^*$. Til sidst udregnes bootstrap-teststørrelsen $t^* = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}$. I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo]. Et eksempel på dette udregnes i nedenstående kodestykke.
 
 ```{r}
-B <- 1000
-boot_t <- replicate(n = B, {
+bootstraps <- 1000
+boot_t <- replicate(n = bootstraps, {
   
     boot <- sample(x = c(stik1, stik2), replace = TRUE) # Samlede bootstrap-stikprøve
   
@@ -73,7 +73,7 @@ Herefter kan _p_-værdien udregnes som ved permutationstest i afsnit \@ref(permu
 ```{r}
 antal_ekstreme <- abs(boot_t) >= t_obs
 
-p_vaerdi <- (sum(antal_ekstreme)+1) / (B + 1)
+p_vaerdi <- (sum(antal_ekstreme) + 1) / (bootstraps + 1)
 p_vaerdi
 ```
 
@@ -84,35 +84,27 @@ __Eksempel__
 Den udførte test kan ved hjælp af R's funktion ```replicate```, gentages mange gange, for at undersøge om resultatet vil blive det samme, ved mange stikprøveudtagninger. Fremgangsmåden for den uparrede bootstrap-test er den samme. Den bliver blot gentaget $100$ gange, og middelværdien af de $100$ _p_-værdier findes.
 
 ```{r}
-reps <- 100
-n1 <- 20
-n2 <- 50
-alfa1 <- 2
-beta1 <- 8
-B <- 1000
-
-res <- replicate(reps, {
-  stik1 <- rbeta(n, alfa1, beta1)
-  stik2 <- rbeta(m, alfa1, beta1)
+res <- replicate(n = 100, {
+  stik1 <- rbeta(n, shape1 = 2, shape2 = 8)
+  stik2 <- rbeta(m, shape1 = 2, shape2 = 8)
   t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
               sqrt(((sd(stik1))^2 / n)) + ((sd(stik2))^2 / m)
 
-  boot_t <- replicate(B, {
+  boot_t <- replicate(n = bootstraps, {
   
     boot <- sample(c(stik1, stik2), replace = TRUE)
   
-    bootx <- boot[1 : n]
-    booty <- boot[(n+1) : (n+m)]
-    boot_test <- ((mean(bootx) - mean(booty)) -
+    boot_x <- boot[1 : n]
+    boot_y <- boot[(n+1) : (n+m)]
+    boot_test <- ((mean(boot_x) - mean(boot_y)) -
                     (mean(stik1) - mean(stik2))) /
-                      sqrt(((sd(bootx))^2 / n)) +
-                        ((sd(booty))^2 / m)
+                      sqrt(((sd(boot_x))^2 / n)) +
+                        ((sd(boot_y))^2 / m)
   })
   
   antal_ekstreme <- abs(boot_t) >= t_obs
-  table(antal_ekstreme)
 
-  p_vaerdi <- (sum(antal_ekstreme)+1) / (B + 1)
+  p_vaerdi <- (sum(antal_ekstreme)+1) / (bootstraps + 1)
 })
 
 p_vaerdi_uparret <- mean(res)
@@ -137,29 +129,23 @@ __Eksempel__
 I nedenstående kode, vises et eksempel på en parret bootstrap-test, hvor stikprøverne ikke er fra den samme fordeling.
 
 ```{r}
-reps <- 100
 n <- 15
-alfa1 <- 10
-beta1 <- 2
-alfa2 <- 4
-beta2 <- 13
-B <- 1000
 
-p_reps <- replicate(reps, {
-  stik1 <- rgamma(n, alfa1, beta1)
-  stik2 <- rgamma(n, alfa2, beta2)
+p_reps <- replicate(n = 100, {
+  stik1 <- rgamma(n, shape = 10, rate = 2)
+  stik2 <- rgamma(n, shape = 4, rate = 13)
   stik_diff <- stik1 - stik2
   obs_t <- (mean(stik_diff)-0)/(sd(stik_diff)/sqrt(n))
 
   boot_t <- c()
-  for(i in seq(1, B)){
+  for(i in seq(1, bootstraps)){
     boot <- sample(stik_diff, n, replace = TRUE)
     boot_t[i] <- (mean(boot)-mean(stik_diff))/(sd(boot)/sqrt(n))
   }
   
   antal_ekstreme <- abs(boot_t) >= obs_t
   
-  p_vaerdi <- (sum(antal_ekstreme) + 1) / (B + 1)
+  p_vaerdi <- (sum(antal_ekstreme) + 1) / (bootstraps + 1)
 })
 
 p_vaerdi_parret <- mean(p_reps)
@@ -180,16 +166,12 @@ set.seed(31415)
 
 ```{r}
 n <- 20
-alfa <- 8
-beta <- 2
 konf_niveau <- 0.95
 sand_middel <- 0
-reps <- 500
-bootstraps <- 500
 
-type_1_fejl_boot <- replicate(reps, {
-  stik1 <- rgamma(n, alfa, beta)
-  stik2 <- rgamma(n, alfa, beta)
+type_1_fejl_boot <- replicate(n = 500, {
+  stik1 <- rgamma(n, shape = 8, rate = 2)
+  stik2 <- rgamma(n, shape = 8, rate = 2)
   stik_diff <- stik1 - stik2
   obs_t <- (mean(stik_diff)-sand_middel)/(sd(stik_diff)/sqrt(n))
 
