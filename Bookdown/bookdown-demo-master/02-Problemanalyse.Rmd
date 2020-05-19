@@ -7,14 +7,14 @@ set.seed(29)
 
 ## Statistikkens udvikling
 
-Ordet _statistik_ stammer tilbage fra det latinske _statisticum collegium_ ("statsrådgiver") og det italienske _statista_ ("statsmand" eller "politiker"), [@Orddef]. At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statistik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrere befolkningen og dennes tilhørselsforhold. Derfor anvendte statsrådgivere og statsmænd statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik.
+Ordet _statistik_ stammer tilbage fra det latinske _statisticum collegium_ ("statsrådgiver") og det italienske _statista_ ("statsmand" eller "politiker"), [@Orddef]. At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statistik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrere befolkningen og dennes tilhørselsforhold. Derfor anvendte statsrådgivere og statsmænd statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik, [@Samfundsstat].
 
 To statistikere, som ligger fundamentet til den statistiske arbejdsform, der bruges i dag er Karl Pearson og Ronald Fisher.
 Karl Pearson var interesseret i at udvikle matematiske metoder til at studere biologisk arv og evolution. Gennem den interesse udsprang en række bidrag til statistiske analyse metoder. Pearson opfandt korrelationskoefficienten $(R^2)$ som bruges til at vise, hvor godt en regressionsmodel passer noget givent data. Udover det, opfandt han også $\chi^2$-testen, som er en metode der bruges til at teste at observerede værdier stemmer overens med de forventede værdier, [@KarlPearsonbrit], [@Chiianden].
 
 Ronald Fisher introducerede princippet om randomisering. Det siger, at et eksperiment skal gentages på et antal kontrolgrupper, og de elementer der bruges i eksperimentet skal tilfældigt udvælges fra hele populationen. Dette gjorde data forventningsret, som mindsker variationen i et eksperiment. Udover det har Fisher introduceret analyse af varians, også kaldet ANOVA (fra engelsk analysis of variance). Denne model bruges til at analysere forskellen mellem gruppemiddelværdier i en stikprøve, [@RonaldFisher].
 
-Yderligere har udviklingen af computeren været med til at gøre anvendelsen af komplicerede statistiske beregninger hurtigere, mere præcise og mere tilgængelige. Anvendelsesområderne for statistik har ligeledes udviklet sig, fra i begyndelsen at være noget staten anvendte til styring af økonomi og befolkningsindblik, til stort set at være repræsenteret i alle større hverv i dag. Den moderne definition af statistik kan beskrives som evnen til at drage konklusioner om generelle tilfælde, _populationer_, på baggrund af enkelte tilfælde, _stikprøver_, [@ASTAbog, s. 1].
+Yderligere har udviklingen af computeren været med til at gøre anvendelsen af komplicerede statistiske beregninger hurtigere, mere præcise og mere tilgængelige. Anvendelsesområderne for statistik har ligeledes udviklet sig, fra i begyndelsen at være noget staten anvendte til styring af økonomi og befolkningsindblik, til stort set at være repræsenteret i alle større hverv i dag. Den moderne definition af statistik kan beskrives som evnen til at drage konklusioner om generelle tilfælde, _populationer_, på baggrund af enkelte tilfælde, _stikprøver_, [@ASTAbog, s. 4].
   
 ## Statistik
 Statistik opdeles overordnet i to kategorier, deskriptiv statistisk og statistisk inferens. 
@@ -43,27 +43,23 @@ En hypotesetest baserer sig på det videnskabelige princip om falsificering. Der
 
 Ved en hypotesetest undersøges, hvorvidt der er en difference mellem observerede værdier og forventede værdier, hvis $H_0$ er sand.
 
-Sandsynligheden for at der er en difference er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen, og derfor benyttes et mål for, hvornår differencen er _for_ stor, kaldet signifikansniveauet, $\alpha$.
+Sandsynligheden for, at der er en difference, er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen, og derfor benyttes et mål for, hvornår differencen er _for_ stor, kaldet signifikansniveauet, $\alpha$.
 
-En hypotesetest viser sandsynligheden for mulige udfald, for på den måde at undersøge, hvorvidt $H_0$ kan forkastes, [@HvorforHYPO].
+Når nulhypotesen og den alternative hypotese er blevet opstillet, kan stikprøvens resultat sammenlignes med det forventede resultat under nulhypotesen, ved hjælp af en teststørrelse. Teststørrelsen kan blandt andet bestemmes som antallet af standardafvigelser, den observerede værdi, $\hat{\theta}$, ligger fra den forventede værdi $\theta_0$, i retning af den alternative hypotese, [@HvorforHYPO].
 
-Et mål for, hvor usandsynlig en observeret værdi er, hvis $H_0$ er sand, kaldes for en teststørrelse.
-
-For at kunne bestemme, om en difference mellem en observeret og forventet værdi er signifikant, benyttes en signifikanstest. En signifikanstest er en metode til at finde teststørrelsen og undersøge, om den er signifikant eller ej.
-
-Teststørrelsen findes ofte som antallet af standardafvigelser, den observerede værdi, $\hat \theta$, ligger fra den forventede værdi $\theta_0$.
-
-At $\hat \theta$ ligger mere end $3$ standardafvigelser fra $\theta_0$, er højst usandsynligt, da $\hat \theta$ i så fald er en outlier i populationen. I et sådan tilfælde er $\theta_0$ højst sandsynligt ikke populationens korrekte værdi.
-
-En illustration af teststørrelsens betydning ved en normalfordeling kan ses på Figur \@ref(fig:figur-Hypotesetest).
-
-```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
-knitr::include_graphics('images/HippoHyppo.jpeg')
-```
+At $\hat \theta$ ligger mere end $3$ standardafvigelser fra $\theta_0$, er højst usandsynligt, da $\hat \theta$ i så fald er en outlier i populationen. I et sådan tilfælde er $\theta_0$ højst sandsynligt ikke populationens korrekte værdi, hvorved nulhypotesen kan forkastes.
 
 Derudover benyttes testtørrelsen til at udregne _p_-værdien, som er sandsynligheden for at få en teststørrelse, der er lige så eller mere ekstrem, hvis $H_0$ er sand.
 
 Værdien af teststørrelsen påvirker _p_-værdien på den måde, at når teststørrelsen bliver mere ekstrem, falder _p_-værdien. Jo mindre _p_-værdien er, des mindre stoles på $H_0$, og hvis _p_-værdien er mindre end signifikansniveauet, $\alpha$, forkastes $H_0$. Er _p_-værdien derimod større end $\alpha$, er der ikke belæg for at forkaste $H_0$ - dette betyder dog ikke, at $H_0$ givetvis er sand.
+
+En illustration af teststørrelsens betydning ved en normalfordeling kan ses på Figur \@ref(fig:figur-Hypotesetest).
+
+__FIXME:__ (Mere forklaring til denne figur)
+
+```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
+knitr::include_graphics('images/HippoHyppo.jpeg')
+```
 
 Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være $10\%$ eller $1\%$. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper, [@ASTA-HYPO].
 
@@ -78,7 +74,7 @@ Forud for gennemførelsen af en t-test, er der nogle antagelser, som skal være 
 3. Stikprøveudtagning skal være udført med tilfældighed.
 4. Populationen skal være normalfordelt.
 
-Herefter er fremgangsmetoden som beskrevet i afsnitet \@ref(hypotesetest).
+Herefter er fremgangsmetoden som beskrevet i afsnit \@ref(hypotesetest).
 
 __Eksempel__
 
@@ -89,7 +85,7 @@ xdata <- rnorm(n, forventet_middelvaerdi, 1)
 x_middelvaerdi <- mean(xdata)
 ```
 
-Der vil nu vises et eksempel på en t-test. Figur \@ref(fig:hist10) viser en stikprøve af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi```, udtaget fra en standard normalfordelt population med en forventet middelværdi på $0$.
+Der vil nu vises et eksempel på en t-test. Figur \@ref(fig:hist10) viser en stikprøve af ```r n``` observationer med en middelværdi på ```r x_middelvaerdi```, udtaget fra en standard normalfordelt population.
 
 ```{r hist10, echo=FALSE, fig.align='center', fig.cap = "Histogram over 10 simulerede standard normalfordelte tal."}
 hist(xdata, main = NULL,
@@ -97,7 +93,7 @@ hist(xdata, main = NULL,
     xlab="Værdi")
 ```
 
-I kodestykket nedenfor gennemgås den beskrevede fremgangsmåde for en t-test. I dette eksempel er $H_0: \mu = 0$, og $H_1: \mu \neq 0$.
+I kodestykket nedenfor gennemgås den beskrevne fremgangsmåde for en t-test. I dette eksempel er $H_0: \mu = 0$, og $H_1: \mu \neq 0$.
 
 ```{r}
 n <- 10
@@ -123,7 +119,7 @@ Der er risiko for to primære fejl når der foretages en hypotesetest, som illus
 
 En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
 
-Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau, $\alpha$. Sandsynligheden for type-II fejl, $\beta$, er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen. Er den virkelige sandhed derimod langt fra nulhypotesen, vil sandsynligheden for type-II fejl være tilsvarende lille. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved en mindre mængde data. Andelen af type-II fejl benyttes til at udregne hypotesetestens styrke, $1-\beta$. Styrken annoterer andelen af gange, hvor $H_1$ korrekt bliver forkastet, [@Fejltyper].
+Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau, $\alpha$. Sandsynligheden for type-II fejl, $\beta$, er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen. Er den virkelige sandhed derimod langt fra nulhypotesen, vil sandsynligheden for type-II fejl være tilsvarende lille. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved en mindre mængde data. Andelen af type-II fejl benyttes til at udregne hypotesetestens styrke, $1-\beta$. Styrken beskriver andelen af gange, hvor $H_1$ korrekt bliver forkastet, [@Fejltyper].
 
 ```{r figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
 knitr::include_graphics('images/Typefejl.png')
@@ -159,7 +155,7 @@ type_2 <- matrix(type_2_vector, nrow = 5, ncol = 7, dimnames = list("Differencen
 type_2
 ```
 
-Tabellen viser, at både stikprøvestørrelsen samt differencen i middelværdien, har stor betydningfor andelen af aftype-II fejl. Er differencen i middelværdierne $0.001$ fremgår det, at stikprøvestørrelsen mellem $5$ og $10,000$ ikke giver signifikante forskelle, hvilket medfører, at stikprøvestørrelsen skal være meget større for at mindske andelen af type-II fejl. Derudover mindskes risikoen for type-II fejl som stikprøvestørrelsen øges, hvilket også er gældende hvis differencen i middelværdierne forøges.
+Tabellen viser, at både stikprøvestørrelsen samt differencen i middelværdien, har stor betydning for andelen af af type-II fejl. Er differencen i middelværdierne $0.001$ fremgår det, at stikprøvestørrelsen mellem $5$ og $10,000$ ikke giver signifikante forskelle, hvilket medfører, at stikprøvestørrelsen skal være meget større for at mindske andelen af type-II fejl. Derudover mindskes risikoen for type-II fejl som stikprøvestørrelsen øges, hvilket også er gældende hvis differencen i middelværdierne forøges.
 
 ## Problemformulering
 

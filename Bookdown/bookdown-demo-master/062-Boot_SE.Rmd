@@ -3,13 +3,10 @@ library(mosaic)
 library(boot)
 set.seed(29)
 ```
-<!-- # Bootstrap anvendelser -->
-
-<!-- I dette kapitel, vil der blive undersøgt hvordan bootstrap kan anvendes i praksis. Herunder, når der skal udregnes standardfejl for en estimator, til at angive konfidensintervaller, samt hvis der skal udføres hypotesetest vha. bootstrap. Til hver anvendelse, vil der også blive givet et eksempel på dataanalyse.  -->
 
 ## Bootstrap-standardfejl {#boot-standardfejl}
 
-Der vil i dette afsnit beskrives, hvordan standardfejl af en bootstrap-stikprøve udregnes. I det efterfølgende afsnit vil standardfejlen inddrages i beregningen af konfidensintervallet for en bootstrap-stikprøve. Det følgende afsnit er primært skrevet på baggrund af [@TDSBootstrap].
+Der vil i dette afsnit beskrives, hvordan standardfejl af en stikprøve kan udregnes ved hjælp af bootstrap. Udregnes standardfejlen på denne måde, kaldes den for bootstrap-standardfejlen. I det efterfølgende afsnit vil standardfejlen inddrages i beregningen af konfidensintervallet for en bootstrap-stikprøve. Det følgende afsnit er primært skrevet på baggrund af [@TDSBootstrap].
 
 Standardafvigelsen for en estimator beskrives som estimatorens standardfejl. Standardfejlen er et udtryk for, hvor stor en afvigelse der er fra populationens parameter til stikprøvens estimat. Jo mindre standardfejlen er, desto mindre er afvigelsen mellem estimatet og parameteren. Som udgangspunkt vil en stikprøves estimat aldrig være lig populationens parameter, fordi der ved udtagning af en stikprøve, i hvert tilfælde vil være variabilitet. Standardfejlen er et mål for denne variabilitet.
 
@@ -19,9 +16,7 @@ Når der arbejdes med data udover det teoretiske, vil standardafvigelsen for pop
 
 Som eksempel vil den estimerede standardfejl for estimatet af middelværdien, $\hat{\mu}$, være  $\hat{\text{se}}(\hat{\mu}) = \frac{S}{\sqrt{n}}$, hvor $S = \sum_{i=1}^{n} \frac{(x_i - \hat{\mu})^2}{n - 1}$ er stikprøvens standardafvigelse for middelværdien, og $n$ er størrelsen på stikprøven.
 
-Såfremt en estimator er normalfordelt eller tilnærmelsesvist er normalfordelt, kan det forventes, at et estimat vil være mindre end én standardfejl fra det forventede i $68\%$ af tilfældene og mindre end to standardfejl fra i $95\%$ af tilfældene. 
-
-Dog er dette ikke altid ligetil i virkeligheden, oftest er der ikke tilstrækkelig informationer om populationen eller fordeligen af denne. Samtidig kræver det, at der er nogle specifikke krav som er opfyldt. Disse problemer kan undgås ved at benytte bootstrap til at estimere standardfejlen, givet ved nedstående formel.
+Dog er dette ikke altid ligetil i virkeligheden. Oftest er der ikke tilstrækkelige informationer om populationen eller fordeligen af denne. Samtidig kræver det, at der er nogle specifikke krav, som er opfyldt. Disse problemer kan undgås ved at benytte bootstrap til at estimere bootstrap-standardfejlen, givet ved nedstående formel.
 
 $$se(\hat{\theta}) = \sqrt{\frac{1}{B-1}\sum_{b=1}^{B}(\hat{\theta_b^*} - \bar{\theta} )^2}$$
 
@@ -29,7 +24,7 @@ Hvor $\hat{\theta}$ er stikprøvens estimat for den ønskede parameter, $B$ er a
 
 __Eksempel__ 
 
-I kodetstykket nedenfor laves en tilfældig population med en standard normalfordeling. Ud fra populationen udtages en tilfældig stikprøve. Der udregnes standardfejlen for stikprøven. Derefter laves $10,000$ bootstrap-stikprøver, hvor standardfejlen for bootstrap-stikprøven udrenges.
+I kodestykket nedenfor udtages en tilfældig stikprøve fra en standard normalfordelt population. Først udregnes standardfejlen for stikprøven. Derefter laves $10,000$ bootstrap-stikprøver, som benyttes til at beregne stikprøvens bootstrap-standardfejl. Til sidst sammenlignes disse to estimater.
 
 ```{r}
 n <- 1000
@@ -48,4 +43,4 @@ SE_boot <- sd(Boot_sample$t) #Standardfejlen for bootstrap-stikprøver
 diff_procent <- ((abs(SE_sample - SE_boot))/SE_sample) * 100 #Procentvis afvigelse
 ```
 
-Fra eksemplet fås, at standardfejlen for bootstrap-stikprøven er $se(\hat{\theta})=$```r round(SE_boot, 3)```, hvilket approksimerer stikprøvens standardfejl på $\text{se}(\hat{\mu})=$```r round(SE_sample, 3)```, med en forskel i dette tilfælde på ```r round(diff_procent, 3)```$\%$. Hvis der opstår en situation hvor der ikke er en simpel måde hvorpå det er muligt at udregne standardfejlen, kan bootstrap altså udnyttes, da en forskel på ```r round(diff_procent, 3)```$\%$ ikke er signifikant. 
+Fra eksemplet fås, at bootstrap-standardfejlen for stikprøven er $se(\hat{\theta})=$```r round(SE_boot, 4)```, hvilket approksimerer stikprøvens standardfejl på $\text{se}(\hat{\mu})=$```r round(SE_sample, 4)```, med en forskel i dette tilfælde på ```r round(diff_procent, 3)```$\%$. Hvis der opstår en situation, hvor der ikke er en simpel måde, hvorpå det er muligt at udregne standardfejlen, kan bootstrap-standardfejlen altså udnyttes, da en forskel på ```r round(diff_procent, 3)```$\%$ ikke er signifikant. 

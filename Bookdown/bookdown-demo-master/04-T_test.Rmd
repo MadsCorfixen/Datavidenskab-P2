@@ -5,23 +5,9 @@ set.seed(29)
 
 # T-test for skæve stikprøver {#t-test2}
 
-__FIXME:__(Kilder!)
+I de tilfælde, hvor det ikke er muligt at overholde alle de pågældende antagelser, som beskrevet i afsnit \@ref(t-test), kan det ikke med sikkerhed antages, at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis stikprøverne ikke er normalfordelte, når der arbejdes med en uparret t-test.
 
-I de tilfælde hvor det ikke er muligt at overholde alle de pågældende antagelser, som beskrevet i afsnit \@ref(t-test), kan det ikke med sikkerhed antages, at resultaterne er retvisende. I dette afsnit vil det vises, hvad der kan ske, hvis stikprøverne ikke er normalfordelte, når der arbejdes med en uparret t-test.
-
-I dette eksempel benyttes betafordelingen, se figur \@ref(fig:figurpop1), og gammafordelingen, se figur \@ref(fig:figurpop2), til at udføre en uparret t-test.
-
-```{r figurpop1, fig.align="center", echo=FALSE, fig.cap= "Tæthedskurve for venstreskæv betafordeling, hvor alfa = 8 og beta = 2"}
-x <- seq(0, 1, length.out = 100)
-y <- dbeta(x, shape1 = 8, shape2 = 2)
-plot(x, y, type = "l", main = "", ylab = "", xlab = "")
-```
-
-```{r figurpop2, fig.align="center", echo=FALSE, fig.cap= "Tæthedskurve for højreskæv gammafordeling, hvor alfa = 1 og beta = 2."}
-x <- seq(0, 1, length.out = 100)
-y <- dgamma(x, shape = 1,  rate = 2)
-plot(x, y, type = "l", main = "", ylab = "", xlab = "")
-```
+I dette eksempel benyttes betafordelingen, se figur \@ref(fig:betafordeling), og gammafordelingen, se figur \@ref(fig:gammafordeling), til at udføre en uparret t-test.
 
 Nulhypotesen er $H_0: \mu_1 - \mu_2 = 0$ og den alternative hypotese er $H_1 : \mu_1 - \mu_2 \neq 0$. Denne nulhypotese undersøges ved hjælp af en uparret t-test. Der udtages en stikprøve fra hver af de viste fordelinger, som der udføres to-sidet uparret t-test på, ved hjælp af den indbyggede funktion `t.test`.
 
@@ -38,8 +24,7 @@ Udfra t-testen fås et konfidensinterval på [```r round(t1$conf.int, 4)```]. Fo
 set.seed(29)
 ```
 
-```{r ronni, opts.tab = "Code"}
-#Undersøg dækningsgraden af konfidensintervallet ved udtræk af nye stikprøver.
+```{r}
 middel1 <- 8/(8+2)
 middel2 <- 1*(1/2)
 

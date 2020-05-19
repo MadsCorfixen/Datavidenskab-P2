@@ -7,20 +7,20 @@ set.seed(29)
 
 Som nævnt i afsnit \@ref(t-test), skal visse antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test, og det efterfølgende resultatet af overtrædelsen af disse antagelser, blev vist i afsnit \@ref(t-test2).
 
-Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre t-test, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en uparret bootstrap-test, og dernæst fremgangsmåden for en parret bootstrap-test.
+Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre hypotesetest, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en uparret bootstrap-test, og dernæst fremgangsmåden for en parret bootstrap-test.
 
 ### Uparret bootstrap-test
 
-Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n_1}]$ og $Y=[y_{1},~y_{2},~...,~y_{n_2}]$, med ens varians være givet på figur \@ref(fig:histhypuparret).
+Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y_{1},~y_{2},~...,~y_{m}]$, hvor $X \wedge Y \sim \text{Beta}(2, 8)$, med ens varians være givet på figur \@ref(fig:histhypuparret).
 
 ```{r}
-n1 <- 20
-n2 <- 50
+n <- 20
+m <- 50
 alfa1 <- 2
 beta1 <- 8
 
-stik1 <- rbeta(n1, alfa1, beta1)
-stik2 <- rbeta(n2, alfa1, beta1)
+stik1 <- rbeta(n, alfa1, beta1)
+stik2 <- rbeta(m, alfa1, beta1)
 ```
 
 ```{r histhypuparret, fig.cap = "To uafhængige uparrede stikprøver", echo = FALSE}
@@ -29,18 +29,22 @@ hist(stik1, main = "", xlab = "Stikprøve 1", ylab = "Antal observationer", ylim
 hist(stik2, main = "", xlab = "Stikprøve 2", ylab = "Antal observationer", ylim = c(0, 20))
 ```
 
-Så opstilles der en nulhypotese, $H_0: \mu_{_X} = \mu_{_Y}$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} \neq \mu_{_Y}$, samt et signifikansniveau, $\alpha = 0.05$. 
+Så opstilles der en nulhypotese, $H_0: \mu_{_X} - \mu_{_Y} = 0$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} - \mu_{_Y} \neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
 
-På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs} = \frac{\bar{X}-\bar{Y}}{\hat{SE}(X)+\hat{SE}(Y)}$.
+På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs} = \frac{(\bar{X}-\bar{Y}) - (\bar{X_0} - \bar{Y_0})}{((s_X^2/n) + (s_Y^2/m))}$, hvor $\bar{X_0}$ og $\bar{Y_0}$ middelværdien for $X$ og $Y$ under $H_0$, og $s_i$ er standardafvigelsen for $i$.
 
 ```{r}
 t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
-            sqrt(((sd(stik1))^2 / n1)) +
-              ((sd(stik2))^2 / n2)
+            sqrt(((sd(stik1))^2 / n)) +
+              ((sd(stik2))^2 / m)
 t_obs
 ```
 
-Først forenes de to stikprøver til en samlet stikprøve med størrelsen $n_1 + n_2$ observationer. Derefter laves en bootstrap-stikprøve af $n_1 + n_2$ observationer med tilbagelægning fra den samlede stikprøve. Herefter udregnes middelværdien af de første $n_1$ observationer, som kaldes $\hat{X}^*$. Desuden udregnes middelværdien af de resterende $n_2$ observationer, der kaldes $\hat{Y}^*$. Til sidst udregnes bootstrap-teststørrelsen $t^*=\frac{\hat{X}^*-\hat{Y}^*}{\hat{SE}(X^*)+\hat{SE}(Y^*)}$. I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo].
+For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikprøve med størrelsen $n + m$ observationer. Derefter laves en bootstrap-stikprøve af $n + m$ observationer fra den samlede stikprøve. De første $n$ indgange i den samlede stikprøve er bootstrap-stikprøven for $X$, og kaldes $\X^*$. De resterende $m$ indgange er bootstrap-stikprøven for $Y$, og kaldes $Y^*$. Til sidst udregnes bootstrap-teststørrelsen $t^*_{obs} = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}$. I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo]. Et eksempel på dette udregnes i nedenstående kodestykke.
+
+
+
+<!-- Herefter udregnes middelværdien af de første $n$ observationer, som kaldes $\hat{X}^*$. Desuden udregnes middelværdien af de resterende $m$ observationer, der kaldes $\hat{Y}^*$.  -->
 
 ```{r}
 B <- 1000
@@ -48,13 +52,13 @@ boot_t <- replicate(B, {
   
     boot <- sample(c(stik1, stik2), replace = TRUE)
   
-    bootx <- boot[1 : n1]
-    booty <- boot[(n1+1) : (n1+n2)]
+    bootx <- boot[1 : n]
+    booty <- boot[(n+1) : (n+m)]
   
     boot_test <- ((mean(bootx) - mean(booty)) -
                     (mean(stik1) - mean(stik2))) /
-                      sqrt(((sd(bootx))^2 / n1)) +
-                        ((sd(booty))^2 / n2)
+                      sqrt(((sd(bootx))^2 / n)) +
+                        ((sd(booty))^2 / m)
 })
 ```
 
@@ -93,21 +97,21 @@ beta1 <- 8
 B <- 1000
 
 res <- replicate(reps, {
-  stik1 <- rbeta(n1, alfa1, beta1)
-  stik2 <- rbeta(n2, alfa1, beta1)
+  stik1 <- rbeta(n, alfa1, beta1)
+  stik2 <- rbeta(m, alfa1, beta1)
   t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
-              sqrt(((sd(stik1))^2 / n1)) + ((sd(stik2))^2 / n2)
+              sqrt(((sd(stik1))^2 / n)) + ((sd(stik2))^2 / m)
 
   boot_t <- replicate(B, {
   
     boot <- sample(c(stik1, stik2), replace = TRUE)
   
-    bootx <- boot[1 : n1]
-    booty <- boot[(n1+1) : (n1+n2)]
+    bootx <- boot[1 : n]
+    booty <- boot[(n+1) : (n+m)]
     boot_test <- ((mean(bootx) - mean(booty)) -
                     (mean(stik1) - mean(stik2))) /
-                      sqrt(((sd(bootx))^2 / n1)) +
-                        ((sd(booty))^2 / n2)
+                      sqrt(((sd(bootx))^2 / n)) +
+                        ((sd(booty))^2 / m)
   })
   
   antal_ekstreme <- abs(boot_t) >= t_obs
