@@ -5,7 +5,7 @@ set.seed(29)
 
 ## Bootstrap-konfidensintervaller
 
-I dette afsnit beskrives, hvorledes konfidensintervallet for en bootstrap-stikprøve beregnes ved hjælp af percentil-, basic- og T-metoden. Til sidst sammenlignes de tre metoders dækningsgrader ved forskellige stikprøvestørrelser.
+I dette afsnit beskrives, hvorledes et konfidensinterval kan beregnes ved hjælp af bootstrap. Der vises tre forskellige metoder, kaldet henholsvis percentil-, basic- og T-metoden. Til sidst sammenlignes de tre metoders dækningsgrader ved forskellige stikprøvestørrelser.
 
 Et $95\%$ konfidensinterval på en normalfordelt estimator, $\Theta$, kan udregnes ved $\text{KI} = [\hat\theta - 1.96\cdot \text{se}(\hat\theta),~\hat\theta + 1.96\cdot  \text{se}(\hat\theta)]$, [@BootKI]. Hvis ikke fordelingen er kendt, er det ikke muligt at udregne et konfidensinterval således. Her er det i stedet muligt at benytte bootstrap til at udregne et konfidensinterval, hvilket kan gøres ved hjælp af forskellige metoder.
 
@@ -35,9 +35,8 @@ SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
 
 ```
 
-Dernæst vælges et konfidensniveau, som regel $90\%$, $95\%$ eller $99\%$.
+Dernæst vælges konfidensniveauet til $\alpha = 0.05$, og konfidensintervallet ved hjælp af percentiler beregnes i nedenstående kodestykke.
 
-Bootstrap-konfidensinterval ved hjælp af percentiler kan findes ved:
 ```{r}
 KI_niveau <- 0.95 # Konfidensinterval
 alpha <- 1-KI_niveau # Benyttes til percentilerne
@@ -50,6 +49,8 @@ KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper]
 
 KI_Percentil
 ```
+
+Percentilmetoden giver et konfidensinterval på $\text{KI}_p = [$```r unname(round(KI_Percentil[1], 3))``` , ```r unname(round(KI_Percentil[2], 3))```$]$.
 
 ### Basic-metoden
 
@@ -93,13 +94,17 @@ KI_Basic <- c(Lower = 2*theta_hat-SortedData[IndexUpper],
 KI_Basic
 ```
 
+Basic-metoden giver et konfidensinterval på $\text{KI}_b = [$```r unname(round(KI_Basic[1], 3))``` , ```r unname(round(KI_Basic[2], 3))```$]$.
+
 ### T-metoden
 
-Konfidensintervaller kan også findes ved hjælp af standardfejl fra stikprøven, hvis stikprøven er tilnærmelsesvist t-fordelt. Beviset for formlen til konfidensintervallet for T-metoden, følger samme metode som i afsnittet for basic-metoden. Formlen for konfidensintervallet er: 
+Denne type bootstrap-konfidensinterval, benytter nedenstående formel.
 
 $$\text{KI}_t=\left[\hat\theta-t^{*}_{(1-\alpha/2)}\cdot \hat{\text{se}}(\theta),~\hat\theta-t^{*}_{(\alpha/2)}\cdot\hat{\text{se}}(\theta)\right]$$ 
 
 Hvor $\hat\theta$ er middelværdien af stikprøven, $t^{*}=\frac{\hat{\vartheta}-\hat\theta}{\hat{\text{se}}(\vartheta)}$ og $\hat{\vartheta}$ er middelværdien for $\Theta^*$, [@TPKI].
+
+Beviset for formlen til konfidensintervallet for T-metoden, følger samme metode som i afsnittet for basic-metoden.
 
 __Eksempel__
 
@@ -116,9 +121,11 @@ KI_T <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)),
 KI_T
 ```
 
+T-metoden giver et konfidensinterval på $\text{KI}_t = [$```r unname(round(KI_T[1], 3))``` , ```r unname(round(KI_T[2], 3))```$]$.
+
 ### Dækningsgrader {#boot-daekningsgrader}
 
-I dette afsnit vil der undersøges om metoderne for at udregne konfidensintervallerne med bootstrap er præcise. Dette gøres ved at udregne dækningsgraden af konfidensintervallerne som de forskellige metoder har produceret. Processen er den samme som i afsnit \@ref(t-test2). 
+I dette afsnit vil der undersøges, hvor præcise metoderne for at udregne konfidensintervallerne med bootstrap er. Dette gøres ved at udregne dækningsgraden af konfidensintervallerne som de forskellige metoder har produceret.
 
 Som det første oprettes en funktion, der udregner middelværdien for stikprøven, og tager en stikprøve og et indeks som _input_.
 
@@ -132,7 +139,11 @@ meanFunc <- function(d, i)
 sand_middel <- 0 #Sand middelværdi
 ```
 
-Det næste der udregnes er et konfidensinterval. Konfidensintervallet beregnes ved hjælp af funktionen ```boot.ci```, der kommer fra pakken ```boot```. Der bliver først lavet 100 konfidensintervaller på baggrund af normalfordelte stikprøver. Så undersøges der om middelværdien af populationen er i konfidensintervallet. Hvis det er tilfældet, vil outputtet være ```TRUE```, hvis ikke vil det være ```FALSE```. Herefter indsættes disse output i en matrix. Til sidst beregnes dækningsgraden som andelen af de intervaller, der indeholder den sande middelværdi. Der laves 100 konfidensintervaller for hver stikprøvestørrelse. Stikprøvestørrelsen er angivet i en sekvens fra 4 til 100 med spring på 4. Denne proces udføres for de tre konfidensintervalmetoder, percentil, T og basic.
+Det næste der udregnes er et konfidensinterval. Konfidensintervallet beregnes ved hjælp af funktionen ```boot.ci```, der kommer fra pakken ```boot```.
+
+Der bliver først lavet 100 konfidensintervaller på baggrund af normalfordelte stikprøver. Så undersøges der om middelværdien af populationen er i konfidensintervallet. Hvis det er tilfældet, vil outputtet være ```TRUE```, hvis ikke vil det være ```FALSE```. Herefter indsættes disse output i en matrix.
+
+Til sidst beregnes dækningsgraden som andelen af de intervaller, der indeholder den sande middelværdi. Der laves 100 konfidensintervaller for hver stikprøvestørrelse. Stikprøvestørrelsen er angivet i en sekvens fra 4 til 100 med spring på 4. Denne proces udføres for de tre metoder, percentil, T og basic.
 
 Her udføres processen for beregning af dækningsgraden for alle tre metoder.
 ```{r}
@@ -173,7 +184,7 @@ vector_p
 I _vector_p_ ses middelværdierne for dækningsgraden af 100 konfidensintervaller genereret ud fra percentilmetoden. Den første middelværdi er for stikprøvestørrelsen $n = 4$, den næste er for stikprøvestørrelsen $n = 8$ osv. 
 
 Dækningsgraderne for de tre metoder illustreres på figur \@ref(fig:fig-daekning).
-```{r fig-daekning, fig.align='center', fig.cap = "Dækningsgraden for de tre konfidensintervaller udarbejdet ved hjælp af bootstraps. På x-aksen ses stikprøve størrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøve størrelse. 0.95 er det ønsket konfidenslevel.", echo=FALSE}
+```{r fig-daekning, fig.align='center', fig.cap = "Dækningsgraden for de tre bootstrap-konfidensintervaller. På x-aksen ses stikprøvestørrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøvestørrelse.", echo=FALSE}
 x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
      xlab = "Stikprøvestørrelse", ylim = c(0.75, 1))
