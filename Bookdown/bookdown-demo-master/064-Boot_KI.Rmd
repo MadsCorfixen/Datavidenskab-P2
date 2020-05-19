@@ -1,4 +1,4 @@
-```{r echo = FALSE, include = FALSE}
+```{r, include = FALSE}
 library(boot)
 set.seed(31415)
 ```
@@ -22,30 +22,29 @@ __Eksempel__
 I kodetstykket nedenfor udtages en tilfældig stikprøve fra en standard normalfordeling. Herefter laves $10,000$ bootstrap-stikprøver, som middelværdien udregnes på. Til sidst sorteres middelværdierne i en liste.
 
 ```{r}
-data <- rnorm(100, mean = 0, sd = 1) # Tilfældig stikprøve
+data <- rnorm(100, mean = 0, sd = 1)
 
 n <- length(data)
-B <- 10000 # Bootstrap-repetitioner
+bootstraps <- 10000
 
-bootstrap_fordeling <- replicate(B, {
+bootstrap_fordeling <- replicate(n = bootstraps, {
   x <- mean(sample(data, size = n, replace = TRUE))
-}) # Bootstrap over middelværdien
+})
 
-SortedData <- sort(bootstrap_fordeling) # Bootstrap-fordelinger sorteret
+SortedBoots <- sort(bootstrap_fordeling)
 
 ```
 
 Dernæst vælges konfidensniveauet til $\alpha = 0.05$, og konfidensintervallet ved hjælp af percentiler beregnes i nedenstående kodestykke.
 
 ```{r}
-KI_niveau <- 0.95 # Konfidensinterval
-alpha <- 1-KI_niveau # Benyttes til percentilerne
+KI_niveau <- 0.95
+alpha <- 1 - KI_niveau
 
-IndexLower <- round(B * alpha/2) # Nedre percentil
-IndexUpper <- round(B * (1-alpha/2)) # Øvre percentil
+NedrePercentil <- round(bootstraps * alpha/2)
+OevrePercentil <- round(bootstraps * (1-alpha/2))
 
-KI_Percentil <- c(Lower = SortedData[IndexLower], Upper = SortedData[IndexUpper])
-  # Konfidensinterval vha. percentiler
+KI_Percentil <- c(Nedre = SortedBoots[NedrePercentil], Oevre = SortedBoots[OevrePercentil])
 
 KI_Percentil
 ```
@@ -88,8 +87,8 @@ I kodestykket nedenfor beregnes middelværdien af stikprøven og benyttes i form
 ```{r}
 theta_hat <- mean(data)
 
-KI_Basic <- c(Lower = 2*theta_hat-SortedData[IndexUpper],
-              Upper = 2*theta_hat-SortedData[IndexLower])
+KI_Basic <- c(Nedre = 2*theta_hat-SortedBoots[OevrePercentil],
+              Oevre = 2*theta_hat-SortedBoots[NedrePercentil])
 
 KI_Basic
 ```
@@ -111,13 +110,14 @@ __Eksempel__
 I kodestykket forneden beregnes $t^{*}$ for det nedre og øvre percentil. Dernæst beregnes konfidensintervallet ud fra formlen. 
 
 ```{r}
-tLower <- (SortedData[IndexUpper]-theta_hat) /
-  (sd(bootstrap_fordeling)) # SD udregner standardfejl
-tUpper <- (SortedData[IndexLower]-theta_hat) /
-  (sd(bootstrap_fordeling)) # SD udregner standardfejl
+T_Nedre <- (SortedBoots[OevrePercentil]-theta_hat) /
+  (sd(bootstrap_fordeling))
 
-KI_T <- c(Lower = theta_hat - tLower * (sd(data)/sqrt(n)),
-               Upper = theta_hat - tUpper * (sd(data)/sqrt(n)))
+T_Oevre <- (SortedBoots[NedrePercentil]-theta_hat) /
+  (sd(bootstrap_fordeling))
+
+KI_T <- c(Nedre = theta_hat - T_Nedre * (sd(data)/sqrt(n)),
+               Oevre = theta_hat - T_Oevre * (sd(data)/sqrt(n)))
 KI_T
 ```
 
@@ -130,13 +130,13 @@ I dette afsnit vil der undersøges, hvor præcise metoderne for at udregne konfi
 Som det første oprettes en funktion, der udregner middelværdien for stikprøven, og tager en stikprøve og et indeks som _input_.
 
 ```{r}
-meanFunc <- function(d, i) 
-{    m <- mean(d$data[i])
+# Estimator for middelværdi
+meanFunc <- function(stik, i) 
+{    middel <- mean(stik$data[i])
      n <- length(i)
-     v <- (n-1)*var(d$data[i])/n^2
-     c(m, v)
+     varians <- (n-1) * var(stik$data[i]) / n^2
+     c(middel, varians)
 }
-sand_middel <- 0 #Sand middelværdi
 ```
 
 Det næste der udregnes er et konfidensinterval. Konfidensintervallet beregnes ved hjælp af funktionen ```boot.ci```, der kommer fra pakken ```boot```.
@@ -147,28 +147,37 @@ Til sidst beregnes dækningsgraden som andelen af de intervaller, der indeholder
 
 Her udføres processen for beregning af dækningsgraden for alle tre metoder.
 ```{r}
+sand_middel <- 0
+
 matriks_p <- matrix(ncol = 25, nrow = 100)
 vector_p <- c()
+
 matriks_b <- matrix(ncol = 25, nrow = 100)
 vector_b <- c()
+
 matriks_t <- matrix(ncol = 25, nrow = 100)
 vector_t <- c()
 
 for(n in seq(4, 100, 4)){
-  res <- replicate(100,{
+  res <- replicate(n = 100,{
     stik <- data.frame(data = rnorm(n))
-    boot_stik <- boot::boot(stik, statistic = meanFunc, 100)
-    interval <- boot::boot.ci(boot_stik, type = c("perc", "basic", "stud"))
+    boot_stik <- boot::boot(data = stik, statistic = meanFunc, r = 100)
+    interval <- boot::boot.ci(boot.out = boot_stik, conf = KI_niveau, 
+                              type = c("perc", "basic", "stud"))
+    
+    # Returnerer nedre og øvre grænse for konfidensintervallerne
     interval_p <- interval$percent[4:5]
     interval_b <- interval$basic[4:5]
     interval_t <- interval$student[4:5]
     
+    # Undersøger om den sande middelværdi ligger i konfidensintervallet
     tf_p <- interval_p[1]<=sand_middel & interval_p[2]>=sand_middel
     tf_b <- interval_b[1]<=sand_middel & interval_b[2]>=sand_middel
     tf_t <- interval_t[1]<=sand_middel & interval_t[2]>=sand_middel
     return(c(tf_p, tf_b, tf_t))
   })
   
+  # Dækningsgraden afhængigt af stikprøvestørrelsen
   matriks_p[,n/4] <- res[1,]
   vector_p <- append(vector_p, mean(matriks_p[,n/4]))
   
@@ -178,6 +187,8 @@ for(n in seq(4, 100, 4)){
   matriks_t[,n/4] <- res[3,]
   vector_t <- append(vector_t, mean(matriks_t[,n/4]))
 }
+
+# Dækningsgraden for percentilmetoden
 vector_p
 ```
 
