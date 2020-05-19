@@ -1,3 +1,9 @@
+```{r, include=FALSE}
+library(mosaic)
+set.seed(29)
+```
+
+
 # Simulering
 
 I dette afsnit, vil der redegøres for lidt baggrundsviden omkring datasimulering, og hvordan tilsyneladende tilfældige tal kan genereres ved hjælp af algoritmer. Derefter vil der ses på hvordan programmeringssproget R, kan udnyttes til at udføre disse simuleringer hurtigt og simpelt.
@@ -131,12 +137,6 @@ I dette afsnit oprettes to normalfordelinger ved hjælp af Box-Muller-transforma
 
 Først simuleres to stokatiske variabler, ```U1``` og ```U2```, hvor $\mathrm{U1 \sim unif(0,1)}$ og $\mathrm{U2 \sim unif(0,1)}$.
 
-```{r, echo = FALSE, message=FALSE, include=FALSE}
-set.seed(2000)
-library(mosaic)
-library(e1071)
-```
-
 ```{r}
 U1 <- runif(n = 100000, min = 0, max = 1)
 U2 <- runif(n = 100000, min = 0, max = 1)
@@ -220,12 +220,10 @@ Det ses på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at d
 
 Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges ved hjælp af nedenstående graf.
 
-__FIXME:__ (Husk at indsætte figuren inden aflevering! :-))
 ```{r}
 plot(Z2 ~ Z1, main = "Graf for uafhængighed mellem Z1 og Z2",
     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25),
     pch = 1, cex = 0.5)
-
 ```
 
 Udover at eftervise uafhængigheden af ```Z1``` og ```Z2``` grafisk, kan det også undersøges ved hjælp af funktionen ```cor``` i R, som giver en værdi for korrelationen af de to talsekvenser.
@@ -248,8 +246,6 @@ Et resultat på afrundet $-0.00048$, hvilket næsten er 0, viser altså også at
 
 I dette afsnit gives eksempler på, hvorledes der kan udføres simuleringer af forskellige fordelinger, således disse fordelinger kan anvendes til statistisk inferens. Afsnittet er primært baseret på kilden [@Rsimulation].
 
-<!-- Simuleringer i R udføres ved at estimere udfald fra en fordeling, hvor der bliver generet pseudo-tilfældige tal. Disse generede tal forekommer at være tilfældige, men er det reelt set ikke, [@PRNG]. Tallene er genereret ud fra et _seed_, som i R bestemmes ved ```set.seed("værdi")```. Dette _seed_ vil nu angives, så de følgende genereret tal vil være ens, ved nye gennemkørsler. -->
-
 I dataanalysen vil de viste fordelinger bruges som populationer, og stikprøver udtages så ved hjælp af forskellige funktioner. Idéen med denne fremgangsmåde er, at der derved udtages stikprøver fra teoretisk uendelige fordelinger.
 
 Nogle af de fordelinger, der kan simuleres i R, er normal-, binomial-, uniforme-, beta- og gammafordelinger. Alle disse fordelinger har forskellige karateristika, som påvirker hvilke værdier de kan antage. Der vil nu vises eksempler på, hvordan disse fordelinger simuleres i R, og hvordan resultatet vil se ud.
@@ -259,7 +255,6 @@ Nogle af de fordelinger, der kan simuleres i R, er normal-, binomial-, uniforme-
 I R simuleres en normalfordeling ved funktionen ```rnorm```. Fordelingen på figur \@ref(fig:normal) bliver genereret ud fra en middelværdi på $0$ og en standardafvigelse på $1$. 
 
 ```{r normal, echo = FALSE, fig.align='center', fig.cap = "Densitetskurven af en standard normalfordeling."}
-set.seed(29)
 x <- seq(-4, 4, length.out = 100)
 y <- dnorm(x, mean = 0, sd = 1)
 plot(x, y, type = "l", main = "", ylab = "Densitet", xlab = "x")

@@ -1,13 +1,5 @@
 # Konklusion
 
-I dette afsnit vil der konkluderes på den viden, der er opnået gennem rapporten.
+I dette afsnit vil der konkluderes på den viden der er opnået gennem rapporten.
 
-Der er gennem rapporten fundet frem til to altenative metoder til t-testen som kunne lave konfidensintervaller og hypotesetest. De to var henholdsvis bootstrapmetoden og permutationsmetoden. Det kan konkluderes at bootstrap- og permutationstest overholder risikoen for type-I fejl.
-
-Dækningsgraden af t-metoden er den mest effektive metode når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruger, fordi de alle stort set rammer den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). 
-
-
-
-* Mere specifikt
-
-* 5.4 gentag konklusion
+I afsnittet der omhandlet "t-test for skæve stikprøver" blev det konkluderet, på baggrund a tallene i tabellen \@ref(fig:ronni), at det ikke kan antages at en t-test på en ikke-normalfordelt stikprøve altid giver retvisende resultater. Der blev herefter fundet frem til to altenative metoder til t-testen som kunne lave konfidensintervaller og hypotesetests, hvis antagelserne ikke var overholdt. De to var henholdsvis bootstrapmetoden og permutationsmetoden. Permutationstesten løste problemet med at stikprøverne ikke var normal-fordelte, og at man så kunne udføre en retvisende hypotesetest. Bootstrapmetoden løste det samme problem og det viste sig at kunne lave konfidensintervaller ved hjælp af percentilmetoden, basicmetoden og t-metoden. Disse metoder viste det sig at dækningsgraden af t-metoden er den mest effektive metode når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruges, fordi de alle stort set den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). Det kan konkluderes at bootstrapmetoden kan give retvisende resultater når antagelserne ikke er overholdt.Det kan derfor siges at simuleringsmetoderne bootstrap og permutation, kan afhjælpe problemer der opstår ved t-tests, med ikke-normalfordelte stikprøver. 

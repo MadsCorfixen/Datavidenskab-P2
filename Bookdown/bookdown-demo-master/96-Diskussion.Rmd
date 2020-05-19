@@ -10,6 +10,12 @@ CLT medfører, at fordelingen af stikprøvemiddelværdierne tilnærmelsesvist li
 
 Var stikprøverne i afsnit \@ref(t-test2) i stedet udtrukket fra to betafordelinger med forskellige parametre, ville dækningsgraden have været forholdsvis tæt på de $95\%$ (se eksempel 1), og ligeledes hvis betafordelingerne havde de samme parametre (se eksempel 2). 
 
+__FIXME__(Der er nogle ændringer i dette afsnit som ikke er blevet gemt eller committet, med henvisning til "attributeres". Andre end mig som oplever dette?)
+Holdbarheden af t-testens konfidensintervaller er på trods af, at stikprøverne ikke er normalfordelte. T-testen viser sig altså at være meget robust overfor overtrådte antagelser, og dette må attributeres til den centrale grænseværdisætning (CLT). 
+
+__FIXME__(Det gør sig ligeledes gældende i dette afsnit.)
+Når der estimeres på middelværdier for stikprøver, vil stikprøve fordelingen for middelværdier omtrendt lige en normalfordeling, altid. Selv ved relativt lave stikprøvestørrelser $n = 5$, er dette aktuelt, [@ASTAbog, side 88, figur 4.15]. Dette gør det sjældent, at komme ud for en situation hvor der estimeres, for eksempel middelværdier som i denne raport, uden at CLT vil have en indflydelse. Dette er kun til t-testens fordel, da den netop antager en normalfordeling. 
+
 __Eksempel 1__
 I dette eksempel påvises dækningsgraden for to stikprøver udtrukket fra to forskellige betafordelinger ved hjælp af en t-test. Den ene stikprøve er udtrukket fra en betafordeling med $\alpha = 8$ og $\beta = 2$. Den anden stikprøve er udtrukket fra en betafordeling med $\alpha = 2$ og $\beta = 8$.
 

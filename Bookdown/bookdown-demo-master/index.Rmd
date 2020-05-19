@@ -11,36 +11,51 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 #description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
-
-# Introduktion
 ```{r, include=FALSE}
 knitr::opts_chunk$set(tidy=FALSE)
 ```
 
-[Link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master)
+# Introduktion
 
 ## Forord
 
+- Hvem har skrevet projektet
+- Hvor lang tid har projektperioden forløbet
+- Hvem har vejledt os
+- Hvad er projektets overordnede tema
+- Link til GitHub
+
+[Link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master)
+
 ## Abstract/Synopsis
 
-## Indledning
+- Formålet med projektet
+- Indhold, kort opsummeret, i rækkefølge
+- Konklusion, kort opsummeret
 
 ## Anvendte pakker
 
 I dette projekt er følgende pakker blevet anvendt.
 
-1) ```bookdown```, [@R-bookdown]. Denne pakke muliggør at skrive hele rapporter i R ved hjælp af Markdown.
+1) ```bookdown```, [@R-bookdown]. Denne pakke muliggør at skrive hele rapporter i R ved hjælp af Markdown, og er derfor brugt til udarbejdelsen af hele rapporten.
 
-2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser. Pakken anvendes i følgende afsnit...
+2) ```mosaic```, [@R-mosaic]. Denne pakke indeholder flere funktionaliteter, der benyttes i statistike analyser. Pakken anvendes i samtlige afsnit i rapporten.
 
-3) ```boot```, [@R-boot]. Denne pakke indeholder funktionaliteter, som benyttes til bootstrap. Pakken anvendes i følgende afsnit...
+3) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i afsnit \@ref(perm-pvaerdi).
 
-4) ```SimDesign```, [@R-SimDesign]. Denne pakke... Pakken anvendes i følgende afsnit...
+4) ```boot```, [@R-boot]. Denne pakke indeholder funktioner, der benyttes til at oprette bootstrap-stikprøver og til at udarbejde bootstrap-konfidensintervaller. Pakken anvendes i afsnit \@ref(boot-standardfejl) og \@ref(boot-daekningsgrader).
 
-5) ```e1071```, [@R-e1071]. Denne pakke... Pakken anvendes i følgende afsnit...
+## Læsevejledning
 
-6) ```gtools```, [@R-gtools]. Denne pakke indeholder funktionaliteter, der benyttes til permutationstests. Pakken anvendes i følgende afsnit...
+__FIXME:__ (Der er gået noget galt med de rettelser, vi lavede til problemanalysen og simulering)
 
-7) ```cowplot```, [@R-cowplot]. Denne pakke... Pakken anvendes i følgende afsnit...
+__FIXME:__ (Identificér funktioner, der stammer fra pakker og skriv dem på den korrekte måde (```pakke::funktion```))
 
-__FIXME__ (Skriv hvilket seed der benyttes)
+__FIXME:__ (Skriv ud, i hver funktion, hvad de forskellige parametre betyder (```rnorm(n = 100, mean = 1, sd = 0)```))
+
+__FIXME:__ (Find eventuelle udtryk, som vi kalder noget, de egentlig ikke er)
+
+- ```pakke::funktion```.
+- Ikke-parametrisk bootstrap.
+- Samme seed, ```29```, i alle rapportens afsnit.
+- Engelsk version af decimal- og tusindtalsseperator
