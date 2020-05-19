@@ -166,3 +166,49 @@ p_vaerdi_parret
 ```
 
 Der ses altså at p-værdien er lig ```r p_vaerdi_parret```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
+
+__Type-I fejl__
+
+Antallet af type-I fejl, der opstår i en parret bootstrap-test kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. Antallet af type-I fejl bør svare til det valgte signifikansniveau, [@ASTAbog, s. 159-160].
+
+I koden nedenfor bestemmes antallet af type-I fejl for en parret bootstrap-test.
+
+```{r, echo=FALSE}
+set.seed(31415)
+```
+
+```{r}
+n <- 20
+alfa <- 8
+beta <- 2
+konf_niveau <- 0.95
+sand_middel <- 0
+reps <- 500
+bootstraps <- 500
+
+type_1_fejl_boot <- replicate(reps, {
+  stik1 <- rgamma(n, alfa, beta)
+  stik2 <- rgamma(n, alfa, beta)
+  stik_diff <- stik1 - stik2
+  obs_t <- (mean(stik_diff)-sand_middel)/(sd(stik_diff)/sqrt(n))
+
+  boot_t <- c()
+  for(i in seq(1, bootstraps)){
+    boot <- sample(stik_diff, n, replace = TRUE)
+    boot_t[i] <- (mean(boot)-mean(stik_diff))/(sd(boot)/sqrt(n))
+  }
+
+  antal_ekstreme <- abs(boot_t) >= obs_t
+
+  p_vaerdi <- (sum(antal_ekstreme)+1) / (bootstraps + 1)
+  
+  andel <- p_vaerdi > 1 - konf_niveau
+})
+
+type_1_parret <- table(type_1_fejl_boot)
+type_1_parret
+```
+
+I alt forkastes $H_0$ fejlagtigt i ```r unname(type_1_parret[1])/5```$\%$ af tilfældene, hvilket ikke stemmer overens med det valgte signifikansniveau.
+
+Selvom det virker godt, at bootstrap laver færre type-I fejl end signifikansniveauet antyder, er det ikke nødvendigvis en fordel. Hvis der laves en hypotesetest, hvor det forventede antal type-I fejl er lig signifikansniveauet, men det faktiske antal er noget andet, kan det lede til forkerte konklusioner. 

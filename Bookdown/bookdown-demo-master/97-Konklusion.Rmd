@@ -1,5 +1,36 @@
+```{r include=FALSE}
+set.seed(29)
+#Undersøg dækningsgraden af konfidensintervallet ved udtræk af nye stikprøver.
+middel1 <- 8/(8+2)
+middel2 <- 1*(1/2)
+
+sand_dif <- abs(middel1 - middel2)
+
+res <- replicate(10000, {
+  x1 <- rbeta(20, 8, 2)
+  x2 <- rgamma(20, 1, 2)
+
+  t_res <- t.test(x1, x2, alternative = "two.sided", conf.level = 0.95)
+
+  konfinterval <- t_res$conf.int
+
+  konfinterval[1L] <= sand_dif & konfinterval[2L] >= sand_dif
+})
+
+tf <- table(res)
+```
 # Konklusion
 
 I dette afsnit vil der konkluderes på den viden der er opnået gennem rapporten.
 
-I afsnittet der omhandlet "t-test for skæve stikprøver" blev det konkluderet, på baggrund a tallene i tabellen \@ref(fig:ronni), at det ikke kan antages at en t-test på en ikke-normalfordelt stikprøve altid giver retvisende resultater. Der blev herefter fundet frem til to altenative metoder til t-testen som kunne lave konfidensintervaller og hypotesetests, hvis antagelserne ikke var overholdt. De to var henholdsvis bootstrapmetoden og permutationsmetoden. Permutationstesten løste problemet med at stikprøverne ikke var normal-fordelte, og at man så kunne udføre en retvisende hypotesetest. Bootstrapmetoden løste det samme problem og det viste sig at kunne lave konfidensintervaller ved hjælp af percentilmetoden, basicmetoden og t-metoden. Disse metoder viste det sig at dækningsgraden af t-metoden er den mest effektive metode når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruges, fordi de alle stort set den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). Det kan konkluderes at bootstrapmetoden kan give retvisende resultater når antagelserne ikke er overholdt.Det kan derfor siges at simuleringsmetoderne bootstrap og permutation, kan afhjælpe problemer der opstår ved t-tests, med ikke-normalfordelte stikprøver. 
+I afsnittet der omhandlede "t-test for skæve stikprøver" blev det konkluderet, på baggrund af den resulterende dækningsgrad på ```r tf[2]/100```$\%$, at det ikke kan antages, at en t-test på en ikke-normalfordelt stikprøve altid giver retvisende resultater. 
+
+Der blev herefter fundet frem til to altenative metoder til t-testen, som kunne lave konfidensintervaller og hypotesetests, hvis antagelserne ikke var overholdt. De to var henholdsvis bootstrap-metoden og permutationstesten. 
+
+Permutationstesten løste problemet med, at stikprøverne ikke var normalfordelte, og at der så kunne udføres en retvisende hypotesetest. Det fremgik, at andelen af type-I fejl, ```r unname(fejltable[1])/10```$\%$, stemte overens med det valgte signifikansniveau, $5\%$.
+
+Hypotesetest ved hjælp af bootstrap fremgik at have færre type-I fejl end antaget, hvor $H_0$ fejlagtigt forkastes i ```r unname(type_1_parret[1])/5```$\%$ af tilfældene. Permutationstesten er altså mere præcis end bootstrap, hvis der udelukkende skal foretages en hypotesetest. 
+
+Bootstrap-metoden løste det samme problem og det viste sig, at kunne lave konfidensintervaller ved hjælp af percentilmetoden, basic-metoden og T-metoden. Disse metoder viste, at dækningsgraden af T-metoden er den mest robuste metode, når stikprøvestørrelsen er mindre end cirka $15$. Dog når stikprøvestørrelsen er $15$ og derover er det lige meget, hvilken metode der bruges, fordi de alle stort set har den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). Det kan konkluderes, at bootstrap-metoden kan give retvisende resultater, når antagelserne ikke er overholdt. 
+
+Det kan derfor siges, at simuleringsmetoderne bootstrap og permutation, kan afhjælpe problemer der opstår ved t-tests, med ikke-normalfordelte stikprøver. 

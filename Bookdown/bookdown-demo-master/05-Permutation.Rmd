@@ -1,7 +1,7 @@
 ```{r, include = FALSE}
 library(mosaic)
 library(wPerm)
-set.seed(29)
+set.seed(31415)
 ```
 # Permutationer
 
@@ -100,13 +100,13 @@ Med en _p_-værdi på ```r p_vaerdi```, er der ikke noget belæg for at forkaste
 
 __Type-I fejl__
 
-Antallet af type-I fejl, der opstår i en uparret permutationstest kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. Antallet af type-I fejl bør svare til det valgte signifikansniveau, [@ASTAbog, s. 156-157].
+Antallet af type-I fejl, der opstår i en uparret permutationstest kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. Antallet af type-I fejl bør svare til det valgte signifikansniveau, [@ASTAbog, s. 159-160].
 
 I koden nedenfor bestemmes antallet af type-I fejl for en uparret permutationstest.
 
 ```{r}
 konf_niveau <- 0.95
-reps <- 100
+reps <- 1000
 type_1_fejl <- replicate(reps, {
   stik1 <- rbeta(n, alfa1, beta1)
   stik2 <- rbeta(n, alfa1, beta1)
@@ -125,10 +125,9 @@ type_1_fejl <- replicate(reps, {
   
   S_pi <- mean_list
 
-  ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[2]
+  ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[1]
   
-  p_vaerdi <- (ekstreme_vaerdier+1)/(length(mean_list)+1)
-  
+  p_vaerdi <- (200-sum(ekstreme_vaerdier)+1)/(length(mean_list)+1)
   type1fejl <- p_vaerdi > 1 - konf_niveau
   return(type1fejl)
 })
@@ -137,9 +136,7 @@ fejltable <- table(type_1_fejl)
 fejltable
 ```
 
-__FIXME:__ (What...? Ud af 100 gange, er den falsk i 8 af tilfældene og sand i 89, men 89+8=97. Hvor er de sidste 3? Fejlen sker kun ved nogle seeds...)
-
-I alt forkastes $H_0$ fejlagtigt i ```r unname(fejltable[1])```$\%$ af tilfældene, hvilket stemmer overens med det valgte signifikansniveau.
+I alt forkastes $H_0$ fejlagtigt i ```r unname(fejltable[1])/10```$\%$ af tilfældene, hvilket stemmer overens med det valgte signifikansniveau.
 
 ## Parret permutationstest {#perm-pvaerdi}
 
