@@ -161,7 +161,7 @@ vector_t <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(n = 100,{
     stik <- data.frame(data = rnorm(n))
-    boot_stik <- boot::boot(data = stik, statistic = meanFunc, r = 100)
+    boot_stik <- boot::boot(data = stik, statistic = meanFunc, R = 100)
     interval <- boot::boot.ci(boot.out = boot_stik, conf = KI_niveau, 
                               type = c("perc", "basic", "stud"))
     

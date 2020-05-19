@@ -51,6 +51,7 @@ stik2 <- rbeta(n = 100, shape1 = 8, shape2 = 2)
 par(mfrow = c(1,2))
 hist(stik1, xlim = c(0, 1), ylim = c(0, 40), main = "", xlab = "", ylab = "Antal observationer")
 hist(stik2, xlim = c(0, 1), ylim = c(0, 40), main = "", xlab = "", ylab = "Antal observationer")
+S_obs <- abs(mean(stik1) - mean(stik2))
 ```
 
 Teststørrelsen vil i dette tilfælde være forskellen mellem stikprøvernes middelværdi, $S_{obs} = |\hat{\mu}_1 - \hat{\mu}_2|$. Den observerede teststørrelse ses at være ```r S_obs```.  Hvorvidt denne forskel er signifikant, kan nu undersøges ved at beregne forskellen i middelværdi for samtlige permutationer af stikprøverne. Observationerne fra hver stikprøve vil blive forenet i en enkelt stikprøve, som der vil permuteres udfra.
@@ -63,7 +64,7 @@ forenet_stik <- c(stik1, stik2)
 
 S_pi <- c()
 for(i in 1:100){
-  permuteret_forenet_stik <- sample(forenet_stik, size = (2 * n))
+  permuteret_forenet_stik <- sample(forenet_stik, size = (2 * 100))
   permuteret_stik1 <- head(permuteret_forenet_stik, 100)
   permuteret_stik2 <- tail(permuteret_forenet_stik, 100)
   

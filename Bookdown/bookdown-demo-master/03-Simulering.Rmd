@@ -33,7 +33,7 @@ En PRNG beskrives ved nedenstående karakteristika, [@PRGNfunc].
 4. Fordelingen af cyklussen. Som det ses på figur \@ref(fig:PRNG-fordelinger), kan fordelingen af cyklussen være jævn, hvilket viser en ligelig fordeling af cyklussen. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og anvendeligheden formindskes.
 
 ```{r PRNG-fordelinger, out.width='75%', fig.align='center', fig.cap="PRNG fordelinger", echo = FALSE}
- knitr::include_graphics("images/prngfordelingerDK.jpeg")
+ knitr::include_graphics("images/PP_fordeling.jpg")
 ```
 
 I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere effektive algoritmer til PRNG. En af de mere kendte og hyppigt anvendte algoritmer er lineær kongruens generator, som gennemgåes i det følgnede afsnit.
