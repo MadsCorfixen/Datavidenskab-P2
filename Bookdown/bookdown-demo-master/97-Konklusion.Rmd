@@ -1,12 +1,13 @@
 # Konklusion
 
-I dette afsnit vil der konkluderes på den viden der er opnået gennem rapporten.
+I dette afsnit vil der konkluderes på den viden, der er opnået gennem rapporten.
 
-Der er gennem rapporten fundet frem til to altenative metoder til t-testen som kunne lave konfidensintervaller og en p-værdi. De to var henholdsvis bootstrapmetoden og permutationsmetoden. Det kan konkluderes at Bootstrap- og Permutationstest er gode til at estimerer en p-værdi, men hvis det er det eneste man skal bruge, er t-test lige så effektiv at bruge.
+Der er gennem rapporten fundet frem til to altenative metoder til t-testen som kunne lave konfidensintervaller og hypotesetest. De to var henholdsvis bootstrapmetoden og permutationsmetoden. Det kan konkluderes at bootstrap- og permutationstest overholder risikoen for type-I fejl.
 
-Dækningsgraden af t-metoden er den mest effektive metode når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruger, fordi de alle stort set den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). 
-
-
+Dækningsgraden af t-metoden er den mest effektive metode når stikprøvestørrelsen er mindre end ca. $15$. Dog når stikprøvestørrelsen er $15$ og derover er det ligemeget hvilken metode der bruger, fordi de alle stort set rammer den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). 
 
 
 
+* Mere specifikt
+
+* 5.4 gentag konklusion

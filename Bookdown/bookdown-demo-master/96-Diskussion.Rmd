@@ -2,30 +2,25 @@
 
 I dette afsnit vil nogle relevante resultater og opdagelser fra rapporten diskuteres.
 
-I problemanalysens afsnit \@ref(t-test2) blev det vist, at en uparret t-tests konfidensinterval for ikke-normalfordelte stikprøver kunne anses for at være misvisende i forhold til dets dækningsgrad. En af antagelserne for t-testen er netop at stikprøverne (eller stikprøven) er normalfordelt, som i dette tilfælde ikke blev overholdt. En observation, der blev gjort i forbindelse med undersøgelsen af den uparret t-test var, at for at få ikke holdbare resultater, krævede det to forholdsvist skæve, men ikke sammenlignelige, stikprøver. Derfor blev der også udtrukket stikprøver fra to forskellige fordelinger, henholdsvis en beta- og gammefordeling. Var stikprøverne udtrukket fra to betafordelinger med forskellige parametre, ville dækningsgraden have været forholdsvis tæt på de 95 % (Se eksempel 1), og ligeledes hvis betafordelinger havde de samme parametre (Se eksempel 2). 
+I problemanalysens afsnit \@ref(t-test2) blev det vist, at en uparret t-tests konfidensinterval for ikke-normalfordelte stikprøver kunne anses for at være misvisende i forhold til dets dækningsgrad. En af antagelserne for t-testen er netop at populationen, som stikprøverne (eller stikprøven) stammer fra, er normalfordelt, som i dette tilfælde ikke blev overholdt. En observation, der blev gjort i forbindelse med undersøgelsen af den uparret t-test var, at for at få ikke holdbare resultater, krævede det to forholdsvist skæve, men ikke sammenlignelige, stikprøver. Derfor blev der også udtrukket stikprøver fra to forskellige fordelinger, henholdsvis en beta- og gammafordeling.
 
-Holdbarheden af t-testens konfidensintervaller er på trods af, at stikprøverne ikke er normalfordelte. T-testen viser sig altså at være meget robust overfor overtrådte antagelser, og dette må attributeres til den centrale grænseværdisætning (CLT). 
+Holdbarheden af t-testens konfidensintervaller er robust på trods af, at populationerne ikke er normalfordelte. T-testen viser sig altså at være meget robust overfor overtrådte antagelser, og dette må skyldes den centrale grænseværdisætning, CLT (fra engelsk _central limit theroem_). 
 
-Når der estimeres på middelværdier for stikprøver, vil stikprøve fordelingen for middelværdier omtrendt lige en normalfordeling, altid. Selv ved relativt lave stikprøvestørrelser $n = 5$, er dette aktuelt, [@ASTAbog, side 88, figur 4.15]. Dette gør det sjældent, at komme ud for en situation hvor der estimeres, for eksempel middelværdier som i denne raport, uden at CLT vil have en indflydelse. Dette er kun til t-testens fordel, da den netop antager en normalfordeling. 
+CLT medfører, at fordelingen af stikprøvemiddelværdierne tilnærmelsesvist ligner en normalfordeling. Selv ved relativt lave stikprøvestørrelser, $n = 5$, er dette aktuelt, [@ASTAbog, side 93, figur 4.15]. At komme ud for en situation, hvor der estimeres middelværdier som i denne rapport, uden at CLT vil have en indflydelse, er usandsynligt. Dette er en fordel i forhold til t-testen, da den netop antager en normalfordeling.
+
+Var stikprøverne i afsnit \@ref(t-test2) i stedet udtrukket fra to betafordelinger med forskellige parametre, ville dækningsgraden have været forholdsvis tæt på de $95\%$ (se eksempel 1), og ligeledes hvis betafordelingerne havde de samme parametre (se eksempel 2). 
 
 __Eksempel 1__
-```{r disk1, echo = FALSE, fig.cap = "To stikprøver udtrukket fra to forskellige betafordelinger. Stikprøve A er udtrukket fra en betafordeling med alfa = 8 og beta = 2. Stikprøve B er udtrukket fra en betafordeling med alfa = 2 og beta = 8."}
-set.seed(29)
-par(mfrow = c(1,2))
-y1 <-  rbeta(20, 8, 2)
-hist(y1, main = "A", ylab = "", xlab = "")
-y2 <- rbeta(20, 2, 8)
-hist(y2, main = "B", ylab = "", xlab = "")
-```
+I dette eksempel påvises dækningsgraden for to stikprøver udtrukket fra to forskellige betafordelinger ved hjælp af en t-test. Den ene stikprøve er udtrukket fra en betafordeling med $\alpha = 8$ og $\beta = 2$. Den anden stikprøve er udtrukket fra en betafordeling med $\alpha = 2$ og $\beta = 8$.
 
-```{r}
+```{r, echo=FALSE}
 middel1 <- 8/(8+2)
 middel2 <- 2/(8+2)
 
 sand_dif1 <- abs(middel1 - middel2)
 
 
-res <- replicate(10000, {
+Daekningsgrad <- replicate(10000, {
   x1 <- rbeta(20, 8, 2)
   x2 <- rbeta(20, 2, 8)
 
@@ -36,28 +31,22 @@ res <- replicate(10000, {
   konfinterval[1L] <= sand_dif1 & konfinterval[2L] >= sand_dif1
 })
 
-tf1 <- table(res)
+tf1 <- table(Daekningsgrad)
 tf1
 ```
 
 For to stikprøver udtrukket fra hver deres betafordeling, en venstreskæv og en højreskæv, ses en dækningsgrad på konfidensintervallet fra t-testen på ```r tf1[2]/100```$\%$, hvilket er rimelig tæt på de antaget $95\%$.
 
 __Eksempel 2__
-```{r disk2, echo=FALSE, fig.cap = "To stikprøver udtrukket fra den samme betafordeling. Stikprøve A og B er udtrukket fra en betafordeling med alfa = 8 og beta = 2."}
-par(mfrow = c(1,2))
-y1 <- rbeta(20, 8, 2)
-hist(y1, main = "A", ylab = "", xlab = "")
-y2 <- rbeta(20, 8, 2)
-hist(y2, main = "B", ylab = "", xlab = "")
-```
+I dette eksempel påvises dækningsgraden for to stikprøver udtrukket fra den samme betafordeling, hvor $\alpha = 8$ og $\beta = 2$, ved hjælp af en t-test.
 
-```{r}
+```{r, echo=FALSE}
 middel1 <- 8/(8+2)
 middel2 <- 8/(8+2)
 
 sand_dif2 <- abs(middel1 - middel2)
 
-res <- replicate(10000, {
+Daekningsgrad_ens <- replicate(10000, {
   x1 <- rbeta(20, 8, 2)
   x2 <- rbeta(20, 8, 2)
 
@@ -68,7 +57,7 @@ res <- replicate(10000, {
   konfinterval[1L] <= sand_dif2 & konfinterval[2L] >= sand_dif2
 })
 
-tf2 <- table(res)
+tf2 <- table(Daekningsgrad_ens)
 tf2
 ```
 

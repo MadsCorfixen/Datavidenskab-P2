@@ -24,13 +24,13 @@ __Deskriptiv statistik__
 
 Det følgende afsnit er baseret på [@ASTAkursus1] og [@ASTAbog, s. 4-5]
 
-Deskriptiv statistik drejer sig om at opsumere, således at informationerne anskueliggøres og styrker forståelsen af data, uden at  fordreje eller miste den oprindelige information. Dette kan eksempelvis gøre ved at beregne middelværdien og spredningen, da det giver et bedre overblik, end at skulle overskue samtlige datapunkter. I nogle tilfælde kan det være tilstrækkeligt at lave en grafisk fremstilling af data, eller i kombination med middelværdi og spredning. 
+Deskriptiv statistik drejer sig om at opsummere data, således at informationerne heri anskueliggøres og forståelsen af data styrkes, uden at fordreje eller miste den oprindelige information. Dette kan eksempelvis gøres ved at beregne middelværdien og spredningen, da det giver et bedre overblik, end at skulle overskue samtlige datapunkter. I nogle tilfælde kan det være tilstrækkeligt at lave en grafisk fremstilling af data, eventuelt i kombination med middelværdi og spredning. 
 
 __Statistisk inferens__
 
 Det følgende afsnit er baseret på [@ASTAkursus2], [@ASTAkursus3] og [@ASTAbog, s. 4-5].
 
-På baggrund af den information som udtrykkes af deskriptiv statistik, er det således muligt ved hjælp af statistisk inferens at kommme med antagelser og drage konklusioner.  
+På baggrund af informationen, som udtrykkes af deskriptiv statistik, er det således muligt ved hjælp af statistisk inferens at kommme med antagelser og drage konklusioner.  
 
 I statistisk inferens differentieres der mellem to metoder, estimering og hypotesetest. Når der estimeres på baggrund af en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan eksempelvis være gennemsnitsindkomst hos en befolkning, $\mu$, for hvilken der findes et estimat $\hat{\mu}$, som bruges til at beskrive $\mu$. Dette betegnes som et punktestimat, og vil oftest suppleres med et intervalestimat. Årsagen til dette er, at punktestimater er tilfældige, og derfor ændrer sig fra stikprøve til stikprøve. Da punktestimaters sandsynlighed for at være korrekt derfor er lig $0$, tilstræbes det at anvende et intervalestimat, hvor det kan siges at $\mu$ med $95\%$ sikkerhed ligger, fremfor et punktestimat. Dette kaldes for et konfidensinterval.
 
@@ -74,17 +74,17 @@ I dette afsnit gennemgås fremgangsmåden for, hvordan en hypotesetest kan bruge
 
 Forud for gennemførelsen af en t-test, er der nogle antagelser, som skal være opfyldt, for at t-testen ikke giver misvisende resultater.
 
-1. Stikprøven er repræsentativ for populationen.
-2. Variablen er kvantitativ.
-3. Stikprøveudtagning er udført med tilfældighed.
-4. Populationen er normalfordelt.
+1. Stikprøven skal være repræsentativ for populationen.
+2. Variablen skal være kvantitativ.
+3. Stikprøveudtagning skal være udført med tilfældighed.
+4. Populationen skal være normalfordelt.
 
 Herefter er fremgangsmetoden som beskrevet i afsnitet \@ref(hypotesetest).
 
 __Eksempel__
 
 ```{r include=FALSE}
-set.seed(1)
+set.seed(3)
 n <- 10
 forventet_middelvaerdi <- 0
 xdata <- rnorm(n, forventet_middelvaerdi, 1)
@@ -117,14 +117,7 @@ alpha_halve <-  1 - pdist("t", q = t_obs, df = n-1, plot = FALSE)
 p <- 2 * alpha_halve # p-værdien udregnes
 ```
 
-```{r include=FALSE}
-forventet_meanx <- -0.5
-t_obsx <- (abs(middelvaerdi-forventet_meanx))/
-  estimeret_standardfejl
-x_p = 2 * (1 - pdist("t", q = t_obsx, df = n-1, plot = FALSE))
-```
-
-Eftersom *p*-værdien er ```r p``` $> \alpha=0.05$, forkastes $H_0$ ikke. Havde det derimod været en forventet værdi på ```r forventet_meanx```, ville *p*-værdien blive ```r x_p``` $< \alpha=0.05$, hvilket vil medføre, at $H_0$ forkastes og det vil formodes, at $H_0$ ikke er korrekt for populationen.
+Eftersom *p*-værdien er ```r p``` $> \alpha=0.05$, forkastes $H_0$ ikke. Havde *p*-værdien derimod været mindre end $0.05$ ville det medføre, at $H_0$ forkastes og det ville formodes, at $H_0$ ikke er korrekt for populationen.
 
 ### Fejltyper {#fejltyper-afsnit}
 
