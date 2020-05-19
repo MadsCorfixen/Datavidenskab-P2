@@ -2,7 +2,7 @@
 
 ```{r, include=FALSE}
 library(mosaic)
-set.seed(29)
+set.seed(31415)
 ```
 
 Som nævnt i afsnit \@ref(t-test), skal visse antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test, og det efterfølgende resultatet af overtrædelsen af disse antagelser, blev vist i afsnit \@ref(t-test2).
@@ -18,14 +18,12 @@ Lad to uafhængige uparrede stikprøver, $X=[x_{1},~x_{2},~...,~x_{n}]$ og $Y=[y
 ```{r}
 n <- 20
 m <- 50
-alfa1 <- 2
-beta1 <- 8
 
-stik1 <- rbeta(n, alfa1, beta1)
-stik2 <- rbeta(m, alfa1, beta1)
+stik1 <- rbeta(n, shape1 = 2, shape2 = 8)
+stik2 <- rbeta(m, shape1 = 2, shape2 = 8)
 ```
 
-```{r histhypuparret, fig.cap = "To uafhængige uparrede stikprøver", echo = FALSE}
+```{r histhypuparret, echo = FALSE, fig.cap = "To uafhængige uparrede stikprøver"}
 par(mfrow = c(1,2))
 hist(stik1, main = "", xlab = "Stikprøve 1", ylab = "Antal observationer", ylim = c(0, 20))
 hist(stik2, main = "", xlab = "Stikprøve 2", ylab = "Antal observationer", ylim = c(0, 20))
@@ -37,26 +35,26 @@ På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at u
 
 ```{r}
 t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
-            sqrt(((sd(stik1))^2 / n)) +
-              ((sd(stik2))^2 / m)
+            (sqrt(((sd(stik1))^2 / n)) +
+              ((sd(stik2))^2 / m))
 t_obs
 ```
 
-For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikprøve med størrelsen $n + m$ observationer. Derefter laves en bootstrap-stikprøve af $n + m$ observationer fra den samlede stikprøve. De første $n$ indgange i den samlede stikprøve er bootstrap-stikprøven for $X$, og kaldes $\X^*$. De resterende $m$ indgange er bootstrap-stikprøven for $Y$, og kaldes $Y^*$. Til sidst udregnes bootstrap-teststørrelsen $t^*_{obs} = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}$. I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo]. Et eksempel på dette udregnes i nedenstående kodestykke.
+For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikprøve med størrelsen $n + m$ observationer. Derefter laves en bootstrap-stikprøve af $n + m$ observationer fra den samlede stikprøve. De første $n$ indgange i den samlede stikprøve er bootstrap-stikprøven for $X$, og kaldes $X^*$. De resterende $m$ indgange er bootstrap-stikprøven for $Y$, og kaldes $Y^*$. Til sidst udregnes bootstrap-teststørrelsen $t^*_{obs} = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}$. I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo]. Et eksempel på dette udregnes i nedenstående kodestykke.
 
 ```{r}
 B <- 1000
-boot_t <- replicate(B, {
+boot_t <- replicate(n = B, {
   
-    boot <- sample(c(stik1, stik2), replace = TRUE)
+    boot <- sample(x = c(stik1, stik2), replace = TRUE) # Samlede bootstrap-stikprøve
   
-    bootx <- boot[1 : n]
-    booty <- boot[(n+1) : (n+m)]
+    boot_x <- boot[1 : n] # Bootstrap-stikprøve 1
+    boot_y <- boot[(n + 1) : (n + m)] # Bootstrap-stikprøve 2
   
-    boot_test <- ((mean(bootx) - mean(booty)) -
+    boot_test <- ((mean(boot_x) - mean(boot_y)) -
                     (mean(stik1) - mean(stik2))) /
-                      sqrt(((sd(bootx))^2 / n)) +
-                        ((sd(booty))^2 / m)
+                      (sqrt(((sd(boot_x))^2 / n)) +
+                        ((sd(boot_y))^2 / m))
 })
 head(boot_t, 3)
 ```
@@ -74,7 +72,6 @@ Herefter kan _p_-værdien udregnes som ved permutationstest i afsnit \@ref(permu
 
 ```{r}
 antal_ekstreme <- abs(boot_t) >= t_obs
-table(antal_ekstreme)
 
 p_vaerdi <- (sum(antal_ekstreme)+1) / (B + 1)
 p_vaerdi

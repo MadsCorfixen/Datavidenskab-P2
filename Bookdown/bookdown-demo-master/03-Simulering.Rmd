@@ -1,6 +1,6 @@
 ```{r, include=FALSE}
 library(mosaic)
-set.seed(29)
+set.seed(31415)
 ```
 
 
@@ -66,15 +66,13 @@ De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere 
 Først defineres en funktion for LCG-algoritmen, som tager de nødvendige parametre for algoritmen som inputs. Derudover angives også et argument, $n$, der fortæller hvor mange iterationer algoritmen skal foretage.
 
 ```{r}
-lcg <- function(m, a, c, seed, n) {
-  #M er modulus, a er faktoren, c er tilvæksten, seed er
-  #startværdien og n er antal iterationer.
+lcg <- function(modulus, faktor, tilvaekst, seed, iterationer) {
 
   r <- c()
-  r[1] <- seed #Angiver startpunktet.
+  r[1] <- seed
 
-  for (i in 1: (n-1)) {
-  r[i + 1] <- (a * r[i] + c) %% m
+  for (i in 1: (iterationer-1)) {
+  r[i + 1] <- (faktor * r[i] + tilvaekst) %% modulus
 
 }
  return(r)
@@ -84,39 +82,44 @@ lcg <- function(m, a, c, seed, n) {
 Det følgende er et eksempel på en LCG-cyklus med en periode på $16$.
 
 ```{r}
-lcg1 <- lcg(64, 33, 12, 57, 17)
+lcg1 <- lcg(modulus = 64, faktor = 33, tilvaekst = 12, seed = 57, iterationer = 20)
 lcg1
 ```
 
 På figur \@ref(fig:ikke-tilfaeldig-LCG) plottes denne cyklus. Det er åbenlyst at cyklussen ikke er tilfældig, da den danner et synligt mønster. Selv, hvis antallet af gange, LCG køres igennem, ændres, vil mønstret ikke ændres.
 
-```{r ikke-tilfaeldig-LCG, fig.align='center', fig.cap= "Et eksempel på en ikke-tilfældig LCG-cyklus."}
-lcg1_plot <- lcg(64, 33, 12, 57, 100)
+```{r ikke-tilfaeldig-LCG, echo = FALSE, fig.align='center', fig.cap= "Et eksempel på en ikke-tilfældig LCG-cyklus."}
+lcg1_plot <- lcg(modulus = 64, faktor = 33, tilvaekst = 12, seed = 57, iterationer = 100)
 plot(lcg1_plot, main = "",
      xlab = "Indeks", ylab = "Værdier", type = "l")
 ```
 
-På figur \@ref(fig:uniform-LCG) vises et eksempel på, hvordan LCG-algoritmen kan bruges til at lave en uniform fordeling i intervallet [0, 1].
+På figur \@ref(fig:uniform-LCG) vises et eksempel på, hvordan LCG-algoritmen kan bruges til at lave en uniform fordeling i intervallet $[0, 1]$. Når cyklussen er oprettet, deles hvert element deri med den valgte modulus, hvilket gør, at hvert element bliver indeholdt i $[0, 1]$.
 
-```{r uniform-LCG, fig.align='center', fig.cap= "Et eksempel på en LCG-cyklus, der er uniformt fordelt."}
-lcg2 <- lcg(86436, 1093, 0, 12, 1000)
+```{r}
+lcg2 <- lcg(modulus = 86436, faktor = 1093, tilvaekst = 0, seed = 12, iterationer = 1000)
 
-hist((lcg2 + 0.05)/ 86436, main = "",
-     xlab = "Værdier", ylab = "Frekvens")
+lcg2_uniform <- lcg2/86436
+```
+
+```{r uniform-LCG, echo = FALSE, fig.align='center', fig.cap= "Et eksempel på en LCG-cyklus, der er uniformt fordelt."}
+hist(lcg2_uniform)
 ```
 
 Her kan det også nævnes, at hvis den cyklus, algoritmen returnerer, plottes i et 2d-punktplot, som på figur \@ref(fig:plot-LCG-cyklus), vil der fremgå en mere tilfældig fordeling, dog vil der stadig kunne ses et mønster.
 
-```{r plot-LCG-cyklus, fig.align='center', fig.cap= "En 2d-graf af en LCG-cyklus, hvor der ses et svagt mønster."}
+```{r plot-LCG-cyklus, echo = FALSE, fig.align='center', fig.cap= "En 2d-graf af en LCG-cyklus, hvor der ses et svagt mønster."}
 plot(lcg2, main = "", xlab = "Indeks",
      ylab = "Værdier")
 ```
 
 Afslutningsvist vil der vises et eksempel, hvor der returneres en cyklus, der ser tilfældig ud. Denne cyklus kan ses på figur \@ref(fig:tilfaeldig-LCG).
 
-```{r tilfaeldig-LCG, fig.align='center', fig.cap= "Et eksempel på en tilsyneladende tilfældig LCG-cyklus."}
-lcg3 <- lcg(86436, 1093, 18257, 12, 100)
+```{r}
+lcg3 <- lcg(modulus = 86436, faktor = 1093, tilvaekst = 18257, seed = 12, iteration = 100)
+```
 
+```{r tilfaeldig-LCG, fig.align='center', fig.cap= "Et eksempel på en tilsyneladende tilfældig LCG-cyklus."}
 plot(lcg3, main = "", xlab = "Indeks",
      ylab = "Værdier", type = "l")
 ```
@@ -145,8 +148,8 @@ U2 <- runif(n = 100000, min = 0, max = 1)
 Disse to stokatiske variabler benyttes nu til at oprette de to påstået standard normalfordelte stokatiske variabler, ```Z1``` og ```Z2```.
 
 ```{r}
-Z1 <- sqrt(-2*log(U1))*cos(2*pi*U2)
-Z2 <- sqrt(-2*log(U1))*sin(2*pi*U2)
+Z1 <- sqrt(-2*log(U1))*cos(2*pi*U2) # Opretter Z1 vha. formlen for Box-Muller
+Z2 <- sqrt(-2*log(U1))*sin(2*pi*U2) # Opretter Z2 vha. formlen for Box-Muller
 ```
 
 __Efterprøvning i R__
@@ -188,14 +191,14 @@ Dette giver henholdsvis en middelværdi og median for ```Z1``` på $`r mean_Z1`$
 For at tjekke punkt $4$, beregnes andelen af outliers i hvert boksplot i kodestykket nedenfor.
 
 ```{r}
-OutVals1 <- boxplot(Z1, plot = FALSE)$out
-outliers_Z1 <- length(OutVals1)
+OutVals1 <- boxplot(Z1, plot = FALSE)$out # Output'er outliers i Z1
+outliers_Z1 <- length(OutVals1) # Tæller antal outliers i Z1
 
-OutVals2 <- boxplot(Z2, plot = FALSE)$out
-outliers_Z2 <- length(OutVals2)
+OutVals2 <- boxplot(Z2, plot = FALSE)$out # Output'er outliers i Z2
+outliers_Z2 <- length(OutVals2) # Tæller antal outliers i Z2
 
-outliers_andel_Z1 <- outliers_Z1/length(Z1)
-outliers_andel_Z2 <- outliers_Z2/length(Z2)
+outliers_andel_Z1 <- outliers_Z1/length(Z1) # Andelen af outliers i Z1
+outliers_andel_Z2 <- outliers_Z2/length(Z2) # Andelen af outliers i Z2
 ```
 
 Dette giver en andel af outliers i ```Z1``` på ```r outliers_andel_Z1``` og i ```Z2``` på ```r outliers_andel_Z2```. Dette svarer til cirka $0,7~ \%$ outliers i både ```Z1``` og ```Z2```, hvilket stemmer overens med punkt 4.
@@ -204,7 +207,7 @@ Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være norm
 
 Hernest kigges der på histogrammerne for ```Z1``` og ```Z2```. På figur \@ref(fig:bmhist) sammenlignes histogrammerne for henholdsvis ```Z1``` og ```Z2``` med densiteten for standard normalfordeling.
 
-```{r bmhist, fig.align='center', fig.cap= "Sammenligning af histogrammerne for henholdsvis Z1 (a) og Z2 (b) med densiteten for standard normalfordeling."}
+```{r bmhist, echo = FALSE, fig.align='center', fig.cap= "Sammenligning af histogrammerne for henholdsvis Z1 (a) og Z2 (b) med densiteten for standard normalfordeling."}
 x <- seq(-4, 4, length.out = 100)
 y <- dnorm(x, mean = 0, sd = 1)
 
@@ -222,7 +225,7 @@ Det ses på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at d
 
 Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges på figur \@ref(fig:korrelationstest).
 
-```{r korrelationstest, fig.align='center', fig.cap='Graf for uafhængigheden mellem Z1 og Z2.'}
+```{r korrelationstest, echo = FALSE, fig.align='center', fig.cap='Graf for uafhængigheden mellem Z1 og Z2.'}
 plot(Z2 ~ Z1, main = "",
     col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25),
     pch = 1, cex = 0.5)
@@ -239,10 +242,10 @@ Hvor $cov$ angiver kovariansen og $sd$ angiver standardafvigelsen.
 Korrelation fortæller, hvor stor en lineær sammenhæng der er mellem to variabler. Denne værdi ligger i intervallet $[-1, 1]$, hvor $-1$ påviser en perfekt negativ lineær sammenhæng, $1$ påviser en perfekt positiv lineær sammenhæng, og $0$ viser, at der ingen lineær sammenhæng er.
 
 ```{r}
-cor(Z1, Z2)
+korrelation <- cor(Z1, Z2)
 ```
 
-Et resultat på afrundet $-0.00048$, hvilket næsten er 0, viser altså også at der ingen lineær korrelation er mellem ```Z1``` og ```Z2```, hvilket giver en indiktion for, at de er uafhængige.
+Et resultat på afrundet ```r round(korrelation, 4)```, hvilket næsten er $0$, viser altså også at der ingen lineær korrelation er mellem ```Z1``` og ```Z2```, hvilket giver en indiktion for, at de er uafhængige.
 
 ## Simulering i R {#pop-sim}
 
@@ -266,7 +269,7 @@ plot(x, y, type = "l", main = "", ylab = "Densitet", xlab = "x")
 
 En uniform fordeling er defineret ud fra et interval, som der skal genereres et givent antal værdier indenfor. Alle disse værdier har lige stor sandsynlighed for at blive genereret. Jo større $n$ er, des mere uniformt bliver histogrammet. At en stokastisk variabel, X, er uniformt fordelt i intervallet $(a, b)$ skrives $X \sim \text{unif}(a, b)$. På figur \@ref(fig:unifordeling) ses densitetskurven for en uniform fordeling.
 
-```{r unifordeling, fig.align='center', fig.cap = "En uniform fordeling, hvor alle tal har lige stor sandsynlighed for at optræde i intervallet [0 , 1]."}
+```{r unifordeling, echo = FALSE, fig.align='center', fig.cap = "En uniform fordeling, hvor alle tal har lige stor sandsynlighed for at optræde i intervallet [0 , 1]."}
 x <- seq(1, 2, length.out = 100)
 plot(x = NA, type = "n", xlim = c(0, 1), ylim = c(0, 1.5), ylab = "Densitet", xlab = "x")
 abline(h = 1)
@@ -294,7 +297,7 @@ En skæv fordeling kan være en betafordelingAt en stokastisk variabel, $X$ er b
 
 En venstreskæv og en højreskæv betafordeling vil nu simuleres og vises på figur \@ref(fig:betafordeling), hvor $\alpha = 8$ og $\beta = 2$ for den venstreskæve, mens $\alpha = 2$ og $\beta = 8$ for den højreskæve.
 
-```{r betafordeling, fig.align='center', fig.cap = "To betafordelinger med henholdsvis alfa = 8 og beta = 2, og alfa = 2 og beta = 8."}
+```{r betafordeling, echo = FALSE, fig.align='center', fig.cap = "To betafordelinger med henholdsvis alfa = 8 og beta = 2, og alfa = 2 og beta = 8."}
 x <- seq(0, 1, length.out = 100)
 y1 <- dbeta(x, shape1 = 2, shape2 = 8)
 y2 <- dbeta(x, shape1 = 8, shape2 = 2)
@@ -309,7 +312,7 @@ legend(0.35, 3, legend=c("alfa = 2, beta = 8 ", "alfa = 8, beta = 2"),
 
 Gammafordelingen er ligeledes en skæv fordeling. Funktionaliteten af gammafordelingen er at forudsige ventetiden til den $\alpha$'te begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter blive anvendt  parameterne $(\alpha,~\beta)$. Tæthedsfuktionen er givet ved $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er _shape_, $\beta > 0$ er _rate_ og $x \in ( 0, \infty)$. At en stokastisk variabel, X, er gammafordelt med _shape_ $\alpha$ og _rate_ $\beta$, skrives $X \sim Gamma(\alpha, \beta)$, [@Gammadist]. På figur \@ref(fig:gammafordeling) er vist tre forskellige højreskæve gammafordelinger.
 
-```{r gammafordeling, fig.align='center', fig.cap = "Tre gammafordelinger hvor beta = 1 og alfa på henholdsvis 1, 5 og 10."}
+```{r gammafordeling, echo = FALSE, fig.align='center', fig.cap = "Tre gammafordelinger hvor beta = 1 og alfa på henholdsvis 1, 5 og 10."}
 x <- seq(0, 25, length.out = 100)
 y1 <- dgamma(x, shape = 1, rate = 1)
 y2 <- dgamma(x, shape = 5, rate = 1)
@@ -326,7 +329,7 @@ legend(20, 0.8, legend=c("alfa = 1", "alfa = 5", "alfa = 10"),
 I nogle statistiske metoder er det nødvendigt at arbejde med flere stikprøver end kun én enkelt. Med funktionen ```replicate``` i R, kan der genereres adskillige nye stikprøver ud fra den oprindelige. Processen med _replicate_ vil nu vises. Først ses en stikprøve med tre observationer.
 
 ```{r echo = FALSE}
-stik <- rnorm(3, 0 ,1) #Den oprindelige stikprøve
+stik <- rnorm(3, 0 ,1)
 stik_matrix <- matrix(stik, nrow = 3)
 colnames(stik_matrix) <- c("Oprindelig stikprøve")
 rownames(stik_matrix) <- c("Observation 1", "Observation 2", "Observation 3")
@@ -336,8 +339,8 @@ stik_matrix
 _Replicate_-funktionen vil nu bruges. I alt replikeres der fem gange, hvilket betyder, at der bliver oprettet fem nye stikprøver. I forbindelse med denne process anvendes funktionen ```sample```, som er funktionen der _resampler_, enten med eller uden tilbagelægning fra stikprøven. I dette eksempel bruges funktionen med tilbagelægning. Fra den oprindelige stikprøve udtrækkes en observation, som indsættes i en ny stikprøve. Observationeren bliver derefter lagt tilbage i den oprindelige stikprøve, dette medfører at den samme observation kan udtages flere gange. Grunden til dette er, at stikprøven anses for at være repræsentativ for population, og to observationer af den samme værdi derfor ikke er utænkelig.
 
 ```{r}
-ny_stik <- replicate(5, { #Der replikeres 5 gange
-  sample(stik, size = 3, replace = TRUE)
+ny_stik <- replicate(n = 5, {
+  sample(x = stik, size = 3, replace = TRUE)
 })
 ny_stik
 ```

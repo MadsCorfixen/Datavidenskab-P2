@@ -1,7 +1,7 @@
 ```{r, echo=FALSE, message=FALSE}
 library(mosaic)
 library(boot)
-set.seed(29)
+set.seed(31415)
 ```
 
 ## Bootstrap-standardfejl {#boot-standardfejl}
@@ -29,18 +29,19 @@ I kodestykket nedenfor udtages en tilfældig stikprøve fra en standard normalfo
 ```{r}
 n <- 1000
 
-sample_pop <- rnorm(n, mean = 0, sd = 1) # Stikprøve fra populationen
-SD_sample <- sd(sample_pop) #Stikprøve standardafvigelse 
-SE_sample <- SD_sample/sqrt(n) #Stikprøve standardfejl
+stik <- rnorm(n, mean = 0, sd = 1)
+SD_stik <- sd(stik)
+SE_stik <- SD_stik/sqrt(n)
 
-B <- 10000 # Antal bootstrap-repetitioner
+B <- 10000
 
-meanFunc <- function(sample_pop,i){mean(sample_pop[i])} #Estimator
+middel_funk <- function(stik, i){mean(stik[i])} # Estimator
 
-Boot_sample <- boot::boot(data = sample_pop, statistic = meanFunc, R = B) #Bootstrap-stikprøver
-SE_boot <- sd(Boot_sample$t) #Standardfejlen for bootstrap-stikprøver
+Boot_stik <- boot::boot(data = stik, statistic = middel_funk, R = B) # Bootstrap-stikprøver
+SE_boot <- sd(Boot_stik$t) # Standardfejlen for bootstrap-stikprøverne
 
-diff_procent <- ((abs(SE_sample - SE_boot))/SE_sample) * 100 #Procentvis afvigelse
+# Procentvis afvigelse mellem normal standardfejl og bootstrap-standardfejl
+diff_procent <- ((abs(SE_sample - SE_boot))/SE_sample) * 100
 ```
 
 Fra eksemplet fås, at bootstrap-standardfejlen for stikprøven er $se(\hat{\theta})=$```r round(SE_boot, 4)```, hvilket approksimerer stikprøvens standardfejl på $\text{se}(\hat{\mu})=$```r round(SE_sample, 4)```, med en forskel i dette tilfælde på ```r round(diff_procent, 3)```$\%$. Hvis der opstår en situation, hvor der ikke er en simpel måde, hvorpå det er muligt at udregne standardfejlen, kan bootstrap-standardfejlen altså udnyttes, da en forskel på ```r round(diff_procent, 3)```$\%$ ikke er signifikant. 

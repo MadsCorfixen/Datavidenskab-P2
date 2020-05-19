@@ -7,8 +7,6 @@ set.seed(31415)
 
 I afsnit \@ref(t-test) blev der redegjort for, hvilke antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test derfor ikke kan anvendes, er det muligt at anvende permutationer.
 
-<!-- I dette afsnit defineres permutationer, og der gives et eksempel på en permutation af en ordnet liste af tre elementer. Afsnittet er skrevet på baggrund af [@Permutationer]. Senere vil der gives en forklaring af, hvad en permutationstest er, og et eksempel på henholdsvis en parret og en uparret permutationstest vil gives. -->
-
 Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2)}, \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $X$, af længde $n$, er givet ved $n!$, [@Permutationer].
 
 Som eksempel, er en mulig permutation, $\pi_1$, af $A = [1, 2, 3]$ givet ved $A_{\pi_1} = [2, 1, 3]$, og der er i alt $|A|! = 3! = 1 \cdot 2 \cdot 3 = 6$ mulige permutationer af listen.
@@ -43,16 +41,10 @@ Det store antal af permutationer afhjælpes ved kun at beregne $S_{\pi_i}$ for e
 Der vil nu vises et eksempel på, hvordan permutationstest kan anvendes som en hypotesetest. Antag, at det ønskes undersøgt, om middelværdien af to stikprøver er signifikant forskellige. Den opstillede nulhypotese bliver $H_0 : \mu_1 - \mu_2 = 0$, og den alternative hypotese bliver $H_1 : \mu_1 - \mu_2 \neq 0$.
 
 Der vil blive udtrukket to stikprøver, vist på figur \@ref(fig:permhist), fra den samme betafordeling.
-__FIXME__ (Er det nødvendigt med dette kode? Og skal vi ikke lave ylim, på hist, således de er sammenlignelige?)
 
-```{r, include = FALSE}
-n <- 100
-alfa1 <- 8
-beta1 <- 2
-stik1 <- rbeta(n, alfa1, beta1)
-stik2 <- rbeta(n, alfa1, beta1)
-
-S_obs <- abs(mean(stik1) - mean(stik2))
+```{r}
+stik1 <- rbeta(n = 100, shape1 = 8, shape2 = 2)
+stik2 <- rbeta(n = 100, shape1 = 8, shape2 = 2)
 ```
 
 ```{r permhist, echo = FALSE, fig.cap = "To stikprøver udtrukket fra den samme betafordeling med parametrene alfa = 8 og beta = 2."}
@@ -66,35 +58,34 @@ Teststørrelsen vil i dette tilfælde være forskellen mellem stikprøvernes mid
 I nedenstående kode udføres der $100$ permutationer på den forenede stikprøve. Den forenede stikprøve har en størrelse på $N = 200$. I hver permutation udtrækkes de første $100$ observationer til at være den permuterede stikprøve ```permuteret_stik1``` , mens de sidste $100$ observationer bliver til den permuterede stikprøve ```permuteret_stik2```. Derefter udregnes den absolutte forskel i middelværdien mellem de nye permuterede stikprøver, i alt $100$ gange, en for hver permutation. Denne difference kaldes den permuterede teststørrelse, $S_{\pi}$.
 
 ```{r}
-mean_list <- c()
+S_obs <- abs(mean(stik1) - mean(stik2))
 forenet_stik <- c(stik1, stik2)
 
+S_pi <- c()
 for(i in 1:100){
   permuteret_forenet_stik <- sample(forenet_stik, size = (2 * n))
   permuteret_stik1 <- head(permuteret_forenet_stik, 100)
   permuteret_stik2 <- tail(permuteret_forenet_stik, 100)
   
-  mean_list[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
+  S_pi[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
 }
-head(mean_list, 3)
+head(S_pi, 3)
 ```
 
-I outputtet _head(mean_list, 3)_ ses et eksempel på tre af de permuterede teststørrelser. På figur \@ref(fig:permmeanhist) illusteres fordelingen af de permuterede teststørrelser.
+I outputtet _head(S_pi, 3)_ ses et eksempel på tre af de permuterede teststørrelser. På figur \@ref(fig:permmeanhist) illusteres fordelingen af de permuterede teststørrelser.
 
-```{r permmeanhist, fig.cap = "Permutationsfordelingen af teststørrelserne. Den blå linje viser den observerede forskel i middelværdierne, og den grønne viser middelværdien for samtlige permuterede teststørrelser."}
-hist(mean_list, main = "", ylab = "Antal observationer", 
+```{r permmeanhist, echo = FALSE, fig.cap = "Permutationsfordelingen af teststørrelserne. Den blå linje viser den observerede forskel i middelværdierne, og den grønne viser middelværdien for samtlige permuterede teststørrelser."}
+hist(S_pi, main = "", ylab = "Antal observationer", 
                             xlab = "Forskel i middelværdier")
-abline(v = mean(mean_list), col = "green")
+abline(v = mean(S_pi), col = "green")
 abline(v = S_obs, col = "blue")
 ```
 
 Nu kan p-værdien beregnes, ved at udregne hvor mange gange de permuterede teststørrelser er større end den observerede teststørrelse. Denne værdi divideres derefter med antallet af permutationer. Dette gøres i nedenstående kodestykke. 
 ```{r}
-S_pi <- mean_list
+antal_ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[2]
 
-ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[2]
-
-p_vaerdi <- unname(ekstreme_vaerdier+1)/(length(S_pi)+1)
+p_vaerdi <- unname(antal_ekstreme_vaerdier+1)/(length(S_pi)+1)
 p_vaerdi
 ```
 
@@ -109,27 +100,26 @@ I koden nedenfor bestemmes antallet af type-I fejl for en uparret permutationste
 ```{r}
 konf_niveau <- 0.95
 reps <- 1000
-type_1_fejl <- replicate(reps, {
-  stik1 <- rbeta(n, alfa1, beta1)
-  stik2 <- rbeta(n, alfa1, beta1)
+n <- 100
+type_1_fejl <- replicate(n = reps, {
+  stik1 <- rbeta(n, shape1 = 8, shape2 = 2)
+  stik2 <- rbeta(n, shape1 = 8, shape2 = 2)
   samlet_stik <- c(stik1, stik2) 
   
   S_obs <- abs(mean(stik1) - mean(stik2))
-  mean_list <- c()
+  S_pi <- c()
   
   for(i in 1:(n*2)){
     permuteret_samlet_stik <- sample(samlet_stik, size = (2 * n))
     permuteret_stik1 <- head(permuteret_samlet_stik, n)
     permuteret_stik2 <- tail(permuteret_samlet_stik, n)
   
-    mean_list[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
+    S_pi[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
   }
-  
-  S_pi <- mean_list
 
-  ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[1]
+  antal_ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[1]
   
-  p_vaerdi <- (200-sum(ekstreme_vaerdier)+1)/(length(mean_list)+1)
+  p_vaerdi <- (200-sum(antal_ekstreme_vaerdier)+1)/(length(S_pi)+1)
   type1fejl <- p_vaerdi > 1 - konf_niveau
   return(type1fejl)
 })
@@ -149,16 +139,16 @@ I nedenstående kode, vises et eksempel på en parret permutations-test for fors
 ```{r, tidy=FALSE}
 reps <- 100
 n <- 100
-permuteringer <- 1000
+permutationer <- 1000
 
-p_reps <- replicate(reps, {
+p_reps <- replicate(n = reps, {
   stik1 <- rgamma(n, shape = 10, rate = 2)
   stik2 <- rgamma(n, shape = 4, rate = 13)
   
   test <- wPerm::perm.paired.loc(x = stik1, y = stik2,
                                   parameter = mean,
                                   alternative = "two.sided",
-                                  R = permuteringer)
+                                  R = permutationer)
   
   p_vaerdi <- test$p.value
 })

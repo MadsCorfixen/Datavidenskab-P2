@@ -1,6 +1,6 @@
 ```{r, echo=FALSE, message=FALSE}
 library(mosaic)
-set.seed(29)
+set.seed(31415)
 ```
 # Bootstrap {#boot-afsnit}
 

@@ -1,6 +1,6 @@
 ```{r echo = FALSE, include = FALSE}
 library(boot)
-set.seed(29)
+set.seed(31415)
 ```
 
 ## Bootstrap-konfidensintervaller
