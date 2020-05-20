@@ -47,14 +47,8 @@ I dette projekt er følgende pakker blevet anvendt.
 
 ## Læsevejledning
 
-__FIXME:__ (Identificér funktioner, der stammer fra pakker og skriv dem på den korrekte måde (```pakke::funktion```))
-
-__FIXME:__ (Skriv ud, i hver funktion, hvad de forskellige parametre betyder (```rnorm(n = 100, mean = 1, sd = 0)```))
-
-__FIXME:__ (Find eventuelle udtryk, som vi kalder noget, de egentlig ikke er)
-
 - ```pakke::funktion```.
 - Ikke-parametrisk bootstrap.
-- Samme seed, ```29```, i alle rapportens afsnit.
+- Samme seed, ```31415```, i alle rapportens afsnit.
 - Engelsk version af decimal- og tusindtalsseperator
-- Antal bootstraps / permutationer / reps kontra computerkraft
+- Antal bootstraps / permutationer // reps kontra computerkraft
