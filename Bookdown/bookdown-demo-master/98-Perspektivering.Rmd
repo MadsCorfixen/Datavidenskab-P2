@@ -1,28 +1,18 @@
 # Perspektivering
 
-Perspektivér! 
+3. Standardfejl vise hvis percentiler.
+4. Gode alternativer end bootstrap og permutation.
+5. Bias corrected adjusted method.
+6. The "second" bootstrap principle = P3 "Monte Carlo" med Peter Falktoft og Esben Bjerre.
 
-1. Permutationstest til konfidensintervaller
-2. Parametrisk bootstrap
 
-----------
+Simuleringsstudier medfører mange retninger projektet kunne have inddraget, såvel som mere dybdegående analysemetoder. Dette er dog undladt, blandt andet, på baggrund af manglende computerkraft samt begrænset tid. 
 
-_UDKAST:_ (Synes måske der er dele, som forholdsvist _diskussions-agtige_)
+Det kunne have været interesseant at undersøge om permutationer kunne bruges til at lave konfidensintervaller og sammenligne dækningsgraden af disse med bootstrap. 
 
-Simuleringsstudier medfører mange retninger projektet kunne have inddraget, såvel som mere dybdegående analysemetoder. Dette er dog undladt, blandt andet, på baggrund af manglende computerkraft samt begrænset tid.
+Da det blev undersøgt, hvordan bootstrap kunne benyttes til at beregne standardfejl blev der kun givet et eksempel på 
 
-Noget der delvist er undersøgt, er faldgruber for diverse analysemetoder, som er brugt i rapporten, og hvad det medfører, hvis ikke antagelserne er opfyldt. T-testen fremgår at have en tydelig robusthed, men dette kunne skyldes, at rapporten er begrænset til få populationer, som der sammenlignes og undersøges.
+I rapporten benyttes udelukkende ikke-parametrisk bootstrap. Der findes dog også parametrisk bootstrap, og det kunne derfor have været interessant at undersøge, hvordan begge typer bootstrap ville håndtere samme stikprøver og sammenligne resulaterne.
 
-Derudover giver simulering, af fiktive populationer, en god basis for simulering med reel data. De studier der foretages, kan derved relateres til den virkelige data, og giver indblik i mulige analysemetoder på den reelle stikprøve. __FIXME__ (KIG PÅ MIG :( )
 
-Type-II fejl er relativt lette at afdække, når populationerne for begge stikprøver er kendt. Undersøger man derimod to reele populationer, er det nært umuligt at afdække hele populationen og derved foretages stikprøver. Dermed er det ikke muligt, at afdække den præcise andel af type-II fejl eftersom de sande parametre ikke er kendte. Dog giver undersøgelsen af type-II fejl et godt grundlag for hvilke parametre, som øger, eller mindsker risikoen for denne fejltype. __FIXME__ (Diskussion?)
 
-I rapporten er der hovedsageligt benyttet ikke-parametrisk bootstrap, hvor der ikke er brugt parametrisk bootstrap. Det kunne være interessant at undersøge, hvordan begge typer bootstrap vil håndtere samme stikprøver og sammenligne resulaterne, samt hvilke der producerer de bedste resulateter.
-
-En væsentlig faktor, som ville have forbedret projektet samt analyserne, vil have været betydeligt bedre computerkraft. I større analyser, hvor antal gentagelser har været essentielle for præcise resultater, har projektet været nødsaget til at reducere disse gentagelser, da computerkraften ikke var tilstrækkelig og derved medført timelange simuleringsanalyser. Computere med nødvendige ressourcer til at gennemløbe disse analyser, ville have hjulpet til at højne samt præcisere resultaterne. __FIXME__ (Diskussion?)
-
-----------
-
-Bootstraps begrænsninger?
-
-Permutationstest?

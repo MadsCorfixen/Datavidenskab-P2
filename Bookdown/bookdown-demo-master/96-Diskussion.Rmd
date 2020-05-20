@@ -72,3 +72,12 @@ tf2
 ```
 
 Ligeledes for to stikprøver udtrukket fra den samme betafordeling, ses en dækningsgrad på konfidensintervallet fra t-testen på ```r tf2[2]/100```$\%$, hvilket også er rimelig tæt på de antaget $95\%$.
+
+
+
+
+Noget der delvist er undersøgt, er faldgruber for diverse analysemetoder, som er brugt i rapporten, og hvad det medfører, hvis ikke antagelserne er opfyldt. T-testen fremgår at have en tydelig robusthed, men dette kunne skyldes, at rapporten er begrænset til få populationer, som der sammenlignes og undersøges.
+
+Type-II fejl er relativt lette at afdække, når populationerne for begge stikprøver er kendt. Undersøger man derimod to reelle populationer, er det nært umuligt at afdække hele populationen og derved foretages stikprøver. Dermed er det ikke muligt, at afdække den præcise andel af type-II fejl eftersom de sande parametre ikke er kendte. Dog giver undersøgelsen af type-II fejl en god indsigt for hvilke parametre, som øger, eller mindsker risikoen for denne fejltype.
+
+En væsentlig faktor, som ville have forbedret projektet samt analyserne, er betydeligt bedre computerkraft. I større analyser, hvor antal gentagelser har været essentielle for præcise resultater, har projektet været nødsaget til at reducere disse gentagelser, da computerkraften ikke var tilstrækkelig og derved medført timelange simuleringsanalyser. Computere med nødvendige ressourcer til at gennemløbe disse analyser, ville have hjulpet til at højne samt præcisere resultaterne.  (diskussion)
