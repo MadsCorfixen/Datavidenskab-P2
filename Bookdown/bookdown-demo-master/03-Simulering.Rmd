@@ -232,7 +232,7 @@ Det ses på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at d
 Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges på figur \@ref(fig:korrelationstest).
 
 
-```{r, figur-korrelationstest, out.width='75%', fig.align='center', fig.cap = "Graf for uafhængigheden mellem Z1 og Z2.", echo = FALSE}
+```{r, korrelationstest, out.width='75%', fig.align='center', fig.cap = "Graf for uafhængigheden mellem Z1 og Z2.", echo = FALSE}
 knitr::include_graphics('images/korrelationstest.png')
 ```
 

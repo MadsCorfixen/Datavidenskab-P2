@@ -6,21 +6,20 @@ set.seed(31415)
 
 I dette afsnit vil nogle relevante resultater og opdagelser fra rapporten diskuteres.
 
-I problemanalysens afsnit \@ref(t-test2) blev det vist, at en uparret t-tests konfidensinterval for ikke-normalfordelte stikprøver kunne anses for at være misvisende i forhold til dets dækningsgrad. En af antagelserne for t-testen er netop at populationen, som stikprøverne (eller stikprøven) stammer fra, er normalfordelt, som i dette tilfælde ikke blev overholdt. En observation, der blev gjort i forbindelse med undersøgelsen af den uparret t-test var, at for at få ikke holdbare resultater, krævede det to forholdsvist skæve, men ikke sammenlignelige, stikprøver. Derfor blev der også udtrukket stikprøver fra to forskellige fordelinger, henholdsvis en beta- og gammafordeling.
+En væsentlig faktor, som ville have forbedret projektet samt analyserne, er betydeligt bedre computerkraft. I større analyser, hvor antal gentagelser har været essentielle for præcise resultater, har projektet været nødsaget til at reducere disse gentagelser, da computerkraften ikke var tilstrækkelig og derved medført timelange simuleringsanalyser. Computere med nødvendige ressourcer til at gennemløbe disse analyser, ville have hjulpet til at højne samt præcisere resultaterne. Dette giver sig bland andet til udtryk i rapporten ved antallet af bootstrap-stikprøver der bliver beregnet. Selvom der i afsnit \@ref(bootstrap) anbefales et antal bootstrap-stikprøver på $10,000$, er der i rapporten valgt at reducere antallet af bootstrap-stikprøver i nogle tilfælde af hensyn til computerkraft og beregningstid. Dette kunne give anledning til større usikkerhed i de opnåede resultater, da et for lille antal bootstrap-stikprøver kan medføre, at fordelingen af bootstrap-stikprøvernes estimater ikke tilnærmer sig fordelingen af stikprøveestimatet jævnfør figur \@ref{fig:fig-boot-fordeling}.   
+
+Der blev i rapporten undersøgt andelen af type-I fejl, for både permutationstest og bootstrap-test, tilsvarende blev dog ikke undersøgt for type-II fejl. Type-II fejl er nært umulige at afdække da det afhænger af mange variabler såsom stikprøvestrørrelsen og populationens parametre. Derfor blev andelen af type-II fejl ikke undersøgt yderligere, da det kun ville have givet information for de specifike tilfælde, hvilket ikke giver mening i den teoretiske tilgang som rapporten beskæftiger sig med.  
+
+I kapitel \@ref(t-test2) blev det vist, at en uparret t-tests konfidensinterval for ikke-normalfordelte stikprøver kunne anses for at være misvisende i forhold til dets dækningsgrad. En af antagelserne for t-testen er netop at populationen, som stikprøverne (eller stikprøven) stammer fra, er normalfordelt, som i dette tilfælde ikke blev overholdt. En observation, der blev gjort i forbindelse med undersøgelsen af den uparret t-test var, at for at få ikke holdbare resultater, krævede det to forholdsvist skæve, men ikke sammenlignelige, stikprøver. Derfor blev der også udtrukket stikprøver fra to forskellige fordelinger, henholdsvis en beta- og gammafordeling.
 
 Holdbarheden af t-testens konfidensintervaller er robust på trods af, at populationerne ikke er normalfordelte. T-testen viser sig altså at være meget robust overfor overtrådte antagelser, og dette må skyldes den centrale grænseværdisætning, CLT (fra engelsk _central limit theroem_). 
 
 CLT medfører, at fordelingen af stikprøvemiddelværdierne tilnærmelsesvist ligner en normalfordeling. Selv ved relativt lave stikprøvestørrelser, $n = 5$, er dette aktuelt, [@ASTAbog, side 93, figur 4.15]. At komme ud for en situation, hvor der estimeres middelværdier som i denne rapport, uden at CLT vil have en indflydelse, er usandsynligt. Dette er en fordel i forhold til t-testen, da den netop antager en normalfordeling.
 
-Var stikprøverne i afsnit \@ref(t-test2) i stedet udtrukket fra to betafordelinger med forskellige parametre, ville dækningsgraden have været forholdsvis tæt på de $95\%$ (se eksempel 1), og ligeledes hvis betafordelingerne havde de samme parametre (se eksempel 2). 
-
-__FIXME__(Der er nogle ændringer i dette afsnit som ikke er blevet gemt eller committet, med henvisning til "attributeres". Andre end mig som oplever dette?)
-Holdbarheden af t-testens konfidensintervaller er på trods af, at stikprøverne ikke er normalfordelte. T-testen viser sig altså at være meget robust overfor overtrådte antagelser, og dette må attributeres til den centrale grænseværdisætning (CLT). 
-
-__FIXME__(Det gør sig ligeledes gældende i dette afsnit.)
-Når der estimeres på middelværdier for stikprøver, vil stikprøve fordelingen for middelværdier omtrendt lige en normalfordeling, altid. Selv ved relativt lave stikprøvestørrelser $n = 5$, er dette aktuelt, [@ASTAbog, side 88, figur 4.15]. Dette gør det sjældent, at komme ud for en situation hvor der estimeres, for eksempel middelværdier som i denne raport, uden at CLT vil have en indflydelse. Dette er kun til t-testens fordel, da den netop antager en normalfordeling. 
+Var stikprøverne i kapitel \@ref(t-test2) i stedet udtrukket fra to fordelinger, der lignede hinanden, ville dækningsgraden have været forholdsvis tæt på de $95\%$ (se eksempel 1). 
 
 __Eksempel 1__
+
 I dette eksempel påvises dækningsgraden for to stikprøver udtrukket fra to forskellige betafordelinger ved hjælp af en t-test. Den ene stikprøve er udtrukket fra en betafordeling med $\alpha = 8$ og $\beta = 2$. Den anden stikprøve er udtrukket fra en betafordeling med $\alpha = 2$ og $\beta = 8$.
 
 ```{r, echo=FALSE}
@@ -45,39 +44,4 @@ tf1 <- table(Daekningsgrad)
 tf1
 ```
 
-For to stikprøver udtrukket fra hver deres betafordeling, en venstreskæv og en højreskæv, ses en dækningsgrad på konfidensintervallet fra t-testen på ```r tf1[2]/100```$\%$, hvilket er rimelig tæt på de antaget $95\%$.
-
-__Eksempel 2__
-I dette eksempel påvises dækningsgraden for to stikprøver udtrukket fra den samme betafordeling, hvor $\alpha = 8$ og $\beta = 2$, ved hjælp af en t-test.
-
-```{r, echo=FALSE}
-middel1 <- 8/(8+2)
-middel2 <- 8/(8+2)
-
-sand_dif2 <- abs(middel1 - middel2)
-
-Daekningsgrad_ens <- replicate(10000, {
-  x1 <- rbeta(20, 8, 2)
-  x2 <- rbeta(20, 8, 2)
-
-  t_res <- t.test(x1, x2, alternative = "two.sided", conf.level = 0.95)
-
-  konfinterval <- t_res$conf.int
-
-  konfinterval[1L] <= sand_dif2 & konfinterval[2L] >= sand_dif2
-})
-
-tf2 <- table(Daekningsgrad_ens)
-tf2
-```
-
-Ligeledes for to stikprøver udtrukket fra den samme betafordeling, ses en dækningsgrad på konfidensintervallet fra t-testen på ```r tf2[2]/100```$\%$, hvilket også er rimelig tæt på de antaget $95\%$.
-
-
-
-
-Noget der delvist er undersøgt, er faldgruber for diverse analysemetoder, som er brugt i rapporten, og hvad det medfører, hvis ikke antagelserne er opfyldt. T-testen fremgår at have en tydelig robusthed, men dette kunne skyldes, at rapporten er begrænset til få populationer, som der sammenlignes og undersøges.
-
-Type-II fejl er relativt lette at afdække, når populationerne for begge stikprøver er kendt. Undersøger man derimod to reelle populationer, er det nært umuligt at afdække hele populationen og derved foretages stikprøver. Dermed er det ikke muligt, at afdække den præcise andel af type-II fejl eftersom de sande parametre ikke er kendte. Dog giver undersøgelsen af type-II fejl en god indsigt for hvilke parametre, som øger, eller mindsker risikoen for denne fejltype.
-
-En væsentlig faktor, som ville have forbedret projektet samt analyserne, er betydeligt bedre computerkraft. I større analyser, hvor antal gentagelser har været essentielle for præcise resultater, har projektet været nødsaget til at reducere disse gentagelser, da computerkraften ikke var tilstrækkelig og derved medført timelange simuleringsanalyser. Computere med nødvendige ressourcer til at gennemløbe disse analyser, ville have hjulpet til at højne samt præcisere resultaterne.  (diskussion)
+For to stikprøver udtrukket fra hver deres betafordeling, en venstreskæv og en højreskæv, ses en dækningsgrad på konfidensintervallet fra t-testen på ```r tf1[2]/100```$\%$, hvilket er passende tæt på de antaget $95\%$.

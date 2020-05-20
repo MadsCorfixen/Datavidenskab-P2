@@ -10,7 +10,7 @@ Der findes forskellige bootstrap-metoder, som varierer på forskellige punkter. 
 
 Der vil i kapitlet blive undersøgt, hvordan bootstrap kan anvendes i praksis til at udregne standardfejl for en estimator, hvordan hypotesetest kan udføres ved hjælp af bootstrap og, hvordan bootstrap kan benyttes til at angive konfidensintervaller. Til hver anvendelse vil der også blive givet et eksempel på metoden.
 
-## Ikke-parametrisk bootstrap
+## Ikke-parametrisk bootstrap {#bootstrap}
 
 Bootstrap er en resampling-metode, der bruges til at generere yderligere stikprøver, kaldet bootstrap-stikprøver, ud fra en given stikprøve, hvor målet er at udføre statistisk inferens for en valgt teststørrelse. For eksempel kan bootstrap give et indblik i tendenser for teststørrelsen, såsom standardfejlen og forventningsrethed, eller udregne konfidensintervaller. Der gøres opmærksom på, at bootstrap ikke kan bruges til at få et bedre estimat for parameteren, da bootstrap-fordelingen er centreret omkring stikprøvens estimat, se figur \@ref(fig:fig-boot-fordeling), for eksempel middelværdien $\hat {\mu}$, og ikke populationens middelværdi, $\mu$, [@BootvsJack s. 114].
 
