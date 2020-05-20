@@ -1,7 +1,6 @@
 # Perspektivering
 
-3. Standardfejl vise hvis percentiler.
-4. Gode alternativer end bootstrap og permutation.
+4. Gode alternativer end bootstrap og permutation:
 5. Bias corrected adjusted method.
 6. The "second" bootstrap principle = P3 "Monte Carlo" med Peter Falktoft og Esben Bjerre.
 
@@ -10,9 +9,9 @@ Simuleringsstudier medfører mange retninger projektet kunne have inddraget, så
 
 Det kunne have været interesseant at undersøge om permutationer kunne bruges til at lave konfidensintervaller og sammenligne dækningsgraden af disse med bootstrap. 
 
-Da det blev undersøgt, hvordan bootstrap kunne benyttes til at beregne standardfejl blev der kun givet et eksempel på 
+Da det blev undersøgt, hvordan bootstrap kunne benyttes til at beregne standardfejl blev der kun givet et eksempel på standardfejlen for middelværdi. Her kunne det have været relevant at lave udregningen for en estimator, hvis standardfejl ikke umiddelbart let kunne beregnes.
 
-I rapporten benyttes udelukkende ikke-parametrisk bootstrap. Der findes dog også parametrisk bootstrap, og det kunne derfor have været interessant at undersøge, hvordan begge typer bootstrap ville håndtere samme stikprøver og sammenligne resulaterne.
+I rapporten benyttes udelukkende ikke-parametrisk bootstrap. Der findes dog også parametrisk bootstrap, og det kunne derfor have været interessant at undersøge, hvordan begge typer bootstrap ville håndtere samme stikprøver og sammenligne resulaterne. 
 
 
 
