@@ -44,7 +44,8 @@ alpha <- 1 - KI_niveau
 NedrePercentil <- round(bootstraps * alpha/2)
 OevrePercentil <- round(bootstraps * (1-alpha/2))
 
-KI_Percentil <- c(Nedre = SortedBoots[NedrePercentil], Oevre = SortedBoots[OevrePercentil])
+KI_Percentil <- c(Nedre = SortedBoots[NedrePercentil], 
+                  Oevre = SortedBoots[OevrePercentil])
 
 KI_Percentil
 ```
@@ -161,8 +162,10 @@ vector_t <- c()
 for(n in seq(4, 100, 4)){
   res <- replicate(n = 100,{
     stik <- data.frame(data = rnorm(n))
-    boot_stik <- boot::boot(data = stik, statistic = meanFunc, R = 100)
-    interval <- boot::boot.ci(boot.out = boot_stik, conf = KI_niveau, 
+    boot_stik <- boot::boot(data = stik, statistic = meanFunc, 
+                            R = 100)
+    interval <- boot::boot.ci(boot.out = boot_stik, 
+                              conf = KI_niveau, 
                               type = c("perc", "basic", "stud"))
     
     # Returnerer nedre og øvre grænse for konfidensintervallerne
@@ -170,7 +173,7 @@ for(n in seq(4, 100, 4)){
     interval_b <- interval$basic[4:5]
     interval_t <- interval$student[4:5]
     
-    # Undersøger om den sande middelværdi ligger i konfidensintervallet
+    # Undersøger om den sande middelværdi er i konfidensintervallet
     tf_p <- interval_p[1]<=sand_middel & interval_p[2]>=sand_middel
     tf_b <- interval_b[1]<=sand_middel & interval_b[2]>=sand_middel
     tf_t <- interval_t[1]<=sand_middel & interval_t[2]>=sand_middel
@@ -189,7 +192,7 @@ for(n in seq(4, 100, 4)){
 }
 
 # Dækningsgraden for percentilmetoden
-vector_p
+vector_p[1:5]
 ```
 
 I _vector_p_ ses middelværdierne for dækningsgraden af 100 konfidensintervaller genereret ud fra percentilmetoden. Den første middelværdi er for stikprøvestørrelsen $n = 4$, den næste er for stikprøvestørrelsen $n = 8$ osv. 
@@ -198,12 +201,12 @@ Dækningsgraderne for de tre metoder illustreres på figur \@ref(fig:fig-daeknin
 ```{r fig-daekning, fig.align='center', fig.cap = "Dækningsgraden for de tre bootstrap-konfidensintervaller. På x-aksen ses stikprøvestørrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøvestørrelse.", echo=FALSE}
 x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
-     xlab = "Stikprøvestørrelse", ylim = c(0.75, 1))
+     xlab = "Stikprøvestørrelse", ylim = c(0.7, 1))
 lines(x, vector_b, type="l", col="blue")
 lines(x, vector_t, type="l", col="green")
 abline(h=0.95, lty=5, col="black")
-legend(83, 0.835, legend=c("Percentil", "Basic", "T"),
+legend(77, 0.8, legend=c("Percentil", "Basic", "T"),
        col=c("red", "blue", "green"), lty=c(1,1,1), cex=0.8)
 ```
 
-Her tyder det på, at T-metoden præsterer bedre ved mindre stikprøver end både percentilmetoden og basic-metoden. Omkring $n=15$ opnår percentil- og basic-metodens konfidensinterval begge den samme dækningsgrad som T-metoden, og generelt kan der ses, at percentil- og basic-metoden har cirka den samme dækningsgrad. Både percentil- og basic-metoden ser ud til at have større udsvingninger end T-metoden. Desuden ser alle tre metoders dækningsgrader ud til at stabilisere sig omkring $95\%$, når stikprøvestørrelsen bliver tilstrækkelig stor. 
+Her tyder det på, at T-metoden præsterer bedre ved mindre stikprøver end både percentilmetoden og basic-metoden. Ved tilpas stor stikprøvestørrelse opnår percentil- og basic-metodens konfidensinterval begge den samme dækningsgrad som T-metoden, og generelt kan der ses, at percentil- og basic-metoden har cirka den samme dækningsgrad. Både percentil- og basic-metoden ser ud til at have større udsvingninger end T-metoden. Desuden ser alle tre metoders dækningsgrader ud til at stabilisere sig omkring $95\%$, når stikprøvestørrelsen bliver tilstrækkelig stor. 

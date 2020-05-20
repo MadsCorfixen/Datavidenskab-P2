@@ -1,0 +1,43 @@
+\contentsline {chapter}{\numberline {1}Introduktion}{5}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Forord}{5}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Abstract/Synopsis}{5}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}Anvendte pakker}{5}{section.1.3}% 
+\contentsline {section}{\numberline {1.4}Læsevejledning}{6}{section.1.4}% 
+\contentsline {chapter}{\numberline {2}Problemanalyse}{7}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Statistikkens udvikling}{7}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Statistik}{8}{section.2.2}% 
+\contentsline {section}{\numberline {2.3}Hypotesetest}{9}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Hypotesetest for middelværdier}{9}{subsection.2.3.1}% 
+\contentsline {subsection}{\numberline {2.3.2}Fejltyper}{12}{subsection.2.3.2}% 
+\contentsline {section}{\numberline {2.4}Problemformulering}{13}{section.2.4}% 
+\contentsline {chapter}{\numberline {3}Simulering}{15}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Pseudorandom number generator}{15}{section.3.1}% 
+\contentsline {subsection}{\numberline {3.1.1}Lineær kongruens generator}{17}{subsection.3.1.1}% 
+\contentsline {subsection}{\numberline {3.1.2}Box-Muller-transformation}{19}{subsection.3.1.2}% 
+\contentsline {section}{\numberline {3.2}Simulering i R}{24}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Normalfordeling}{25}{subsection.3.2.1}% 
+\contentsline {subsection}{\numberline {3.2.2}Uniform fordeling}{25}{subsection.3.2.2}% 
+\contentsline {subsection}{\numberline {3.2.3}Binomialfordeling}{25}{subsection.3.2.3}% 
+\contentsline {subsection}{\numberline {3.2.4}Skæve fordelinger}{26}{subsection.3.2.4}% 
+\contentsline {subsubsection}{\numberline {3.2.4.1}Betafordeling}{26}{subsubsection.3.2.4.1}% 
+\contentsline {subsubsection}{\numberline {3.2.4.2}Gammafordeling}{28}{subsubsection.3.2.4.2}% 
+\contentsline {subsection}{\numberline {3.2.5}Repetitioner}{28}{subsection.3.2.5}% 
+\contentsline {chapter}{\numberline {4}T-test for skæve stikprøver}{31}{chapter.4}% 
+\contentsline {chapter}{\numberline {5}Permutationer}{33}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Permutationstest}{33}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Uparret permutationstest}{34}{section.5.2}% 
+\contentsline {section}{\numberline {5.3}Parret permutationstest}{38}{section.5.3}% 
+\contentsline {chapter}{\numberline {6}Bootstrap}{39}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Ikke-parametrisk bootstrap}{39}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Bootstrap-standardfejl}{41}{section.6.2}% 
+\contentsline {section}{\numberline {6.3}Bootstrap-hypotesetest}{43}{section.6.3}% 
+\contentsline {subsection}{\numberline {6.3.1}Uparret bootstrap-test}{43}{subsection.6.3.1}% 
+\contentsline {subsection}{\numberline {6.3.2}Parret bootstrap-test}{46}{subsection.6.3.2}% 
+\contentsline {section}{\numberline {6.4}Bootstrap-konfidensintervaller}{48}{section.6.4}% 
+\contentsline {subsection}{\numberline {6.4.1}Percentilmetoden}{48}{subsection.6.4.1}% 
+\contentsline {subsection}{\numberline {6.4.2}Basic-metoden}{49}{subsection.6.4.2}% 
+\contentsline {subsection}{\numberline {6.4.3}T-metoden}{50}{subsection.6.4.3}% 
+\contentsline {subsection}{\numberline {6.4.4}Dækningsgrader}{51}{subsection.6.4.4}% 
+\contentsline {chapter}{\numberline {7}Diskussion}{55}{chapter.7}% 
+\contentsline {chapter}{\numberline {8}Konklusion}{57}{chapter.8}% 
+\contentsline {chapter}{\numberline {9}Perspektivering}{59}{chapter.9}% 

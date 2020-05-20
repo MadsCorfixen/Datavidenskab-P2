@@ -82,7 +82,8 @@ lcg <- function(modulus, faktor, tilvaekst, seed, iterationer) {
 Det følgende er et eksempel på en LCG-cyklus med en periode på $16$.
 
 ```{r}
-lcg1 <- lcg(modulus = 64, faktor = 33, tilvaekst = 12, seed = 57, iterationer = 20)
+lcg1 <- lcg(modulus = 64, faktor = 33, tilvaekst = 12, seed = 57,
+            iterationer = 20)
 lcg1
 ```
 
@@ -97,7 +98,8 @@ plot(lcg1_plot, main = "",
 På figur \@ref(fig:uniform-LCG) vises et eksempel på, hvordan LCG-algoritmen kan bruges til at lave en uniform fordeling i intervallet $[0, 1]$. Når cyklussen er oprettet, deles hvert element deri med den valgte modulus, hvilket gør, at hvert element bliver indeholdt i $[0, 1]$.
 
 ```{r}
-lcg2 <- lcg(modulus = 86436, faktor = 1093, tilvaekst = 0, seed = 12, iterationer = 1000)
+lcg2 <- lcg(modulus = 86436, faktor = 1093, tilvaekst = 0, 
+            seed = 12, iterationer = 1000)
 
 lcg2_uniform <- lcg2/86436
 ```
@@ -116,10 +118,11 @@ plot(lcg2, main = "", xlab = "Indeks",
 Afslutningsvist vil der vises et eksempel, hvor der returneres en cyklus, der ser tilfældig ud. Denne cyklus kan ses på figur \@ref(fig:tilfaeldig-LCG).
 
 ```{r}
-lcg3 <- lcg(modulus = 86436, faktor = 1093, tilvaekst = 18257, seed = 12, iteration = 100)
+lcg3 <- lcg(modulus = 86436, faktor = 1093, tilvaekst = 18257, 
+            seed = 12, iteration = 100)
 ```
 
-```{r tilfaeldig-LCG, fig.align='center', fig.cap= "Et eksempel på en tilsyneladende tilfældig LCG-cyklus."}
+```{r, echo=FALSE, tilfaeldig-LCG, fig.align='center', fig.cap= "Et eksempel på en tilsyneladende tilfældig LCG-cyklus."}
 plot(lcg3, main = "", xlab = "Indeks",
      ylab = "Værdier", type = "l")
 ```
@@ -148,8 +151,10 @@ U2 <- runif(n = 100000, min = 0, max = 1)
 Disse to stokatiske variabler benyttes nu til at oprette de to påstået standard normalfordelte stokatiske variabler, ```Z1``` og ```Z2```.
 
 ```{r}
-Z1 <- sqrt(-2*log(U1))*cos(2*pi*U2) # Opretter Z1 vha. formlen for Box-Muller
-Z2 <- sqrt(-2*log(U1))*sin(2*pi*U2) # Opretter Z2 vha. formlen for Box-Muller
+# Opretter Z1 vha. formlen for Box-Muller
+Z1 <- sqrt(-2*log(U1))*cos(2*pi*U2) 
+# Opretter Z2 vha. formlen for Box-Muller
+Z2 <- sqrt(-2*log(U1))*sin(2*pi*U2) 
 ```
 
 __Efterprøvning i R__
@@ -191,14 +196,15 @@ Dette giver henholdsvis en middelværdi og median for ```Z1``` på $`r mean_Z1`$
 For at tjekke punkt $4$, beregnes andelen af outliers i hvert boksplot i kodestykket nedenfor.
 
 ```{r}
-OutVals1 <- boxplot(Z1, plot = FALSE)$out # Output'er outliers i Z1
+OutVals1 <- boxplot(Z1, plot = FALSE)$out # Outliers i Z1
 outliers_Z1 <- length(OutVals1) # Tæller antal outliers i Z1
 
-OutVals2 <- boxplot(Z2, plot = FALSE)$out # Output'er outliers i Z2
+OutVals2 <- boxplot(Z2, plot = FALSE)$out # Outliers i Z2
 outliers_Z2 <- length(OutVals2) # Tæller antal outliers i Z2
 
-outliers_andel_Z1 <- outliers_Z1/length(Z1) # Andelen af outliers i Z1
-outliers_andel_Z2 <- outliers_Z2/length(Z2) # Andelen af outliers i Z2
+# Andelen af outliers i Z1 og Z2
+outliers_andel_Z1 <- outliers_Z1/length(Z1)
+outliers_andel_Z2 <- outliers_Z2/length(Z2) 
 ```
 
 Dette giver en andel af outliers i ```Z1``` på ```r outliers_andel_Z1``` og i ```Z2``` på ```r outliers_andel_Z2```. Dette svarer til cirka $0,7~ \%$ outliers i både ```Z1``` og ```Z2```, hvilket stemmer overens med punkt 4.
@@ -225,11 +231,11 @@ Det ses på histogrammerne, at de tilnærmelsesvist er normalfordelte, samt at d
 
 Desuden er det også en konsekvens af Box-Muller-transformationerne, at ```Z1``` og ```Z2``` er uafhængige. Dette undersøges på figur \@ref(fig:korrelationstest).
 
-```{r korrelationstest, echo = FALSE, fig.align='center', fig.cap='Graf for uafhængigheden mellem Z1 og Z2.'}
-plot(Z2 ~ Z1, main = "",
-    col = rgb(red = 0, green = 0, blue = 0, alpha = 0.25),
-    pch = 1, cex = 0.5)
+
+```{r, figur-korrelationstest, out.width='75%', fig.align='center', fig.cap = "Graf for uafhængigheden mellem Z1 og Z2.", echo = FALSE}
+knitr::include_graphics('images/korrelationstest.png')
 ```
+
 
 Udover at eftervise uafhængigheden af ```Z1``` og ```Z2``` grafisk, kan det også undersøges ved hjælp af funktionen ```cor``` i R, som giver en værdi for korrelationen af de to talsekvenser.
 Korrelationen af to variabler udregnes ved formlen

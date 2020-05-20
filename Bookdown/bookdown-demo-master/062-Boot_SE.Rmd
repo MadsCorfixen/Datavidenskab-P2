@@ -37,10 +37,13 @@ B <- 10000
 
 middel_funk <- function(stik, i){mean(stik[i])} # Estimator
 
-Boot_stik <- boot::boot(data = stik, statistic = middel_funk, R = B) # Bootstrap-stikprøver
-SE_boot <- sd(Boot_stik$t) # Standardfejlen for bootstrap-stikprøverne
+# Bootstrap-stikprøver
+Boot_stik <- boot::boot(data = stik, statistic = middel_funk, R = B) 
+# Standardfejlen for bootstrap-stikprøverne
+SE_boot <- sd(Boot_stik$t) 
 
-# Procentvis afvigelse mellem normal standardfejl og bootstrap-standardfejl
+# Procentvis afvigelse mellem normal standardfejl og 
+# bootstrap-standardfejl
 diff_procent <- ((abs(SE_stik - SE_boot))/SE_stik) * 100
 ```
 

@@ -45,8 +45,9 @@ For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikpr�
 ```{r}
 bootstraps <- 1000
 boot_t <- replicate(n = bootstraps, {
-  
-    boot <- sample(x = c(stik1, stik2), replace = TRUE) # Samlede bootstrap-stikprøve
+    
+    # Samlede bootstrap-stikprøve
+    boot <- sample(x = c(stik1, stik2), replace = TRUE) 
   
     boot_x <- boot[1 : n] # Bootstrap-stikprøve 1
     boot_y <- boot[(n + 1) : (n + m)] # Bootstrap-stikprøve 2
