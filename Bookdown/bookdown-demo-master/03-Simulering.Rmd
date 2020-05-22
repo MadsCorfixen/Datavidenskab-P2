@@ -51,9 +51,9 @@ LCG danner en cyklus af tal ved iteration, og kræver kun få parametre. Helt sp
 Algoritmen fungerer således:
 Der startes ved et _seed_, angivet med $X_0$, som bliver multipliceret med faktoren, $a$, og konstantleddet, $c$, adderes. Derefter tages modulus $m$ af værdien.
 
-I figuren nedenfor kan ses tre eksempler på LCG. De to første eksempler har samme parametre, men forskelligt _seed_.
+I figur \@ref(lcgcyklus) ses tre eksempler på LCG. De to første eksempler har samme parametre, men forskelligt _seed_.
 
-```{r, out.width='75%', fig.align='center', fig.cap="Tre eksempler på algoritmen lineær kongruens generator. De to første eksempler har samme parametre, men forskelligt seed. [@lincongenvis]", echo = FALSE}
+```{r lcgcyklus, out.width='75%', fig.align='center', fig.cap="Tre eksempler på algoritmen lineær kongruens generator. De to første eksempler har samme parametre, men forskelligt seed. [@lincongenvis]", echo = FALSE}
  knitr::include_graphics("images/LCG_eksempel.PNG")
 ```
 
@@ -207,7 +207,7 @@ outliers_andel_Z1 <- outliers_Z1/length(Z1)
 outliers_andel_Z2 <- outliers_Z2/length(Z2) 
 ```
 
-Dette giver en andel af outliers i ```Z1``` på ```r outliers_andel_Z1``` og i ```Z2``` på ```r outliers_andel_Z2```. Dette svarer til cirka $0,7~ \%$ outliers i både ```Z1``` og ```Z2```, hvilket stemmer overens med punkt 4.
+Dette giver en andel af outliers i ```Z1``` på ```r outliers_andel_Z1``` og i ```Z2``` på ```r outliers_andel_Z2```. Dette svarer til cirka $0.7\%$ outliers i både ```Z1``` og ```Z2```, hvilket stemmer overens med punkt 4.
 
 Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være normalfordelt. Tværtimod underbygger beregningen af deres middelværdi, at de er _standard_ normalfordelte.
 

@@ -60,9 +60,7 @@ Værdien af teststørrelsen påvirker _p_-værdien på den måde, at når testst
 
 En illustration af teststørrelsens betydning ved en normalfordeling kan ses på Figur \@ref(fig:figur-Hypotesetest).
 
-__FIXME:__ (Mere forklaring til denne figur)
-
-```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen", echo = FALSE}
+```{r, figur-Hypotesetest, out.width='75%', fig.align='center', fig.cap = "Teststørrelsens indflydelse på nulhypotesen. Er den observerede værdi mindre ekstrem end den kritiske værdi forkastes nulhypotesen ikke. Er den observerede værdi mere ekstrem end den kritiske værdi forkastes nulhypotesen og den alternative hypotese antages at være gældende.", echo = FALSE}
 knitr::include_graphics('images/HippoHyppo.jpeg')
 ```
 

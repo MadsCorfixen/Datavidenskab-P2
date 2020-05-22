@@ -24,7 +24,7 @@ Hvor $\hat{\theta}$ er stikprøvens estimat for den ønskede parameter, $B$ er a
 
 __Eksempel__ 
 
-I kodestykket nedenfor udtages en tilfældig stikprøve fra en standard normalfordelt population. Først udregnes standardfejlen for stikprøven. Derefter laves $10,000$ bootstrap-stikprøver, som benyttes til at beregne stikprøvens bootstrap-standardfejl. Til sidst sammenlignes disse to estimater.
+I kodestykket nedenfor udtages en tilfældig stikprøve fra en standard normalfordelt population. Først udregnes standardfejlen for stikprøven. Derefter laves $10,000$ bootstrap-stikprøver, som benyttes til at beregne stikprøvens bootstrap-standardfejl. Til sidst sammenlignes disse to estimater. Pakken ```boot``` benyttes.
 
 ```{r}
 n <- 1000
