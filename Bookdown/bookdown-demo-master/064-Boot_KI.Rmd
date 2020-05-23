@@ -195,7 +195,7 @@ for(n in seq(4, 100, 4)){
 vector_p[1:5]
 ```
 
-I _vector_p_ ses middelværdierne for dækningsgraden af 100 konfidensintervaller genereret ud fra percentilmetoden. Den første middelværdi er for stikprøvestørrelsen $n = 4$, den næste er for stikprøvestørrelsen $n = 8$ osv. 
+I _vector_p_ ses middelværdierne for dækningsgraden af 100 konfidensintervaller genereret ud fra percentilmetoden. Den første middelværdi er for stikprøvestørrelsen $n = 4$, den næste er for stikprøvestørrelsen $n = 8$ og så videre. 
 
 Dækningsgraderne for de tre metoder illustreres på figur \@ref(fig:fig-daekning).
 ```{r fig-daekning, fig.align='center', fig.cap = "Dækningsgraden for de tre bootstrap-konfidensintervaller. På x-aksen ses stikprøvestørrelsen, mens på y-aksen ses dækningsgraden af konfidensintervallet på baggrund af den givne stikprøvestørrelse.", echo=FALSE}

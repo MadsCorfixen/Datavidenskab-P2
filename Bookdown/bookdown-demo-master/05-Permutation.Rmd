@@ -1,3 +1,8 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
 ```{r, include = FALSE}
 library(mosaic)
 library(wPerm)
@@ -23,10 +28,9 @@ En permutationstest går ud på at forsøge at måle evidens imod $H_0$, som i e
 
 Selve beregningen af teststørrelsen afhænger af de specifikke hypoteser, men det er et krav, at store værdier for $S_{\pi_i}$ indikerer evidens imod $H_0$. Desuden er det kun nulhypoteser om ingen forskel, der kan testes ved hjælp af permutationer - eksempelvis kan evidensen imod $H_0: \mu_1 \neq \mu_2$ ikke beregnes, [@BootvsJack, s. 48].
 
-_P_-værdien for en tosidet test beregnes som antal gange, den numeriske værdi af permutationsteststørrelsen, $|S_{\pi_i}|$, er større end den observerede teststørrelse, $S_{obs}$, divideret med antallet af mulige permuationer, $M$. _P_-værdien beregnes på tilsvarende vis for en ensidet test, hvor $|S_{\pi_i}|$ erstattes med $S_{\pi_i}$, og uligheden erstattes med det tilsvarende passende.
-__FIXME__ (Skulle vi ikke have en kilde på den formel og fremgangsmåde?)
-$$p = \frac{\#(|S_{\pi_i}| \geq S_{obs}) + 1}{M + 1}$$
+_P_-værdien for en tosidet test beregnes som antal gange, den numeriske værdi af permutationsteststørrelsen, $|S_{\pi_i}|$, er større end den observerede teststørrelse, $S_{obs}$, divideret med antallet af mulige permuationer, $M$. _P_-værdien beregnes på tilsvarende vis for en ensidet test, hvor $|S_{\pi_i}|$ erstattes med $S_{\pi_i}$, og uligheden erstattes med det tilsvarende passende, [@BootvsJack side 55].
 
+$$p = \frac{\#(|S_{\pi_i}| \geq S_{obs}) + 1}{M + 1}$$
 
 Permutationstest har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Desuden er permutationstest især smart, når fordelingen af teststørrelsen er ukendt.
 
