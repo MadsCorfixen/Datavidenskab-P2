@@ -120,7 +120,7 @@ Eftersom *p*-værdien er ```r p_tosidet``` $> \alpha=0.05$, forkastes $H_0$ ikke
 
 ### Fejltyper {#fejltyper-afsnit}
 
-Der er risiko for to primære fejl når der foretages en hypotesetest, som illustreret på figur \@ref(fig:figur-typefejl). Den første, type-I fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-II fejl, er hvor $H_0$ accepteres, men i realiteten er falsk.
+Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-I fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-II fejl, er hvor $H_0$ accepteres, men i realiteten er falsk. Dette er illustreret på figur \@ref(fig:figur-typefejl). 
 
 En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
 
