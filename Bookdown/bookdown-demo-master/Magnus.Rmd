@@ -1,34 +1,22 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-```{r include=FALSE, MESSAGE = FALSE}
-library(mosaic)
-set.seed(31415)
-```
-
 # Problemanalyse
 
 ## Statistikkens udvikling
 
 Ordet _statistik_ stammer tilbage fra det latinske _statisticum collegium_ ("statsrådgiver") og det italienske _statista_ ("statsmand" eller "politiker"), [@Orddef]. At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statistik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrere befolkningen og dennes tilhørselsforhold. Derfor anvendte statsrådgivere og statsmænd statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik, [@Samfundsstat].
 
-To statistikere, som ligger fundamentet til den statistiske arbejdsform, der bruges i dag er Karl Pearson og Ronald Fisher.
-Karl Pearson var interesseret i at udvikle matematiske metoder til at studere biologisk arv og evolution. Gennem den interesse udsprang en række bidrag til statistiske analyse metoder. Pearson opfandt korrelationskoefficienten $(R^2)$ som bruges til at vise, hvor godt en regressionsmodel passer noget givent data. Udover det, opfandt han også $\chi^2$-testen, som er en metode der bruges til at teste at observerede værdier stemmer overens med de forventede værdier, [@KarlPearsonbrit], [@Chiianden].
-
-Ronald Fisher introducerede princippet om randomisering. Det siger, at et eksperiment skal gentages på et antal kontrolgrupper, og de elementer der bruges i eksperimentet skal tilfældigt udvælges fra hele populationen. Dette gjorde data forventningsret, som mindsker variationen i et eksperiment. Udover det har Fisher introduceret analyse af varians, også kaldet ANOVA (fra engelsk analysis of variance). Denne model bruges til at analysere forskellen mellem gruppemiddelværdier i en stikprøve, [@RonaldFisher].
+En af de mere ukendte statistikere, som lagde fundamentet il den statistiske arbejdsform der bruges i dag, er William Sealy Gosset, som gik under aliasset Student. Gosset arbejdede på Guinness bryggeri, hvor han udviklede statistike metoder til hans arbejde, der kunne håndtere små stikprøver. I denne forbindelse opfandt han t-fordeling, samt den dertil tilhørende t-test.  (https://en.wikipedia.org/wiki/William_Sealy_Gosset)
 
 Yderligere har udviklingen af computeren været med til at gøre anvendelsen af komplicerede statistiske beregninger hurtigere, mere præcise og mere tilgængelige. Anvendelsesområderne for statistik har ligeledes udviklet sig, fra i begyndelsen at være noget staten anvendte til styring af økonomi og befolkningsindblik, til stort set at være repræsenteret i alle større hverv i dag. Den moderne definition af statistik kan beskrives som evnen til at drage konklusioner om generelle tilfælde, _populationer_, på baggrund af enkelte tilfælde, _stikprøver_, [@ASTAbog, s. 4].
   
 ## Statistik
+
 Statistik opdeles overordnet i to kategorier, deskriptiv statistisk og statistisk inferens. 
 
 __Deskriptiv statistik__
 
 Det følgende afsnit er baseret på [@ASTAkursus1] og [@ASTAbog, s. 4-5]
 
-Deskriptiv statistik drejer sig om at opsummere data, således at informationerne heri anskueliggøres og forståelsen af data styrkes, uden at fordreje eller miste den oprindelige information. Dette kan eksempelvis gøres ved at beregne middelværdien og spredningen, da det giver et bedre overblik, end at skulle overskue samtlige datapunkter. I nogle tilfælde kan det være tilstrækkeligt at lave en grafisk fremstilling af data, eventuelt i kombination med middelværdi og spredning. 
+Deskriptiv statistik drejer sig om at opsummere data, således at informationerne heri anskueliggøres og forståelsen af data styrkes, uden at fordreje eller miste den oprindelige information. Dette kan eksempelvis gøres ved at beregne middelværdien og spredningen, da det giver et bedre overblik, end at skulle overskue samtlige datapunkter. I nogle tilfælde kan det være tilstrækkeligt at lave en grafisk fremstilling af data, eventuelt i kombination med middelværdi og spredning.
 
 __Statistisk inferens__
 
@@ -38,17 +26,15 @@ På baggrund af informationen, som udtrykkes af deskriptiv statistik, er det så
 
 I statistisk inferens differentieres der mellem to metoder, estimering og hypotesetest. Når der estimeres på baggrund af en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan eksempelvis være gennemsnitsindkomst hos en befolkning, $\mu$, for hvilken der findes et estimat $\hat{\mu}$, som bruges til at beskrive $\mu$. Dette betegnes som et punktestimat, og vil oftest suppleres med et intervalestimat. Årsagen til dette er, at punktestimater er tilfældige, og derfor ændrer sig fra stikprøve til stikprøve. Da punktestimaters sandsynlighed for at være korrekt derfor er lig $0$, tilstræbes det at anvende et intervalestimat, hvor det kan siges at $\mu$ med $95\%$ sikkerhed ligger, fremfor et punktestimat. Dette kaldes for et konfidensinterval.
 
-Den anden form for statistisk infernes er hypotesetest, som beskrives i det efterfølgende afsnit. 
+Den anden form for statistisk infernes, hypotesetest, beskrives i det næste afsnit. 
 
 ## Hypotesetest {#hypotesetest}
 
-I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at drage konklusioner for en population, ved at opstille to hypoteser.
+<!-- I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at drage konklusioner for en population, ved at opstille to hypoteser. -->
 
 En hypotesetest baserer sig på det videnskabelige princip om falsificering. Der opstilles en indledende formodning om en population, kaldet nulhypotesen $H_0$, og en alternativ, modsat hypotese $H_1$. Er den indledende formodning ikke korrekt, må den alternative hypotese være gældende.
 
-Ved en hypotesetest undersøges, hvorvidt der er en difference mellem observerede værdier og forventede værdier, hvis $H_0$ er sand.
-
-Sandsynligheden for, at der er en difference, er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen, og derfor benyttes et mål for, hvornår differencen er _for_ stor, kaldet signifikansniveauet, $\alpha$.
+Ved en hypotesetest undersøges, hvorvidt der er en difference mellem observerede værdier og forventede værdier, hvis $H_0$ er sand. Sandsynligheden for, at der er en difference, er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen, og derfor benyttes et mål for, hvornår differencen er _for_ stor, kaldet signifikansniveauet, $\alpha$.
 
 Når nulhypotesen og den alternative hypotese er blevet opstillet, kan stikprøvens resultat sammenlignes med det forventede resultat under nulhypotesen, ved hjælp af en teststørrelse. Teststørrelsen kan blandt andet bestemmes som antallet af standardafvigelser, den observerede værdi, $\hat{\theta}$, ligger fra den forventede værdi $\theta_0$, i retning af den alternative hypotese, [@HvorforHYPO].
 
@@ -64,7 +50,62 @@ En illustration af teststørrelsens betydning ved en normalfordeling kan ses på
 knitr::include_graphics('images/HippoHyppo.jpeg')
 ```
 
-Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være $10\%$ eller $1\%$. Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper, [@ASTA-HYPO].
+Normalt arbejdes der med et signifikansniveau på $5\%$, $\alpha=0.05$. Dog er der intet fast signifikansniveau og det kunne lige såvel være $10\%$ eller $1\%$. Betydningen heraf diskuteres i næste afsnit, [@ASTA-HYPO].
+
+<!-- Betydningen heraf diskuteres kort sidst i afsnittet under fejltyper, [@ASTA-HYPO].  -->
+
+__FIXME__
+
+### Fejltyper {#fejltyper-afsnit}
+
+Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-I fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-II fejl, er hvor $H_0$ accepteres, men i realiteten er falsk. Dette er illustreret på figur \@ref(fig:figur-typefejl). 
+
+En af de primære årsager til disse fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
+
+Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau, $\alpha$. Sandsynligheden for type-II fejl, $\beta$, er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen. Er den virkelige sandhed derimod langt fra nulhypotesen, vil sandsynligheden for type-II fejl være tilsvarende lille. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved en mindre mængde data. Andelen af type-II fejl benyttes til at udregne hypotesetestens styrke, $1-\beta$. Styrken beskriver andelen af gange, hvor $H_1$ korrekt bliver forkastet, [@Fejltyper].
+
+```{r figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
+knitr::include_graphics('images/Typefejl.png')
+```
+
+Det vil påvises, hvilken betydning små differencer i middelværdien samt stikprøvestørrelsen har for andelen af type-II fejl.
+
+```{r, echo=FALSE}
+type_2_vector <- c()
+reps <- 1000
+for(n in c(5, 10, 25, 50, 200, 1000, 10000)){ # Forskellige stikprøvestørrelser
+  for(m_diff in c(0.001, 0.1, 1, 2, 5)){ # Forskellige middelværdi-differencer
+    
+    forventet_dif <- 0
+    
+    res <- replicate(reps, {
+      x1 <- rnorm(n, mean = 0 + m_diff, sd = 1)
+      x2 <- rnorm(n, mean = 0, sd = 1)
+    
+      t_res <- t.test(x1, x2, alternative = "two.sided", conf.level = 0.95)
+    
+      konf_interval <- t_res$conf.int 
+      
+      # Tjekker, om 0 ligger i konfidensintervallet
+      konf_interval[1L] <= forventet_dif & konf_interval[2L] >= forventet_dif 
+    })
+    # Vektor over, hvor ofte, 0 lå i konfidensintervallet
+    type_2_vector <- append(type_2_vector, table(res)[2])
+  }
+}
+type_2_vector[is.na(type_2_vector)] <- 0 # Ændrer NA-forekomster til 0
+type_2_vector <- type_2_vector / reps # Omregner til procent
+
+# Tabel over betydning af stikprøvestørrelse
+# og difference i middelværdi for andelen af type-II fejl.
+type_2 <- matrix(type_2_vector, nrow = 5, ncol = 7,
+           dimnames = list("Differencen i middelværdi" = c("0.001", "0.1", "1", "2", "5"),
+                           "Stikprøvestørrelsen, n =" = c("5", "10", "25", "50", "200",
+                                                          "1000", "10000")))
+type_2
+```
+
+Tabellen viser, at både stikprøvestørrelsen samt differencen i middelværdien, har stor betydning for andelen af af type-II fejl. Er differencen i middelværdierne $0.001$ fremgår det, at stikprøvestørrelsen mellem $5$ og $10,000$ ikke giver signifikante forskelle, hvilket medfører, at stikprøvestørrelsen skal være meget større for at mindske andelen af type-II fejl. Derudover mindskes risikoen for type-II fejl som stikprøvestørrelsen øges, hvilket også er gældende hvis differencen i middelværdierne forøges.
 
 ### Hypotesetest for middelværdier {#t-test}
 
@@ -116,68 +157,13 @@ p_tosidet <- 2 * p_ensidet
 p_tosidet
 ```
 
-Eftersom *p*-værdien er ```r p_tosidet``` $> \alpha=0.05$, forkastes $H_0$ ikke. Havde *p*-værdien derimod været mindre end $0.05$ ville det medføre, at $H_0$ forkastes og det ville formodes, at $H_0$ ikke er korrekt for populationen.
-
-### Fejltyper {#fejltyper-afsnit}
-
-Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-I fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-II fejl, er hvor $H_0$ accepteres, men i realiteten er falsk. Dette er illustreret på figur \@ref(fig:figur-typefejl). 
-
-En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
-
-Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau, $\alpha$. Sandsynligheden for type-II fejl, $\beta$, er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen. Er den virkelige sandhed derimod langt fra nulhypotesen, vil sandsynligheden for type-II fejl være tilsvarende lille. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved en mindre mængde data. Andelen af type-II fejl benyttes til at udregne hypotesetestens styrke, $1-\beta$. Styrken beskriver andelen af gange, hvor $H_1$ korrekt bliver forkastet, [@Fejltyper].
-
-```{r figur-typefejl, out.width='75%', fig.align='center', fig.cap = "Tabel over fejltyper", echo = FALSE}
-knitr::include_graphics('images/Typefejl.png')
-```
-
-Det vil påvises, hvilken betydning små differencer i middelværdien samt stikprøvestørrelsen har for andelen af type-II fejl.
-
-```{r, echo=FALSE}
-type_2_vector <- c()
-reps <- 1000
-for(n in c(5, 10, 25, 50, 200, 1000, 10000)){ # Forskellige stikprøvestørrelser
-  for(m_diff in c(0.001, 0.1, 1, 2, 5)){ # Forskellige middelværdi-differencer
-    
-    forventet_dif <- 0
-    
-    res <- replicate(reps, {
-      x1 <- rnorm(n, mean = 0 + m_diff, sd = 1)
-      x2 <- rnorm(n, mean = 0, sd = 1)
-    
-      t_res <- t.test(x1, x2, alternative = "two.sided", conf.level = 0.95)
-    
-      konf_interval <- t_res$conf.int 
-      
-      # Tjekker, om 0 ligger i konfidensintervallet
-      konf_interval[1L] <= forventet_dif & konf_interval[2L] >= forventet_dif 
-    })
-    # Vektor over, hvor ofte, 0 lå i konfidensintervallet
-    type_2_vector <- append(type_2_vector, table(res)[2])
-  }
-}
-type_2_vector[is.na(type_2_vector)] <- 0 # Ændrer NA-forekomster til 0
-type_2_vector <- type_2_vector / reps # Omregner til procent
-
-# Tabel over betydning af stikprøvestørrelse
-# og difference i middelværdi for andelen af type-II fejl.
-type_2 <- matrix(type_2_vector, nrow = 5, ncol = 7,
-           dimnames = list("Differencen i middelværdi" = c("0.001", "0.1", "1", "2", "5"),
-                           "Stikprøvestørrelsen, n =" = c("5", "10", "25", "50", "200",
-                                                          "1000", "10000")))
-type_2
-```
-
-Tabellen viser, at både stikprøvestørrelsen samt differencen i middelværdien, har stor betydning for andelen af af type-II fejl. Er differencen i middelværdierne $0.001$ fremgår det, at stikprøvestørrelsen mellem $5$ og $10,000$ ikke giver signifikante forskelle, hvilket medfører, at stikprøvestørrelsen skal være meget større for at mindske andelen af type-II fejl. Derudover mindskes risikoen for type-II fejl som stikprøvestørrelsen øges, hvilket også er gældende hvis differencen i middelværdierne forøges.
+Eftersom *p*-værdien er ```r p_tosidet``` $> \alpha=0.05$, forkastes $H_0$ ikke. Der er altså ikke fundet nok evidens imod $H_0$ til at kunne forkaste den. Havde *p*-værdien derimod været mindre end $\alpha$ ville det medføre, at $H_0$ forkastes og det ville formodes, at $H_0$ ikke er korrekt for populationen.
 
 ## Problemformulering
 
-1) Hvorledes kan simuleringsstudier bidrage til at afdække problemer med klassiske inferensmetoder, når deres antagelser ikke er overholdt?
+1) Kan det ses på resultatet af klassiske inferensmetoder, hvis deres antagelser ikke er overholdt? Og i så fald, hvorledes kan simuleringsstudier bidrage til at afdække dette problem?
 
 2) Hvilke alternativer er der til klassiske inferensmetoder, såsom t-tests og konfidensintervaller, når deres antagelser ikke er overholdt, og hvor robuste er alternativerne?
-
-
-
-
 
 
 
