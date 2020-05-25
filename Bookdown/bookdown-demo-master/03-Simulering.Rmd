@@ -30,7 +30,7 @@ En PRNG beskrives ved nedenstående karakteristika, [@PRGNfunc].
 
 3. Perioden, som beskriver hvor mange repetitioner algoritmen gennemløber, før cyklussen gentages. Jo kortere perioden er, des mere gennemskuelig vil algoritmen fremstå.
 
-4. Fordelingen af cyklussen. Som det illustreres på figur \@ref(fig:PRNG-fordelinger), er det ideelt for en PRNG, at cyklussen er uniformt fordelt, mens andre typer af fordelinger ikke er ideelle.
+4. Fordelingen af cyklussen. Som det illustreres på figur \@ref(fig:PRNG-fordelinger) (genskabt ud fra figuren i [@PRNGfigurkilde, 3:07]), er det ideelt for en PRNG, at cyklussen er uniformt fordelt, mens andre typer af fordelinger ikke er ideelle.
 
 ```{r PRNG-fordelinger, out.width='75%', fig.align='center', fig.cap="PRNG-fordelinger. (A) viser en uniform fordeling af cyklussen, hvilket er ideelt for en PRNG. (B) og (C) viser to skæve fordelinger, hvor der derfor er større sandsynlighed for lave (B) og store (C) værdier. (D), (E) og (F) viser andre typer af fordelinger, der heller ikke er ideelle for en PRNG.", echo = FALSE}
  knitr::include_graphics("images/PP_fordeling.jpg")

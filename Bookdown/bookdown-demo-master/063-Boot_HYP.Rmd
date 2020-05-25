@@ -5,7 +5,7 @@ library(mosaic)
 set.seed(31415)
 ```
 
-Som nævnt i afsnit \@ref(t-test), skal visse antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test, og det efterfølgende resultatet af overtrædelsen af disse antagelser, blev vist i afsnit \@ref(t-test2).
+Som nævnt i afsnit \@ref(t-test), skal visse antagelser være opfyldt, for at garantere korrektheden af resultaterne af en t-test, og det efterfølgende resultat af overtrædelsen af disse antagelser, blev vist i kapitel \@ref(t-test2).
 
 Når disse antagelser ikke er opfyldt, kan bootstrap anvendes til at udføre hypotesetest, og i så fald kaldes det i det følgende for en bootstrap-test. I følgende to afsnit gennemgås først fremgangsmåden for en uparret bootstrap-test, og dernæst fremgangsmåden for en parret bootstrap-test.
 
@@ -31,7 +31,11 @@ hist(stik2, main = "", xlab = "Stikprøve 2", ylab = "Antal observationer", ylim
 
 Så opstilles der en nulhypotese, $H_0: \mu_{_X} - \mu_{_Y} = 0$, hvor $\mu_{_X}$ og $\mu_{_Y}$ er de sande middelværdier for populationerne, hvorfra stikprøverne blev udtrukket og en alternativ hypotese, $H_1: \mu_{_X} - \mu_{_Y} \neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
 
-På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse, $t_{obs} = \frac{(\bar{X}-\bar{Y}) - (\bar{X_0} - \bar{Y_0})}{((s_X^2/n) + (s_Y^2/m))}$, hvor $\bar{X_0}$ og $\bar{Y_0}$ middelværdien for $X$ og $Y$ under $H_0$, og $s_i$ er standardafvigelsen for $i$.
+På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse ved nedenstående formel.
+
+$$t_{obs} = \frac{(\bar{X}-\bar{Y}) - (\bar{X_0} - \bar{Y_0})}{((s_X^2/n) + (s_Y^2/m))}$$
+
+Hvor $\bar{X_0}$ og $\bar{Y_0}$ er middelværdien for $X$ og $Y$ under $H_0$, og $s$ er standardafvigelsen.
 
 ```{r}
 t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
@@ -40,7 +44,11 @@ t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
 t_obs
 ```
 
-For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikprøve med størrelsen $n + m$ observationer. Derefter laves en bootstrap-stikprøve af $n + m$ observationer fra den samlede stikprøve. De første $n$ indgange i den samlede stikprøve er bootstrap-stikprøven for $X$, og kaldes $X^*$. De resterende $m$ indgange er bootstrap-stikprøven for $Y$, og kaldes $Y^*$. Til sidst udregnes bootstrap-teststørrelsen $t^* = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}$. I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo]. Et eksempel på dette udregnes i nedenstående kodestykke.
+For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikprøve med størrelsen $n + m$ observationer. Derefter laves en bootstrap-stikprøve af $n + m$ observationer fra den samlede stikprøve. De første $n$ indgange i bootstrap-stikprøven er bootstrap-stikprøven for $X$, og kaldes $X^*$. De resterende $m$ indgange er bootstrap-stikprøven for $Y$, og kaldes $Y^*$. Til sidst udregnes bootstrap-teststørrelsen ved hjælp af nedenstående formel.
+
+$$t^* = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}$$
+
+I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo]. Et eksempel på dette udregnes i nedenstående kodestykke.
 
 ```{r}
 bootstraps <- 1000
@@ -153,11 +161,11 @@ p_vaerdi_parret <- mean(p_reps)
 p_vaerdi_parret
 ```
 
-Det ses, at p-værdien er lig ```r p_vaerdi_parret```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$.
+Det ses, at p-værdien er lig ```r p_vaerdi_parret```, hvilket er mindre end signifikansniveauet. Her vil nulhypotesen forkastes, da der er evidens for at differencen ikke er $0$. For at undersøge korrektheden af en bootstrap-test, kan andelen af type-I fejl, som skal svare til signifikansniveauet, beregnes, [@ASTAbog, s. 159-160].
 
 __Type-I fejl__
 
-Antallet af type-I fejl, der opstår i en parret bootstrap-test kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. Antallet af type-I fejl bør svare til det valgte signifikansniveau, [@ASTAbog, s. 159-160].
+Antallet af type-I fejl, der opstår i en parret bootstrap-test kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand.
 
 I koden nedenfor bestemmes antallet af type-I fejl for en parret bootstrap-test.
 

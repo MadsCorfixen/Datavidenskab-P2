@@ -13,12 +13,12 @@
 \contentsline {chapter}{\numberline {3}Simulering}{17}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Pseudorandom number generator}{17}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Lineær kongruens generator}{19}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Box-Muller-transformation}{21}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Simulering i R}{26}{section.3.2}%
+\contentsline {subsection}{\numberline {3.1.2}Box-Muller-transformation}{20}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Simulering i R}{27}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Normalfordeling}{27}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Uniform fordeling}{27}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Binomialfordeling}{29}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Skæve fordelinger}{29}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.2}Uniform fordeling}{28}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Binomialfordeling}{28}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Skæve fordelinger}{28}{subsection.3.2.4}%
 \contentsline {subsubsection}{\numberline {3.2.4.1}Betafordeling}{30}{subsubsection.3.2.4.1}%
 \contentsline {subsubsection}{\numberline {3.2.4.2}Gammafordeling}{30}{subsubsection.3.2.4.2}%
 \contentsline {subsection}{\numberline {3.2.5}Repetitioner}{31}{subsection.3.2.5}%
