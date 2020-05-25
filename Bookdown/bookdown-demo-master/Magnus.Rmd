@@ -9,6 +9,7 @@ En af de mere ukendte statistikere, som lagde fundamentet il den statistiske arb
 Yderligere har udviklingen af computeren været med til at gøre anvendelsen af komplicerede statistiske beregninger hurtigere, mere præcise og mere tilgængelige. Anvendelsesområderne for statistik har ligeledes udviklet sig, fra i begyndelsen at være noget staten anvendte til styring af økonomi og befolkningsindblik, til stort set at være repræsenteret i alle større hverv i dag. Den moderne definition af statistik kan beskrives som evnen til at drage konklusioner om generelle tilfælde, _populationer_, på baggrund af enkelte tilfælde, _stikprøver_, [@ASTAbog, s. 4].
   
 ## Statistik
+
 Statistik opdeles overordnet i to kategorier, deskriptiv statistisk og statistisk inferens. 
 
 __Deskriptiv statistik__
@@ -25,17 +26,15 @@ På baggrund af informationen, som udtrykkes af deskriptiv statistik, er det så
 
 I statistisk inferens differentieres der mellem to metoder, estimering og hypotesetest. Når der estimeres på baggrund af en population, bruges stikprøven til at beskrive en ukendt del af populationen. Det kan eksempelvis være gennemsnitsindkomst hos en befolkning, $\mu$, for hvilken der findes et estimat $\hat{\mu}$, som bruges til at beskrive $\mu$. Dette betegnes som et punktestimat, og vil oftest suppleres med et intervalestimat. Årsagen til dette er, at punktestimater er tilfældige, og derfor ændrer sig fra stikprøve til stikprøve. Da punktestimaters sandsynlighed for at være korrekt derfor er lig $0$, tilstræbes det at anvende et intervalestimat, hvor det kan siges at $\mu$ med $95\%$ sikkerhed ligger, fremfor et punktestimat. Dette kaldes for et konfidensinterval.
 
-Den anden form for statistisk infernes, hypotesetest, beskrives i det efterfølgende afsnit. 
+Den anden form for statistisk infernes, hypotesetest, beskrives i det næste afsnit. 
 
 ## Hypotesetest {#hypotesetest}
 
-I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at drage konklusioner for en population, ved at opstille to hypoteser.
+<!-- I det følgende afsnit introduceres hypotesetests, samt hvorledes disse anvendes til at drage konklusioner for en population, ved at opstille to hypoteser. -->
 
 En hypotesetest baserer sig på det videnskabelige princip om falsificering. Der opstilles en indledende formodning om en population, kaldet nulhypotesen $H_0$, og en alternativ, modsat hypotese $H_1$. Er den indledende formodning ikke korrekt, må den alternative hypotese være gældende.
 
-Ved en hypotesetest undersøges, hvorvidt der er en difference mellem observerede værdier og forventede værdier, hvis $H_0$ er sand.
-
-Sandsynligheden for, at der er en difference, er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen, og derfor benyttes et mål for, hvornår differencen er _for_ stor, kaldet signifikansniveauet, $\alpha$.
+Ved en hypotesetest undersøges, hvorvidt der er en difference mellem observerede værdier og forventede værdier, hvis $H_0$ er sand. Sandsynligheden for, at der er en difference, er stor, eftersom der arbejdes på en stikprøve og ikke selve populationen, og derfor benyttes et mål for, hvornår differencen er _for_ stor, kaldet signifikansniveauet, $\alpha$.
 
 Når nulhypotesen og den alternative hypotese er blevet opstillet, kan stikprøvens resultat sammenlignes med det forventede resultat under nulhypotesen, ved hjælp af en teststørrelse. Teststørrelsen kan blandt andet bestemmes som antallet af standardafvigelser, den observerede værdi, $\hat{\theta}$, ligger fra den forventede værdi $\theta_0$, i retning af den alternative hypotese, [@HvorforHYPO].
 
@@ -61,7 +60,7 @@ __FIXME__
 
 Der er risiko for to primære fejl når der foretages en hypotesetest. Den første, type-I fejl, er hvor $H_0$ forkastes, men i virkeligheden er sand, og den anden, type-II fejl, er hvor $H_0$ accepteres, men i realiteten er falsk. Dette er illustreret på figur \@ref(fig:figur-typefejl). 
 
-En af de primære årsager til disse typer fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
+En af de primære årsager til disse fejl er, hvor signifikansniveauet bliver sat, da dette i nogle tilfælde har stor betydning for, hvorvidt en hypotese bliver forkastet eller ej.
 
 Sandsynligheden for type-I fejl er lig med det valgte signifikansniveau, $\alpha$. Sandsynligheden for type-II fejl, $\beta$, er derimod ikke let at præcisere. Dog er der stor sandsynlighed for type-II fejl, hvis den virkelige sandhed er tæt på nulhypotesen. Er den virkelige sandhed derimod langt fra nulhypotesen, vil sandsynligheden for type-II fejl være tilsvarende lille. Ligeledes har stikprøvens størrelse indflydelse, eftersom meget data mindsker risikoen for type-II fejl, hvor der er større risiko ved en mindre mængde data. Andelen af type-II fejl benyttes til at udregne hypotesetestens styrke, $1-\beta$. Styrken beskriver andelen af gange, hvor $H_1$ korrekt bliver forkastet, [@Fejltyper].
 

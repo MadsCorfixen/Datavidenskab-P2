@@ -51,7 +51,7 @@ LCG danner en cyklus af tal ved iteration, og kræver kun få parametre. Helt sp
 Algoritmen fungerer således:
 Der startes ved et _seed_, angivet med $X_0$, som bliver multipliceret med faktoren, $a$, og konstantleddet, $c$, adderes. Derefter tages modulus $m$ af værdien.
 
-I figur \@ref(lcgcyklus) ses tre eksempler på LCG. De to første eksempler har samme parametre, men forskelligt _seed_.
+I figur \@ref(fig:lcgcyklus) ses tre eksempler på LCG. De to første eksempler har samme parametre, men forskelligt _seed_.
 
 ```{r lcgcyklus, out.width='75%', fig.align='center', fig.cap="Tre eksempler på algoritmen lineær kongruens generator. De to første eksempler har samme parametre, men forskelligt seed. [@lincongenvis]", echo = FALSE}
  knitr::include_graphics("images/LCG_eksempel.PNG")
