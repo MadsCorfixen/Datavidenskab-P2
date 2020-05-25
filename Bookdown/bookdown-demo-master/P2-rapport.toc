@@ -1,9 +1,7 @@
 \contentsline {chapter}{\numberline {1}Introduktion}{5}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Forord}{5}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Synopsis}{5}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Abstract}{6}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Anvendte pakker}{6}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Læsevejledning}{6}{section.1.5}%
+\contentsline {section}{\numberline {1.2}Læsevejledning}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Anvendte pakker}{6}{section.1.3}%
 \contentsline {chapter}{\numberline {2}Problemanalyse}{7}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Statistikkens udvikling}{7}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Statistik}{8}{section.2.2}%

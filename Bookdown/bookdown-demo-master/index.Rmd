@@ -37,6 +37,20 @@ Projektet er udarbejdet af gruppe B2-19 fra Datavidenskab 2. semester på Aalbor
 
 <!-- It was discovered that it cannot be assumed that a t-test on a non-normal random sample always produces true results. In addition, it was found that the permutation test is more accurate than bootstrap if only a hypothesis test is to be performed. Furthermore, it was concluded that, out of the three bootstrap methods examined for confidence intervals, the coverage of the T method is the most accurate. -->
 
+## Læsevejledning
+
+I denne rapport anvendes grundlæggende teori omkring klassisk statistisk inferens, derudover er der inddraget to metoder, permutation og bootstrap, for at kunne sammenligne og teste op mod de klassiske statistiske inferens metoder. 
+
+I rapporten gøres der brug af programmeringssproget R, til at gennemfører simuleringer og analyse. Til simulerings- og analysedelen i rapporten er der hovedsagligt anvendt funktionaliteter fra R og pakken _mosaic_. Derudover er der til nogle specifikke formål anvendt pakker, som er konstrueret hertil, disse pakker er _wPerm_ og _boot_. De steder hvor _wPerm_ og _boot_ anvendes i rapporten, skrives der i koden pakkenavn::funktion, eksempelvis ```boot::boot.ci()```. Rapportens enkelte dele er skrevet i Markdown, som efterfølgende er samlet til den færdige rapport ved hjælp af pakken _bookdown_. 
+
+I rapporten gøres der brug af den engelske version af decimal- og tusindtalsseperator. Baggrunden for dette er, at denne metode anvendes i programmeringssproget R, og for derved at lette vekslingen mellem brødtekst og kode, fortsættes metoden ligeledes i selve rapporten. 
+
+Der anvendes samme _seed_ $31,415$ igennem alle kapitler, for at sikre, at der er kontinuitet i de resultater, som rapporten drager sine konklusioner på baggrund af, og at resultaterne er reproducerbare.
+
+Det beskrives i rapporten, at udførelsen af bootstrap og permutation, kræver $10,000$ resamples for at give et nøjagtigt resultat. Der vil igennem rapporten være steder hvor disse resamples, af hensyn til den tilgængelige computerkraft, er reduceret til henholdsvis $500$ og $1,000$ resamples.   
+
+Alle kilder er skrevet efter Harvard-metoden og angives i firkantede parenteser, [forfatternavn, årstal]. Refereres der til en bestemt side i kilden eller et tidspunkt i en video, vil dette fremgå efter årstallet.
+
 ## Anvendte pakker
 
 I dette projekt er følgende pakker blevet anvendt.
@@ -48,11 +62,3 @@ I dette projekt er følgende pakker blevet anvendt.
 3) ```wPerm```, [@R-wPerm]. Denne pakke indeholder en funktion, der kan udføre hypotesetest ved hjælp af permutationstest. Pakken anvendes i afsnit \@ref(perm-pvaerdi).
 
 4) ```boot```, [@R-boot]. Denne pakke indeholder funktioner, der benyttes til at oprette bootstrap-stikprøver og til at udarbejde bootstrap-konfidensintervaller. Pakken anvendes i afsnit \@ref(boot-standardfejl) og \@ref(boot-daekningsgrader).
-
-## Læsevejledning
-
-- ```pakke::funktion```.
-- Ikke-parametrisk bootstrap.
-- Samme seed, ```31415```, i alle rapportens afsnit.
-- Engelsk version af decimal- og tusindtalsseperator
-- Antal bootstraps / permutationer // reps kontra computerkraft
