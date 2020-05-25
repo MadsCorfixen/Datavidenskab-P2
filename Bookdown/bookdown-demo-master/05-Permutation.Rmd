@@ -10,7 +10,7 @@ set.seed(31415)
 ```
 # Permutationer
 
-I afsnit \@ref(t-test) blev der redegjort for, hvilke antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i afsnit \@ref(t-test2) vist hvorledes en t-tests resultater kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test derfor ikke kan anvendes, er det muligt at anvende permutationer.
+I afsnit \@ref(t-test) blev der redegjort for, hvilke antagelser, der skal være opfyldt, for at en t-test giver retvisende resultater. Ligeledes blev der i kapitel \@ref(t-test2) vist, hvorledes resultater for en t-test  kan være misvisende, hvis stikprøverne ikke er normalfordelte. I dette kapitel vil der redegøres for en løsning til dette problem. Hvis antagelserne ikke er opfyldte, og en t-test derfor ikke kan anvendes, er det muligt at anvende permutationer.
 
 Givet en ordnet liste, $X = [x_1, x_2, \ldots, x_n ]$, er en permutation, $\pi$, en omarrangering af listens elementer, $X_\pi = [x_{\pi(1)}, x_{\pi(2)}, \ldots, x_{\pi(n)}]$. Antallet af mulige permutationer af en ordnet liste, $X$, af længde $n$, er givet ved $n!$, [@Permutationer].
 
@@ -24,7 +24,7 @@ I dette afsnit gives en forklaring af, hvad en permutationstest er. Afsnittet er
 
 Antag, at en tilfældig stikprøveudtagning af en population kan udtrykkes ved $X = [x_1, x_2, \ldots, x_n]$. Der opstilles en nulhypotese $H_0$ og en alternativ hypotese, $H_1$, der er relevante at undersøge. Der kan så vælges en teststørrelse at undersøge for at måle evidensen imod $H_0$. Værdien af denne teststørrelse er givet ved $S_{obs}$ for stikprøven.
 
-En permutationstest går ud på at forsøge at måle evidens imod $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststørrelsen for samtlige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi(1)}, X_{\pi(2)}, \ldots X_{\pi(M)} \}$, hvor $M$ er antallet af mulige permutationer af $X$. Teststørrelsen for den $i$'te permutation benævnes $S_{\pi_i}$.
+En permutationstest går ud på at forsøge at måle evidens imod $H_0$, som i en almindelig t-test. Dette gøres ved at beregne teststørrelsen for samtlige permutationer af $X$. Denne mængde af permutationer er givet ved $\Pi_X = \{X_{\pi_1}, X_{\pi_2}, \ldots X_{\pi_M} \}$, hvor $M$ er antallet af mulige permutationer af $X$. Teststørrelsen for den $i$'te permutation benævnes $S_{\pi_i}$.
 
 Selve beregningen af teststørrelsen afhænger af de specifikke hypoteser, men det er et krav, at store værdier for $S_{\pi_i}$ indikerer evidens imod $H_0$. Desuden er det kun nulhypoteser om ingen forskel, der kan testes ved hjælp af permutationer - eksempelvis kan evidensen imod $H_0: \mu_1 \neq \mu_2$ ikke beregnes, [@BootvsJack, s. 48].
 
@@ -32,7 +32,7 @@ _P_-værdien for en tosidet test beregnes som antal gange, den numeriske værdi 
 
 $$p = \frac{\#(|S_{\pi_i}| \geq S_{obs}) + 1}{M + 1}$$
 
-Permutationstest har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Desuden er permutationstest især smart, når fordelingen af teststørrelsen er ukendt.
+Permutationstest har den fordel, at den antager meget lidt omkring stikprøven. I særdeleshed antager den hverken tilfældig stikprøveudtagning, eller at populationen, fra hvilken stikprøven stammer, er normalfordelt. Desuden er permutationstest især fordelagtig, når fordelingen af teststørrelsen er ukendt.
 
 Der er dog visse ulemper ved en permutationstest. For det første, skal det antages, at den del af data, der permuteres, er ombyttelig. For det andet er det ikke alle teststørrelser, der kan undersøges ved hjælp af en permutationstest - for eksempel vil middelværdien af samtlige permutationer være lig hinanden for en test for en enkelt stikprøve. For det tredje bliver antallet af mulige permutationer hurtigt meget stor, når størrelsen af stikprøven stiger. Hvis der for eksempel er $n = 10$ datapunkter i stikprøven, vil der være $10! = 3,628,800$ mulige permutationer af stikprøven.
 
@@ -86,7 +86,8 @@ abline(v = mean(S_pi), col = "green")
 abline(v = S_obs, col = "blue")
 ```
 
-Nu kan p-værdien beregnes, ved at udregne hvor mange gange de permuterede teststørrelser er større end den observerede teststørrelse. Denne værdi divideres derefter med antallet af permutationer. Dette gøres i nedenstående kodestykke. 
+Nu kan p-værdien beregnes, ved at udregne hvor mange gange de permuterede teststørrelser er større end den observerede teststørrelse. Denne værdi divideres derefter med antallet af permutationer. Dette gøres i nedenstående kodestykke.
+
 ```{r}
 antal_ekstreme_vaerdier <- table(abs(S_pi) >= S_obs)[2]
 
@@ -94,11 +95,11 @@ p_vaerdi <- unname(antal_ekstreme_vaerdier+1)/(length(S_pi)+1)
 p_vaerdi
 ```
 
-Med en _p_-værdi på ```r p_vaerdi```, er der ikke noget belæg for at forkaste nulhypotesen.
+Med en _p_-værdi på ```r p_vaerdi```, er der ikke noget belæg for at forkaste nulhypotesen. For at undersøge korrektheden af en permutationstest, kan andelen af type-I fejl, som skal svare til signifikansniveauet, beregnes, [@ASTAbog, s. 159-160].
 
 __Type-I fejl__
 
-Antallet af type-I fejl, der opstår i en uparret permutationstest kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand. Antallet af type-I fejl bør svare til det valgte signifikansniveau, [@ASTAbog, s. 159-160].
+Antallet af type-I fejl, der opstår i en uparret permutationstest kan undersøges ved at se, hvor mange gange $H_0$ forkastes, selvom $H_0$ er sand.
 
 I koden nedenfor bestemmes antallet af type-I fejl for en uparret permutationstest.
 
@@ -137,7 +138,7 @@ I alt forkastes $H_0$ fejlagtigt i ```r unname(fejltable[1])/10```$\%$ af tilfæ
 
 ## Parret permutationstest {#perm-pvaerdi}
 
-Ligesom permutationstest kan bruges til at lave en uparret hypotesetest, kan den også bruges til en parret. Fremgangsmåden er den samme, bortset fra, at det er hvert koordinatpar $(x_i, y_i)$ i stikprøven $Z = ((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n))$, der permuteres.
+Ligesom permutationstest kan bruges til at lave en uparret hypotesetest, kan den også bruges til en parret. Fremgangsmåden er den samme, bortset fra, at det er indgangene i hvert koordinatpar $(x_i, y_i)$ i stikprøven $Z = ((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n))$, der permuteres.
 
 I nedenstående kode, vises et eksempel på en parret permutations-test for forskel i middelværdi, der gør brug af pakken ```wPerm```.
 

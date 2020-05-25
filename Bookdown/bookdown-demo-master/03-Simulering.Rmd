@@ -6,15 +6,15 @@ set.seed(31415)
 
 # Simulering
 
-I dette afsnit, vil der redegøres for lidt baggrundsviden omkring simulering, og hvordan tilsyneladende tilfældige tal kan genereres ved hjælp af algoritmer. Derefter vil der ses på, hvordan programmeringssproget R kan udnyttes, til at udføre disse simuleringer hurtigt og simpelt.
+I dette afsnit vil der redegøres for lidt baggrundsviden omkring simulering, og hvordan tilsyneladende tilfældige tal kan genereres ved hjælp af algoritmer. Derefter vil der ses på, hvordan programmeringssproget R kan udnyttes, til at udføre disse simuleringer hurtigt og simpelt.
 
 En definition på simulering er;
 
->A situation or event that seems real but is not real, used especially in order to help people deal with such situations or events. - Cambridge Dictonary, [@CambridgeSimulation].
+>A situation or event that seems real but is not real, used especially in order to help people deal with such situations or events. - [@CambridgeSimulation].
 
 Ud fra definitionen, er formålet altså ved simuleringer at efterligne virkeligheden, så de analyser der gøres på baggrund af simuleringerne, kan bruges i virkeligheden når lignende situationer opstår.
 
-Brancher hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producerer dem i virkeligheden for at spare ressourcer, [@MercedesF1].
+En branche, hvor simuleringer er et yderst vigtigt redskab, er i motorsporten. I Formel 1 benytter holdene sig af simulatorer, hvor de genskaber bilerne og derved kan teste nye dele inden de producerer dem i virkeligheden for at spare ressourcer, [@MercedesF1].
 
 ## Pseudorandom number generator
 
@@ -26,13 +26,13 @@ En PRNG beskrives ved nedenstående karakteristika, [@PRGNfunc].
 
 1. Et input, eller _seed_, på baggrund af hvilket algoritmen beregner et pseudo-tilfældigt output. Herefter fortsætter algoritmen rekursivt, hvor det forrige output anvendes som nyt input.
 
-2. Cyklussen, som beskriver den talserie, PRNG'en beregner.
+2. Cyklussen, som beskriver den talserie, algoritmen beregner.
 
 3. Perioden, som beskriver hvor mange repetitioner algoritmen gennemløber, før cyklussen gentages. Jo kortere perioden er, des mere gennemskuelig vil algoritmen fremstå.
 
-4. Fordelingen af cyklussen. Som det ses på figur \@ref(fig:PRNG-fordelinger), kan fordelingen af cyklussen være jævn, hvilket viser en ligelig fordeling af cyklussen. Ses der derimod et mønster eller tendens i fordelingen, vil algoritmen ikke være forventningsret, og anvendeligheden formindskes.
+4. Fordelingen af cyklussen. Som det illustreres på figur \@ref(fig:PRNG-fordelinger), er det ideelt for en PRNG, at cyklussen er uniformt fordelt, mens andre typer af fordelinger ikke er ideelle.
 
-```{r PRNG-fordelinger, out.width='75%', fig.align='center', fig.cap="PRNG fordelinger", echo = FALSE}
+```{r PRNG-fordelinger, out.width='75%', fig.align='center', fig.cap="PRNG-fordelinger. (A) viser en uniform fordeling af cyklussen, hvilket er ideelt for en PRNG. (B) og (C) viser to skæve fordelinger, hvor der derfor er større sandsynlighed for lave (B) og store (C) værdier. (D), (E) og (F) viser andre typer af fordelinger, der heller ikke er ideelle for en PRNG.", echo = FALSE}
  knitr::include_graphics("images/PP_fordeling.jpg")
 ```
 
@@ -40,7 +40,7 @@ I takt med udviklingen af de teknologiske hjælpemidler er der opstået mere eff
 
 ### Lineær kongruens generator
 
-Dette afsnit beskriver, hvorledes lineær kongruens generatorer, LCG (fra engelsk _linear congruential generator_), kan generere en cyklus af tilsyneladende tilfældige tal, som er uniformt fordelt, ved valg af passende parametre. Det følgende afsnit er primært baseret på kilden [@LCGinfo].
+Dette afsnit beskriver, hvorledes lineær kongruens generatorer, LCG (fra engelsk _linear congruential generator_), kan generere en cyklus af tilsyneladende tilfældige tal, som, ved valg af passende parametre, er uniformt fordelt. Det følgende afsnit er primært baseret på kilden [@LCGinfo].
 
 LCG danner en cyklus af tal ved iteration, og kræver kun få parametre. Helt specifikt er algoritmen givet ved
 
@@ -51,9 +51,9 @@ LCG danner en cyklus af tal ved iteration, og kræver kun få parametre. Helt sp
 Algoritmen fungerer således:
 Der startes ved et _seed_, angivet med $X_0$, som bliver multipliceret med faktoren, $a$, og konstantleddet, $c$, adderes. Derefter tages modulus $m$ af værdien.
 
-I figur \@ref(fig:lcgcyklus) ses tre eksempler på LCG. De to første eksempler har samme parametre, men forskelligt _seed_.
+På figur \@ref(fig:lcgcyklus), fra [@lincongenvis], ses tre eksempler på LCG. De to første eksempler har samme parametre, men forskelligt _seed_.
 
-```{r lcgcyklus, out.width='75%', fig.align='center', fig.cap="Tre eksempler på algoritmen lineær kongruens generator. De to første eksempler har samme parametre, men forskelligt seed. [@lincongenvis]", echo = FALSE}
+```{r lcgcyklus, out.width='100%', fig.align='center', fig.cap="Tre eksempler på algoritmen lineær kongruens generator. De to første eksempler har samme parametre, men forskelligt seed.", echo = FALSE}
  knitr::include_graphics("images/LCG_eksempel.PNG")
 ```
 
@@ -61,7 +61,7 @@ I teorien er parametrene arbitrære, men i praksis bruges nogle værdier oftere 
 
 __Eksempel__
 
-De følgende simuleringer er baseret på kilden [@LCGsimu], som også går mere i dybden med hvordan, der undersøges om de givne parametre genererer tilsyneladende tilfældige cyklusser.
+De følgende simuleringer er baseret på kilden [@LCGsimu].
 
 Først defineres en funktion for LCG-algoritmen, som tager de nødvendige parametre for algoritmen som inputs. Derudover angives også et argument, $n$, der fortæller hvor mange iterationer algoritmen skal foretage.
 
@@ -95,7 +95,7 @@ plot(lcg1_plot, main = "",
      xlab = "Indeks", ylab = "Værdier", type = "l")
 ```
 
-På figur \@ref(fig:uniform-LCG) vises et eksempel på, hvordan LCG-algoritmen kan bruges til at lave en uniform fordeling i intervallet $[0, 1]$. Når cyklussen er oprettet, deles hvert element deri med den valgte modulus, hvilket gør, at hvert element bliver indeholdt i $[0, 1]$.
+På figur \@ref(fig:uniform-LCG) vises et eksempel på, hvordan LCG-algoritmen kan bruges til at lave en uniform fordeling i intervallet $[0, 1]$. Når cyklussen er oprettet, divideres hvert element deri med den valgte modulus, hvilket gør, at hvert element bliver indeholdt i $[0, 1]$.
 
 ```{r}
 lcg2 <- lcg(modulus = 86436, faktor = 1093, tilvaekst = 0, 
@@ -161,12 +161,12 @@ __Efterprøvning i R__
 
 I det følgende afsnit efterprøves de forventede karakteristika af de to stokastiske variabler $Z_1$ og $Z_2$, der blev oprettet ved hjælp af Box-Muller-transformationen.
 
-Først undersøges deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har, ved at oprette et boksplot af de to stokastiske variabler, som ses i figur \@ref(fig:boksplotz1z2).
+Først undersøges deskriptivt, hvilken fordeling ```Z1``` og ```Z2``` har, ved at oprette et boksplot af de to stokastiske variabler, som ses på figur \@ref(fig:boksplotz1z2).
 
 ```{r boksplotz1z2, echo = FALSE, fig.align='center', fig.cap= "Et boksplot over Z1 og Z2"}
 par(mfrow = c(1,2))
-boxplot(Z1, xlab = "Z1", main = "")
-boxplot(Z2, xlab = "Z2", main = "")
+boxplot(Z1, xlab = "Z1", main = "", ylim = c(-5, 5))
+boxplot(Z2, xlab = "Z2", main = "", ylim = c(-5, 5))
 ```
 
 Det ses på boksplottet, at der er en indikation på normalfordeling med henvisning til de fire krav et boksplot af en normalfordeling opfylder. De fire krav er:
@@ -181,17 +181,17 @@ Det ses på boksplottet, at der er en indikation på normalfordeling med henvisn
 
 Punkterne 2 og 3 tjekkes ved at betragte boksplottet, hvor der ikke umiddelbart synes at være noget, der modbeviser en normalfordeling af ```Z1``` og ```Z2```.
 
-For at tjekke punkt 1, beregnes median (```median```) og middelværdi (```mean```) i kodestykket nedenfor.
+For at tjekke punkt 1, beregnes medianen og middelværdien i kodestykket nedenfor.
 
 ```{r}
-mean_Z1 <- mean(Z1)
+middel_Z1 <- mean(Z1)
 median_Z1 <- median(Z1)
 
-mean_Z2 <- mean(Z2)
+middel_Z2 <- mean(Z2)
 median_Z2 <- median(Z2)
 ```
 
-Dette giver henholdsvis en middelværdi og median for ```Z1``` på $`r mean_Z1`$ og $`r median_Z1`$, samt for ```Z2```  på $`r mean_Z2`$ og $`r median_Z2`$. De meget lave værdi stemmer overens med forventningen om, at ```Z1``` og ```Z2``` er standard normalfordelte.
+Dette giver henholdsvis en middelværdi og median for ```Z1``` på $`r middel_Z1`$ og $`r median_Z1`$, samt for ```Z2```  på $`r middel_Z2`$ og $`r median_Z2`$. De meget lave værdi stemmer overens med forventningen om, at ```Z1``` og ```Z2``` er standard normalfordelte.
 
 For at tjekke punkt $4$, beregnes andelen af outliers i hvert boksplot i kodestykket nedenfor.
 
@@ -209,11 +209,11 @@ outliers_andel_Z2 <- outliers_Z2/length(Z2)
 
 Dette giver en andel af outliers i ```Z1``` på ```r outliers_andel_Z1``` og i ```Z2``` på ```r outliers_andel_Z2```. Dette svarer til cirka $0.7\%$ outliers i både ```Z1``` og ```Z2```, hvilket stemmer overens med punkt 4.
 
-Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være normalfordelt. Tværtimod underbygger beregningen af deres middelværdi, at de er _standard_ normalfordelte.
+Der er altså ikke noget evidens imod, at ```Z1``` og ```Z2``` skulle være normalfordelte. Tværtimod underbygger beregningen af deres middelværdi, at de er _standard_ normalfordelte, hvilket undersøges nærmere på figur \@ref(fig:bmhist), hvor fordelingerne sammenlignes med densiteten for en standard normalfordeling.
 
 Hernest kigges der på histogrammerne for ```Z1``` og ```Z2```. På figur \@ref(fig:bmhist) sammenlignes histogrammerne for henholdsvis ```Z1``` og ```Z2``` med densiteten for standard normalfordeling.
 
-```{r bmhist, echo = FALSE, fig.align='center', fig.cap= "Sammenligning af histogrammerne for henholdsvis Z1 (a) og Z2 (b) med densiteten for standard normalfordeling."}
+```{r bmhist, echo = FALSE, fig.align='center', fig.cap= "Sammenligning af histogrammerne for henholdsvis Z1 (a) og Z2 (b) med densiteten for standard normalfordeling, som er angivet med en blå linje."}
 x <- seq(-4, 4, length.out = 100)
 y <- dnorm(x, mean = 0, sd = 1)
 
@@ -273,7 +273,7 @@ plot(x, y, type = "l", main = "", ylab = "Densitet", xlab = "x")
 
 ### Uniform fordeling
 
-En uniform fordeling er defineret ud fra et interval, som der skal genereres et givent antal værdier indenfor. Alle disse værdier har lige stor sandsynlighed for at blive genereret. Jo større $n$ er, des mere uniformt bliver histogrammet. At en stokastisk variabel, X, er uniformt fordelt i intervallet $(a, b)$ skrives $X \sim \text{unif}(a, b)$. På figur \@ref(fig:unifordeling) ses densitetskurven for en uniform fordeling.
+En uniform fordeling er defineret ud fra et interval, som der skal genereres et givent antal værdier indenfor. Alle disse værdier har lige stor sandsynlighed for at blive genereret. At en stokastisk variabel, X, er uniformt fordelt i intervallet $(a, b)$ skrives $X \sim \text{unif}(a, b)$. På figur \@ref(fig:unifordeling) ses densitetskurven for en uniform fordeling.
 
 ```{r unifordeling, echo = FALSE, fig.align='center', fig.cap = "En uniform fordeling, hvor alle tal har lige stor sandsynlighed for at optræde i intervallet [0 , 1]."}
 x <- seq(1, 2, length.out = 100)
@@ -283,9 +283,7 @@ abline(h = 1)
 
 ### Binomialfordeling
 
-En binomialfordeling bliver genereret ud fra sandsynligheder med to udfald, succes eller fiasko. I den binomiale fordeling gives en _size_ som er størrelsen af et eksperiment, samt en sandsynlighed for succes, angivet med _prob_. For hver gentagelse af eksperimentet optælles andelen af successer, som minimalt kan være $0$ og maksimalt $1$. At en stokastisk variabel, X, er binomal fordelt  med $n$ antal eksperimenter og en sandsynlighed for sucess på $p$, skrives $X \sim \text{binom}(n, p)$. Andelen af successer fra hvert eksperiment illustreres herefter i et histogram.
-
-På figur \@ref(fig:binomfordeling) vises densitetskurven af en binomialfordeling.
+En binomialfordeling bliver genereret ud fra sandsynligheder med to udfald, succes eller fiasko. I den binomiale fordeling gives en _size_ som er størrelsen af et eksperiment, samt en sandsynlighed for succes, angivet med _prob_. For hver gentagelse af eksperimentet optælles andelen af successer, som minimalt kan være $0$ og maksimalt $1$. At en stokastisk variabel, X, er binomal fordelt  med $n$ antal eksperimenter og en sandsynlighed for sucess på $p$, skrives $X \sim \text{binom}(n, p)$. På figur \@ref(fig:binomfordeling) illustreres andelen af sucesser for en binomialfordeling.
 
 ```{r binomfordeling, echo = FALSE, fig.align='center', fig.cap = "En binomialfordeling med size = 6 og en sandsynlighed for succes på prob = 1/3."}
 x <- c(0,1,2,3,4,5,6)
@@ -295,11 +293,11 @@ plot(x, y, xlim = c(0,6), ylim = c(0.023, 0.6), main = "", ylab = "Densitet", xl
 
 ### Skæve fordelinger
 
-En skæv fordeling er kendetegnet ved, at størstedelen af observationerne er samlet omkring visse værdier, mens de resterende observationer fordeler sig ud til kun én af siderne. De resterende observationer kaldes for "halen" af fordelingen, og alt efter retningen af dem, kaldes den skæve fordeling for "venstreskæv" elller "højreskæv".
+En skæv fordeling er kendetegnet ved, at størstedelen af observationerne er samlet omkring visse værdier, mens de resterende observationer fordeler sig ud til kun én af siderne. De resterende observationer kaldes for halen af fordelingen, og alt efter retningen af halen, kaldes den skæve fordeling for venstreskæv elller højreskæv.
 
 #### Betafordeling
 
-En skæv fordeling kan være en betafordelingAt en stokastisk variabel, $X$ er betafordelt med parametrene $\alpha$ og $\beta$ skrives $X \sim Beta(\alpha, \beta$. I en betafordeling angiver $\alpha - 1$ andelen af sucesser, og $\beta - 1$ angiver andelen af fiaskoer, [@TDSBeta].
+En skæv fordeling kan være en betafordeling. At en stokastisk variabel, $X$ er betafordelt med parametrene $\alpha$ og $\beta$ skrives $X \sim \text{Beta}(\alpha, \beta)$. I en betafordeling angiver $\alpha - 1$ andelen af sucesser, og $\beta - 1$ angiver andelen af fiaskoer, [@TDSBeta].
 
 En venstreskæv og en højreskæv betafordeling vil nu simuleres og vises på figur \@ref(fig:betafordeling), hvor $\alpha = 8$ og $\beta = 2$ for den venstreskæve, mens $\alpha = 2$ og $\beta = 8$ for den højreskæve.
 
@@ -316,7 +314,7 @@ legend(0.35, 3, legend=c("alfa = 2, beta = 8 ", "alfa = 8, beta = 2"),
 
 #### Gammafordeling
 
-Gammafordelingen er ligeledes en skæv fordeling. Funktionaliteten af gammafordelingen er at forudsige ventetiden til den $\alpha$'te begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter blive anvendt  parameterne $(\alpha,~\beta)$. Tæthedsfuktionen er givet ved $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er _shape_, $\beta > 0$ er _rate_ og $x \in ( 0, \infty)$. At en stokastisk variabel, X, er gammafordelt med _shape_ $\alpha$ og _rate_ $\beta$, skrives $X \sim Gamma(\alpha, \beta)$, [@Gammadist]. På figur \@ref(fig:gammafordeling) er vist tre forskellige højreskæve gammafordelinger.
+Gammafordelingen er ligeledes en skæv fordeling. Funktionaliteten af gammafordelingen er at forudsige ventetiden til den $\alpha$'te begivenhed. Tæthedsfunktionen for gammafordelingen, er beskrevet med to forskellige parametersæt, henholdsvis $(k,~\theta)$ og $(\alpha,~\beta)$. I denne rapport vil der fremefter blive anvendt  parameterne $(\alpha,~\beta)$. Tæthedsfuktionen er givet ved $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$, hvor $\alpha > 0$ er _shape_, $\beta > 0$ er _rate_, $\Gamma(\alpha) = (\alpha - 1)!$ og $x \in ( 0, \infty)$. At en stokastisk variabel, X, er gammafordelt med _shape_ $\alpha$ og _rate_ $\beta$, skrives $X \sim \text{Gamma}(\alpha, \beta)$, [@Gammadist]. På figur \@ref(fig:gammafordeling) er vist tre forskellige højreskæve gammafordelinger.
 
 ```{r gammafordeling, echo = FALSE, fig.align='center', fig.cap = "Tre gammafordelinger hvor beta = 1 og alfa på henholdsvis 1, 5 og 10."}
 x <- seq(0, 25, length.out = 100)
@@ -342,7 +340,7 @@ rownames(stik_matrix) <- c("Observation 1", "Observation 2", "Observation 3")
 stik_matrix
 ```
 
-_Replicate_-funktionen vil nu bruges. I alt replikeres der fem gange, hvilket betyder, at der bliver oprettet fem nye stikprøver. I forbindelse med denne process anvendes funktionen ```sample```, som er funktionen der _resampler_, enten med eller uden tilbagelægning fra stikprøven. I dette eksempel bruges funktionen med tilbagelægning. Fra den oprindelige stikprøve udtrækkes en observation, som indsættes i en ny stikprøve. Observationeren bliver derefter lagt tilbage i den oprindelige stikprøve, dette medfører at den samme observation kan udtages flere gange. Grunden til dette er, at stikprøven anses for at være repræsentativ for population, og to observationer af den samme værdi derfor ikke er utænkelig.
+I følgende eksempel replikeres der fem gange, hvilket betyder, at der bliver oprettet fem nye stikprøver. I forbindelse med denne process anvendes funktionen ```sample```, som er funktionen der _resampler_, enten med eller uden tilbagelægning fra stikprøven. I dette eksempel bruges funktionen med tilbagelægning. Fra den oprindelige stikprøve udtrækkes en observation, som indsættes i en ny stikprøve. Observationen bliver derefter lagt tilbage i den oprindelige stikprøve, hvilket medfører, at den samme observation kan udtages flere gange. Grunden til dette er, at stikprøven anses for at være repræsentativ for population, og to observationer af den samme værdi derfor ikke er utænkelig.
 
 ```{r}
 ny_stik <- replicate(n = 5, {
@@ -351,4 +349,4 @@ ny_stik <- replicate(n = 5, {
 ny_stik
 ```
 
-Funktionen har nu resamplet fem nye repræsentative stikprøver udfra den oprindelige. Denne metode og dens anvendelser vil der kigges nærmere på kapitel \@ref(boot-afsnit).
+Funktionen har nu _resamplet_ fem nye repræsentative stikprøver udfra den oprindelige.

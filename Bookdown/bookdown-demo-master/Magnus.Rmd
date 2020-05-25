@@ -1,5 +1,9 @@
 # Problemanalyse
 
+```{r, include = FALSE}
+library(mosaic)
+```
+
 ## Statistikkens udvikling
 
 Ordet _statistik_ stammer tilbage fra det latinske _statisticum collegium_ ("statsrådgiver") og det italienske _statista_ ("statsmand" eller "politiker"), [@Orddef]. At statistik netop stammer derfra, giver god mening, under anskueelse af betydningen af disse to ord og den tidlige anvendelse af statistik. I takt med udviklingen af suverænitetsstaterne, steg behovet for at registrere befolkningen og dennes tilhørselsforhold. Derfor anvendte statsrådgivere og statsmænd statistik til at beskrive staten, særligt demografien. Senerere blev dette udvidet til at indsamle flere informationer, og ligeledes at analysere og fortolke disse ved hjælp af statistik, [@Samfundsstat].
@@ -118,7 +122,7 @@ Forud for gennemførelsen af en t-test, er der nogle antagelser, som skal være 
 3. Stikprøveudtagning skal være udført med tilfældighed.
 4. Populationen skal være normalfordelt.
 
-Herefter er fremgangsmetoden som beskrevet i afsnit \@ref(hypotesetest).
+I det følgende afsnit vil alle fire antagelser være opfyldt, og herefter er fremgangsmetoden som beskrevet i afsnit \@ref(hypotesetest).
 
 __Eksempel__
 
