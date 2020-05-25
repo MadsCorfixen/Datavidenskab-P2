@@ -118,7 +118,7 @@ Forud for gennemførelsen af en t-test, er der nogle antagelser, som skal være 
 3. Stikprøveudtagning skal være udført med tilfældighed.
 4. Populationen skal være normalfordelt.
 
-Herefter er fremgangsmetoden som beskrevet i afsnit \@ref(hypotesetest).
+I det følgende afsnit vil alle fire antagelser være opfyldt, og herefter er fremgangsmetoden som beskrevet i afsnit \@ref(hypotesetest).
 
 __Eksempel__
 
