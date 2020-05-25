@@ -21,16 +21,16 @@ tf <- table(res)
 ```
 # Konklusion
 
-I dette afsnit vil der konkluderes på den viden der er opnået gennem rapporten.
+I dette afsnit vil der konkluderes på den viden, som er opnået gennem rapporten.
 
-I afsnittet der omhandlede "t-test for skæve stikprøver" blev det konkluderet, på baggrund af den resulterende dækningsgrad på ```r tf[2]/100```$\%$, at det ikke kan antages, at en t-test på en ikke-normalfordelt stikprøve altid giver retvisende resultater. 
+I afsnittet, der omhandlede "t-test for skæve stikprøver" blev det konkluderet, på baggrund af den resulterende dækningsgrad på ```r tf[2]/100```$\%$, at det ikke kan antages, at en t-test på en ikke-normalfordelt stikprøve altid giver retvisende resultater. 
 
-Der blev herefter fundet frem til to altenative metoder til t-testen, som kunne lave konfidensintervaller og hypotesetests, hvis antagelserne ikke var overholdt. De to var henholdsvis bootstrap-metoden og permutationstesten. 
+Der blev herefter fundet frem til to alternative metoder til t-testen, som kunne lave konfidensintervaller og hypotesetests, hvis antagelserne ikke var overholdt. De to var henholdsvis bootstrap og permutationer. 
 
-Permutationstesten løste problemet med, at stikprøverne ikke var normalfordelte, og at der så kunne udføres en retvisende hypotesetest. Det fremgik, at andelen af type-I fejl, ```r unname(fejltable[1])/10```$\%$, stemte overens med det valgte signifikansniveau, $5\%$.
+Permutationstesten kunne bruges til at teste hypoteser, uden antagelsen om, at stikprøverne var normalfordelte. Permutationstesten havde en andel af type-I fejl på ```r unname(fejltable[1])/10```$\%$, hvilket stemmer overens med signifikansniveauet, $\alpha = 0.05$.
 
-Hypotesetest ved hjælp af bootstrap fremgik at have færre type-I fejl end antaget, hvor $H_0$ fejlagtigt forkastes i ```r unname(type_1_parret[1])/5```$\%$ af tilfældene. Permutationstesten er altså mere præcis end bootstrap, hvis der udelukkende skal foretages en hypotesetest. 
+Hypotesetest ved hjælp af bootstrap fremgik at have færre type-I fejl end antaget, hvor $H_0$ fejlagtigt forkastes i ```r unname(type_1_parret[1])/5```$\%$ af tilfældene. Permutationstesten er altså mere retvisende i forhold til andelen af type-I fejl, end bootstrap.
 
-Bootstrap-metoden løste det samme problem og det viste sig, at kunne lave konfidensintervaller ved hjælp af percentilmetoden, basic-metoden og T-metoden. Disse metoder viste, at dækningsgraden af T-metoden er den mest robuste metode. Dog når stikprøvestørrelsen er tilpas stor, er det lige meget, hvilken metode der bruges, fordi de alle stort set har den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). Det kan konkluderes, at bootstrap-metoden kan give retvisende resultater, når antagelserne ikke er overholdt. 
+Bootstrap-metoden kunne benyttes til at beregne konfidensintervaller ved hjælp af percentilmetoden, basic-metoden og T-metoden. Disse metoder viste, at dækningsgraden af T-metoden er den mest robuste metode. Dog, når stikprøvestørrelsen er tilpas stor, er det irrelevant, hvilken metode der bruges, fordi de alle stort set har den samme dækningsgrad ifølge figur \@ref(fig:fig-daekning). Det kan konkluderes, at bootstrap-metoden kan give retvisende resultater, når antagelserne ikke er overholdt.
 
-Det kan derfor siges, at simuleringsmetoderne bootstrap og permutation, kan afhjælpe problemer der opstår ved t-tests, med ikke-normalfordelte stikprøver. 
+Det kan derfor siges, at simuleringsmetoderne bootstrap og permutation, kan afhjælpe problemer, der opstår ved t-tests, når stikprøverne ikke er normalfordelte.

@@ -32,8 +32,8 @@
 \contentsline {section}{\numberline {6.2}Bootstrap-standardfejl}{44}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Bootstrap-hypotesetest}{45}{section.6.3}%
 \contentsline {subsection}{\numberline {6.3.1}Uparret bootstrap-test}{45}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Parret bootstrap-test}{49}{subsection.6.3.2}%
-\contentsline {section}{\numberline {6.4}Bootstrap-konfidensintervaller}{51}{section.6.4}%
+\contentsline {subsection}{\numberline {6.3.2}Parret bootstrap-test}{50}{subsection.6.3.2}%
+\contentsline {section}{\numberline {6.4}Bootstrap-konfidensintervaller}{52}{section.6.4}%
 \contentsline {subsection}{\numberline {6.4.1}Percentilmetoden}{52}{subsection.6.4.1}%
 \contentsline {subsection}{\numberline {6.4.2}Basic-metoden}{53}{subsection.6.4.2}%
 \contentsline {subsection}{\numberline {6.4.3}T-metoden}{54}{subsection.6.4.3}%
