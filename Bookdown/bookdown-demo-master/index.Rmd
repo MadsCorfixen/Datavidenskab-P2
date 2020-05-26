@@ -1,6 +1,12 @@
---- 
+---
 title: "P2 - Simulering af Data"
-author: "Gruppe B2-19, Ronni Carlsen, Mads Corfixen, Thomas Heede, Christian F. P. Nielsen & Magnus Olesen"
+author: 
+  - Gruppe B2-19
+  - Ronni Carlsen
+  - Mads Corfixen
+  - Thomas Heede
+  - Christian F. P. Nielsen
+  - Magnus Olesen
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -30,7 +36,7 @@ It is worth mentioning that a lack of computing power might have impacted the re
 
 ## Forord
 
-Projektet er udarbejdet af gruppe B2-19 fra Datavidenskab 2. semester på Aalborg Universitet. Projketperioden løb fra den 3. februar til den 27. maj 2020. Gruppen blev vejledt af Mikkel Meyer Andersen. Det overordnede tema i projektet er "Fra Data til Videnskab" med fokus på statistisk inferens ved hjælp af simuleringer. Projektets kildekode kan findes på følgende [link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master).
+Projektet er udarbejdet af gruppe B2-19 fra Datavidenskab 2. semester på Aalborg Universitet. Projketperioden løb fra den 3. februar til den 27. maj 2020. Gruppen blev vejledt af Mikkel Meyer Andersen. Det overordnede tema i projektet er "Fra Data til Videnskab" med fokus på statistisk inferens ved hjælp af simuleringer. Projektets kildekode kan findes på følgende [link til GitHub](https://github.com/MadsCorfixen/Datavidenskab-P2/tree/master/Bookdown/bookdown-demo-master), og projektet kan læses på HTML-form på [dette link til bookdown.org](https://bookdown.org/madscorfixen/bookdown-demo-master/).
 
 ## Læsevejledning
 

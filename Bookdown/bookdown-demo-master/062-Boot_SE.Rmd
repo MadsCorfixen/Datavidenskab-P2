@@ -18,7 +18,7 @@ Som eksempel vil den estimerede standardfejl for estimatet af middelværdien, $\
 
 Dog er dette ikke altid ligetil i virkeligheden. Oftest er der ikke tilstrækkelige informationer om populationen eller fordeligen af denne. Samtidig kræver det, at der er nogle specifikke krav, som er opfyldt. Disse problemer kan undgås ved at benytte bootstrap til at estimere bootstrap-standardfejlen, givet ved nedenstående formel.
 
-$$se^*(\hat{\theta}) = \sqrt{\frac{1}{B-1}\sum_{b=1}^{B}(\hat{\theta_b^*} - \hat{\theta} )^2}$$
+$$se^*(\hat{\theta}) = \sqrt{\frac{1}{B-1}\sum_{b=1}^{B}(\hat{\theta_b^*} - \bar{\theta} )^2}$$
 
 Hvor $\hat{\theta}$ er stikprøvens estimat for den ønskede parameter, $B$ er antal bootstrap-stikprøver, $\hat\theta_b^*$ er estimatet for den $b$'te bootstrap-stikprøve og $\bar{\theta} = (\frac{1}{B}) \sum_{b=1}^{B}\hat{\theta_b^*}$, [@BootMiracle].
 

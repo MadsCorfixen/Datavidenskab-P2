@@ -131,7 +131,7 @@ Der oprettes et tredje datasæt, $Z$, som består af differencerne mellem $x_i$ 
 
 Så opstilles der en nulhypotese, $H_0:~\mu_Z = 0$, hvor $\mu_Z$ angiver den sande middelværdi for $Z$, og en alternativ hypotese, $H_1:~\mu_Z \neq 0$, samt et signifikansniveau, $\alpha = 0.05$. 
 
-Der udtages en bootstrap-stikprøve for $Z$, som betegnes $Z^*$. På baggrund af bootstrap-stikprøven kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \frac{\bar{Z}^*_i - \bar{Z}}{\hat{SE}(Z^*_i)}$, hvor $Z^*_i$ er den $i$'te bootstrap-stikprøve, og $i = 1, 2, \ldots, B$, [@BootvsJack, s. 106, 124-127, 246].
+Der udtages en bootstrap-stikprøve for $Z$, som betegnes $Z^*$. På baggrund af bootstrap-stikprøven kan der nu udregnes $B$ nye teststørrelser, $t^*_i = \frac{\bar{Z}^*_i - \bar{Z}}{\hat{SE}(Z^*_i)}$, hvor $Z^*_i$ er den $i$'te bootstrap-stikprøve, og $i = 1, 2, \ldots, B$, [@MathStat, s. 106, 124-127, 246].
 
 __Eksempel__
 
