@@ -3,14 +3,13 @@
 set.seed(31415)
 tf_vektor <- c()
 for(n in seq(4, 100, 4)){
-  n <- 100
   pop_middel <- 10
   pop_sd <- 2
   stik <- rnorm(n, pop_middel, pop_sd)
   stik_middel <- mean(stik)
   stik_sd <- sd(stik)
   
-  n_boot <- 100
+  n_boot <- 1000
   hejsa <- replicate(100, {
     boot_stik <- replicate(n_boot, rnorm(n, stik_middel, stik_sd))
     boot_means <- apply(boot_stik, 2, mean)
@@ -27,7 +26,6 @@ plot(x, tf_vektor/100, type="l", col="blue", ylab = "Dækningsgrad",
      xlab = "Stikprøvestørrelse")
 abline(h=0.95, lty=5, col="black")
 
-tf_vektor
 mean(tf_vektor)
 ```
 
@@ -43,7 +41,7 @@ for(n in seq(4, 100, 4)){
   stik_middel2 <- mean(stik2)
   stik_sd2 <- sd(stik2)
   
-  boot_n2 <- 100
+  boot_n2 <- 1000
   byggemand_bob <- replicate(100, {
     boot_liste2 <- rnorm(n * boot_n2, stik_middel2, stik_sd2)
     boot_stik2 <- matrix(boot_liste2, nrow = n, ncol = boot_n2)
@@ -64,7 +62,6 @@ plot(x2, tf_vektor2/100, type="l", col="blue", ylab = "Dækningsgrad",
      xlab = "Stikprøvestørrelse")
 abline(h=0.95, lty=5, col="black")
 
-tf_vektor2
 mean(tf_vektor2)
 ```
 
