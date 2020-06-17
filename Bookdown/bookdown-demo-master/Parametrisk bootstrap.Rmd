@@ -1,0 +1,45 @@
+```{r}
+set.seed(31415)
+
+for(n in seq(4, 100, 4)){
+  stik <- rnorm(n)
+  boot_stik <- replicate(n = 10000, {
+    ronni <- rnorm(n, mean(stik), sd(stik))
+  })
+  boot_stik_mean <- apply(boot_stik, 2, mean)
+  boot_KI <- quantile(boot_stik_mean, c(0.025, 0.975))
+  tf_p <- boot_KI[1]<=0 & boot_KI[2]>=0
+  return (tf_p)
+}
+
+
+```
+
+```{r}
+sand_middel <- 0
+
+tabel <- c()
+
+for(n in seq(4, 100, 4)){
+  res <- replicate(n = 100,{
+    stik <- rnorm(n)
+    boot_stik <- replicate(n = 100, {
+      ronni <- rnorm(n, mean(stik), sd(stik))
+    })
+    boot_stik_mean <- apply(boot_stik, 2, mean)
+    boot_KI <- quantile(boot_stik_mean, c(0.025, 0.975))
+    
+    # Undersøger om den sande middelværdi er i konfidensintervallet
+    tf_p <- boot_KI[1]<=0 & boot_KI[2]>=0
+    return(tf_p)
+  })
+  tabel <- append(tabel, mean(table(res)[2]))
+}
+tabel
+```
+```{r}
+plot(seq(4,100,4), tabel/100, type = "l", ylim = c(0.7, 1))
+abline(h=0.95, lty=5, col="black")
+```
+
+
