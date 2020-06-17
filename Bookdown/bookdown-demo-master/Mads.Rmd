@@ -1,0 +1,72 @@
+# Fremgangsmåden fra YouTube (DTU)
+```{r}
+set.seed(31415)
+tf_vektor <- c()
+for(n in seq(4, 100, 4)){
+  n <- 100
+  pop_middel <- 10
+  pop_sd <- 2
+  stik <- rnorm(n, pop_middel, pop_sd)
+  stik_middel <- mean(stik)
+  stik_sd <- sd(stik)
+  
+  n_boot <- 100
+  hejsa <- replicate(100, {
+    boot_stik <- replicate(n_boot, rnorm(n, stik_middel, stik_sd))
+    boot_means <- apply(boot_stik, 2, mean)
+    ci <- quantile(boot_means, c(0.025, 0.975))
+    tf <- ci[1] <= pop_middel & ci[2] >= pop_middel
+  })
+  tf_vektor <- append(tf_vektor, sum(hejsa))
+}
+```
+
+```{r}
+x <- seq(4, 100, 4)
+plot(x, tf_vektor/100, type="l", col="blue", ylab = "Dækningsgrad",
+     xlab = "Stikprøvestørrelse")
+abline(h=0.95, lty=5, col="black")
+
+tf_vektor
+mean(tf_vektor)
+```
+
+
+# Fremgangsmåden fra PDF (MIT)
+```{r}
+set.seed(31415)
+tf_vektor2 <- c()
+for(n in seq(4, 100, 4)){
+  pop_middel2 <- 10
+  pop_sd2 <- 2
+  stik2 <- rnorm(n, pop_middel2, pop_sd2)
+  stik_middel2 <- mean(stik2)
+  stik_sd2 <- sd(stik2)
+  
+  boot_n2 <- 100
+  byggemand_bob <- replicate(100, {
+    boot_liste2 <- rnorm(n * boot_n2, stik_middel2, stik_sd2)
+    boot_stik2 <- matrix(boot_liste2, nrow = n, ncol = boot_n2)
+    boot_middel2 <- colMeans(boot_stik2)
+    
+    boot_stat2 <- boot_middel2 - stik_middel2
+    kvantiler2 <- quantile(boot_stat2, c(0.05, 0.95))
+    konf2 <- stik_middel2 - c(kvantiler2[2], kvantiler2[1])
+    tf <- konf2[1] <= pop_middel2 & konf2[2] >= pop_middel2
+  })
+  tf_vektor2 <- append(tf_vektor2, sum(byggemand_bob))
+}
+```
+
+```{r}
+x2 <- seq(4, 100, 4)
+plot(x2, tf_vektor2/100, type="l", col="blue", ylab = "Dækningsgrad",
+     xlab = "Stikprøvestørrelse")
+abline(h=0.95, lty=5, col="black")
+
+tf_vektor2
+mean(tf_vektor2)
+```
+
+
+
