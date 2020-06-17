@@ -1,0 +1,171 @@
+```{r}
+set.seed(31415)
+
+for(n in seq(4, 100, 4)){
+  stik <- rnorm(n)
+  boot_stik <- replicate(n = 10000, {
+    ronni <- rnorm(n, mean(stik), sd(stik))
+  })
+  boot_stik_mean <- apply(boot_stik, 2, mean)
+  boot_KI <- quantile(boot_stik_mean, c(0.025, 0.975))
+  tf_p <- boot_KI[1]<=0 & boot_KI[2]>=0
+  return (tf_p)
+}
+
+
+```
+
+
+
+```{r}
+plot(seq(4,100,4), tabel/100, type = "l", ylim = c(0.7, 1))
+abline(h=0.95, lty=5, col="black")
+```
+
+```{r}
+n <- 100
+stik <- rnorm(n, 0, 1)
+x_bar <- mean(stik)
+x_sd <- sd(stik)
+n_boot <- 1000
+x <- rnorm(n*n_boot, x_bar, x_sd)
+bootstrapsample <- matrix(x, nrow = n, ncol = n_boot)
+x_star <- colMeans(bootstrapsample)
+delta_star <- x_star - x_bar
+d <- quantile(delta_star, c(0.05, 0.95))
+ci <- x_bar - c(d[2], d[1])
+ci
+```
+
+```{r}
+set.seed(31415)
+sand_middel <- 0
+
+tabel <- c()
+
+for(n in seq(4, 16, 4)){
+  stik <- rnorm(n)
+  x_bar <- mean(stik)
+  x_sd <- sd(stik)
+  n_boot <- 1000
+  res <- replicate(n = 4,{
+    bootliste <- rnorm(n*n_boot, x_bar, x_sd)
+    bootstrapsample <- matrix(bootliste, nrow = n, ncol = n_boot)
+    x_star <- colMeans(bootstrapsample)
+    delta_star <- x_star - x_bar
+    d <- quantile(delta_star, c(0.05, 0.95))
+    ci <- x_bar - c(d[2], d[1])
+    #print(ci)
+    # Undersøger om den sande middelværdi er i konfidensintervallet
+    tf_p <- ci[1]<=0 & ci[2]>=0
+    print(tf_p)
+    return(unname(tf_p))
+  })
+  print(table(res))
+  #tabel <- append(tabel, table(res))
+}
+#tabel
+```
+
+New 'n' improved - Hopefully...
+
+```{r}
+set.seed(28)
+```
+
+```{r}
+# KI for middelværdi for en normalfordeling
+n <- 20
+stik <- rnorm(n)
+
+k <- 10000
+sim_samples <- replicate(k, rnorm(20, mean = mean(stik), sd = sd(stik)))
+sim_mean <- apply(sim_samples, 2, mean)
+quantile(sim_mean, c(0.025, 0.975))
+```
+
+```{r}
+# KI for middelværdi for en eksponentialfunktion, hvor det både er antaget at det er en eksponential, men også normalfordeling
+n <- 20
+stik <- rnorm(n, 50, 100) #rexp(n, 1/25)
+
+k <- 10000
+
+# Normalfordeling antages
+sim_samples <- replicate(k, rnorm(20, mean = mean(stik), sd = sd(stik)))
+sim_mean <- apply(sim_samples, 2, mean)
+quantile(sim_mean, c(0.025, 0.975))
+
+# Eksponentialfunktion antages
+sim_samples <- replicate(k, rexp(n, 1/mean(stik)))
+sim_mean <- apply(sim_samples, 2, mean)
+quantile(sim_mean, c(0.025, 0.975))
+
+# Uniform fordeling antages
+sim_samples <- replicate(k, runif(n, min = min(stik), max = max(stik)))
+sim_mean <- apply(sim_samples, 2, mean)
+quantile(sim_mean, c(0.025, 0.975))
+
+# Logistisk funktion antages
+sim_samples <- replicate(k, rlogis(n, mean(stik), sd(stik)))
+sim_mean <- apply(sim_samples, 2, mean)
+quantile(sim_mean, c(0.025, 0.975))
+```
+
+Interessant observation i overstående. KI hvor _exp_ antages er langt mere præcis end alle andre for selve stikprøven. Selv _norm_. Dog passer den ikke altid med populationen.
+
+```{r}
+# Uparret hypotesetest vha. parametrisk bootstrap.
+n <- 20
+m <- 30
+stik1 <- rbeta(n, 2, 8)
+stik2 <- rbeta(m, 2, 8)
+
+bootstraps <- 100
+
+res <- replicate(n = 100, {
+  stik1 <- rbeta(n, shape1 = 2, shape2 = 8)
+  stik2 <- rbeta(m, shape1 = 2, shape2 = 8)
+  t_obs <- ((mean(stik1)-mean(stik2))-(0))/(((sd(stik1)^2)/n)+((sd(stik2)^2)/m))
+
+  boot_t <- replicate(n = bootstraps, {
+    
+    boot1 <- rbeta(n, mean(stik1), 1-mean(stik1))
+    boot2 <- rbeta(m, mean(stik1), 1-mean(stik1))
+  
+    boot <- sample(c(stik1, stik2))
+  
+    boot_x <- boot[1 : n]
+    boot_y <- boot[(n+1) : (n+m)]
+    boot_test <- ((mean(boot_x) - mean(boot_y)) -
+                    (mean(stik1) - mean(stik2))) /
+                      (((sd(boot_x))^2 / n) +
+                        ((sd(boot_y))^2 / m))
+  })
+  
+  antal_ekstreme <- abs(boot_t) >= t_obs
+
+  p_vaerdi <- (sum(antal_ekstreme)+1) / (bootstraps + 1)
+})
+
+p_vaerdi_uparret <- mean(res)
+p_vaerdi_uparret
+```
+
+
+```{r}
+# Lort
+
+# KI for middelværdi for en normalfordeling
+n <- 20
+stik <- rnorm(n)
+
+k <- 100
+
+temp <- replicate(100, {
+  sim_samples <- replicate(k, rnorm(20, mean = mean(stik), sd = sd(stik)))
+  sim_mean <- apply(sim_samples, 2, mean)
+  quantile(sim_mean, c(0.025, 0.975))
+})
+temp
+```
