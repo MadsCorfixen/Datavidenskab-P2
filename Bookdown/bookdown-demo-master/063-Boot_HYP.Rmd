@@ -39,7 +39,7 @@ Hvor $\bar{X_0}$ og $\bar{Y_0}$ er middelværdien for $X$ og $Y$ under $H_0$, og
 
 ```{r}
 t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
-            (sqrt(((sd(stik1))^2 / n)) +
+            (((sd(stik1))^2 / n) +
               ((sd(stik2))^2 / m))
 t_obs
 ```
@@ -62,7 +62,7 @@ boot_t <- replicate(n = bootstraps, {
   
     boot_test <- ((mean(boot_x) - mean(boot_y)) -
                     (mean(stik1) - mean(stik2))) /
-                      (sqrt(((sd(boot_x))^2 / n)) +
+                      (((sd(boot_x))^2 / n) +
                         ((sd(boot_y))^2 / m))
 })
 head(boot_t, 3)
@@ -97,7 +97,7 @@ res <- replicate(n = 100, {
   stik1 <- rbeta(n, shape1 = 2, shape2 = 8)
   stik2 <- rbeta(m, shape1 = 2, shape2 = 8)
   t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
-              sqrt(((sd(stik1))^2 / n)) + ((sd(stik2))^2 / m)
+              ((sd(stik1))^2 / n + ((sd(stik2))^2 / m))
 
   boot_t <- replicate(n = bootstraps, {
   
@@ -107,8 +107,8 @@ res <- replicate(n = 100, {
     boot_y <- boot[(n+1) : (n+m)]
     boot_test <- ((mean(boot_x) - mean(boot_y)) -
                     (mean(stik1) - mean(stik2))) /
-                      sqrt(((sd(boot_x))^2 / n)) +
-                        ((sd(boot_y))^2 / m)
+                      (((sd(boot_x))^2 / n) +
+                        ((sd(boot_y))^2 / m))
   })
   
   antal_ekstreme <- abs(boot_t) >= t_obs
