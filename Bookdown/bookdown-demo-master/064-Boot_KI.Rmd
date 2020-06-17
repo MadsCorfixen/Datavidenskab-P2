@@ -213,3 +213,27 @@ legend(77, 0.8, legend=c("Percentil", "Basic", "T"),
 ```
 
 Her tyder det på, at T-metoden præsterer bedre ved mindre stikprøver end både percentilmetoden og basic-metoden. Ved tilpas stor stikprøvestørrelse opnår percentil- og basic-metodens konfidensinterval begge den samme dækningsgrad som T-metoden, og generelt kan der ses, at percentil- og basic-metoden har cirka den samme dækningsgrad. Både percentil- og basic-metoden ser ud til at have større udsvingninger end T-metoden. Desuden ser alle tre metoders dækningsgrader ud til at stabilisere sig omkring $95\%$, når stikprøvestørrelsen bliver tilstrækkelig stor. 
+
+```{r}
+text_p <- "Dækningsgrad for percentil:"
+middel_p <- mean(vector_p)
+print(c(text_p, middel_p))
+
+text_b <- "Dækningsgrad for basic:"
+middel_b <- mean(vector_b)
+print(c(text_b, middel_b))
+
+text_t <- "Dækningsgrad for T:"
+middel_t <- mean(vector_t)
+print(c(text_t, middel_t))
+
+
+# print("Dækningsgrad for basic")
+# mean(vector_b)
+# print("Dækningsgrad for t")
+# mean(vector_t)
+```
+
+
+
+

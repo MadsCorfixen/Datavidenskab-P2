@@ -52,7 +52,7 @@ table(type_1_fejl_t)
 
 # Permutationstest (MNWE)
 ```{r}
-type_1_fejl_perm <- replicate(reps, {
+type_1_fejl_perm <- replicate(500, {
   stik1 <- rgamma(n, alfa, beta)
   stik2 <- rgamma(n, alfa, beta)
   stik_diff <- stik1 - stik2
@@ -93,11 +93,11 @@ table(type_1_fejl_perm)
 
 
 ```{r}
-type_1_fejl_perm_funk <- replicate(reps, {
-  stik1 <- rgamma(n, alfa, beta)
-  stik2 <- rgamma(n, alfa, beta)
+type_1_fejl_perm_funk <- replicate(500, {
+  stik1 <- rgamma(100, 10, 2)
+  stik2 <- rgamma(100, 4, 13)
   
-  test <- wPerm::perm.paired.loc(x = stik1, y = stik2, parameter = mean, alternative = "two.sided", R = permuteringer)
+  test <- wPerm::perm.paired.loc(x = stik1, y = stik2, parameter = mean, alternative = "two.sided", R = 1000)
   
   p_vaerdi <- test$p.value
   andel <- p_vaerdi > 1 - konf_niveau
