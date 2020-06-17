@@ -123,9 +123,9 @@ type_1_fejl <- replicate(n = reps, {
     t_pi[i] <- abs(mean(permuteret_stik1) - mean(permuteret_stik2))
   }
 
-  antal_ekstreme_vaerdier <- table(abs(t_pi) >= t_obs)[1]
+  antal_ekstreme_vaerdier <- table(abs(t_pi) >= abs(t_obs))[1]
   
-  p_vaerdi <- (200-sum(antal_ekstreme_vaerdier)+1)/(length(t_pi)+1)
+  p_vaerdi <- (sum(antal_ekstreme_vaerdier)+1)/(length(t_pi)+1)
   type1fejl <- p_vaerdi > 1 - konf_niveau
   return(type1fejl)
 })
