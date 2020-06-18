@@ -118,8 +118,8 @@ Interessant observation i overstående. KI hvor _exp_ antages er langt mere præ
 # Uparret hypotesetest vha. parametrisk bootstrap.
 n <- 20
 m <- 30
-stik1 <- rbeta(n, 2, 8)
-stik2 <- rbeta(m, 2, 8)
+# stik1 <- rbeta(n, 2, 8)
+# stik2 <- rbeta(m, 2, 8)
 
 bootstraps <- 100
 
