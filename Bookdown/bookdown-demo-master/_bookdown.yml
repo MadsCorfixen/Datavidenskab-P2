@@ -24,7 +24,7 @@ language:
 delete_merged_file: true
 
 
-rmd_files: ["index.Rmd", "Magnus.Rmd", "03-Simulering.Rmd",
+rmd_files: ["index.Rmd", "02-Problemanalyse.Rmd", "03-Simulering.Rmd",
             "04-T_test.Rmd", "05-Permutation.Rmd", "06-Bootstrap.Rmd",
             "062-Boot_SE.Rmd", "063-Boot_HYP.Rmd", "064-Boot_KI.Rmd",
             "96-Diskussion.Rmd", "97-Konklusion.Rmd",

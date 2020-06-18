@@ -32,6 +32,7 @@ mean(tf_vektor)
 # Hypotesetest (Uparret)
 
 ```{r}
+set.seed(31415)
 bootstraps <- 1000
 n <- 20
 m <- 50
@@ -57,7 +58,7 @@ res <- replicate(n = 100, {
   stik2_shape2 <- stik2_shape1*((1/stik2_middel) - 1)
   
   boot_t <- replicate(n = bootstraps, {
-    boot_x <- rbeta(n, shape1 = stik1_shape1, shape2 = stik2_shape2)
+    boot_x <- rbeta(n, shape1 = stik1_shape1, shape2 = stik1_shape2)
     boot_y <- rbeta(m, shape1 = stik2_shape1, shape2 = stik2_shape2)
 
     boot_test <- ((mean(boot_x) - mean(boot_y)) -
@@ -66,7 +67,7 @@ res <- replicate(n = 100, {
                         ((sd(boot_y))^2 / m))
   })
   
-  antal_ekstreme <- abs(boot_t) >= t_obs
+  antal_ekstreme <- abs(boot_t) >= abs(t_obs)
 
   p_vaerdi <- (sum(antal_ekstreme)+1) / (bootstraps + 1)
 })
@@ -76,6 +77,7 @@ p_vaerdi_uparret
 ```
 
 ```{r}
+set.seed(31415)
 bootstraps <- 1000
 n <- 20
 m <- 50
@@ -88,7 +90,6 @@ type_1_fejl <- replicate(n = reps, {
   stik1 <- rbeta(n, shape1 = pop_shape1, shape2 = pop_shape2)
   stik2 <- rbeta(m, shape1 = pop_shape1, shape2 = pop_shape2)
   t_obs <- ((mean(stik1) - mean(stik2)) - (0)) / ((sd(stik1))^2 / n + ((sd(stik2))^2 / m))
-  t_boot <- c()
   
   stik1_middel <- mean(stik1)
   stik1_sd <- sd(stik1)
@@ -100,19 +101,19 @@ type_1_fejl <- replicate(n = reps, {
   stik2_shape1 <- ((((1 - stik2_middel)/(stik2_sd)^2) - (1/stik2_middel)))*stik2_middel^2
   stik2_shape2 <- stik2_shape1*((1/stik2_middel) - 1)
   
-  for(i in 1:bootstraps){
-    boot_x <- rbeta(n, shape1 = stik1_shape1, shape2 = stik2_shape2)
+  boot_t <- replicate(n = bootstraps, {
+    boot_x <- rbeta(n, shape1 = stik1_shape1, shape2 = stik1_shape2)
     boot_y <- rbeta(m, shape1 = stik2_shape1, shape2 = stik2_shape2)
-  
-    t_boot[i] <- ((mean(boot_x) - mean(boot_y)) -
-                      (mean(stik1) - mean(stik2))) /
-                        (((sd(boot_x))^2 / n) +
-                          ((sd(boot_y))^2 / m))
-  }
 
-  antal_ekstreme_vaerdier <- table(abs(t_boot) >= t_obs)[1]
-  
-  p_vaerdi <- (sum(antal_ekstreme_vaerdier)+1)/(length(t_boot)+1)
+    boot_test <- ((mean(boot_x) - mean(boot_y)) -
+                    (mean(stik1) - mean(stik2))) /
+                      (((sd(boot_x))^2 / n) +
+                        ((sd(boot_y))^2 / m))
+  })
+
+  antal_ekstreme <- abs(boot_t) >= abs(t_obs)
+
+  p_vaerdi <- (sum(antal_ekstreme)+1) / (bootstraps + 1)
   type1fejl <- p_vaerdi > 1 - konf_niveau
   return(type1fejl)
 })
