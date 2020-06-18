@@ -33,20 +33,20 @@ Så opstilles der en nulhypotese, $H_0: \mu_{_X} - \mu_{_Y} = 0$, hvor $\mu_{_X}
 
 På baggrund af forskellen i de to stikprøvers middelværdi, er det muligt at udregne en teststørrelse ved nedenstående formel.
 
-$$t_{obs} = \frac{(\bar{X}-\bar{Y}) - (\bar{X_0} - \bar{Y_0})}{((s_X^2/n) + (s_Y^2/m))}$$
+$$t_{obs} = \frac{(\bar{X}-\bar{Y}) - (\bar{X_0} - \bar{Y_0})}{\sqrt{((s_X^2/n) + (s_Y^2/m))}}$$
 
 Hvor $\bar{X_0}$ og $\bar{Y_0}$ er middelværdien for $X$ og $Y$ under $H_0$, og $s$ er standardafvigelsen.
 
 ```{r}
 t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
-            (((sd(stik1))^2 / n) +
+            sqrt(((sd(stik1))^2 / n) +
               ((sd(stik2))^2 / m))
 t_obs
 ```
 
 For at udføre bootstrap-testen, forenes de to stikprøver til en samlet stikprøve med størrelsen $n + m$ observationer. Derefter laves en bootstrap-stikprøve af $n + m$ observationer fra den samlede stikprøve. De første $n$ indgange i bootstrap-stikprøven er bootstrap-stikprøven for $X$, og kaldes $X^*$. De resterende $m$ indgange er bootstrap-stikprøven for $Y$, og kaldes $Y^*$. Til sidst udregnes bootstrap-teststørrelsen ved hjælp af nedenstående formel.
 
-$$t^* = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}$$
+$$t^* = \frac{(\bar{X}^*-\bar{Y}^*) - (\bar{X} - \bar{Y})}{\sqrt{((s_{X^*}^2/n) + (s_{Y^*}^2/m))}}$$
 
 I alt beregnes der $B$ bootstrap-teststørrelser, [@BootHypo]. Et eksempel på dette udregnes i nedenstående kodestykke.
 
@@ -62,7 +62,7 @@ boot_t <- replicate(n = bootstraps, {
   
     boot_test <- ((mean(boot_x) - mean(boot_y)) -
                     (mean(stik1) - mean(stik2))) /
-                      (((sd(boot_x))^2 / n) +
+                      sqrt(((sd(boot_x))^2 / n) +
                         ((sd(boot_y))^2 / m))
 })
 head(boot_t, 3)
@@ -80,7 +80,7 @@ abline(v = t_boot, col = "green")
 Herefter kan _p_-værdien udregnes som ved permutationstest i afsnit \@ref(permutationstest). 
 
 ```{r}
-antal_ekstreme <- abs(boot_t) >= t_obs
+antal_ekstreme <- abs(boot_t) >= abs(t_obs)
 
 p_vaerdi <- (sum(antal_ekstreme) + 1) / (bootstraps + 1)
 p_vaerdi
@@ -97,7 +97,7 @@ res <- replicate(n = 100, {
   stik1 <- rbeta(n, shape1 = 2, shape2 = 8)
   stik2 <- rbeta(m, shape1 = 2, shape2 = 8)
   t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
-              ((sd(stik1))^2 / n + ((sd(stik2))^2 / m))
+              sqrt((sd(stik1))^2 / n + ((sd(stik2))^2 / m))
 
   boot_t <- replicate(n = bootstraps, {
   
@@ -107,7 +107,7 @@ res <- replicate(n = 100, {
     boot_y <- boot[(n+1) : (n+m)]
     boot_test <- ((mean(boot_x) - mean(boot_y)) -
                     (mean(stik1) - mean(stik2))) /
-                      (((sd(boot_x))^2 / n) +
+                      sqrt(((sd(boot_x))^2 / n) +
                         ((sd(boot_y))^2 / m))
   })
   
