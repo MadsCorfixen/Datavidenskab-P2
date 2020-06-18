@@ -111,7 +111,7 @@ res <- replicate(n = 100, {
                         ((sd(boot_y))^2 / m))
   })
   
-  antal_ekstreme <- abs(boot_t) >= t_obs
+  antal_ekstreme <- abs(boot_t) >= abs(t_obs)
 
   p_vaerdi <- (sum(antal_ekstreme)+1) / (bootstraps + 1)
 })
@@ -152,7 +152,7 @@ p_reps <- replicate(n = 100, {
     boot_t[i] <- (mean(boot)-mean(stik_diff))/(sd(boot)/sqrt(n))
   }
   
-  antal_ekstreme <- abs(boot_t) >= obs_t
+  antal_ekstreme <- abs(boot_t) >= abs(obs_t)
   
   p_vaerdi <- (sum(antal_ekstreme) + 1) / (bootstraps + 1)
 })
@@ -190,7 +190,7 @@ type_1_fejl_boot <- replicate(n = 500, {
     boot_t[i] <- (mean(boot)-mean(stik_diff))/(sd(boot)/sqrt(n))
   }
 
-  antal_ekstreme <- abs(boot_t) >= obs_t
+  antal_ekstreme <- abs(boot_t) >= abs(obs_t)
 
   p_vaerdi <- (sum(antal_ekstreme)+1) / (bootstraps + 1)
   
