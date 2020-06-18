@@ -1,79 +1,55 @@
 ```{r}
-n <- 100
-stik <- rnorm(n, 0, 1)
-x_bar <- mean(stik)
-x_sd <- sd(stik)
-n_boot <- 1000
-x <- rnorm(n*n_boot, x_bar, x_sd)
-bootstrapsample <- matrix(x, nrow = n, ncol = n_boot)
-x_star <- colMeans(bootstrapsample)
-delta_star <- x_star - x_bar
-d <- quantile(delta_star, c(0.05, 0.95))
-ci <- x_bar - c(d[2], d[1])
-ci
-```
+set.seed(2)
+pop_middel = 10
 
-```{r}
-set.seed(1)
-sand_middel <- 0
-n_boot <- 100
-matriks_p <- matrix(ncol = 25, nrow = 100)
 vector_p <- c()
+vector_b <- c()
+vector_t <- c()
 
-for (n in seq(4, 16, 4)){
-  stik <- rnorm(n)
-  stikmean <- mean(stik)
-  sdstik <- sd(stik)
+for(n in seq(4, 20, 4)){
   
-  res <- replicate(100, {
-    bootliste <- rnorm(n*n_boot, stikmean, sdstik)
-    bootsamples <- matrix(bootliste, nrow = n, ncol = n_boot)
-    bootmean <- colMeans(bootsamples)
-    estimater <- stikmean - bootmean
-    kvartiler <- quantile(estimater, c(0.05, 0.95))
-    konfinf <- stikmean - c(kvartiler[2], kvartiler[1])
+  stik <- rnorm(n, pop_middel, 1)
+  middel_stik <- mean(stik)
+  sd_stik <- sd(stik)
+  
+  r = 5
+  res <- replicate(r, {
+    simSamples <- replicate(r, rnorm(n, middel_stik, sd_stik))
+
+    simMeans <- apply(simSamples, 2, mean)
+  
+    konf_p <- quantile(simMeans, c(0.025, 0.975))
+    konf_b <- 2 * middel_stik - quantile(simMeans, c(0.975, 0.025))
+    konf_t <- middel_stik - ((quantile(simMeans, c(0.975, 0.025)) - middel_stik)/sd(simSamples)) *    
+    sd_stik
     
-    tf <- konfinf[1]<=sand_middel & konfinf[2]>=sand_middel
-    return(tf)
+    tf_p <- konf_p[1] <= pop_middel & konf_p[2] >= pop_middel
+    tf_b <- konf_b[1] <= pop_middel & konf_b[2] >= pop_middel
+    tf_t <- konf_t[1] <= pop_middel & konf_t[2] >= pop_middel
+    
+    return(c(tf_p, tf_b, tf_t))
   })
   
-  matriks_p[,n/4] <- unname(res)
-  vector_p <- append(vector_p, mean(matriks_p[,n/4]))
+  print(res)
+  print(sum(res[1,]))
+  print(sum(res[1,])/r)
+  
+  vector_p <- append(vector_p, sum(res[1,])/r)
+  vector_b <- append(vector_b, sum(res[2,])/r)
+  vector_t <- append(vector_t, sum(res[3,])/r)
 }
 
-tf
-#vector_p
+print(vector_p)
 ```
-
 
 
 ```{r}
-set.seed(31415)
-sand_middel <- 0
-
-tabel <- c()
-
-for(n in seq(4, 16, 4)){
-  stik <- rnorm(n)
-  x_bar <- mean(stik)
-  x_sd <- sd(stik)
-  n_boot <- 1000
-  res <- replicate(n = 4,{
-    bootliste <- rnorm(n*n_boot, x_bar, x_sd)
-    bootstrapsample <- matrix(bootliste, nrow = n, ncol = n_boot)
-    x_star <- colMeans(bootstrapsample)
-    delta_star <- x_star - x_bar
-    d <- quantile(delta_star, c(0.05, 0.95))
-    ci <- x_bar - c(d[2], d[1])
-    #print(ci)
-    # Undersøger om den sande middelværdi er i konfidensintervallet
-    tf_p <- ci[1]<=0 & ci[2]>=0
-    print(tf_p)
-    return(unname(tf_p))
-  })
-  print(table(res))
-  #tabel <- append(tabel, table(res))
-}
-#tabel
+x <- seq(4, 20, 4)
+plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
+      xlab = "Stikprøvestørrelse", ylim = c(0, 1))
+lines(x, vector_b, type="l", col="blue")
+lines(x, vector_t, type="l", col="green")
+abline(h=0.95, lty=5, col="black")
 ```
+
 

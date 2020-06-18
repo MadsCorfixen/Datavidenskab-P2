@@ -68,3 +68,65 @@ for(n in seq(4, 16, 4)){
 ```
 
 
+```{r}
+# Estimator for middelværdi
+meanFunc <- function(stik, i) 
+{    middel <- mean(stik$data[i])
+     n <- length(i)
+     varians <- (n-1) * var(stik$data[i]) / n^2
+     c(middel, varians)
+}
+```
+
+
+```{r}
+sand_middel <- 0
+
+matriks_p <- matrix(ncol = 25, nrow = 100)
+vector_p <- c()
+
+matriks_b <- matrix(ncol = 25, nrow = 100)
+vector_b <- c()
+
+matriks_t <- matrix(ncol = 25, nrow = 100)
+vector_t <- c()
+
+for(n in seq(4, 100, 4)){
+  res <- replicate(n = 100,{
+    stik <- data.frame(data = rnorm(n))
+    boot_stik <- boot::boot(data = stik, statistic = meanFunc, 
+                            R = 100, sim = "parametric", ran.gen = magnus )
+    
+    # Beregner konfidensintervallerne, hvor typen "stud" betegner
+    # T-metoden
+    interval <- boot::boot.ci(boot.out = boot_stik, 
+                              conf = KI_niveau, 
+                              type = c("perc", "basic", "stud"))
+    
+    # Returnerer nedre og øvre grænse for konfidensintervallerne
+    interval_p <- interval$percent[4:5]
+    interval_b <- interval$basic[4:5]
+    interval_t <- interval$student[4:5]
+    
+    # Undersøger om den sande middelværdi er i konfidensintervallet
+    tf_p <- interval_p[1]<=sand_middel & interval_p[2]>=sand_middel
+    tf_b <- interval_b[1]<=sand_middel & interval_b[2]>=sand_middel
+    tf_t <- interval_t[1]<=sand_middel & interval_t[2]>=sand_middel
+    return(c(tf_p, tf_b, tf_t))
+  })
+  
+  # Dækningsgraden afhængigt af stikprøvestørrelsen
+  matriks_p[,n/4] <- res[1,]
+  vector_p <- append(vector_p, mean(matriks_p[,n/4]))
+  
+  matriks_b[,n/4] <- res[2,]
+  vector_b <- append(vector_b, mean(matriks_b[,n/4]))
+  
+  matriks_t[,n/4] <- res[3,]
+  vector_t <- append(vector_t, mean(matriks_t[,n/4]))
+}
+
+# Dækningsgraden for percentilmetoden
+vector_p[1:5]
+```
+
