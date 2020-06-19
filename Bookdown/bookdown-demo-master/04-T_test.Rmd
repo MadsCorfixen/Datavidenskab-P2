@@ -39,6 +39,7 @@ daekningsgrad <- replicate(n = 10000, {
   t_test <- t.test(x1, x2, alternative = "two.sided", 
                    conf.level = 0.95)
   konf_interval <- t_test$conf.int
+  
 
   # Tjekker, om den sande difference ligger i konfidensintervallet
   konf_interval[1L] <= sand_dif & konf_interval[2L] >= sand_dif

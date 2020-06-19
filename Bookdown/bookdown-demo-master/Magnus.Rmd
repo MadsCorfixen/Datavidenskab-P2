@@ -1,18 +1,18 @@
 ```{r}
-set.seed(2)
+#set.seed(2)
 pop_middel = 10
 
 vector_p <- c()
 vector_b <- c()
 vector_t <- c()
 
-for(n in seq(4, 20, 4)){
+for(n in seq(4, 100, 4)){
   
   stik <- rnorm(n, pop_middel, 1)
   middel_stik <- mean(stik)
   sd_stik <- sd(stik)
   
-  r = 5
+  r = 100
   res <- replicate(r, {
     simSamples <- replicate(r, rnorm(n, middel_stik, sd_stik))
 
@@ -30,21 +30,21 @@ for(n in seq(4, 20, 4)){
     return(c(tf_p, tf_b, tf_t))
   })
   
-  print(res)
-  print(sum(res[1,]))
-  print(sum(res[1,])/r)
+  # print(res)
+  # print(sum(res[1,]))
+  # print(sum(res[1,])/r)
   
-  vector_p <- append(vector_p, sum(res[1,])/r)
-  vector_b <- append(vector_b, sum(res[2,])/r)
-  vector_t <- append(vector_t, sum(res[3,])/r)
+  vector_p <- append(vector_p, mean(res[1,]))
+  vector_b <- append(vector_b, mean(res[2,]))
+  vector_t <- append(vector_t, mean(res[3,]))
 }
 
-print(vector_p)
+#print(vector_p)
 ```
 
 
 ```{r}
-x <- seq(4, 20, 4)
+x <- seq(4, 100, 4)
 plot(x, vector_p, type="l", col="red", ylab = "Dækningsgrad",
       xlab = "Stikprøvestørrelse", ylim = c(0, 1))
 lines(x, vector_b, type="l", col="blue")
