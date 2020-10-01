@@ -1,3 +1,4 @@
+
 ```{r}
 #set.seed(2)
 pop_middel = 10
@@ -52,4 +53,44 @@ lines(x, vector_t, type="l", col="green")
 abline(h=0.95, lty=5, col="black")
 ```
 
+
+```{r}
+set.seed(2)
+n <- 20
+m <- 50
+konf_niveau <- 0.95
+sand_middel <- 0
+
+type_1_fejl_boot <- replicate(n = 500, {
+  stik1 <- rbeta(n, shape1 = 2, shape2 = 8)
+  stik2 <- rbeta(m, shape1 = 2, shape2 = 8)
+  
+  #stik_diff <- stik1 - stik2
+  t_obs <- ((mean(stik1) - mean(stik2)) - (0)) /
+            sqrt(((sd(stik1))^2 / n) +
+              ((sd(stik2))^2 / m))
+
+  boot_t <- c()
+  for(i in seq(1, bootstraps)){
+    boot <- sample(x = c(stik1, stik2), replace = TRUE)
+    
+    boot_x <- boot[1 : n] # Bootstrap-stikprøve 1
+    boot_y <- boot[(n + 1) : (n + m)] # Bootstrap-stikprøve 2
+    
+    boot_t[i] <- ((mean(boot_x) - mean(boot_y)) -
+                    (mean(stik1) - mean(stik2))) /
+                      sqrt(((sd(boot_x))^2 / n) +
+                        ((sd(boot_y))^2 / m))
+  }
+
+  antal_ekstreme <- abs(boot_t) >= abs(t_obs)
+
+  p_vaerdi <- (sum(antal_ekstreme)+1) / (bootstraps + 1)
+  
+  andel <- p_vaerdi > 1 - konf_niveau
+})
+
+type_1_uparret <- table(type_1_fejl_boot)
+type_1_uparret
+```
 
